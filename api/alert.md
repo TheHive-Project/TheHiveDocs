@@ -37,7 +37,7 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 |POST       |/api/alert/_search                      |Find alerts                           |
 |PATCH      |/api/alert/_bulk                        |Update alerts in bulk                 |
 |POST       |/api/alert/_stats                       |Compute stats on alerts               |
-|POST       |/api/alert                              |[Create an alert](#Create-a-case)     |
+|POST       |/api/alert                              |[Create an alert](#create-a-case)     |
 |GET        |/api/alert/:alertId                     |Get an alert                          |
 |PATCH      |/api/alert/:alertId                     |Update an alert                       |
 |DELETE     |/api/alert/:alertId                     |Delete an alert                       |
