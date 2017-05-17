@@ -10,11 +10,11 @@ Required attributes:
  - `owner` (string) : user to whom the case has been assigned **default=use who create the case**
  - `flag` (boolean) : flag of the case **default=false**
  - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`-1`: `unknown`; `0`: `white`; `1`: `green`; `2: amber`;
- `3: red`) **default=-1**
+ `3: red`) **default=2**
  - `status` (caseStatus) : status of the case (*Open*, *Resolved* or *Deleted*) **default=Open**
+ - `tags` (multi-string) : case tags **default=empty**
 
 Optional attributes:
- - `tags` (multi-string) : case tags
  - `resolutionStatus` (caseResolutionStatus) : resolution status of the case (*Indeterminate*, *FalsePositive*,
  *TruePositive*, *Other* or *Duplicated*)
  - `impactStatus` (caseImpactStatus) : impact status of the case (*NoImpact*, *WithImpact* or *NotApplicable*)
