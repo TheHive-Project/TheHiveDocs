@@ -12,7 +12,7 @@ From version 2.11, TheHive docker image doesn't come with ElasticSearch. As TheH
 
 Docker-compose can start multiple dockers and link them together. It can be installed using the
 [documentation](https://docs.docker.com/compose/install/).
-The following [docker-compose.yml](https://raw.githubusercontent.com/CERT-BDF/TheHive/master/docker/docker-compose.yml)
+The following [docker-compose.yml](https://raw.githubusercontent.com/CERT-BDF/TheHive/master/docker/thehive/docker-compose.yml)
 file starts ElasticSearch, Cortex and TheHive:
 ```
 version: "2"
