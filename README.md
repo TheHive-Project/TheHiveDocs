@@ -5,6 +5,8 @@
 
 TheHive is a scalable 3-in-1 open source and free security incident response platform designed to make life easier for SOCs, CSIRTs, CERTs and any information security practitioner dealing with security incidents that need to be investigated and acted upon swiftly.
 
+**Note:**  TheHive's documentation repository. If you are looking for its source code, please visit [https://github.com/CERT-BDF/TheHive/](https://github.com/CERT-BDF/TheHive/).
+
 ## Hardware Pre-requisites
 
 TheHive uses ElasticSearch to store data. Both software use a Java VM. We recommend using a virtual machine with 8vCPU, 8
