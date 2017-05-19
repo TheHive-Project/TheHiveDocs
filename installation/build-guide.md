@@ -173,7 +173,7 @@ service elasticsearch restart
 
 ### First start
 
-Follow [4.3. First start in the Installation guide](Installation-guide#43-first-start) to start using TheHive.
+Follow [4.3. First start in the Installation guide](binary-guide.md#43-first-start) to start using TheHive.
 
 
 ## Build the front-end only
