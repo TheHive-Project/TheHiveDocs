@@ -43,16 +43,16 @@ TheHive can also be [built from sources](installation/build-guide.md).
 ## Other
 - [FAQ](FAQ.md)
 
-# License
+## License
 TheHive is an open source and free software released under the [AGPL](https://github.com/CERT-BDF/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
 
-# Updates
+## Updates
 Information, news and updates are regularly posted on [TheHive Project Twitter account](https://twitter.com/thehive_project) and on [the blog](https://blog.thehive-project.org/).
 
-# Contributing
+## Contributing
 We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests.
 
-# Support
+## Support
 Please [open an issue on GitHub](https://github.com/CERT-BDF/TheHive/issues) if you'd like to report a bug or request a feature. We are also available on [Gitter](https://gitter.im/TheHive-Project/TheHive) to help you out.
 
 If you need to contact the Project's team, send an email to <support@thehive-project.org>.
@@ -63,8 +63,8 @@ If you need to contact the Project's team, send an email to <support@thehive-pro
 - If you encounter an issue with Cortex or would like to request a Cortex-related feature, please [open an issue on its dedicated GitHub repository](https://github.com/CERT-BDF/Cortex/issues/new).
 - If you have troubles with a Cortex analyzer or would like to request a new one or an improvement to an existing analyzer, please open an issue on the [analyzers' dedicated GitHub repository](https://github.com/CERT-BDF/cortex-analyzers/issues/new).
 
-# Community Discussions
+## Community Discussions
 We have set up a Google forum at <https://groups.google.com/a/thehive-project.org/d/forum/users>. To request access, you need a Google account. You may create one [using a Gmail address](https://accounts.google.com/SignUp?hl=en) or [without it](https://accounts.google.com/SignUpWithoutGmail?hl=en).
 
-# Website
+## Website
 <https://thehive-project.org/>
