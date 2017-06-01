@@ -42,13 +42,14 @@ Put this file in an empty folder and run `docker-compose up`. TheHive is exposed
 
 You can specify a custom `application.conf` file by adding the lines, in `thehive` section:
 ```
-volumes: - /path/to/application.conf:/etc/thehive/application.conf
+volumes: 
+    - /path/to/application.conf:/etc/thehive/application.conf
 ```
 
 You should define where the data (i.e. the ElasticSearch database) will be stored in your server by adding the lines, in `elasticsearch` section:
 ```
 volumes: 
-   - /path/to/data:/usr/share/elasticsearch/data
+    - /path/to/data:/usr/share/elasticsearch/data
 ```
 
 
