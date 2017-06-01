@@ -40,11 +40,17 @@ services:
 Put this file in an empty folder and run `docker-compose up`. TheHive is exposed on 9000/tcp port and Cortex on
 9001/tcp. These ports can be changed by modifying the `docker-compose` file.
 
-You can specify a custom `application.conf` file by adding the line
-`volume: /path/to/application.conf:/etc/thehive/application.conf` in `thehive` section.
+You can specify a custom `application.conf` file by adding the lines, in `thehive` section:
+```
+volumes: - /path/to/application.conf:/etc/thehive/application.conf
+```
 
-You should define where the data (i.e. the ElasticSearch database) will be stored in your server by adding the line
-`volume: /path/to/data:/usr/share/elasticsearch/data` in `elasticsearch` section.
+You should define where the data (i.e. the ElasticSearch database) will be stored in your server by adding the lines, in `elasticsearch` section:
+```
+volumes: 
+   - /path/to/data:/usr/share/elasticsearch/data
+```
+
 
 ### Manual Installation of ElasticSearch
 
