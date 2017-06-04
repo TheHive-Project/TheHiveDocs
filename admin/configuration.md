@@ -2,7 +2,7 @@
 
 The configuration file of TheHive is `/etc/thehive/application.conf` by default. This file uses the [HOCON format](https://github.com/typesafehub/config/blob/master/HOCON.md). All configuration parameters should go in this file.
 
-You can have a look at the [default settings](https://github.com/CERT-BDF/TheHiveDocs/blob/master/admin/default-configuration.md).
+You can have a look at the [default settings](default-configuration.md).
 
 ### 1. Database
 
@@ -136,7 +136,7 @@ session {
 }
 ```
 
-To enable authentication using AD or LDAP, edit the `application.conf` file and supply the values for your environment. Then you need to create an account on TheHive for each AD or LDAP user in `Administration > Users` page (which can only be accessed by an administrator). This is required as TheHive needs to look up the role associated with the user and that role is stored locally by TheHive. Obviously, you don't need to supply a password as TheHive will check the credentials against the remote directory. 
+To enable authentication using AD or LDAP, edit the `application.conf` file and supply the values for your environment. Then you need to create an account on TheHive for each AD or LDAP user in `Administration > Users` page (which can only be accessed by an administrator). This is required as TheHive needs to look up the role associated with the user and that role is stored locally by TheHive. Obviously, you don't need to supply a password as TheHive will check the credentials against the remote directory.
 
 In order to use SSL on LDAP or AD, TheHive must be able to validate remote certificates. To that end, the Java truststore must contain certificate authorities used to generate the AD and/or LDAP certificates. The Default JVM truststore contains the main official authorities but LDAP and AD certificates are probably not issued by them.
 
@@ -219,16 +219,16 @@ misp {
   "MISP-SERVER-ID" {
     # URL of the MISP server
     url = "<The_URL_of_the_MISP_Server_goes_here>"
-    
+
     # authentication key
     key = "<the_auth_key_goes_here>"
-    
+
     # tags that must be automatically added to the case corresponding to the imported event
     tags = ["misp"]
-    
+
     # truststore configuration using "cert" key is deprecated
     #cert = /path/to/truststore.jsk
-    
+
     # HTTP client configuration, more details in section 8
     # ws {
     #   proxy {}
@@ -240,7 +240,7 @@ misp {
 }
 ```
 HTTP client used by MISP connector use global configuration (in `play.ws`) but can be overridden in MISP section and in each MISP server configuration (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more detail on how to configure HTTP client.
- 
+
 Before TheHive 2.11 one could set truststore using `cert` key. This setting is now deprecated. It support will be remove in next major version (2.12). It can be easily replaced :
   - before:
 ```
