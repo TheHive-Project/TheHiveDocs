@@ -2,7 +2,7 @@
 
 The configuration file of TheHive is `/etc/thehive/application.conf` by default. This file uses the [HOCON format](https://github.com/typesafehub/config/blob/master/HOCON.md). All configuration parameters should go in this file.
 
-You can have a look at the [default settings](Default-configuration).
+You can have a look at the [default settings](https://github.com/CERT-BDF/TheHiveDocs/blob/master/admin/default-configuration.md).
 
 ### 1. Database
 
