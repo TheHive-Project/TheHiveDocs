@@ -5,7 +5,7 @@
 Required attributes:
  - `login` / `id` (string) : login of the user
  - `userName` (text) : Full name of the user
- - `roles` (userRole) : Role of the user (`read`, `write` or `admin`)
+ - `roles` (multi-userRole) : Array containing roles of the user (`read`, `write` or `admin`)
  - `status` (userStatus) : `Ok` or `Locked` **default=Ok**
  - `preference` (string) : JSON object containing user preference **default={}**
 
