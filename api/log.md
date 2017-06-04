@@ -51,7 +51,8 @@ It returns:
   "message":"Some message",
   "status": "Ok",
   "id": "AVqqi3C-yQ6w1DNC8aDq",
-  "type":"case_task_log"
+  "_id": "AVqqi3C-yQ6w1DNC8aDq",
+  "_type":"case_task_log"
 }
 ```
 
@@ -80,6 +81,7 @@ It returns:
     "id": "086541e99743c6752f5fd4931e256e6e8d5fc7afe47488fb9e0530c390d0ca65"
   },
   "id": "AVqqlSy0yQ6w1DNC8aDx",
-  "type": "case_task_log"
+  "_id": "AVqqlSy0yQ6w1DNC8aDx",
+  "_type": "case_task_log"
 }
 ```

@@ -56,7 +56,8 @@ It returns:
   "user": "myuser",
   "flag": false,
   "id":"AVqqeXc9yQ6w1DNC8aDj",
-  "type":"case_task"
+  "_id":"AVqqeXc9yQ6w1DNC8aDj",
+  "_type":"case_task"
 }
 ```
 

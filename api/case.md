@@ -79,7 +79,8 @@ It returns:
   "tlp": 2,
   "flag": false,
   "id": "AVqqdpY2yQ6w1DNC8aDh",
-  "type":"case"
+  "_id": "AVqqdpY2yQ6w1DNC8aDh",
+  "_type":"case"
 }
 ```
 Creation of another case:

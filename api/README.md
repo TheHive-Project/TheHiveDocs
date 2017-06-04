@@ -10,3 +10,4 @@ TheHive exposes REST APIs through JSON over HTTP.
 - [Observable](artifact.md)
 - [Task](task.md)
 - [Log](log.md)
+- [User](user.md)
