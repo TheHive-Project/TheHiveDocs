@@ -37,8 +37,8 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 |POST       |/api/alert/_search                      |Find alerts                           |
 |PATCH      |/api/alert/_bulk                        |Update alerts in bulk                 |
 |POST       |/api/alert/_stats                       |Compute stats on alerts               |
-|POST       |/api/alert                              |[Create an alert](#create-a-alert)    |
-|GET        |/api/alert/:alertId                     |Get an alert                          |
+|POST       |/api/alert                              |[Create an alert](#create-an-alert)    |
+|GET        |/api/alert/:alertId                     |[Get an alert](#get-an-alert)         |
 |PATCH      |/api/alert/:alertId                     |Update an alert                       |
 |DELETE     |/api/alert/:alertId                     |Delete an alert                       |
 |POST       |/api/alert/:alertId/markAsRead          |Mark an alert as read                 |
@@ -47,10 +47,104 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 |POST       |/api/alert/:alertId/follow              |Follow an alert                       |
 |POST       |/api/alert/:alertId/unfollow            |Unfollow an alert                     |
 
+### Get an alert
 
-### Create a Case
+An alert details can be retrieve using the url:
+```
+GET     /api/alert/:alertId
+```
+The alert ID is obtained by [List alerts](#list-alerts) or [Find alerts](#find-alerts) API.
 
-An alert can be created using the following url :
+If the parameter `similarity` is set to "1" or "true", this API returns information on cases which have similar observables.
+With this feature, output will contain `similarCases` attribute which list case details with:
+ - artifactCount: number of observables in the original case
+ - iocCount: number of observables marked as IOC in original case
+ - similarArtifactCount: number of observables which are in alert and in case
+ - similarIocCount: number of IOCs which are in alert and in case
+
+*warning* IOCs are observables
+
+#### Examples
+
+Get alert without similarity data:
+```
+curl -u myuser:mypassword http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810
+```
+It returns:
+```
+{
+    "_id": "ce2c00f17132359cb3c50dfbb1901810",
+    "_type": "alert",
+    "artifacts": [],
+    "createdAt": 1495012062014,
+    "createdBy": "myuser",
+    "date": 1495012062016,
+    "description": "N/A",
+    "follow": true,
+    "id": "ce2c00f17132359cb3c50dfbb1901810",
+    "lastSyncDate": 1495012062016,
+    "severity": 2,
+    "source": "instance1",
+    "sourceRef": "alert-ref",
+    "status": "New",
+    "title": "New Alert",
+    "tlp": 2,
+    "type": "external",
+    "user": "myuser"
+}
+```
+
+Get alert with similarity data:
+```
+curl -u myuser:mypassword http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810?similarity=1
+```
+It returns:
+```
+{
+    "_id": "ce2c00f17132359cb3c50dfbb1901810",
+    "_type": "alert",
+    "artifacts": [],
+    "createdAt": 1495012062014,
+    "createdBy": "myuser",
+    "date": 1495012062016,
+    "description": "N/A",
+    "follow": true,
+    "id": "ce2c00f17132359cb3c50dfbb1901810",
+    "lastSyncDate": 1495012062016,
+    "severity": 2,
+    "source": "instance1",
+    "sourceRef": "alert-ref",
+    "status": "New",
+    "title": "New Alert",
+    "tlp": 2,
+    "type": "external",
+    "user": "myuser",
+    "similarCases": [
+        {
+            "_id": "AVwwrym-Rw5vhyJUfdJW",
+            "artifactCount": 5,
+            "endDate": null,
+            "id": "AVwwrym-Rw5vhyJUfdJW",
+            "iocCount": 1,
+            "resolutionStatus": null,
+            "severity": 1,
+            "similarArtifactCount": 2,
+            "similarIocCount": 1,
+            "startDate": 1495465039000,
+            "status": "Open",
+            "tags": [
+                "src:MISP"
+            ],
+            "title": "#651 TEST TheHive",
+            "tlp": 2
+        }
+    ]
+}
+```
+
+### Create an alert
+
+An alert can be created using the following url:
 ```
 POST     /api/alert
 ```
@@ -63,7 +157,7 @@ This call returns attributes of the created alert.
 #### Examples
 Creation of a simple alert:
 ```
-curl -XPOST -u myuser:mypassword -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
+curl -XPOST -u myuser:mypassword -H 'Content-Type: application/json' http://127.0.0.1:9000/api/alert -d '{
   "title": "New Alert",
   "description": "N/A",
   "type": "external",
