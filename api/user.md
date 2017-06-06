@@ -54,7 +54,7 @@ Creation of an user:
 curl -XPOST -u myuser:mypassword -H 'Content-Type: application/json' http://127.0.0.1:9000/api/user -d '{
   "login": "georges",
   "name": "Georges Abitbol",
-  "role": ["read", "write"],
+  "roles": ["read", "write"],
   "password": "La classe"
 }'
 ```
