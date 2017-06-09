@@ -135,7 +135,8 @@ It returns:
             "tags": [
                 "src:MISP"
             ],
-            "title": "#651 TEST TheHive",
+            "caseId": 1405,
+            "title": "TEST TheHive",
             "tlp": 2
         }
     ]
