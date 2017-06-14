@@ -52,7 +52,7 @@ Information, news and updates are regularly posted on [TheHive Project Twitter a
 ## Contributing
 We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests using [issues](https://github.com/CERT-BDF/TheHive/issues).
 
-We do have a [Code of conduct](code_of_conduct.md). Make sure to check it out before contributing..
+We do have a [Code of conduct](code_of_conduct.md). Make sure to check it out before contributing.
 
 ## Support
 Please [open an issue on GitHub](https://github.com/CERT-BDF/TheHive/issues) if you'd like to report a bug or request a feature. We are also available on [Gitter](https://gitter.im/TheHive-Project/TheHive) to help you out.
