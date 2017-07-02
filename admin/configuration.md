@@ -229,6 +229,9 @@ misp {
     # truststore configuration using "cert" key is deprecated
     #cert = /path/to/truststore.jsk
 
+    # Case template created in TheHive for MISP events
+    caseTemplate = "<Template_Name_goes_here>"
+
     # HTTP client configuration, more details in section 8
     # ws {
     #   proxy {}
