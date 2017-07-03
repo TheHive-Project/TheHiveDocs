@@ -188,7 +188,7 @@ play.modules.enabled += connectors.cortex.CortexConnector
 cortex {
   "CORTEX-SERVER-ID" {
     # URL of the Cortex server
-    url = "<The_URL_of_the_CORTEX_Server_goes_here>"
+    url = "http://CORTEX_SERVER:CORTEX_PORT"
   }
   # HTTP client configuration, more details in section 8
   # ws {
