@@ -1,5 +1,12 @@
 # Migration guide
 
+## From 2.11.x to 2.12.x
+
+### Database migration
+
+At the first connection to TheHive 2.12, a migration of the database will be asked. This will create a new ElastciSearch
+  index (the_hive_10). See [Updating](admin/updating.md).
+
 ## From 2.10.x to 2.11.x
 
 ### Database migration
