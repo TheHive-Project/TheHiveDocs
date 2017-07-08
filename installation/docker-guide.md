@@ -70,7 +70,7 @@ By Default, TheHive docker image adds minimal configuration:
  - search ElasticSearch instance (host named `elasticsearch`) and add it to configuration
  - search Cortex instance (host named `cortex`) and add it to configuration 
 
-This behavious can be disabled by adding `--no-config` to the docker command line:
+This behavior can be disabled by adding `--no-config` to the docker command line:
 `docker run certbdf/thehive:latest --no-config` or by adding the line `command: --no-config` in `thehive` section of
 docker-compose file.
  
