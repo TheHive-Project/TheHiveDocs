@@ -206,7 +206,10 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
 
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
 ### 7. MISP
-TheHive has the ability to connect to one or several MISP servers. Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events.
+TheHive has the ability to connect to one or several MISP servers. Within the configuration file, you can register your MISP server(s) under the 
+
+#####Important Note
+**TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
 
 #### 7.1 Minimal Configuration
 To sync with a MISP server and retrieve events,  edit the `application.conf` file and adjust the example shown below to your setup:
