@@ -15,7 +15,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 ## What's New?
 
 - [Training Material](/training-material.md)
-- [Changelog](/blob/master/CHANGELOG.md)
+- [Changelog](https://github.com/CERT-BDF/TheHive/blob/master/CHANGELOG.md)
 - [Migration Guide](migration-guide.md)
 
 ## Installation Guides
