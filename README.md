@@ -14,6 +14,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 
 ## What's New?
 
+- [Training Material](/training-material.md)
 - [Changelog](/CHANGELOG.md)
 - [Migration Guide](migration-guide.md)
 
@@ -42,6 +43,7 @@ TheHive can also be [built from sources](installation/build-guide.md).
 
 ## Other
 - [FAQ](FAQ.md)
+- [Training Material](training-material.md)
 
 ## License
 TheHive is an open source and free software released under the [AGPL](https://github.com/CERT-BDF/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
