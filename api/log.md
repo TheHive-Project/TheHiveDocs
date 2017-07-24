@@ -17,6 +17,7 @@ Optional attributes:
 |HTTP Mehod |URI                                     |Action                                |
 |-----------|----------------------------------------|--------------------------------------|
 |GET        |/api/case/task/:taskId/log              |Get logs of the task                  |
+|POST       |/api/case/task/:taskId/log/_search      |Find logs in specified task           |
 |POST       |/api/case/task/log/_search              |Find logs                             |
 |POST       |/api/case/task/:taskId/log              |Create a log                          |
 |PATCH      |/api/case/task/log/:logId               |Update a log                          |
