@@ -318,7 +318,7 @@ Proxy can be used. By default, proxy configured in JVM is used but one can confi
  - `ws.proxy.password`: The password for the credentials for the proxy server.
  - `ws.proxy.ntlmDomain`: The password for the credentials for the proxy server.
  - `ws.proxy.encoding`: The realm's charset.
- - `ws.proxy.proxyNonProxyHosts`: The list of host on which proxy must not be used.
+ - `ws.proxy.nonProxyHosts`: The list of host on which proxy must not be used.
 
 #### SSL
 SSL of HTTP client can be completely configured in `application.conf` file.
