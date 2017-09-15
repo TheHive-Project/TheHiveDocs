@@ -107,7 +107,7 @@ auth {
     # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
     #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
 
-		# The Microsoft Windows domaine name using the short format. This parameter is required.
+		# The Microsoft Windows domain name using the short format. This parameter is required.
 		#domainName = "MYDOMAIN"
 
 		# Use SSL to connect to the domain controller(s).
