@@ -6,9 +6,20 @@ are easier.
 ## Install ElasticSearch using system package
 Install the ElasticSearch package provided by Elastic:
 ```
+# PGP key installation
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
-echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
-sudo apt-get update && sudo apt-get install elasticsearch
+
+# Alternative PGP key installation
+# wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+# Debian repository configuration
+echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+
+# Install https support for apt
+sudo apt install apt-transport-https
+
+# ElasticSearch installation
+sudo apt update && sudo apt install elasticsearch
 ```
 
 The Debian package does not start up the service by default. The reason for this is to prevent the instance from
@@ -35,9 +46,9 @@ Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 network.host: 127.0.0.1
 script.inline: on
 cluster.name: hive
-threadpool.index.queue_size: 100000
-threadpool.search.queue_size: 100000
-threadpool.bulk.queue_size: 1000
+thread_pool.index.queue_size: 100000
+thread_pool.search.queue_size: 100000
+thread_pool.bulk.queue_size: 100000
 ```
 
 ### Start the Service
@@ -56,14 +67,19 @@ path for persistent data on your host :
 
 ```
 docker run \
-  --publish 127.0.0.1:9200:9200 \
-  --publish 127.0.0.1:9300:9300 \
-  --volume /absolute/path/to/persistent/data/:/usr/share/elasticsearch/data \
+  --name elasticsearch \
+  --hostname elasticsearch \
   --rm \
-  elasticsearch:2 \
-  -Des.script.inline=on \
-  -Des.cluster.name=hive \
-  -Des.threadpool.index.queue_size=100000 \
-  -Des.threadpool.search.queue_size=100000 \
-  -Des.threadpool.bulk.queue_size=1000
+  --publish 127.0.0.1:9200:9200 \
+	--publish 127.0.0.1:9300:9300 \
+  --volume ***DATA_DIR***:/usr/share/elasticsearch/data \
+	-e "http.host=0.0.0.0" \
+	-e "transport.host=0.0.0.0" \
+	-e "xpack.security.enabled=false" \
+	-e "cluster.name=hive" \
+  -e "script.inline=true" \
+  -e "thread_pool.index.queue_size=100000" \
+  -e "thread_pool.search.queue_size=100000" \
+  -e "thread_pool.bulk.queue_size=100000" \
+	docker.elastic.co/elasticsearch/elasticsearch:5.5.2
 ```

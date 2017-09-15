@@ -18,13 +18,16 @@ file starts ElasticSearch, Cortex and TheHive:
 version: "2"
 services:
   elasticsearch:
-    image: elasticsearch:2
-    command: [
-      -Des.script.inline=on,
-      -Des.cluster.name=hive,
-      -Des.threadpool.index.queue_size=100000,
-      -Des.threadpool.search.queue_size=100000,
-      -Des.threadpool.bulk.queue_size=1000]
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+    environment:
+    	- http.host=0.0.0.0
+    	- transport.host=0.0.0.0
+    	- xpack.security.enabled=false
+    	- cluster.name=hive
+      - script.inline=true
+      - thread_pool.index.queue_size=100000
+      - thread_pool.search.queue_size=100000
+      - thread_pool.bulk.queue_size=100000
   cortex:
     image: certbdf/cortex:latest
     ports:
@@ -42,13 +45,13 @@ Put this file in an empty folder and run `docker-compose up`. TheHive is exposed
 
 You can specify a custom `application.conf` file by adding the lines, in `thehive` section:
 ```
-volumes: 
+volumes:
     - /path/to/application.conf:/etc/thehive/application.conf
 ```
 
 You should define where the data (i.e. the ElasticSearch database) will be stored in your server by adding the lines, in `elasticsearch` section:
 ```
-volumes: 
+volumes:
     - /path/to/data:/usr/share/elasticsearch/data
 ```
 
@@ -68,12 +71,12 @@ You can add the `--publish` docker option to expose TheHive HTTP service.
 By Default, TheHive docker image adds minimal configuration:
  - choose a random secret (play.crypto.secret)
  - search ElasticSearch instance (host named `elasticsearch`) and add it to configuration
- - search Cortex instance (host named `cortex`) and add it to configuration 
+ - search Cortex instance (host named `cortex`) and add it to configuration
 
 This behavior can be disabled by adding `--no-config` to the docker command line:
 `docker run certbdf/thehive:latest --no-config` or by adding the line `command: --no-config` in `thehive` section of
 docker-compose file.
- 
+
 The image accepts more options:
  - --no-config             : do not try to configure TheHive (add secret and elasticsearch)
  - --no-config-secret      : do not add random secret to configuration
@@ -86,7 +89,7 @@ The image accepts more options:
  - --cortex-url <url>      : add Cortex connection
  - --cortex-hostname <host>: resolve this hostname to find Cortex instances
 
- 
+
 Please remember that you must install and configure ElasticSearch.
 
 ## How to Use The Docker Image

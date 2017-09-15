@@ -41,7 +41,7 @@ This call returns attributes of the created task.
 #### Examples
 Creation of a simple task in case `AVqqdpY2yQ6w1DNC8aDh`:
 ```
-curl -XPOST -u myuser:mypassword -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
+curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
   "title": "Do something"
 }'
 ```
@@ -63,7 +63,7 @@ It returns:
 
 Creation of another task:
 ```
-curl -XPOST -u myuser:mypassword -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
+curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
   "title": "Analyze the malware",
   "description": "The malware XXX is analyzed using sandbox ...",
   "owner": "Joe",

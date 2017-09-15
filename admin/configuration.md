@@ -85,32 +85,41 @@ datastore {
 
 TheHive supports local, LDAP and Active Directory (AD) for authentication. By default, it relies on local credentials stored in Elasticsearch.
 
-Authentication methods are stored in the `auth.type` parameter, which is multi-valued. When an user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
+Authentication methods are stored in the `auth.provider` parameter, which is multi-valued. When a user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
 
 The Default values within the configuration file are:
 ```
 auth {
-	# "type" parameter contains authentication provider. It can be multi-valued (useful for migration)
+	# "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
 	# available auth types are:
 	# services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration are required.
 	# ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
 	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
-	type = [local]
+	provider = [local]
+
+  # By default, basic authentication is disabled. You can enable it by setting "method.basic" to true.
+  method.basic = false
 
 	ad {
-		# Domain Windows name using DNS format. This parameter is required.
+		# The name of the Microsoft Windows domaine using the DNS format. This parameter is required.
 		#domainFQDN = "mydomain.local"
 
-		# Domain Windows name using short format. This parameter is required.
+    # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
+    #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
+
+		# The Microsoft Windows domain name using the short format. This parameter is required.
 		#domainName = "MYDOMAIN"
 
-		# Use SSL to connect to domain controller
+		# Use SSL to connect to the domain controller(s).
 		#useSSL = true
 	}
 
 	ldap {
 		# LDAP server name or address. Port can be specified (host:port). This parameter is required.
 		#serverName = "ldap.mydomain.local:389"
+
+    # If you have multiple ldap servers, use the multi-valued settings.
+    #serverNames = [ldap1.mydomain.local, ldap2.mydomain.local]
 
 		# Use SSL to connect to directory server
 		#useSSL = true
@@ -177,7 +186,7 @@ play.http.parser.maxMemoryBuffer=1M
 play.http.parser.maxDiskBuffer=1G
 ```
 
-*Note*: if you are using a NGINX reverse proxy in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
+*Note*: if you are using a NGINX reverse in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
 
 ### 6. Cortex
 TheHive can use one or several [Cortex](https://github.com/CERT-BDF/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
@@ -205,17 +214,27 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
  - click on `Import templates` button and select the downloaded package
 
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
-### 7. MISP
-TheHive has the ability to connect to one or several MISP servers. Within the configuration file, you can register your MISP server(s) under the 
 
-#####Important Note
+### 7. MISP
+TheHive has the ability to connect to one or several MISP servers in order to import and export events. Hence TheHive is able to:
+
+- receive events as they are added or updated from multiple MISP instances. These events will appear within the `Alerts` pane.
+- export cases as MISP events to one or several MISP instances. The exported cases will not be published automatically though as they need to be reviewed prior to publishing. We **strongly** advise you to review the categories and types of attributes at least, before publishing the corresponding MISP events.
+
+**Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable. 
+
+Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events. Any registered server will be used to import events as alerts and export cases as MISP events. This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
+
+##### Important Notes
+
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
 
+
 #### 7.1 Minimal Configuration
-To sync with a MISP server and retrieve events,  edit the `application.conf` file and adjust the example shown below to your setup:
+To sync with a MISP server and retrieve events or export cases,  edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
-## Enable the MISP module
+## Enable the MISP module (import and export)
 play.modules.enabled += connectors.misp.MispConnector
 
 misp {
@@ -229,8 +248,13 @@ misp {
     # tags that must be automatically added to the case corresponding to the imported event
     tags = ["misp"]
 
-    # truststore configuration using "cert" key is deprecated
-    #cert = /path/to/truststore.jsk
+    # truststore configuration (truststore using "cert" key is deprecated)
+    #ws.ssl.trustManager.stores = [
+    #{
+    #  type: "JKS"
+    #  path: "/path/to/truststore.jks"
+    #}
+    #]
 
     # Case template created in TheHive for MISP events
     caseTemplate = "<Template_Name_goes_here>"
@@ -245,31 +269,11 @@ misp {
   interval = 1h
 }
 ```
-HTTP client used by MISP connector use global configuration (in `play.ws`) but can be overridden in MISP section and in each MISP server configuration (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more detail on how to configure HTTP client.
 
-Before TheHive 2.11 one could set truststore using `cert` key. This setting is now deprecated. It support will be remove in next major version (2.12). It can be easily replaced :
-  - before:
-```
-misp {
-  [...]
-  cert = "/path/to/truststore.jks"
-}
-```
-  - after:
-```
-misp {
-  [...]
-  ws.ssl.trustManager.stores = [
-    {
-      type: "JKS"
-      path: "/path/to/truststore.jks"
-    }
-  ]
-}
-```
-
-#### 7.2 Associate a Case Template to MISP Imports
-As stated in the subsection above, TheHive is able to automatically import MISP events and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
+The HTTP client used by the MISP connector uses a global configuration (in `play.ws`) but it can be overridden within the MISP section of the configuation file and/or in the configuration section of each MISP server (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more details on how to configure the HTTP client.
+  
+#### 7.2 Associate a Case Template to Alerts corresponding to MISP events
+As stated in the subsection above, TheHive is able to automatically import MISP events (they will appear as alerts within the `Alerts` pane) and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
 First, create a case template. Let's call it **MISP_CASETEMPLATE**.
 
@@ -310,7 +314,7 @@ There are 3 different timeouts in WS. Reaching a timeout causes the WS request t
 
 #### Proxy
 Proxy can be used. By default, proxy configured in JVM is used but one can configured specific configuration for each HTTP client.
- - `ws.useProxyProperties`: To use the JVM system’s HTTP proxy settings (http.proxyHost, http.proxyPort) (default is true). This setting is ignored if `ws.proxy' settings is present.
+ - `ws.useProxyProperties`: To use the JVM system’s HTTP proxy settings (http.proxyHost, http.proxyPort) (default is true). This setting is ignored if `ws.proxy` settings is present.
  - `ws.proxy.host`: The hostname of the proxy server.
  - `ws.proxy.post`: The port of the proxy server.
  - `ws.proxy.protocol`: The protocol of the proxy server.  Use "http" or "https".  Defaults to "http" if not specified.
@@ -467,3 +471,10 @@ To import your certificate in the keystore, depending on your situation, you can
 
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
+
+### 11. Miscellaneous
+Case similarity algorithm need a setting that define the maximum number of similar case. By default it is set to 100 but in some circumstances it is not enougth.
+In this case, you can set the setting `maxSimilarCases` in application.conf:
+```
+  maxSimilarCases = 100
+```

@@ -9,6 +9,9 @@ play.modules.enabled += global.TheHive
 
 play.http.filters = global.TheHiveFilters
 
+# maximum number of similar cases
+maxSimilarCases = 100
+
 # ElasticSearch
 search {
   # Name of the index
@@ -38,27 +41,33 @@ datastore {
 }
 
 auth {
-	# "type" parameter contains authentication provider. It can be multi-valued (useful for migration)
+	# "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
 	# available auth types are:
-	# services.LocalAuthSrv : passwords are stored in user entity (in ElasticSearch). No configuration are required.
+	# local : passwords are stored in user entity (in ElasticSearch). No configuration are required.
 	# ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
 	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
-	type = [local]
+	provider = [local]
 
 	ad {
-		# Domain Windows name using DNS format. This parameter is required.
+		# The name of the Microsoft Windows domaine using the DNS format. This parameter is required.
 		#domainFQDN = "mydomain.local"
 
-		# Domain Windows name using short format. This parameter is required.
+    # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
+    #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
+
+		# The Microsoft Windows domain name using the short format. This parameter is required.
 		#domainName = "MYDOMAIN"
 
-		# Use SSL to connect to domain controller
+		# Use SSL to connect to the domain controller(s).
 		#useSSL = true
 	}
 
 	ldap {
 		# LDAP server name or address. Port can be specified (host:port). This parameter is required.
 		#serverName = "ldap.mydomain.local:389"
+
+    # If you have multiple ldap servers, use the multi-valued settings.
+    #serverNames = [ldap1.mydomain.local, ldap2.mydomain.local]
 
 		# Use SSL to connect to directory server
 		#useSSL = true

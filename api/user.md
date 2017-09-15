@@ -51,7 +51,7 @@ This call is authenticated and requires admin role.
 #### Examples
 Creation of an user:
 ```
-curl -XPOST -u myuser:mypassword -H 'Content-Type: application/json' http://127.0.0.1:9000/api/user -d '{
+curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/user -d '{
   "login": "georges",
   "name": "Georges Abitbol",
   "roles": ["read", "write"],
