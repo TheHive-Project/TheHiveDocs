@@ -216,9 +216,14 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
 
 ### 7. MISP
-TheHive has the ability to connect to one or several MISP servers to import and export events. Within the configuration file, you can register your MISP server(s) under the the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events.
+TheHive has the ability to connect to one or several MISP servers in order to import and export events. Hence TheHive is able to:
 
-For the moment, this allows TheHive to import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destinations servers is expected in a future version.
+- receive events as they are added or updated from multiple MISP instances. These events will appear within the `Alerts` pane.
+- export cases as MISP events to one or several MISP instances. The exported cases will not be published automatically though as they need to be reviewed prior to publishing. We **strongly** advise you to review the categories and types of attributes at least, before publishing the corresponding MISP events.
+
+**Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable. 
+
+Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events. Any registered server will be used to import events as alerts and export cases as MISP events. This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
 
 ##### Important Notes
 
@@ -226,7 +231,7 @@ For the moment, this allows TheHive to import events from configured MISP server
 
 
 #### 7.1 Minimal Configuration
-To sync with a MISP server and retrieve events,  edit the `application.conf` file and adjust the example shown below to your setup:
+To sync with a MISP server and retrieve events or export cases,  edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
 ## Enable the MISP module (import and export)
@@ -265,11 +270,10 @@ misp {
 }
 ```
 
-HTTP client used by MISP connector use global configuration (in `play.ws`) but can be overridden in MISP section and in each MISP server configuration (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more detail on how to configure HTTP client.
-
+The HTTP client used by the MISP connector uses a global configuration (in `play.ws`) but it can be overridden within the MISP section of the configuation file and/or in the configuration section of each MISP server (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more details on how to configure the HTTP client.
   
-#### 7.2 Associate a Case Template to MISP Imports
-As stated in the subsection above, TheHive is able to automatically import MISP events and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
+#### 7.2 Associate a Case Template to Alerts corresponding to MISP events
+As stated in the subsection above, TheHive is able to automatically import MISP events (they will appear as alerts within the `Alerts` pane) and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
 First, create a case template. Let's call it **MISP_CASETEMPLATE**.
 
