@@ -11,16 +11,21 @@
 **Basic authentication is disabled by default. We strongly recommand to update the clients that rely on the API to interact with TheHive to use the new API key authentication method**. This feature has been added in this release. If you need to enable
 basic authentication, use `auth.method.basic=true` in `application.conf`
 
-Note that the [TheHive4Py 1.3.0](https://github.com/CERT-BDF/TheHive4py) Python library also adds 
+Note that the [TheHive4Py 1.3.0](https://github.com/CERT-BDF/TheHive4py) Python library also adds
 API key authentication support.
 
-## ElasticSearch
+### Alert role
+A new role "alert" has been added. Only users with this role can create an
+alert. If you have tool that uses TheHive API to create alerts, you must give
+the ability to do it in user administration.
+
+### ElasticSearch
 
 TheHive 2.13 uses ElasticSearch 5.x. Our tests have been done on ElasticSearch
 5.5. So we recommend to use this specific version, even if TheHive should work
 perfectly with ElasticSearch 5.6 that doesn't introduce breaking changes.
 
-### Data structure migration
+#### Data structure migration
 Before upgrading ElasticSearch, [backup all your indices](admin/backup-restore.md).
 Then remove all indices except the last index of TheHive (most probably
 the_hive_10). You can list all indices with the following command:
@@ -42,13 +47,13 @@ mv ${DATA_DIR}/${CLUSTER_NAME:=hive}/* ${DATA_DIR}
 rmdir ${DATA_DIR}/${CLUSTER_NAME}
 ```
 
-### System requirements
+#### System requirements
 ElasticSearch 5.x requires at least 262144 memory map areas (vm.max_map_count).
 Run sysctl -w vm.max_map_count=262144. To make this setting persistent after a
 server restart, add "vm.max_map_count = 262144" in /etc/sysctl.conf (or to
 /etc/sysctl.d/80-elasticsearch.conf)
 
-### Configuration
+#### Configuration
 The configuration of ElasticSearch should contain the following settings:
 ```
 http.host: 127.0.0.1
@@ -61,7 +66,7 @@ thread_pool.bulk.queue_size: 100000
 ```
 Adapt `http.host` and `transport.host` to your environment.
 
-### Docker
+#### Docker
 The default [ElasticSearch image](https://store.docker.com/images/elasticsearch) has
 been deprecated. It is recommended to use the
 [docker image from Elastic.co](docker.elastic.co/elasticsearch/elasticsearch).
@@ -92,14 +97,14 @@ docker run \
 
 **Note**: TheHive doesn't support X-Pack. **Don't enable it**.
 
-### Warnings You Can Safely Ignore with ES 5.5
+#### Warnings You Can Safely Ignore with ES 5.5
 ElasticSearch 5.5 will output the following warnings:
  - `unexpected docvalues type NONE for field '_parent' (expected one of [SORTED, SORTED_SET]). Re-index with correct docvalues type.`
  You can safely ignore this message. For more information see issues [#25849](https://github.com/elastic/elasticsearch/issues/25849)
  and [#26341](https://github.com/elastic/elasticsearch/issues/26341)
  - `License [will expire] on [***]. If you have a new license, please update it.`
  Ignore this warning as TheHive doesn't use Elasticsearch's commercial features.
- 
+
 **Note**: ElasticSearch 5.6 fixes those warnings.
 
 ## From 2.11.x to 2.12.x
