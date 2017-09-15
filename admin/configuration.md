@@ -85,21 +85,27 @@ datastore {
 
 TheHive supports local, LDAP and Active Directory (AD) for authentication. By default, it relies on local credentials stored in Elasticsearch.
 
-Authentication methods are stored in the `auth.type` parameter, which is multi-valued. When an user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
+Authentication methods are stored in the `auth.provider` parameter, which is multi-valued. When an user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
 
 The Default values within the configuration file are:
 ```
 auth {
-	# "type" parameter contains authentication provider. It can be multi-valued (useful for migration)
+	# "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
 	# available auth types are:
 	# services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration are required.
 	# ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
 	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
-	type = [local]
+	provider = [local]
+
+  # By default basic authentication is disabled. You can enable it by setting method.basic to true.
+  method.basic = false
 
 	ad {
 		# Domain Windows name using DNS format. This parameter is required.
 		#domainFQDN = "mydomain.local"
+
+    # Optionally you can specify domain controller host names. If not set, TheHive uses domainFQDN.
+    #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
 
 		# Domain Windows name using short format. This parameter is required.
 		#domainName = "MYDOMAIN"
@@ -111,6 +117,9 @@ auth {
 	ldap {
 		# LDAP server name or address. Port can be specified (host:port). This parameter is required.
 		#serverName = "ldap.mydomain.local:389"
+
+    # If you have multiple ldap servers, use the multi-valued settings.
+    #serverNames = [ldap1.mydomain.local, ldap2.mydomain.local]
 
 		# Use SSL to connect to directory server
 		#useSSL = true
@@ -206,7 +215,7 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
 
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
 ### 7. MISP
-TheHive has the ability to connect to one or several MISP servers. Within the configuration file, you can register your MISP server(s) under the 
+TheHive has the ability to connect to one or several MISP servers. Within the configuration file, you can register your MISP server(s) under the
 
 #####Important Note
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
@@ -310,7 +319,7 @@ There are 3 different timeouts in WS. Reaching a timeout causes the WS request t
 
 #### Proxy
 Proxy can be used. By default, proxy configured in JVM is used but one can configured specific configuration for each HTTP client.
- - `ws.useProxyProperties`: To use the JVM system’s HTTP proxy settings (http.proxyHost, http.proxyPort) (default is true). This setting is ignored if `ws.proxy' settings is present.
+ - `ws.useProxyProperties`: To use the JVM system’s HTTP proxy settings (http.proxyHost, http.proxyPort) (default is true). This setting is ignored if `ws.proxy` settings is present.
  - `ws.proxy.host`: The hostname of the proxy server.
  - `ws.proxy.post`: The port of the proxy server.
  - `ws.proxy.protocol`: The protocol of the proxy server.  Use "http" or "https".  Defaults to "http" if not specified.
