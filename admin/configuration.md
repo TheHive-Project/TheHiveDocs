@@ -214,17 +214,21 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
  - click on `Import templates` button and select the downloaded package
 
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
-### 7. MISP
-TheHive has the ability to connect to one or several MISP servers. Within the configuration file, you can register your MISP server(s) under the
 
-#####Important Note
+### 7. MISP
+TheHive has the ability to connect to one or several MISP servers to import and export events. Within the configuration file, you can register your MISP server(s) under the the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events.
+
+##### Important Notes
+
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
+
+For the moment, this allows TheHive to import _and_ export events from and to configured servers. Having different configuration for sources and destinations servers is expected in a future version.
 
 #### 7.1 Minimal Configuration
 To sync with a MISP server and retrieve events,  edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
-## Enable the MISP module
+## Enable the MISP module (import and export events)
 play.modules.enabled += connectors.misp.MispConnector
 
 misp {
@@ -238,8 +242,13 @@ misp {
     # tags that must be automatically added to the case corresponding to the imported event
     tags = ["misp"]
 
-    # truststore configuration using "cert" key is deprecated
-    #cert = /path/to/truststore.jsk
+    # truststore configuration (truststore using "cert" key is deprecated)
+    #ws.ssl.trustManager.stores = [
+    #{
+    #  type: "JKS"
+    #  path: "/path/to/truststore.jks"
+    #}
+    #]
 
     # Case template created in TheHive for MISP events
     caseTemplate = "<Template_Name_goes_here>"
@@ -254,29 +263,10 @@ misp {
   interval = 1h
 }
 ```
+
 HTTP client used by MISP connector use global configuration (in `play.ws`) but can be overridden in MISP section and in each MISP server configuration (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more detail on how to configure HTTP client.
 
-Before TheHive 2.11 one could set truststore using `cert` key. This setting is now deprecated. It support will be remove in next major version (2.12). It can be easily replaced :
-  - before:
-```
-misp {
-  [...]
-  cert = "/path/to/truststore.jks"
-}
-```
-  - after:
-```
-misp {
-  [...]
-  ws.ssl.trustManager.stores = [
-    {
-      type: "JKS"
-      path: "/path/to/truststore.jks"
-    }
-  ]
-}
-```
-
+  
 #### 7.2 Associate a Case Template to MISP Imports
 As stated in the subsection above, TheHive is able to automatically import MISP events and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
