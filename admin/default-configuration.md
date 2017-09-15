@@ -46,16 +46,16 @@ auth {
 	provider = [local]
 
 	ad {
-		# Domain Windows name using DNS format. This parameter is required.
+		# The name of the Microsoft Windows domaine using the DNS format. This parameter is required.
 		#domainFQDN = "mydomain.local"
 
-    # Optionally you can specify domain controller host names. If not set, TheHive uses domainFQDN.
+    # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
     #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
 
-		# Domain Windows name using short format. This parameter is required.
+		# The Microsoft Windows domain name using the short format. This parameter is required.
 		#domainName = "MYDOMAIN"
 
-		# Use SSL to connect to domain controller
+		# Use SSL to connect to the domain controller(s).
 		#useSSL = true
 	}
 
