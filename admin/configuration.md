@@ -218,17 +218,18 @@ HTTP client used by Cortex connector use global configuration (in `play.ws`) but
 ### 7. MISP
 TheHive has the ability to connect to one or several MISP servers to import and export events. Within the configuration file, you can register your MISP server(s) under the the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events.
 
+For the moment, this allows TheHive to import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destinations servers is expected in a future version.
+
 ##### Important Notes
 
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
 
-For the moment, this allows TheHive to import _and_ export events from and to configured servers. Having different configuration for sources and destinations servers is expected in a future version.
 
 #### 7.1 Minimal Configuration
 To sync with a MISP server and retrieve events,  edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
-## Enable the MISP module (import and export events)
+## Enable the MISP module (import and export)
 play.modules.enabled += connectors.misp.MispConnector
 
 misp {
