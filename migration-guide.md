@@ -43,7 +43,7 @@ mv ${DATA_DIR}/${CLUSTER_NAME:=hive}/* ${DATA_DIR}
 rmdir ${DATA_DIR}/${CLUSTER_NAME}
 ```
 
-### System requirements
+### System requirements
 ElasticSearch 5.x requires at least 262144 memory map areas (vm.max_map_count).
 Run sysctl -w vm.max_map_count=262144. To make this setting persistent after a
 server restart, add "vm.max_map_count = 262144" in /etc/sysctl.conf (or in
@@ -93,7 +93,7 @@ docker run \
 
 Note: TheHive doesn't support X-Pack. Don't enable it.
 
-### Warnings
+### Warnings
 ElasticSearch 5.5 will output warnings:
  - `unexpected docvalues type NONE for field '_parent' (expected one of [SORTED, SORTED_SET]). Re-index with correct docvalues type.`
  You can safely ignore this. For more information see issues [#25849](https://github.com/elastic/elasticsearch/issues/25849)
