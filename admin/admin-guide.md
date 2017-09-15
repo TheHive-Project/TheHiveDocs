@@ -12,7 +12,7 @@ There are 4 roles currently:
  - `read` : all non-sensitive data can be read. With this role, a user can't make any change. They can't add a case, task, log or observable. They also can't run analyzers;
  - `write`: create, remove and change data of any type. This role is for standard users. `write` role inherits `read` rights;
  - `admin`: this role is reserved for TheHive administrators. Users with this role can manage user accounts, metrics, create case templates and observable data types. `admin` inherits `write` rights;
- - `alert`: this role only give to user the permission to create alerts.
+ - `alert`: users with this role can only create alerts.
 
 **Warning**: Please note that user accounts cannot be removed once they have been created, otherwise audit logs will refer to an unknown user. However, unwanted or unused accounts can be locked.
 
