@@ -85,7 +85,7 @@ datastore {
 
 TheHive supports local, LDAP and Active Directory (AD) for authentication. By default, it relies on local credentials stored in Elasticsearch.
 
-Authentication methods are stored in the `auth.provider` parameter, which is multi-valued. When an user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
+Authentication methods are stored in the `auth.provider` parameter, which is multi-valued. When a user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
 
 The Default values within the configuration file are:
 ```
@@ -97,20 +97,20 @@ auth {
 	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
 	provider = [local]
 
-  # By default basic authentication is disabled. You can enable it by setting method.basic to true.
+  # By default, basic authentication is disabled. You can enable it by setting "method.basic" to true.
   method.basic = false
 
 	ad {
-		# Domain Windows name using DNS format. This parameter is required.
+		# The name of the Microsoft Windows domaine using the DNS format. This parameter is required.
 		#domainFQDN = "mydomain.local"
 
-    # Optionally you can specify domain controller host names. If not set, TheHive uses domainFQDN.
+    # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
     #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
 
-		# Domain Windows name using short format. This parameter is required.
+		# The Microsoft Windows domaine name using the short format. This parameter is required.
 		#domainName = "MYDOMAIN"
 
-		# Use SSL to connect to domain controller
+		# Use SSL to connect to the domain controller(s).
 		#useSSL = true
 	}
 
@@ -186,7 +186,7 @@ play.http.parser.maxMemoryBuffer=1M
 play.http.parser.maxDiskBuffer=1G
 ```
 
-*Note*: if you are using a NGINX reverse proxy in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
+*Note*: if you are using a NGINX reverse in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
 
 ### 6. Cortex
 TheHive can use one or several [Cortex](https://github.com/CERT-BDF/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
