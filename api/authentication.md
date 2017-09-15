@@ -10,7 +10,10 @@ command:
 ```
 # Using API key
 curl -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' http://127.0.0.1:9000/api/cases
+```
 
+TheHive supports also basic authentication (disabled by default). You can enable it by adding `auth.method.basic=true` in configuration file.
+```
 # Using basic authentication
 curl -u mylogin:mypassword http://127.0.0.1:9000/api/cases
 ```

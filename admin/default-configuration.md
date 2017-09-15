@@ -9,6 +9,9 @@ play.modules.enabled += global.TheHive
 
 play.http.filters = global.TheHiveFilters
 
+# maximum number of similar cases
+maxSimilarCases = 100
+
 # ElasticSearch
 search {
   # Name of the index

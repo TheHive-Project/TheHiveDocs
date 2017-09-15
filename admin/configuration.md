@@ -476,3 +476,10 @@ To import your certificate in the keystore, depending on your situation, you can
 
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
+
+### 11. Miscellaneous
+Case similarity algorithm need a setting that define the maximum number of similar case. By default it is set to 100 but in some circumstances it is not enougth.
+In this case, you can set the setting `maxSimilarCases` in application.conf:
+```
+  maxSimilarCases = 100
+```
