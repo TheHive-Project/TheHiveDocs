@@ -2,22 +2,25 @@
 
 ## From 2.12.x to 2.13.x
 
-### Configuration updates
+### Configuration updates
 
 `play.crypto.secret` is deprecated, use `play.http.secret.key` instead.
 
 `auth.type` is deprecated, use `auth.provider` instead.
 
 Basic authentication is disabled by default. API client should use key for
-authentication. This feature has been added in this release. Can be enabled
+authentication. This feature has been added in this release. You can enable
 basic authentication with the setting `auth.method.basic=true` in
 application.conf
+
+Note that [TheHive4Py 1.3.0](https://github.com/CERT-BDF/TheHive4py) also adds 
+the support to API key authentication.
 
 ## ElasticSearch
 
 TheHive 2.13 uses ElasticSearch 5.x. Our tests have been done on ElasticSearch
 5.5. So we recommend to use this specific version, even if TheHive should work
-perfectly with ElastciSearch 5.6 should work perfectly.
+perfectly with ElastciSearch 5.6 that doesn't introduce breaking changes.
 
 ### Data structure migration
 Before upgrade ElasticSearch, [backup all your indices](admin/backup-restore.md).
@@ -59,8 +62,6 @@ thread_pool.bulk.queue_size: 100000
 ```
 Adapt `http.host` and `transport.host` to your environment.
 
-TheHive doesn't support X-Pack. Don't enable it.
-
 ### Docker
 Default [ElasticSearch image](https://store.docker.com/images/elasticsearch) has
 been deprecated. It is recommended to use
@@ -90,13 +91,17 @@ docker run \
 	docker.elastic.co/elasticsearch/elasticsearch:5.5.2
 ```
 
+Note: TheHive doesn't support X-Pack. Don't enable it.
+
 ### Warnings
-ElasticSearch will output warnings:
+ElasticSearch 5.5 will output warnings:
  - `unexpected docvalues type NONE for field '_parent' (expected one of [SORTED, SORTED_SET]). Re-index with correct docvalues type.`
  You can safely ignore this. For more information see issues [#25849](https://github.com/elastic/elasticsearch/issues/25849)
  and [#26341](https://github.com/elastic/elasticsearch/issues/26341)
  - `License [will expire] on [***]. If you have a new license, please update it.`
  Ignore this warning as TheHive doesn't yse commercial features.
+ 
+Note: ElasticSearch 5.6 fixes those warnings.
 
 ## From 2.11.x to 2.12.x
 
