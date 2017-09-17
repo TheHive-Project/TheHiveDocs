@@ -1,7 +1,7 @@
 ## Training Material
 TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex and Cortex analyzers with all dependencies and ElasticSearch installed on top of Ubuntu 16.04 with Oracle JRE 8.
 
-As of this writing, the training VM includes Mellifera 12 (TheHive 2.12.0 ) and  Cortex 1.1.3.
+As of this writing, the training VM includes Mellifera 13 (TheHive 2.12.0 ), Cortex 1.1.4, TheHive4py 1.3.0, Cortex4py 1.0.0 and the latest Cortex analyzers as of Sep 15, 2017.
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
@@ -9,12 +9,12 @@ As of this writing, the training VM includes Mellifera 12 (TheHive 2.12.0 ) and 
 
 You can download the VM from the following location:
 
-[https://drive.google.com/file/d/0B3G-Due88gfQYWR6WVlkLWhRemM/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQYWR6WVlkLWhRemM/view?usp=sharing)
+[https://drive.google.com/file/d/0B3G-Due88gfQajViaS01Ym1hdW8/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQajViaS01Ym1hdW8/view?usp=sharing)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
 
-`17df5989d852583e3046daefb97caadff90d30ecf4402df69cf6036d7ad1cacd`
+`93176fffdbdd47cb8457efe10fb8c783eddd7895a18c8ca75a7c6bae316b081b`
 
 The system’s login is `thehive` and the associated password is `thehive1234`.
 
