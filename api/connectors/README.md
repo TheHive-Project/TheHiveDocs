@@ -2,6 +2,6 @@
 
 TheHive offers an API to manipulate its various connectors
 
-- [Cortext](cortex)
+- [Cortex](cortex)
 - [MISP](misp)
 - [Metrics](metrics)
