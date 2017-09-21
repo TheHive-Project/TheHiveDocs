@@ -29,7 +29,7 @@ $ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
 Start the backup by executing the following command :
 ```
 $ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1' -d '{
-  "indices": "the_hive_9"
+  "indices": "the_hive_10"
 }'
 ```
 You can backup the last index of TheHive (you can list indices in you ElasticSearch cluster with
@@ -41,6 +41,6 @@ cluster. This operation is done with this command :
 ```
 $ curl -XPOST http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore
 {
-  "indices": "the_hive_9"
+  "indices": "the_hive_10"
 }
 ```
