@@ -58,7 +58,7 @@ This call returns attributes of the created case.
 #### Examples
 Creation of a simple case:
 ```
-curl -XPOST curl -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
+curl -XPOST curl -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
   "title": "My first case",
   "description": "This case have been created by my custom script"
 }'
@@ -85,7 +85,7 @@ It returns:
 ```
 Creation of another case:
 ```
-curl -XPOST curl -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
+curl -XPOST curl -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
   "title": "My second case",
   "description": "This case have been created by my custom script, its severity is high, tlp is red and it contains tags",
   "severity": 3,

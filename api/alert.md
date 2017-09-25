@@ -68,7 +68,7 @@ With this feature, output will contain `similarCases` attribute which list case 
 
 Get alert without similarity data:
 ```
-curl curl -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810
+curl curl -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810
 ```
 It returns:
 ```
@@ -96,7 +96,7 @@ It returns:
 
 Get alert with similarity data:
 ```
-curl -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810?similarity=1
+curl -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810?similarity=1
 ```
 It returns:
 ```
@@ -158,7 +158,7 @@ This call returns attributes of the created alert.
 #### Examples
 Creation of a simple alert:
 ```
-curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/alert -d '{
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/alert -d '{
   "title": "New Alert",
   "description": "N/A",
   "type": "external",
@@ -193,7 +193,7 @@ It returns:
 
 Creation of another alert:
 ```
-curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/alert -d '{
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/alert -d '{
   "title": "Other alert",
   "description": "alert description",
   "type": "external",
