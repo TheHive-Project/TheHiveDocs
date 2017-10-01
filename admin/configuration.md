@@ -300,7 +300,7 @@ Once the configuration file has been edited, restart TheHive. Every new import o
 
 ### 8. HTTP client configuration
 
-HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contains configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.5.x/ScalaWS#Configuring-WS):
+HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contains configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
 
  - `ws.followRedirects`: Configures the client to follow 301 and 302 redirects (default is true).
  - `ws.useragent`: To configure the User-Agent header field.
