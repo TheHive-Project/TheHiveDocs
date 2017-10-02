@@ -52,13 +52,19 @@ thread_pool.bulk.queue_size: 100000
 ```
 
 ### Start the Service
-Now that ElasticSearch is configured, start it as a service:
+Now that ElasticSearch is configured, start it as a service and check whether it's running:
 ```
 sudo systemctl enable elasticsearch.service
-sudo service elasticsearch start
+sudo systemctl start elasticsearch.service
+sudo systemctl status elasticsearch.service
 ```
 
-Note that by default, the database is stored in `/var/lib/elasticsearch`.
+The status should be `active (running)`. If it's not running, you can check for the reason in the logs:
+```
+sudo journalctl -u elasticsearch.service
+```
+
+Note that by default, the database is stored in `/var/lib/elasticsearch` and the logs in `/var/log/elasticsearch`
 
 ## ElasticSearch inside a Docker
 
