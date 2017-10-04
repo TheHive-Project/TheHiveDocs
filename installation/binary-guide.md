@@ -136,7 +136,7 @@ Once created, you should be redirected to the login page.
 delete the index in ElasticSearch. In the case you made a mistake, just delete the index with the following command
 (beware, it deletes everything in the database)
 ```
-curl -X DELETE http://127.0.0.1:9200/the_hive_9
+curl -X DELETE http://127.0.0.1:9200/the_hive_10
 ```
 
 And reload the page or restart TheHive.
