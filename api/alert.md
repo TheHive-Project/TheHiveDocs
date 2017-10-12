@@ -5,10 +5,10 @@
 Required attributes:
  - `title` (text) : title of the alert
  - `description` (text) : description of the alert
- - `severity` (number) : severity of the alert (0: not set; 1: low; 2: medium; 3: high) **default=2**
+ - `severity` (number) : severity of the alert (1: low; 2: medium; 3: high) **default=2**
  - `date` (date) : date and time when the alert was raised **default=now**
  - `tags` (multi-string) : case tags **default=empty**
- - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`-1`: `unknown`; `0`: `white`; `1`: `green`; `2: amber`;
+ - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`0`: `white`; `1`: `green`; `2: amber`;
  `3: red`) **default=2**
  - `status` (AlertStatus) : status of the alert (*New*, *Updated*, *Ignored*, *Imported*) **default=New**
  - `type` (string) : type of the alert (read only)
