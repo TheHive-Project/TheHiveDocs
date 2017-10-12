@@ -10,7 +10,7 @@ Required attributes:
  - `dataType` (enumeration) : type of the observable (read only)
  - `message` (text) : description of the observable in the context of the case
  - `startDate` (date) : date of the observable creation **default=now**
- - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`-1`: `unknown`; `0`: `white`; `1`: `green`; `2: amber`;
+ - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`0`: `white`; `1`: `green`; `2: amber`;
  `3: red`) **default=2**
  - `ioc` (boolean) : indicates if the observable is an IOC **default=false**
  - `status` (artifactStatus) : status of the observable (*Ok* or *Deleted*) **default=Ok**
