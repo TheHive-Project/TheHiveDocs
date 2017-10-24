@@ -1,5 +1,11 @@
 # Migration guide
 
+## From 2.13.0 or 2.13.1 to 2.13.2
+
+At the first connection to TheHive 2.13.2, a migration of the database will be
+asked. This will create a new ElasticSearch index (the_hive_11). See
+[Updating](admin/updating.md).
+
 ## From 2.12.x to 2.13.x
 
 ### Configuration updates
@@ -112,7 +118,7 @@ ElasticSearch 5.5 will output the following warnings:
 ### Database migration
 
 At the first connection to TheHive 2.12, a migration of the database will be
-asked. This will create a new ElastciSearch index (the_hive_10). See
+asked. This will create a new ElasticSearch index (the_hive_10). See
 [Updating](admin/updating.md).
 
 ## From 2.10.x to 2.11.x
