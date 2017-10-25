@@ -20,11 +20,17 @@ The system’s login is `thehive` and the associated password is `thehive1234`.
 
 ### Use It
 
-You can start using TheHive & Cortex once the VM is started. To access TheHive, point your browser to the following URL:
+Start the VM and make sure the `/var/log/thehive` and `/var/log/cortex` directories exist. If they don't, please use the following commands to create them:
+
+`$ sudo mkdir /var/log/thehive && sudo chown thehive:thehive /var/log/thehive && sudo service thehive restart` 
+
+`$ sudo mkdir /var/log/cortex && sudo chown cortex:cortex /var/log/cortex && sudo service cortex restart`
+
+To access TheHive, point your browser to the following URL:
 
 [http://IP_OF_VM:9000](http://IP_OF_VM:9000)
 
-For Cortex, the port is 9999:
+To access Cortex, point your browser to the following URL:
 
 [http://IP_OF_VM:9999](http://IP_OF_VM:9999)
 
