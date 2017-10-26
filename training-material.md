@@ -9,12 +9,12 @@ As of this writing, the training VM includes Mellifera 13.2 (TheHive 2.13.2), Co
 
 You can download the VM from the following location:
 
-[https://drive.google.com/open?id=0B3G-Due88gfQMFljX09UaUpzcHM](https://drive.google.com/open?id=0B3G-Due88gfQMFljX09UaUpzcHM)
+[https://drive.google.com/file/d/0B3G-Due88gfQMGZ2RjRlc1RfQ2M/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQMGZ2RjRlc1RfQ2M/view?usp=sharing)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
 
-`9ece2f10c5524099ae7e23173d393dad5b6f41266f98f25dcb444523679d9793`
+`15dc0a1d1ef099abd852fefff3a12c1b752573c01b133fc6e643dd2fceb1d46f`
 
 The system’s login is `thehive` and the associated password is `thehive1234`.
 
