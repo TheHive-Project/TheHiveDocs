@@ -18,7 +18,7 @@ webhooks {
 ```
 
 Proxy and SSL configuration can be added in the same manner than MISP or Cortex
-(cf. [configuration guide, section 8. HTTP client configuration](admin/configuration.md):
+(cf. [configuration guide, section 8. HTTP client configuration](configuration.md#8-http-client-configuration):
 
 ```
 webhooks {
