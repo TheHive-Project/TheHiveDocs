@@ -83,6 +83,7 @@ It returns:
   "_type":"case"
 }
 ```
+
 Creation of another case:
 ```
 curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
@@ -93,3 +94,24 @@ curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: applicati
   "tags": ["automatic", "creation"]
 }'
 ```
+
+Creating a case with Tasks & Customfields:
+```
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
+    "title": "My first case",
+    "description": "This case have been created by my custom script"
+    "tasks": [{
+        "title": "mytask",
+        "description": "description of my task"
+    }],
+    "customFields": {
+        "cvss": {
+            "number": 9,
+        },
+        "businessImpact": {
+            "string": "HIGH"
+        }
+    }
+}'
+```
+For `customFields` object, the attribute names should correspond to the `ExternalReference` (cvss and businessImpact in the example above) not to the name of custom fields.
