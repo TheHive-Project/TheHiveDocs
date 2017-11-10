@@ -93,3 +93,24 @@ curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: applicati
   "tags": ["automatic", "creation"]
 }'
 ```
+
+Creating a case with Tasks & Customfields:
+```
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case -d '{
+  "title": "My first case",
+  "description": "This case have been created by my custom script"
+  "tasks":[
+    {
+	 "title":"mytask",
+  "description":"description of my task"
+    }
+    ],
+    "customFields": {
+    "CaseSource": {
+        "string": "Suspicious Mail",
+    "analyzer": {
+        "string": "John Doe"
+    },
+}'
+```
+For customfields, don't forget that we call ExternalReference, not the name of your CustomField.
