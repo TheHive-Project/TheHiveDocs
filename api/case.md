@@ -102,7 +102,7 @@ curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: applicati
   "tasks":[
     {
 	 "title":"mytask",
-  "description":"description of my task"
+  	 "description":"description of my task"
     }
     ],
     "customFields": {
