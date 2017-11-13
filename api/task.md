@@ -21,7 +21,7 @@ Optional attributes:
 |HTTP Mehod |URI                                     |Action                                |
 |-----------|----------------------------------------|--------------------------------------|
 |POST       |/api/case/:caseId/task/_search          |Find tasks in a case (deprecated)     |
-|POST       |/api/case/task/_search                  |Find tasksv                           |
+|POST       |/api/case/task/_search                  |Find tasks                            |
 |POST       |/api/case/task/_stats                   |Compute stats on tasks                |
 |GET        |/api/case/task/:taskId                  |Get a task                            |
 |PATCH      |/api/case/task/:taskId                  |Update a task                         |
