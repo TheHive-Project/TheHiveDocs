@@ -216,14 +216,16 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
 
 ### 7. MISP
-TheHive has the ability to connect to one or several MISP servers in order to import and export events. Hence TheHive is able to:
+TheHive has the ability to connect to one or several MISP instances in order to import and export events. Hence TheHive is able to:
 
 - receive events as they are added or updated from multiple MISP instances. These events will appear within the `Alerts` pane.
 - export cases as MISP events to one or several MISP instances. The exported cases will not be published automatically though as they need to be reviewed prior to publishing. We **strongly** advise you to review the categories and types of attributes at least, before publishing the corresponding MISP events.
 
 **Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable. 
 
-Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events. Any registered server will be used to import events as alerts and export cases as MISP events. This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
+Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add each observable created from a MISP event. Any registered server will be used to import events as alerts. It can also be used to export cases to as MISP events, if the account used by TheHive on the MISP instance has sufficient rights. 
+
+This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
 
 ##### Important Notes
 
@@ -239,16 +241,22 @@ play.modules.enabled += connectors.misp.MispConnector
 
 misp {
   "MISP-SERVER-ID" {
-    # URL of the MISP server
+    # URL of the MISP instance.
     url = "<The_URL_of_the_MISP_Server_goes_here>"
 
-    # authentication key
+    # Authentication key.
     key = "<the_auth_key_goes_here>"
+    
+    # Name of the case template in TheHive that shall be used to import
+    # MISP events as cases by default.
+    caseTemplate = "<Template_Name_goes_here>"
 
-    # tags that must be automatically added to the case corresponding to the imported event
-    tags = ["misp"]
+    # Tags to add to each observable imported from an event available on
+    # this instance.
+    tags = ["misp-server-id"]
 
-    # truststore configuration (truststore using "cert" key is deprecated)
+    # Truststore to use to validate the X.509 certificate  of  the  MISP
+    # instance if the default truststore is not sufficient.
     #ws.ssl.trustManager.stores = [
     #{
     #  type: "JKS"
@@ -265,7 +273,9 @@ misp {
     #   ssl {}
     # }
   }
-  # Interval between two MISP event import in hours (h) or minutes (m)
+  
+  # Interval between consecutive MISP event  imports  in  hours  (h)  or
+  # minutes (m).
   interval = 1h
 }
 ```
