@@ -18,6 +18,10 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 The system’s login is `thehive` and the associated password is `thehive1234`.
 
+**Note**: when importing the OVA file in VMware Fusion, you may encounter an import error such as the one shown in the screenshot below. By clicking on the `Retry` button, the OVF specification should be relaxed and you would be able to use the VM as expected.
+
+![](images/training-vm-vmware-fusion-ova-warn_msg.png)
+
 ### Use It
 
 Start the VM and make sure the `/var/log/thehive` and `/var/log/cortex` directories exist. If they don't, please use the following commands to create them:
