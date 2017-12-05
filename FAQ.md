@@ -1,3 +1,10 @@
+# Installation
+#### Creation of administrator password
+First launch of Web GUI triggers and database update and after db creation user is prompted to create the admin password. If this prompt is not completed there is no way to set admin password and GUI login is not possible. To open the password creation page you need to delete the index from elasticsearch: 
+
+    curl http://127.0.0.1:9200/_cat/indices?v
+    curl -X DELETE http://127.0.0.1:9200/the_hive_11
+    
 # Cases and Tasks
 
 - [I Can't Add a Template](https://github.com/CERT-BDF/TheHiveDocs/blob/master/FAQ.md#i-cant-add-a-template)
