@@ -11,7 +11,11 @@ curl 'localhost:9200/_cat/indices?v'
 
 ## 1. Create a snapshot repository
 First you must define a location in local filesystem (where ElasticSearch instance runs) where the backup will be
-written. Be careful if you run ElasticSearch in Docker, the directory must be mapped in host filesystem using `--volume`
+written. This repository must be declared in ElasticSearch configuration (elasticsearch.yml) by adding:
+```
+repo.path: ["/absolute/path/to/backup/directory"]
+```
+Be careful if you run ElasticSearch in Docker, the directory must be mapped in host filesystem using `--volume`
 parameter (cf. [Docker documentation](https://docs.docker.com/engine/tutorials/dockervolumes/)).
 
 Create a ElasticSearch snapshot point with the following command :
