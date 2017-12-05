@@ -1,5 +1,11 @@
 # Migration guide
 
+
+## From 2.13.x to 3.0.0
+
+The schema of data has been changed in Cerana to integrate dashboard. At the first request, TheHive will ask you to migrate the data. A new index (the_hive_12 by default) will be created then.  See
+[Updating](admin/updating.md).
+
 ## From 2.13.0 or 2.13.1 to 2.13.2
 
 At the first connection to TheHive 2.13.2, a migration of the database will be
