@@ -43,8 +43,8 @@ You can backup the last index of TheHive (you can list indices in you ElasticSea
 Restore will do the reverse actions : it reads backup in your snapshot directory and load indices in ElasticSearch
 cluster. This operation is done with this command :
 ```
-$ curl -XPOST http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore
+$ curl -XPOST 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore' -d '
 {
   "indices": "the_hive_10"
-}
+}'
 ```
