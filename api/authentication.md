@@ -9,11 +9,11 @@ For example, to list cases, use the following curl
 command:
 ```
 # Using API key
-curl -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/cases
+curl -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/case
 ```
 
 TheHive supports also basic authentication (disabled by default). You can enable it by adding `auth.method.basic=true` in configuration file.
 ```
 # Using basic authentication
-curl -u mylogin:mypassword http://127.0.0.1:9000/api/cases
+curl -u mylogin:mypassword http://127.0.0.1:9000/api/case
 ```
