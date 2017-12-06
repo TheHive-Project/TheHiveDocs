@@ -6,7 +6,7 @@ This guide describes the manual installation of TheHive from binaries in Ubuntu 
 
 Install a minimal Ubuntu 16.04  system with the following software:
  * Java runtime environment 1.8+ (JRE)
- * ElasticSearch 2.x
+ * ElasticSearch 5.x
 
 Make sure your system is up-to-date:
 
