@@ -14,6 +14,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 
 ## What's New?
 
+- [Single Sign-On on TheHive with X.509 Certificates](https://github.com/CERT-BDF/TheHiveDocs/blob/master/admin/certauth.md) **(Experimental Feature)**
 - [Training Material](/training-material.md)
 - [Changelog](https://github.com/CERT-BDF/TheHive/blob/master/CHANGELOG.md)
 - [Migration Guide](migration-guide.md)
