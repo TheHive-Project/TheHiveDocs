@@ -12,7 +12,7 @@ Starting from version 2.11 (Mellifera), TheHive Docker image doesn't come with E
 
 Docker-compose can start multiple dockers and link them together. It can be installed using the
 [documentation](https://docs.docker.com/compose/install/).
-The following [docker-compose.yml](https://raw.githubusercontent.com/CERT-BDF/TheHive/master/docker/thehive/docker-compose.yml)
+The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml)
 file starts ElasticSearch, Cortex and TheHive:
 ```
 version: "2"

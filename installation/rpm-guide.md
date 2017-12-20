@@ -1,6 +1,6 @@
 # Installing TheHive Using an RPM Package
 
-TheHive's RPM packages are published on our Bintray repository. All packages are PGP signed using the key which ID is [562CBC1C](/PGP-PUBLIC-KEY). The key's fingerprint is:
+TheHive's RPM packages are published on our Bintray repository. All packages are PGP signed using the key which ID is [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). The key's fingerprint is:
 
 ```0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C```
 

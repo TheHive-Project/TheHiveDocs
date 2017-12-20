@@ -189,7 +189,7 @@ play.http.parser.maxDiskBuffer=1G
 *Note*: if you are using a NGINX reverse in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
 
 ### 6. Cortex
-TheHive can use one or several [Cortex](https://github.com/CERT-BDF/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
+TheHive can use one or several [Cortex](https://github.com/TheHive-Project/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
 ```
 ## Enable the Cortex module
 play.modules.enabled += connectors.cortex.CortexConnector

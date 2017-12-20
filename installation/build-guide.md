@@ -148,7 +148,7 @@ Binaries are built and stored in `TheHive/target/universal/stage/`. Install them
 sudo cp -r TheHive/target/universal/stage /opt/thehive
 ```
 
-Follow the [configuration part of the installation guide](Installation-guide#42-configuration) to run TheHive.
+Follow the [configuration part of the installation guide](../admin/configuration.md) to run TheHive.
 
 
 ### Configure and start elasticsearch

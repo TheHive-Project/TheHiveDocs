@@ -23,7 +23,7 @@ asked. This will create a new ElasticSearch index (the_hive_11). See
 **Basic authentication is disabled by default. We strongly recommand to update the clients that rely on the API to interact with TheHive to use the new API key authentication method**. This feature has been added in this release. If you need to enable
 basic authentication, use `auth.method.basic=true` in `application.conf`
 
-Note that the [TheHive4Py 1.3.0](https://github.com/CERT-BDF/TheHive4py) Python library also adds
+Note that the [TheHive4Py 1.3.0](https://github.com/TheHive-Project/TheHive4py) Python library also adds
 API key authentication support.
 
 ### Alert role
@@ -139,7 +139,7 @@ asked. This will create a new ElastciSearch index (the_hive_9). See
 
 MISP synchronization is now done using alerting framework. MISP events are seen
 like other alert. You can use
-[TheHive4py](https://github.com/CERT-BDF/TheHive4py) to create your own alert.
+[TheHive4py](https://github.com/TheHive-Project/TheHive4py) to create your own alert.
 
 ### Configuration changes
 

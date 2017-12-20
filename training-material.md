@@ -44,7 +44,7 @@ The first time you access TheHive, you’ll need to create the associated databa
 
 ![](images/thehive-first-access_screenshot.png)
 
-TheHive’s configuration file is located in `/etc/thehive/application.conf`. For additional configuration, [read the documentation](https://github.com/CERT-BDF/TheHiveDocs).
+TheHive’s configuration file is located in `/etc/thehive/application.conf`. For additional configuration, [read the documentation](README.md).
 
 #### Cortex
 
@@ -62,7 +62,7 @@ To fully benefit from the analyzers, you should install the associated report te
 
 #### Plug it with MISP
 
-The test VM does not contain a MISP instance and none is configured in TheHive’s configuration file.  To play with MISP, you may want to [use the VM our good friends at CIRCL provide](https://www.circl.lu/services/misp-training-materials/).  Once you’ve downloaded it or if you have an existing instance, edit `/etc/thehive/application.conf` and [follow the configuration guide](https://github.com/CERT-BDF/TheHiveDocs/blob/master/admin/configuration.md#7-misp).
+The test VM does not contain a MISP instance and none is configured in TheHive’s configuration file.  To play with MISP, you may want to [use the VM our good friends at CIRCL provide](https://www.circl.lu/services/misp-training-materials/).  Once you’ve downloaded it or if you have an existing instance, edit `/etc/thehive/application.conf` and [follow the configuration guide](admin/configuration.md#7-misp).
 
 #### Restart or Go Mad
 

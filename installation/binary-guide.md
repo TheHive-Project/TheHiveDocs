@@ -46,7 +46,7 @@ Installation of ElasticSearch is describe in the following [guide](elasticsearch
 Binary package can be downloaded at [thehive-latest.zip](https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip)
 
 After configuring TheHive, if you use Cortex, don't forget to install
-[report templates](../admin-guid.md#3-report-template-management).
+[report templates](../admin/admin-guide.md#3-report-template-management).
 
 ## 4.1. Install from Binaries
 
