@@ -1,7 +1,7 @@
 ## Training Material
 TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex and Cortex analyzers with all dependencies and ElasticSearch installed on top of Ubuntu 16.04 with Oracle JRE 8.
 
-As of this writing, the training VM includes Mellifera 13.2 (TheHive 2.13.2), Cortex 1.1.4, TheHive4py 1.3.1, Cortex4py 1.0.0 and the latest Cortex analyzers as of Sep 25, 2017.
+As of this writing, the training VM includes Cerena 0.2 (TheHive 3.0.2), Cortex 1.1.4, TheHive4py 1.4.1, Cortex4py 1.0.0 and the latest Cortex analyzers as of Dec 20, 2017.
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
@@ -9,18 +9,18 @@ As of this writing, the training VM includes Mellifera 13.2 (TheHive 2.13.2), Co
 
 You can download the VM from the following location:
 
-[https://drive.google.com/file/d/0B3G-Due88gfQMGZ2RjRlc1RfQ2M/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQMGZ2RjRlc1RfQ2M/view?usp=sharing)
+[https://drive.google.com/open?id=0B3G-Due88gfQMTlrTXF3ZnBIRTA](https://drive.google.com/open?id=0B3G-Due88gfQMTlrTXF3ZnBIRTA)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
 
-`15dc0a1d1ef099abd852fefff3a12c1b752573c01b133fc6e643dd2fceb1d46f`
+`48eb89f4051d6ef65f6b8f04f48680a96497fcc5199383a5d83e6469db6ef9b9`
 
 The system’s login is `thehive` and the associated password is `thehive1234`.
 
-**Note**: when importing the OVA file in VMware Fusion, you may encounter an import error such as the one shown in the screenshot below. By clicking on the `Retry` button, the OVF specification should be relaxed and you would be able to use the VM as expected.
+**Note**: On starting the newly imported VM from OVA file in VMware Fusion, you may encounter a message asking to upgrade the virtual machine. By clicking on the `Upgrade` button you would be able to use the VM as expected.
 
-![](images/training-vm-vmware-fusion-ova-warn_msg.png)
+![](images/training-vm-vmware-fusion-ova-upgrade_msg.png)
 
 ### Use It
 
