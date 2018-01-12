@@ -10,8 +10,8 @@ The following softwares are required to download and build TheHive.
   * downloadable from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * git
   * Use the system package or downloadable it from http://www.git-scm.com/downloads
-* ElasticSearch 2.3
-  * downloadable from https://www.elastic.co/downloads/past-releases/elasticsearch-2-3-5
+* ElasticSearch 5.6
+  * downloadable from https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-5
 * NodeJs with its package manager (NPM)
   * downloadable from https://nodejs.org/en/download/
 * Grunt
