@@ -1,4 +1,4 @@
-# MISP / TheHive connector
+# MISP connector
 
 MISP and TheHive can interact between each other in both ways:
 * TheHive is able to import events from a MISP instance as alerts and create cases from them
