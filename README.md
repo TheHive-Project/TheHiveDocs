@@ -22,6 +22,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 - [Backup & Restore](admin/backup-restore.md)
 - [Migration Guide](migration-guide.md)
 - [API Documentation](api/README.md) (incomplete)
+- [Cluster configuration](admin/cluster.md)
 
 ## Miscellaneous Information
 - [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
