@@ -68,7 +68,7 @@ With this feature, output will contain `similarCases` attribute which list case 
 
 Get alert without similarity data:
 ```
-curl curl -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810
+curl -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810
 ```
 It returns:
 ```
