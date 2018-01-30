@@ -41,7 +41,7 @@ parameter (cf. [Docker documentation](https://docs.docker.com/engine/tutorials/d
 Create a ElasticSearch snapshot point named *the_hive_backup* with the following command (set the same path in the location setting than the one set in the configuration file):
 
 ```
-$ curl - XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
+$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
     "type": "fs",
     "settings": {
         "location": "/absolute/path/to/backup/directory",
@@ -64,14 +64,34 @@ Since, everything is fine to backup and restore data.
 Create a backup named *snapshot_1* of all your data by executing the following command :
 
 ```
-$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true' -d '{
+$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true&pretty' -d '{
   "indices": "<INDICE>"
 }'
 ```
 This command terminates only when the backup is complete and the result of the command should look like this:
 
 ```
-{"snapshots":[{"snapshot":"snapshot_1","uuid":"ZQ3kv5-FQoeN3NFIhfKgMg","version_id":5060099,"version":"5.6.0","indices":[the_hive_12"],"state":"SUCCESS","start_time":"2018-01-29T14:41:51.580Z","start_time_in_millis":1517236911580,"end_time":"2018-01-29T14:42:05.216Z","end_time_in_millis":1517236925216,"duration_in_millis":13636,"failures":[],"shards":{"total":41,"failed":0,"successful":41}}]}
+{
+  "snapshots": [{
+    "snapshot": "snapshot_1",
+    "uuid": "ZQ3kv5-FQoeN3NFIhfKgMg",
+    "version_id": 5060099,
+    "version": "5.6.0",
+    "indices": ["the_hive_12"],
+    "state": "SUCCESS",
+    "start_time": "2018-01-29T14:41:51.580Z",
+    "start_time_in_millis": 1517236911580,
+    "end_time": "2018-01-29T14:42:05.216Z",
+    "end_time_in_millis": 1517236925216,
+    "duration_in_millis": 13636,
+    "failures": [],
+    "shards": {
+      "total": 41,
+      "failed": 0,
+      "successful": 41
+    }
+  }]
+}
 ```
 
 
