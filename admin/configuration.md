@@ -333,8 +333,8 @@ In the example below, the following MISP events won't generate alerts in TheHive
 - events that have more than 1000 attributes
 - events which JSON message size is greater than 1MB
 - events that are more than one week old
-- events that have been created by `bad organisation` and `other orga`
-- events that contain `tag1` and `tag2`
+- events that have been created by `bad organisation` or `other orga`
+- events that contain `tag1` or `tag2`
 
 ```
     # filters:
