@@ -221,9 +221,9 @@ TheHive has the ability to connect to one or several MISP instances in order to 
 - receive events as they are added or updated from multiple MISP instances. These events will appear within the `Alerts` pane.
 - export cases as MISP events to one or several MISP instances. The exported cases will not be published automatically though as they need to be reviewed prior to publishing. We **strongly** advise you to review the categories and types of attributes at least, before publishing the corresponding MISP events.
 
-**Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable. 
+**Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable.
 
-Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add each observable created from a MISP event. Any registered server will be used to import events as alerts. It can also be used to export cases to as MISP events, if the account used by TheHive on the MISP instance has sufficient rights. 
+Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add each observable created from a MISP event. Any registered server will be used to import events as alerts. It can also be used to export cases to as MISP events, if the account used by TheHive on the MISP instance has sufficient rights.
 
 This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
 
@@ -232,7 +232,7 @@ This means that TheHive can import events from configured MISP servers _**and**_
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
 
 
-#### 7.1 Minimal Configuration
+#### 7.1 Configuration
 To sync with a MISP server and retrieve events or export cases,  edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
@@ -246,7 +246,7 @@ misp {
 
     # Authentication key.
     key = "<the_auth_key_goes_here>"
-    
+
     # Name of the case template in TheHive that shall be used to import
     # MISP events as cases by default.
     caseTemplate = "<Template_Name_goes_here>"
@@ -272,8 +272,17 @@ misp {
     #   proxy {}
     #   ssl {}
     # }
+
+    # filters:
+    max-attributes = 1000
+    max-size = 1 MiB
+    max-age = 7 days
+    exclusion {
+     organisation = ["bad organisation", "other orga"]
+     tags = ["tag1", "tag2"]
+    }
   }
-  
+
   # Interval between consecutive MISP event  imports  in  hours  (h)  or
   # minutes (m).
   interval = 1h
@@ -281,7 +290,7 @@ misp {
 ```
 
 The HTTP client used by the MISP connector uses a global configuration (in `play.ws`) but it can be overridden within the MISP section of the configuation file and/or in the configuration section of each MISP server (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more details on how to configure the HTTP client.
-  
+
 #### 7.2 Associate a Case Template to Alerts corresponding to MISP events
 As stated in the subsection above, TheHive is able to automatically import MISP events (they will appear as alerts within the `Alerts` pane) and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
@@ -307,6 +316,16 @@ misp {
 ```
 
 Once the configuration file has been edited, restart TheHive. Every new import of MISP event will generate a case according to the "MISP_CASETEMPLATE" template.
+
+#### 7.3 Event filters
+MISP event can be excluded according to the following filters:
+ - the maximum number of attributes (max-attributes)
+ - the maximum size of the event json message (max-size)
+ - the age of the last publication (max-age)
+ - the organisation is black-listed (exclusion.organisation)
+ - one of the tags is black-listed (exclusion.tags)
+
+MISP filters can be added to each MISP server configuration.
 
 ### 8. HTTP client configuration
 

@@ -3,11 +3,13 @@ All persistent data are stored in ElasticSearch database. The backup and restore
 detailed in
 [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
 
-_Note_: you may have to adapt your indices in the examples below. To find the right indice, use the following command :
+_Note_: you may have to adapt your indices in the examples below. To find the right index, use the following command :
 
 ```
 curl 'localhost:9200/_cat/indices?v'
 ```
+
+You can also refer to the [schema version](schema_version.md) page.
 
 To save all your data you only need to backup the last indice. For example, if the previous command gives you the following results, all your data belong to **the_hive_12**.
 
@@ -18,7 +20,7 @@ yellow open   the_hive_12                   Cq4Gc4qkRPaTCqrorFgDRw   5   1      
 ```
 
 
-**In the rest of this document, ensure to change <INDICE> by you own last indice to backup or restore all your data.**
+**In the rest of this document, ensure to change <INDEX> by you own last index to backup or restore all your data.**
 
 
 ## 1. Create a backup repository
@@ -65,7 +67,7 @@ Create a backup named *snapshot_1* of all your data by executing the following c
 
 ```
 $ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true&pretty' -d '{
-  "indices": "<INDICE>"
+  "indices": "<INDEX>"
 }'
 ```
 This command terminates only when the backup is complete and the result of the command should look like this:
@@ -107,7 +109,7 @@ cluster. This operation is done with the following command :
 ```
 $ curl -XPOST 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore' -d '
 {
-  "indices": "<INDICE>"
+  "indices": "<INDEX>"
 }'
 ```
 
