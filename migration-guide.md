@@ -3,13 +3,13 @@
 
 ## From 3.0.x to 3.0.4
 
-The version 3.0.4 of TheHive comes with new MISP settings to filter which event can be imported. Please refer to (MISP event filters)[admin/configuration.md#73-Event-filters] configuration section.
+The version 3.0.4 of TheHive comes with new MISP settings to filter which event can be imported. Please refer to [MISP event filters](admin/configuration.md#73-Event-filters) configuration section.
 The schema of data has been changed in Cerana to integrate dashboard. At the first request, TheHive will ask you to migrate the data. A new index (the_hive_13 by default) will be created then.  See
 [Updating](admin/updating.md).
 
 ## From 2.13.x to 3.0.0
 
-The schema of data has been changed in Cerana to integrate dashboard. At the first request, TheHive will ask you to migrate the data. A new index (the_hive_12 by default) will be created then.  See
+The schema of data has been changed in Cerana to integrate dashboard. At the first request, TheHive will ask you to migrate the data. A new index, called the_hive_12 by default, will be created then.  See
 [Updating](admin/updating.md).
 
 ## From 2.13.0 or 2.13.1 to 2.13.2
