@@ -32,6 +32,11 @@ search {
   nbshards = 5
   # Number of replicas
   nbreplicas = 1
+  # Arbitrary settings
+  settings {
+    # Maximum number of nested fields
+    mapping.nested_fields.limit = 100
+  }
 }
 ```
 
@@ -345,7 +350,7 @@ In the example below, the following MISP events won't generate alerts in TheHive
      organisation = ["bad organisation", "other orga"]
      tags = ["tag1", "tag2"]
     }
-``` 
+```
 
 Of course, you can omit some of the filters or all of them.
 
