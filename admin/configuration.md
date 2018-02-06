@@ -315,17 +315,39 @@ misp {
 
 ```
 
-Once the configuration file has been edited, restart TheHive. Every new import of MISP event will generate a case according to the "MISP_CASETEMPLATE" template.
+Once the configuration file has been edited, restart TheHive. Every new import of a MISP event will generate a case using to the "MISP_CASETEMPLATE" template by default. The template can be overridden though during the import.
 
-#### 7.3 Event filters
-MISP event can be excluded according to the following filters:
+#### 7.3 Event Filters
+When you first connect TheHive to a MISP instance, you can be overwhelmed by the number of alerts that will be generated, particularly if the MISP instance contains a lot of events. Indeed, every event, even those that date back to the beginning of the Internet, will generate an alert. To avoid alert fatigue, and starting from TheHive 3.0.4 (Cerana 0.4), you can exclude MISP events using different filters:
+
  - the maximum number of attributes (max-attributes)
- - the maximum size of the event json message (max-size)
+ - the maximum size of the event's JSON message (max-size)
  - the age of the last publication (max-age)
  - the organisation is black-listed (exclusion.organisation)
  - one of the tags is black-listed (exclusion.tags)
 
-MISP filters can be added to each MISP server configuration.
+Please note that MISP event filters can be adapted to the configuration associated to each MISP server TheHive is connected with.
+
+In the example below, the following MISP events won't generate alerts in TheHive:
+
+- events that have more than 1000 attributes
+- events which JSON message size is greater than 1MB
+- events that are more than one week old
+- events that have been created by `bad organisation` and `other orga`
+- events that contain `tag1` and `tag2`
+
+```
+    # filters:
+    max-attributes = 1000
+    max-size = 1 MiB
+    max-age = 7 days
+    exclusion {
+     organisation = ["bad organisation", "other orga"]
+     tags = ["tag1", "tag2"]
+    }
+``` 
+
+Of course, you can omit some of the filters or all of them.
 
 ### 8. HTTP client configuration
 
