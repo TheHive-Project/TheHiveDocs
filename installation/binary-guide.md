@@ -40,7 +40,7 @@ sudo apt-get install openjdk-8-jre-headless
 # 3. Install ElasticSearch
 
 Installation of ElasticSearch is describe in the following [guide](elasticsearch-guide.md)
- 
+
 # 4. Install TheHive
 
 Binary package can be downloaded at [thehive-latest.zip](https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip)
@@ -65,7 +65,7 @@ ln -s thehive-x.x.x thehive
 #### 4.2.1 Required configuration
 
 Please refer the [configuration guide](../admin/configuration.md) for full information on TheHive configuration.
-The only required parameter in order to start TheHive is the key of the server (`play.crypto.secret`). This key is used
+The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used
 to authenticate cookies that contain data. If TheHive runs in cluster mode, all instance must share the same key.
 You can generate the minimal configuration with the following command lines (they assume that you have created a
 dedicated user for TheHive, named thehive):
@@ -77,7 +77,7 @@ sudo mkdir /etc/thehive
 # ~~~~~
 # The secret key is used to secure cryptographics functions.
 # If you deploy your application to several instances be sure to use the same key!
-play.crypto.secret="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 ) | sudo tee -a /etc/thehive/application.conf
 ```

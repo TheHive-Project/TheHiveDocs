@@ -69,7 +69,7 @@ You can add the `--publish` docker option to expose TheHive HTTP service.
 ## Customize the Docker Image
 
 By Default, TheHive docker image adds minimal configuration:
- - choose a random secret (play.crypto.secret)
+ - choose a random secret (play.http.secret.key)
  - search ElasticSearch instance (host named `elasticsearch`) and add it to configuration
  - search Cortex instance (host named `cortex`) and add it to configuration
 
