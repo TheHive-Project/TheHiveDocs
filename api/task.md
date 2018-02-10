@@ -21,7 +21,7 @@ Optional attributes:
 |HTTP Mehod |URI                                     |Action                                |
 |-----------|----------------------------------------|--------------------------------------|
 |POST       |/api/case/:caseId/task/_search          |Find tasks in a case (deprecated)     |
-|POST       |/api/case/task/_search                  |Find tasksv                           |
+|POST       |/api/case/task/_search                  |Find tasks                            |
 |POST       |/api/case/task/_stats                   |Compute stats on tasks                |
 |GET        |/api/case/task/:taskId                  |Get a task                            |
 |PATCH      |/api/case/task/:taskId                  |Update a task                         |
@@ -41,7 +41,7 @@ This call returns attributes of the created task.
 #### Examples
 Creation of a simple task in case `AVqqdpY2yQ6w1DNC8aDh`:
 ```
-curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
   "title": "Do something"
 }'
 ```
@@ -63,7 +63,7 @@ It returns:
 
 Creation of another task:
 ```
-curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -d '{
   "title": "Analyze the malware",
   "description": "The malware XXX is analyzed using sandbox ...",
   "owner": "Joe",

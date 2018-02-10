@@ -10,8 +10,8 @@ The following softwares are required to download and build TheHive.
   * downloadable from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * git
   * Use the system package or downloadable it from http://www.git-scm.com/downloads
-* ElasticSearch 2.3
-  * downloadable from https://www.elastic.co/downloads/past-releases/elasticsearch-2-3-5
+* ElasticSearch 5.6
+  * downloadable from https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-5
 * NodeJs with its package manager (NPM)
   * downloadable from https://nodejs.org/en/download/
 * Grunt
@@ -148,7 +148,7 @@ Binaries are built and stored in `TheHive/target/universal/stage/`. Install them
 sudo cp -r TheHive/target/universal/stage /opt/thehive
 ```
 
-Follow the [configuration part of the installation guide](Installation-guide#42-configuration) to run TheHive.
+Follow the [configuration part of the installation guide](../admin/configuration.md) to run TheHive.
 
 
 ### Configure and start elasticsearch

@@ -32,6 +32,11 @@ search {
   nbshards = 5
   # Number of replicas
   nbreplicas = 1
+  # Arbitrary settings
+  settings {
+    # Maximum number of nested fields
+    mapping.nested_fields.limit = 100
+  }
 }
 ```
 
@@ -189,7 +194,7 @@ play.http.parser.maxDiskBuffer=1G
 *Note*: if you are using a NGINX reverse in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
 
 ### 6. Cortex
-TheHive can use one or several [Cortex](https://github.com/CERT-BDF/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
+TheHive can use one or several [Cortex](https://github.com/TheHive-Project/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
 ```
 ## Enable the Cortex module
 play.modules.enabled += connectors.cortex.CortexConnector
@@ -216,21 +221,23 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive show the
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
 
 ### 7. MISP
-TheHive has the ability to connect to one or several MISP servers in order to import and export events. Hence TheHive is able to:
+TheHive has the ability to connect to one or several MISP instances in order to import and export events. Hence TheHive is able to:
 
 - receive events as they are added or updated from multiple MISP instances. These events will appear within the `Alerts` pane.
 - export cases as MISP events to one or several MISP instances. The exported cases will not be published automatically though as they need to be reviewed prior to publishing. We **strongly** advise you to review the categories and types of attributes at least, before publishing the corresponding MISP events.
 
-**Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable. 
+**Note**: Please note that only and all the observables marked as IOCs will be used to create the MISP event. Any other observable will not be shared. This is not configurable.
 
-Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add to the corresponding cases when importing MISP events. Any registered server will be used to import events as alerts and export cases as MISP events. This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
+Within the configuration file, you can register your MISP server(s) under the `misp` configuration keyword. Each server shall be identified using an arbitrary name, its `url`, the corresponding authentication `key` and optional `tags` to add each observable created from a MISP event. Any registered server will be used to import events as alerts. It can also be used to export cases to as MISP events, if the account used by TheHive on the MISP instance has sufficient rights.
+
+This means that TheHive can import events from configured MISP servers _**and**_ export cases to the same configured MISP servers. Having different configuration for sources and destination servers is expected in a future version.
 
 ##### Important Notes
 
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
 
 
-#### 7.1 Minimal Configuration
+#### 7.1 Configuration
 To sync with a MISP server and retrieve events or export cases,  edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
@@ -239,16 +246,22 @@ play.modules.enabled += connectors.misp.MispConnector
 
 misp {
   "MISP-SERVER-ID" {
-    # URL of the MISP server
+    # URL of the MISP instance.
     url = "<The_URL_of_the_MISP_Server_goes_here>"
 
-    # authentication key
+    # Authentication key.
     key = "<the_auth_key_goes_here>"
 
-    # tags that must be automatically added to the case corresponding to the imported event
-    tags = ["misp"]
+    # Name of the case template in TheHive that shall be used to import
+    # MISP events as cases by default.
+    caseTemplate = "<Template_Name_goes_here>"
 
-    # truststore configuration (truststore using "cert" key is deprecated)
+    # Tags to add to each observable imported from an event available on
+    # this instance.
+    tags = ["misp-server-id"]
+
+    # Truststore to use to validate the X.509 certificate  of  the  MISP
+    # instance if the default truststore is not sufficient.
     #ws.ssl.trustManager.stores = [
     #{
     #  type: "JKS"
@@ -264,14 +277,25 @@ misp {
     #   proxy {}
     #   ssl {}
     # }
+
+    # filters:
+    max-attributes = 1000
+    max-size = 1 MiB
+    max-age = 7 days
+    exclusion {
+     organisation = ["bad organisation", "other orga"]
+     tags = ["tag1", "tag2"]
+    }
   }
-  # Interval between two MISP event import in hours (h) or minutes (m)
+
+  # Interval between consecutive MISP event  imports  in  hours  (h)  or
+  # minutes (m).
   interval = 1h
 }
 ```
 
 The HTTP client used by the MISP connector uses a global configuration (in `play.ws`) but it can be overridden within the MISP section of the configuation file and/or in the configuration section of each MISP server (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more details on how to configure the HTTP client.
-  
+
 #### 7.2 Associate a Case Template to Alerts corresponding to MISP events
 As stated in the subsection above, TheHive is able to automatically import MISP events (they will appear as alerts within the `Alerts` pane) and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
@@ -296,11 +320,43 @@ misp {
 
 ```
 
-Once the configuration file has been edited, restart TheHive. Every new import of MISP event will generate a case according to the "MISP_CASETEMPLATE" template.
+Once the configuration file has been edited, restart TheHive. Every new import of a MISP event will generate a case using to the "MISP_CASETEMPLATE" template by default. The template can be overridden though during the import.
+
+#### 7.3 Event Filters
+When you first connect TheHive to a MISP instance, you can be overwhelmed by the number of alerts that will be generated, particularly if the MISP instance contains a lot of events. Indeed, every event, even those that date back to the beginning of the Internet, will generate an alert. To avoid alert fatigue, and starting from TheHive 3.0.4 (Cerana 0.4), you can exclude MISP events using different filters:
+
+ - the maximum number of attributes (max-attributes)
+ - the maximum size of the event's JSON message (max-size)
+ - the age of the last publication (max-age)
+ - the organisation is black-listed (exclusion.organisation)
+ - one of the tags is black-listed (exclusion.tags)
+
+Please note that MISP event filters can be adapted to the configuration associated to each MISP server TheHive is connected with.
+
+In the example below, the following MISP events won't generate alerts in TheHive:
+
+- events that have more than 1000 attributes
+- events which JSON message size is greater than 1MB
+- events that are more than one week old
+- events that have been created by `bad organisation` or `other orga`
+- events that contain `tag1` or `tag2`
+
+```
+    # filters:
+    max-attributes = 1000
+    max-size = 1 MiB
+    max-age = 7 days
+    exclusion {
+     organisation = ["bad organisation", "other orga"]
+     tags = ["tag1", "tag2"]
+    }
+```
+
+Of course, you can omit some of the filters or all of them.
 
 ### 8. HTTP client configuration
 
-HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contains configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.5.x/ScalaWS#Configuring-WS):
+HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contains configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
 
  - `ws.followRedirects`: Configures the client to follow 301 and 302 redirects (default is true).
  - `ws.useragent`: To configure the User-Agent header field.
@@ -322,7 +378,7 @@ Proxy can be used. By default, proxy configured in JVM is used but one can confi
  - `ws.proxy.password`: The password for the credentials for the proxy server.
  - `ws.proxy.ntlmDomain`: The password for the credentials for the proxy server.
  - `ws.proxy.encoding`: The realm's charset.
- - `ws.proxy.proxyNonProxyHosts`: The list of host on which proxy must not be used.
+ - `ws.proxy.nonProxyHosts`: The list of host on which proxy must not be used.
 
 #### SSL
 SSL of HTTP client can be completely configured in `application.conf` file.

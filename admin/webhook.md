@@ -18,7 +18,7 @@ webhooks {
 ```
 
 Proxy and SSL configuration can be added in the same manner than MISP or Cortex
-(cf. [configuration guide, section 8. HTTP client configuration](admin/configuration.md):
+(cf. [configuration guide, section 8. HTTP client configuration](configuration.md#8-http-client-configuration):
 
 ```
 webhooks {
@@ -127,3 +127,30 @@ For an update, data looks like:
   }
 }
 ```
+## Sample Webhook server application
+This application might help you to get started with webhooks.
+It listens to a local port and displays the contents of received POST json data.
+
+Install dependencies:
+`sudo pip install flask`
+
+Create a simple Python script (e.g. `vi webhooktest.py`):
+```
+from flask import Flask, request
+import json
+
+app = Flask(__name__)
+
+@app.route('/',methods=['POST'])
+def foo():
+   data = json.loads(request.data)
+   print json.dumps(data, indent=4)
+   return "OK"
+
+if __name__ == '__main__':
+   app.run()
+
+```
+
+Run the server:
+`python webhooktest.py`

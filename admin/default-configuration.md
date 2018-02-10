@@ -1,14 +1,6 @@
 You can find below the default configuration settings of TheHive:
 
 ```
-# Register module for dependency injection
-play.modules.enabled += global.TheHive
-
-# handler for requests (check if database is in maintenance or not)
-#play.http.requestHandler = TheHiveHostRequestHandler
-
-play.http.filters = global.TheHiveFilters
-
 # maximum number of similar cases
 maxSimilarCases = 100
 
@@ -24,11 +16,15 @@ search {
   keepalive = 1m
   # Size of the page for scroll
   pagesize = 50
+  # Arbitrary settings
+  settings {
+    # Maximum number of nested fields
+    mapping.nested_fields.limit = 50
+  }
 }
 
 # Datastore
 datastore {
-  name = data
   # Size of stored data chunks
   chunksize = 50k
   hash {
@@ -102,13 +98,6 @@ stream.longpolling {
   globalMaxWait = 1s
 }
 
-# Name of the ElasticSearch type used to store dblist /!\ Don't change this value
-dblist.name = dblist
-# Name of the ElasticSearch type used to store audit event /!\ Don't change this value
-audit.name = audit
-# Name of the ElasticSearch type used to store attachment /!\ Don't change this value
-datastore.name = data
-
 # Cortex configuration
 ########
 
@@ -116,8 +105,70 @@ cortex {
   #"CORTEX-SERVER-ID" {
   #  # URL of MISP server
   #  url = ""
+  #  #HTTP client configuration, more details in section 8
+  #  ws {
+  #    ws.useProxyProperties = true
+  #    proxy {
+  #      # The hostname of the proxy server.
+  #      #host = ""
+  #      # The port of the proxy server.
+  #      #post = 0
+  #      # The protocol of the proxy server.  Use "http" or "https".  Defaults to "http" if not specified.
+  #      #protocol = "http"
+  #      # The username of the credentials for the proxy server.
+  #      #user = ""
+  #      # The password for the credentials for the proxy server.
+  #      #password = ""
+  #      # The password for the credentials for the proxy server.
+  #      #ntlmDomain = ""
+  #      # The realm's charset.
+  #      #encoding = ""
+  #      # The list of host on which proxy must not be used.
+  #      #nonProxyHosts = ""
+  #    }
+  #    ssl {
+  #      keyManager { # used for client certificate authentication
+  #        stores = [{
+  #          type: "pkcs12" // JKS or PEM
+  #          path: "mycert.p12"
+  #          password: "password1"
+  #        }]
+  #      }
+  #      # Add certificate authorities to trust remote certificate  
+  #      trustManager {
+  #        stores = [{
+  #          type: "JKS" // JKS or PEM
+  #          path: "keystore.jks"
+  #          password: "password1"
+  #        }]
+  #     }
+  #     debug = {
+  #       ssl = false
+  #       trustmanager = false
+  #       keymanager = false
+  #       sslctx = false
+  #       handshake = false
+  #       verbose = false
+  #       data = false
+  #       certpath = false
+  #     }
+  #
+  #     # default SSL protocol
+  #     #protocol = "TLSv1.2"
+  #
+  #     # list of enabled SSL protocols
+  #     #ws.ssl.enabledProtocols = ["TLSv1.2", "TLSv1.1", "TLSv1"]
+  #
+  #     # SSL Cipher suite
+  #     #enabledCipherSuites = [
+  #     #  "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+  #     #  "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+  #     #  "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+  #     #  "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+  #     #]
+  #    }
+  #  }
   #}
-}
 
 # MISP configuration
 ########
@@ -130,13 +181,89 @@ misp {
   #  key = ""
   #  #tags to be added to imported artifact
   #  tags = ["misp"]
+  #
+  #  # filters:
+  #  # the maximum number of attributes (max-attributes)
+  #  #max-attributes = 1000
+  #  # the maximum size of the event json message
+  #  #max-size = 1 MiB
+  #  # the age of the last publication
+  #  #max-age = 7 days
+  #  exclusion {
+  #  # the organisation is black-listed  
+  #  #organisation = ["bad organisation", "other orga"]
+  #  # one of the tags is black-listed
+  #  #tags = ["tag1", "tag2"]
+  #  }
+  #
+  #  ws {
+  #    ws.useProxyProperties = true
+  #    proxy {
+  #      # The hostname of the proxy server.
+  #      #host = ""
+  #      # The port of the proxy server.
+  #      #post = 0
+  #      # The protocol of the proxy server.  Use "http" or "https".  Defaults to "http" if not specified.
+  #      #protocol = "http"
+  #      # The username of the credentials for the proxy server.
+  #      #user = ""
+  #      # The password for the credentials for the proxy server.
+  #      #password = ""
+  #      # The password for the credentials for the proxy server.
+  #      #ntlmDomain = ""
+  #      # The realm's charset.
+  #      #encoding = ""
+  #      # The list of host on which proxy must not be used.
+  #      #nonProxyHosts = ""
+  #    }
+  #
+  #    ssl {
+  #      keyManager { # used for client certificate authentication
+  #        stores = [{
+  #          type: "pkcs12" // JKS or PEM
+  #          path: "mycert.p12"
+  #          password: "password1"
+  #        }]
+  #      }
+  #      # Add certificate authorities to trust remote certificate  
+  #      trustManager {
+  #        stores = [{
+  #          type: "JKS" // JKS or PEM
+  #          path: "keystore.jks"
+  #          password: "password1"
+  #        }]
+  #     }
+  #     debug = {
+  #       ssl = false
+  #       trustmanager = false
+  #       keymanager = false
+  #       sslctx = false
+  #       handshake = false
+  #       verbose = false
+  #       data = false
+  #       certpath = false
+  #     }
+  #
+  #     # default SSL protocol
+  #     #protocol = "TLSv1.2"
+  #
+  #     # list of enabled SSL protocols
+  #     #ws.ssl.enabledProtocols = ["TLSv1.2", "TLSv1.1", "TLSv1"]
+  #
+  #     # SSL Cipher suite
+  #     #enabledCipherSuites = [
+  #     #  "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+  #     #  "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+  #     #  "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+  #     #  "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+  #     #]
+  #    }
+  #  }
   #}
-
-  # truststore to used to validate MISP certificate (if default truststore is not suffisient)
-  #cert = /path/to/truststore.jsk
 
   # Interval between two MISP event import
   interval = 1h
+
 }
 
 # Metrics configuration

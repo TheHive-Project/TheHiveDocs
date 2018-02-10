@@ -38,7 +38,7 @@ This call returns attributes of the created log.
 #### Examples
 Creation of a simple log in task `AVqqeXc9yQ6w1DNC8aDj`:
 ```
-curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/task/AVqqeXc9yQ6w1DNC8aDj/log -d '{
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/case/task/AVqqeXc9yQ6w1DNC8aDj/log -d '{
   "message": "Some message"
 }'
 ```
@@ -59,7 +59,7 @@ It returns:
 
 If log contain attachment, request must be in multipart format:
 ```
-curl -XPOST -H 'Authorization: Bearer gvlvgck/user/api/key/dkS4Ywjz8Uf' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -F '_json={"message": "Screenshot of fake site"};type=application/json' -F 'attachment=@screenshot1.png;type=image/png'
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -F '_json={"message": "Screenshot of fake site"};type=application/json' -F 'attachment=@screenshot1.png;type=image/png'
 ```
 It returns:
 ```
