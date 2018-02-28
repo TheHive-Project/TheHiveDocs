@@ -10,7 +10,7 @@ It is possible to use the API to control those behaviours.
 
 ### API methods
 
-| HTTP method | URI                                | Action                                                                                        |
+| HTTP Method | URI                                | Action                                                                                        |
 |-------------|------------------------------------|-----------------------------------------------------------------------------------------------|
 | GET         | /api/connector/misp/_syncAlerts    | Synchronize from all MISP instances all MISP events published since the last synchronization  |
 | GET         | /api/connector/misp/_syncAllAlerts | Synchronize from all MISP instances all MISP published events since the beginning             |
@@ -20,7 +20,7 @@ It is possible to use the API to control those behaviours.
 
 ### API methods
 
-| HTTP method | URI                                           | Action                |
+| HTTP Method | URI                                           | Action                |
 |-------------|-----------------------------------------------|-----------------------|
 | POST        | /api/connector/misp/export/:caseId/:mispName | Export a case to MISP |
 

@@ -14,15 +14,15 @@ Optional attributes:
 
 ### Log methods
 
-|HTTP Mehod |URI                                     |Action                                |
-|-----------|----------------------------------------|--------------------------------------|
-|GET        |/api/case/task/:taskId/log              |Get logs of the task                  |
-|POST       |/api/case/task/:taskId/log/_search      |Find logs in specified task           |
-|POST       |/api/case/task/log/_search              |Find logs                             |
-|POST       |/api/case/task/:taskId/log              |Create a log                          |
-|PATCH      |/api/case/task/log/:logId               |Update a log                          |
-|DELETE     |/api/case/task/log/:logId               |Remove a log                          |
-|GET        |/api/case/task/log/:logId               |Get a log                             |
+|HTTP Method |URI                                     |Action                                |
+|------------|----------------------------------------|--------------------------------------|
+|GET         |/api/case/task/:taskId/log              |Get logs of the task                  |
+|POST        |/api/case/task/:taskId/log/_search      |Find logs in specified task           |
+|POST        |/api/case/task/log/_search              |Find logs                             |
+|POST        |/api/case/task/:taskId/log              |Create a log                          |
+|PATCH       |/api/case/task/log/:logId               |Update a log                          |
+|DELETE      |/api/case/task/log/:logId               |Remove a log                          |
+|GET         |/api/case/task/log/:logId               |Get a log                             |
 
 ### Create a log
 The URL used to create a task is:
@@ -57,7 +57,7 @@ It returns:
 }
 ```
 
-If log contain attachment, request must be in multipart format:
+If log contains an attachment, the request must be in multipart format:
 ```
 curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -F '_json={"message": "Screenshot of fake site"};type=application/json' -F 'attachment=@screenshot1.png;type=image/png'
 ```
