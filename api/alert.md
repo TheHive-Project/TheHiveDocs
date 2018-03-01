@@ -151,7 +151,7 @@ POST     /api/alert
 ```
 Required case attributes (cf. models) must be provided.
 
-If an alert with the same tuple `type`, `source` andi `sourceRef` already exists, TheHive will refuse to create it.
+If an alert with the same tuple `type`, `source` and `sourceRef` already exists, TheHive will refuse to create it.
 
 This call returns attributes of the created alert.
 
