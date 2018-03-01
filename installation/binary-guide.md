@@ -6,7 +6,7 @@ This guide describes the manual installation of TheHive from binaries in Ubuntu 
 
 Install a minimal Ubuntu 16.04 system with the following software:
  * Java runtime environment 1.8+ (JRE)
- * ElasticSearch 5.x
+ * Elasticsearch 5.x
 
 Make sure your system is up-to-date:
 
@@ -37,9 +37,9 @@ sudo apt-get install openjdk-8-jre-headless
 
 ```
 
-# 3. Install ElasticSearch
+# 3. Install Elasticsearch
 
-Installation of ElasticSearch is described in the following [guide](elasticsearch-guide.md)
+Installation of Elasticsearch is described in the following [guide](elasticsearch-guide.md)
 
 # 4. Install TheHive
 
@@ -133,7 +133,7 @@ Once created, you should be redirected to the login page.
 ![](../files/installguide_login.png)
 
 **Warning**: at this stage, if you missed the creation of the admin user, you will not be able to do it unless you
-delete the index in ElasticSearch. In the case you made a mistake, just delete the index with the following command
+delete the index in Elasticsearch. In the case you made a mistake, just delete the index with the following command
 (beware, it deletes everything in the database)
 ```
 curl -X DELETE http://127.0.0.1:9200/the_hive_10
