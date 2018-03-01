@@ -4,13 +4,13 @@ This document is a step-by-step guide to build TheHive from sources.
 
 ## 1. Pre-requisites
 
-The following softwares are required to download and build TheHive.
+The following software is required to download and build TheHive.
 
 * Java Development Kit 8 (JDK)
   * downloadable from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * git
-  * Use the system package or downloadable it from http://www.git-scm.com/downloads
-* ElasticSearch 5.6
+  * Use the system package or download it from http://www.git-scm.com/downloads
+* Elasticsearch 5.6
   * downloadable from https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-5
 * NodeJs with its package manager (NPM)
   * downloadable from https://nodejs.org/en/download/
@@ -38,7 +38,7 @@ sudo yum -y install git bzip2
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
-### 2.1.3. Installation of ElasticSearch
+### 2.1.3. Installation of Elasticsearch
 
 Download and install the public signing key:
 
@@ -59,7 +59,7 @@ enabled=1
 __EOF
 ```
 
-Your repository is ready for use. You can install ElasticSearch with:
+Your repository is ready for use. You can install Elasticsearch with:
 ```
 sudo yum -y install elasticsearch
 ```
@@ -102,7 +102,7 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
-### 2.2.3. Installation of ElasticSearch
+### 2.2.3. Installation of Elasticsearch
 
 ```
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
@@ -140,7 +140,7 @@ bin/activator clean stage
 ```
 
 It will download all dependencies (could be long) then build the back-end.
-This command clean previous build files and create an autonomous package in `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), analyzers (`/analyzers`), configuration files (`/conf`) and startup scripts (`/bin`).
+This command cleans previous build files and creates an autonomous package in the `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), analyzers (`/analyzers`), configuration files (`/conf`) and startup scripts (`/bin`).
 
 Binaries are built and stored in `TheHive/target/universal/stage/`. Install them in `/opt/thehive` for example.
 
@@ -177,18 +177,18 @@ Follow [4.3. First start in the Installation guide](binary-guide.md#43-first-sta
 
 
 ## Build the front-end only
-Building back-end builds also front-end, so you don't need to build front-end separately. This section is useful only for troubleshooting or in order to install front-end in a reverse proxy.
+Building the back-end also builds the front-end, so you don't need to build the front-end separately. This section is useful only for troubleshooting or in order to install front-end in a reverse proxy.
 
 Go to front-end directory:
 ```
 cd TheHive/ui
 ```
 
-Install NodeJs libraries (required by building step), bower libraries (javascript libraries downloaded by browser). Then build the front-end :
+Install NodeJs libraries (required by building step) and bower libraries (javascript libraries downloaded by browser). Then build the front-end :
 ```
 npm install
 bower install
 grunt build
 ```
 
-This step generates static files (html, javascript and related resources) in `dist` directory. These files are ready to be imported in http server.
+This step generates static files (html, javascript and related resources) in the `dist` directory. These files are ready to be imported into the http server.

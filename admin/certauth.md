@@ -18,7 +18,7 @@ play.server.https.keyStore {
 You can find more details in the [configuration guide](configuration.md#10-https) and in the [PlayFramework documentation](https://www.playframework.com/documentation/2.6.x/ConfiguringHttps).
 
 ## Step 2: Configure a Certificate Authority
-A certificate must be provided to each user who is going to single-sign on. The certificate authority which is used to to sign the user certificated must be declared in TheHive. Once setup, all certificates issued by this authority will be trusted.
+A certificate must be provided to each user who is going to single-sign on. The certificate authority which is used to to sign the user's certificate must be declared in TheHive. Once setup, all certificates issued by this authority will be trusted.
 
 A certificate authority must be added to a trust store in the same manner as a key store:
 ```

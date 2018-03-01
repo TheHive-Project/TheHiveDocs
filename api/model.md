@@ -16,11 +16,9 @@ Field can be prefixed with `multi-` in order to indicate that multiple values ca
 ## Common Attributes
 
 All entities share the following attributes:
- - `createdBy` (text) : login of the user who create the entity
+ - `createdBy` (text) : login of the user who created the entity
  - `createdAt` (date) : date and time of the creation
- - `updatedBy` (text) : login of the user who do the last update of the entity
+ - `updatedBy` (text) : login of the user who last updated the entity
  - `upadtedAt` (date) : date and time of the last update
  - `user` (text) : same value as `createdBy` (this field is deprecated)
-This attributes are handled by back-end and can't be directly updated.
-
-
+These attributes are handled by the back-end and can't be directly updated.

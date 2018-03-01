@@ -18,14 +18,14 @@ Optional attributes:
 
 ### Task methods
 
-|HTTP Mehod |URI                                     |Action                                |
-|-----------|----------------------------------------|--------------------------------------|
-|POST       |/api/case/:caseId/task/_search          |Find tasks in a case (deprecated)     |
-|POST       |/api/case/task/_search                  |Find tasks                            |
-|POST       |/api/case/task/_stats                   |Compute stats on tasks                |
-|GET        |/api/case/task/:taskId                  |Get a task                            |
-|PATCH      |/api/case/task/:taskId                  |Update a task                         |
-|POST       |/api/case/:caseId/task                  |[Create a task](#create-a-task)       |
+|HTTP Method |URI                                     |Action                                |
+|------------|----------------------------------------|--------------------------------------|
+|POST        |/api/case/:caseId/task/_search          |Find tasks in a case (deprecated)     |
+|POST        |/api/case/task/_search                  |Find tasks                            |
+|POST        |/api/case/task/_stats                   |Compute stats on tasks                |
+|GET         |/api/case/task/:taskId                  |Get a task                            |
+|PATCH       |/api/case/task/:taskId                  |Update a task                         |
+|POST        |/api/case/:caseId/task                  |[Create a task](#create-a-task)       |
 
 ### Create a task
 The URL used to create a task is:

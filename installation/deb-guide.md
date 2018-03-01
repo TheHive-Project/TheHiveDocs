@@ -11,8 +11,8 @@ sudo apt-get install thehive
 ```
 
 If the command `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C` fails (because your infrastructure
-refuses the acccess to pgp.mit.edu server key), you can run with the equivalent command: `curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -`
+refuses the access to pgp.mit.edu server key), you can run with the equivalent command: `curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
 After package installation, you should install ElasticSearch
 (see [ElasticSearch installation guide](elasticsearch-guide.md)) and configure TheHive
-(see [configuration guide](../admin/configuration.md))
+(see [configuration guide](../admin/configuration.md)).

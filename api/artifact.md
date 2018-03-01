@@ -10,8 +10,8 @@ Required attributes:
  - `dataType` (enumeration) : type of the observable (read only)
  - `message` (text) : description of the observable in the context of the case
  - `startDate` (date) : date of the observable creation **default=now**
- - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`0`: `white`; `1`: `green`; `2: amber`;
- `3: red`) **default=2**
+ - `tlp` (number) : [TLP](https://www.us-cert.gov/tlp) (`0`: `white`; `1`: `green`; `2`: `amber`;
+ `3`: `red`) **default=2**
  - `ioc` (boolean) : indicates if the observable is an IOC **default=false**
  - `status` (artifactStatus) : status of the observable (*Ok* or *Deleted*) **default=Ok**
 
@@ -22,19 +22,19 @@ Optional attributes:
 
 ### Observable methods
 
-|HTTP Mehod |URI                                     |Action                                |
-|-----------|----------------------------------------|--------------------------------------|
-|POST       |/api/case/artifact/_search              |Find observables                      |
-|POST       |/api/case/artifact/_stats               |Compute stats on observables          |
-|POST       |/api/case/:caseId/artifact              |Create an observable                  |
-|GET        |/api/case/artifact/:artifactId          |Get an observable                     |
-|DELETE     |/api/case/artifact/:artifactId          |Remove an observable                  |
-|PATCH      |/api/case/artifact/:artifactId          |Update an observable                  |
-|GET        |/api/case/artifact/:artifactId/similar  |Get list of similar observables       |
-|PATCH      |/api/case/artifact/_bulk                |Update observables in bulk            |
+|HTTP Method |URI                                     |Action                                |
+|------------|----------------------------------------|--------------------------------------|
+|POST        |/api/case/artifact/_search              |Find observables                      |
+|POST        |/api/case/artifact/_stats               |Compute stats on observables          |
+|POST        |/api/case/:caseId/artifact              |Create an observable                  |
+|GET         |/api/case/artifact/:artifactId          |Get an observable                     |
+|DELETE      |/api/case/artifact/:artifactId          |Remove an observable                  |
+|PATCH       |/api/case/artifact/:artifactId          |Update an observable                  |
+|GET         |/api/case/artifact/:artifactId/similar  |Get list of similar observables       |
+|PATCH       |/api/case/artifact/_bulk                |Update observables in bulk            |
 
 ### List Observables of a Case
-Complete observable list of a case can be retrieve by performing a search:
+Complete observable list of a case can be retrieved by performing a search:
 ```
 POST     /api/case/artifact/_search
 ```

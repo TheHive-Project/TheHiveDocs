@@ -31,32 +31,32 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 
 ### Alert methods
 
-|HTTP Mehod |URI                                     |Action                                |
-|-----------|----------------------------------------|--------------------------------------|
-|GET        |/api/alert                              |List alerts                           |
-|POST       |/api/alert/_search                      |Find alerts                           |
-|PATCH      |/api/alert/_bulk                        |Update alerts in bulk                 |
-|POST       |/api/alert/_stats                       |Compute stats on alerts               |
-|POST       |/api/alert                              |[Create an alert](#create-an-alert)    |
-|GET        |/api/alert/:alertId                     |[Get an alert](#get-an-alert)         |
-|PATCH      |/api/alert/:alertId                     |Update an alert                       |
-|DELETE     |/api/alert/:alertId                     |Delete an alert                       |
-|POST       |/api/alert/:alertId/markAsRead          |Mark an alert as read                 |
-|POST       |/api/alert/:alertId/markAsUnread        |Mark an alert as unread               |
-|POST       |/api/alert/:alertId/createCase          |Create a case from an alert           |
-|POST       |/api/alert/:alertId/follow              |Follow an alert                       |
-|POST       |/api/alert/:alertId/unfollow            |Unfollow an alert                     |
+|HTTP Method |URI                                     |Action                                |
+|------------|----------------------------------------|--------------------------------------|
+|GET         |/api/alert                              |List alerts                           |
+|POST        |/api/alert/_search                      |Find alerts                           |
+|PATCH       |/api/alert/_bulk                        |Update alerts in bulk                 |
+|POST        |/api/alert/_stats                       |Compute stats on alerts               |
+|POST        |/api/alert                              |[Create an alert](#create-an-alert)    |
+|GET         |/api/alert/:alertId                     |[Get an alert](#get-an-alert)         |
+|PATCH       |/api/alert/:alertId                     |Update an alert                       |
+|DELETE      |/api/alert/:alertId                     |Delete an alert                       |
+|POST        |/api/alert/:alertId/markAsRead          |Mark an alert as read                 |
+|POST        |/api/alert/:alertId/markAsUnread        |Mark an alert as unread               |
+|POST        |/api/alert/:alertId/createCase          |Create a case from an alert           |
+|POST        |/api/alert/:alertId/follow              |Follow an alert                       |
+|POST        |/api/alert/:alertId/unfollow            |Unfollow an alert                     |
 
 ### Get an alert
 
-An alert details can be retrieve using the url:
+An alert's details can be retrieve using the url:
 ```
 GET     /api/alert/:alertId
 ```
 The alert ID is obtained by [List alerts](#list-alerts) or [Find alerts](#find-alerts) API.
 
 If the parameter `similarity` is set to "1" or "true", this API returns information on cases which have similar observables.
-With this feature, output will contain `similarCases` attribute which list case details with:
+With this feature, output will contain the `similarCases` attribute which list case details with:
  - artifactCount: number of observables in the original case
  - iocCount: number of observables marked as IOC in original case
  - similarArtifactCount: number of observables which are in alert and in case
@@ -151,7 +151,7 @@ POST     /api/alert
 ```
 Required case attributes (cf. models) must be provided.
 
-If an alert with the same tuple `type`, `source` and`sourceRef` already exists, TheHive refuses to create it.
+If an alert with the same tuple `type`, `source` and `sourceRef` already exists, TheHive will refuse to create it.
 
 This call returns attributes of the created alert.
 

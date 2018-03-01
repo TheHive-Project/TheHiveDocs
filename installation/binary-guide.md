@@ -4,9 +4,9 @@ This guide describes the manual installation of TheHive from binaries in Ubuntu 
 
 # 1. Minimal Ubuntu Installation
 
-Install a minimal Ubuntu 16.04  system with the following software:
+Install a minimal Ubuntu 16.04 system with the following software:
  * Java runtime environment 1.8+ (JRE)
- * ElasticSearch 5.x
+ * Elasticsearch 5.x
 
 Make sure your system is up-to-date:
 
@@ -37,9 +37,9 @@ sudo apt-get install openjdk-8-jre-headless
 
 ```
 
-# 3. Install ElasticSearch
+# 3. Install Elasticsearch
 
-Installation of ElasticSearch is describe in the following [guide](elasticsearch-guide.md)
+Installation of Elasticsearch is described in the following [guide](elasticsearch-guide.md)
 
 # 4. Install TheHive
 
@@ -66,9 +66,9 @@ ln -s thehive-x.x.x thehive
 
 Please refer the [configuration guide](../admin/configuration.md) for full information on TheHive configuration.
 The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used
-to authenticate cookies that contain data. If TheHive runs in cluster mode, all instance must share the same key.
-You can generate the minimal configuration with the following command lines (they assume that you have created a
-dedicated user for TheHive, named thehive):
+to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
+You can generate the minimal configuration with the following commands (they assume that you have created a
+dedicated user for TheHive, named `thehive`):
 
 ```
 sudo mkdir /etc/thehive
@@ -84,7 +84,7 @@ _EOF_
 
 Now you can start TheHive.
 
-For advanced configuration, please, refer to the [configuration page](../admin/configuration.md) and default configuration
+For advanced configuration, please refer to the [configuration page](../admin/configuration.md) and default configuration
 information you can find [here](../admin/default-configuration.md). You will especially find all the necessary information to
 connect TheHive with Cortex and MISP.
 
@@ -97,7 +97,7 @@ bin/thehive -Dconfig.file=/etc/thehive/application.conf
 ```
 
 It is recommended to use a dedicated non-privilege user to start TheHive. If so, make sure that your user can create log
-file in `/var/log/thehive/`
+files in `/var/log/thehive/`
 
 This command starts an HTTP service on port 9000/tcp. You can change the port by adding "http.port=8080" in the
 configuration file or add the "-Dhttp.port=8080" parameter to the command line. If you run TheHive using a
@@ -133,7 +133,7 @@ Once created, you should be redirected to the login page.
 ![](../files/installguide_login.png)
 
 **Warning**: at this stage, if you missed the creation of the admin user, you will not be able to do it unless you
-delete the index in ElasticSearch. In the case you made a mistake, just delete the index with the following command
+delete the index in Elasticsearch. In the case you made a mistake, just delete the index with the following command
 (beware, it deletes everything in the database)
 ```
 curl -X DELETE http://127.0.0.1:9200/the_hive_10

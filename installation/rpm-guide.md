@@ -4,7 +4,7 @@ TheHive's RPM packages are published on our Bintray repository. All packages are
 
 ```0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C```
 
-To intall TheHive from an RPM package, you'll need to begin by installing the RPM release package using the following command:
+To install TheHive from an RPM package, you'll need to begin by installing the RPM release package using the following command:
 ```
 yum install https://dl.bintray.com/cert-bdf/rpm/thehive-project-release-1.0.0-3.noarch.rpm
 ```
