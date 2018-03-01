@@ -1,7 +1,7 @@
 # Installation guides
 
 TheHive can be installed using:
-- A [RPM package](rpm-guide.md)
+- An [RPM package](rpm-guide.md)
 - A [DEB package](deb-guide.md)
 - [Docker](docker-guide.md)
 - [Binary](binary-guide.md)
