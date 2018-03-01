@@ -18,9 +18,9 @@ There are 4 roles currently:
 
 ## 2. Case template management
 
-Some cases may share the same structure (tags, tasks, description, metrics). Templates are here to automatically add tasks, description or metrics while creating a new case. An user can choose to create an empty case or based on registered template.
+Some cases may share the same structure (tags, tasks, description, metrics). Templates are here to automatically add tasks, description or metrics while creating a new case. A user can choose to create an empty case or based on a registered template.
 
-To create a template, as _admin_ go in the administration menu, and open the "Case templates" item.
+To create a template, as _admin_ go into the administration menu, and open the "Case templates" item.
 
 ![template](../files/adminguide_template.png)
 
@@ -38,11 +38,11 @@ Except for title prefix, task list and metrics, the user can change values defin
 
 ## 3. Report template management
 
-When TheHive is connected to a Cortex server, observable can be analyzed to get additional information on them. Cortex outputs report in JSON format. In order to make reports more readable, you can configure report templates. Report templates convert JSON in to HTML using AngularJS template engine.
+When TheHive is connected to a Cortex server, observables can be analyzed to get additional information on them. Cortex outputs reports in JSON format. In order to make reports more readable, you can configure report templates. Report templates convert JSON in to HTML using the AngularJS template engine.
 
-For each analyzer available in Cortex you can define two kinds of template: short and long. Short report exposes synthetic information, shows in top of observable page. With short reports you can see a sum-up of all run analyzes. Long report shows detail information only when the user select the report. Raw data in JSON format is always available.
+For each analyzer available in Cortex you can define two kinds of templates: short and long. A short report exposes synthetic information, shows in top of observable page. With short reports you can see a summarry of all run analyzers. Long reports show detailed information only when the user selects the report. Raw data in JSON format is always available.
 
-Report templates can be configure in `Admin` > `Report templates` menu. We offer report templates for default Cortex analyzers. A package with all report templates can be downloaded at https://dl.bintray.com/cert-bdf/thehive/report-templates.zip and can be injected using the `Import templates` button.
+Report templates can be configured in the `Admin` > `Report templates` menu. We offer report templates for default Cortex analyzers. A package with all report templates can be downloaded at https://dl.bintray.com/cert-bdf/thehive/report-templates.zip and can be injected using the `Import templates` button.
 
 ## 4. Metrics management
 
@@ -50,7 +50,7 @@ Metrics have been integrated to have relevant indicators about cases.
 
 Metrics are numerical values associated to cases (for example, the number of impacted users). Each metric has a _name_, a _title_ and a _description_, defined by an administrator. When a metric is added to a case, it can't be removed and must be filled. Metrics are used to monitor business indicators, thanks to graphs.
 
-Metrics are defined globally. To create metrics, as _admin_ got in the administration menu, and open the "Case metrics" item.
+Metrics are defined globally. To create metrics, as _admin_ go into the administration menu, and open the "Case metrics" item.
 
 ![metrics](../files/adminguide_metrics.png)
 
@@ -61,6 +61,6 @@ For example you can show metrics of case with "malspam" tag on January 2016 :
 
 ![statistics](../files/adminguide_statistics.png)
 
-For graphs based on time, user can choose metrics to show. They are aggregated on interval of time (by day, week, month of year) using a function (sum, min or max).
+For graphs based on time, the user can choose metrics to show. They are aggregated on interval of time (by day, week, month of year) using a function (sum, min or max).
 
-Some metrics are predefined (in addition to those defined by administrator) like case handling duration (how much time the case had been open) and number of case opening or closing.
+Some metrics are predefined (in addition to those defined by administrator) like case handling duration (how much time the case had been open) and number of cases open or closed.

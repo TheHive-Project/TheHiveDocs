@@ -2,12 +2,12 @@
 
 From TheHive 2.13, you can configure webhooks. In this case, each action done on
 TheHive platform (update a case, add a task, ...) is sent to an http endpoint.
-You can then create a tool that listen on http port and act when specific event
+You can then create a tool that listens on an http port and acts when specific event
 occurs.
 
 ## Configuration
 
-Webhooks are configured under `webhook` key in configuration. Minimal
+Webhooks are configured under the `webhook` key in configuration file. Minimal
 configuration must contain an arbitrary name and an url:
 ```
 webhooks {
@@ -17,7 +17,7 @@ webhooks {
 }
 ```
 
-Proxy and SSL configuration can be added in the same manner than MISP or Cortex
+Proxy and SSL configuration can be added in the same manner as MISP or Cortex
 (cf. [configuration guide, section 8. HTTP client configuration](configuration.md#8-http-client-configuration):
 
 ```
@@ -45,7 +45,7 @@ webhooks {
 
 ## Data sent to Webhook
 
-TheHive sent audit trail to webhook. Here is an example of case creation:
+TheHive sent an audit trail to webhook. Here is an example of case creation:
 ```
 {
   "operation": "Creation",                                        # Creation, Update or Delete

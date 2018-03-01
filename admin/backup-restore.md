@@ -1,5 +1,5 @@
 # Backup and restore data
-All persistent data are stored in ElasticSearch database. The backup and restore procedures are the ones that are
+All persistent data is stored in an ElasticSearch database. The backup and restore procedures are the ones that are
 detailed in
 [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
 
@@ -11,7 +11,7 @@ curl 'localhost:9200/_cat/indices?v'
 
 You can also refer to the [schema version](schema_version.md) page.
 
-To save all your data you only need to backup the last indice. For example, if the previous command gives you the following results, all your data belong to **the_hive_12**.
+To save all your data you only need to backup the last indice. For example, if the previous command gives you the following results, all your data belongs to **the_hive_12**.
 
 ```
 health status index                         uuid                   pri rep docs.count docs.deleted store.size pri.store.size
@@ -20,18 +20,18 @@ yellow open   the_hive_12                   Cq4Gc4qkRPaTCqrorFgDRw   5   1      
 ```
 
 
-**In the rest of this document, ensure to change <INDEX> by you own last index to backup or restore all your data.**
+**In the rest of this document, ensure to change <INDEX> to your own last index in order to backup or restore all your data.**
 
 
 ## 1. Create a backup repository
 
-First you must define a location in local filesystem (where ElasticSearch instance runs) where the backup will be written. This repository must be declared in ElasticSearch configuration. Edit _elasticsearch.yml_ file by adding:
+First you must define a location in local filesystem (where ElasticSearch instance runs) where the backup will be written. This repository must be declared in the ElasticSearch configuration. Edit _elasticsearch.yml_ file by adding:
 
 ```
 repo.path: ["/absolute/path/to/backup/directory"]
 ```
 
-Then, restart Elasticsearch service.
+Then, restart the Elasticsearch service.
 
 
 _Note_: Be careful if you run ElasticSearch in Docker, the directory must be mapped in host filesystem using `--volume`
@@ -40,7 +40,7 @@ parameter (cf. [Docker documentation](https://docs.docker.com/engine/tutorials/d
 
 ## 2. Register a snapshot repository
 
-Create a ElasticSearch snapshot point named *the_hive_backup* with the following command (set the same path in the location setting than the one set in the configuration file):
+Create an ElasticSearch snapshot point named *the_hive_backup* with the following command (set the same path in the location setting as the one set in the configuration file):
 
 ```
 $ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
@@ -52,7 +52,7 @@ $ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
 }'
 ```
 
-The result of the command should looks like this :
+The result of the command should look like this :
 
 ```
 {"acknowledged":true}
@@ -98,13 +98,13 @@ This command terminates only when the backup is complete and the result of the c
 
 
 _Note_:
-You can backup the last index of TheHive (you can list indices in you ElasticSearch cluster with
+You can backup the last index of TheHive (you can list indices in your ElasticSearch cluster with
 `curl -s http://localhost:9200/_cat/indices | cut -d ' '  -f3` ) or all indices with `_all` value.
 
 
 ## 4. Restore data
 
-Restore will do the reverse actions : it reads backup in your snapshot directory and load indices in ElasticSearch
+Restore will do the reverse actions : it reads the backup in your snapshot directory and loads indices into the ElasticSearch
 cluster. This operation is done with the following command :
 ```
 $ curl -XPOST 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore' -d '
@@ -119,7 +119,7 @@ The result of the command should look like this :
 {"accepted":true}
 ```
 
-_Note_: be sure to restore data from the same version of Elasticsearch.
+_Note_: be sure to restore data from the same version of ElasticSearch.
 
 
 ## 5. Moving data from one server to another
@@ -128,6 +128,6 @@ If you want to move your data from one server from another:
 - Create your backup on the origin server (steps [1](1__create_a_backup_repository), [2](2__register_a_snapshot_repository), [3](3__backup_your_data))
 - copy your backup directory from the origin server to the destination server
 - On the destination server :
-    - Register your backup repository in Elasticsearch configuration (step [1](1__create_a_backup_repository))
+    - Register your backup repository in the ElasticSearch configuration (step [1](1__create_a_backup_repository))
     - Register your snapshot repository with the same snapshot name (step [2](2__register_a_snapshot_repository))
     - Restore your data (step [4](4__restore_data))

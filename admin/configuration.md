@@ -52,7 +52,7 @@ search {
 
 TheHive uses the [`transport`](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/modules-transport.html#_tcp_transport) port (9300/tcp by default) and not the [`http`](https://www.elastic.co/guide/en/Elasticsearch/reference/current/modules-http.html) port (9200/tcp).
 
-TheHive versions index schema (mapping) in Elasticsearch. Version number are appended to index base name (the 8th version of the schema uses the index `the_hive_8` if `search.index = the_hive`).
+TheHive versions index schema (mapping) in Elasticsearch. Version numbers are appended to the index base name (the 8th version of the schema uses the index `the_hive_8` if `search.index = the_hive`).
 
 When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
 
@@ -97,7 +97,7 @@ The Default values within the configuration file are:
 auth {
 	# "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
 	# available auth types are:
-	# services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration are required.
+	# services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration is required.
 	# ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
 	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
 	provider = [local]
@@ -106,7 +106,7 @@ auth {
   method.basic = false
 
 	ad {
-		# The name of the Microsoft Windows domaine using the DNS format. This parameter is required.
+		# The name of the Microsoft Windows domain using the DNS format. This parameter is required.
 		#domainFQDN = "mydomain.local"
 
     # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
@@ -162,7 +162,7 @@ keytool -import -file /path/to/your/ca.cert -alias InternalCA -keystore /path/to
 Then add `-Djavax.net.ssl.trustStore=/path/to/your/truststore.jks` parameter when you start TheHive or put it in the `JAVA_OPTS` environment variable before starting TheHive.
 
 ### 4. Streaming (a.k.a The Flow)
-The user interface is automatically updated when data is changed in the back-end. To do this, the back-end sends events to all the connected front-end.s The mechanism used to notify the front-end is called long polling and its settings are:
+The user interface is automatically updated when data is changed in the back-end. To do this, the back-end sends events to all the connected front-ends. The mechanism used to notify the front-end is called long polling and its settings are:
 
 * `refresh` : when there is no notification, close the connection after this duration (the default is 1 minute).
 * `cache` : before polling a session must be created, in order to make sure no event is lost between two polls. If there is no poll during the `cache` setting, the session is destroyed (the default is 15 minutes).
@@ -191,7 +191,7 @@ play.http.parser.maxMemoryBuffer=1M
 play.http.parser.maxDiskBuffer=1G
 ```
 
-*Note*: if you are using a NGINX reverse in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among two: file upload and text size defined in TheHive `application.conf` file.
+*Note*: if you are using a NGINX reverse proxy in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among the two: file upload and text size defined in TheHive `application.conf` file.
 
 ### 6. Cortex
 TheHive can use one or several [Cortex](https://github.com/TheHive-Project/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
@@ -212,7 +212,7 @@ cortex {
 }
 ```
 
-Cortex analyzes observables and outputs reports in JSON format. TheHive show the report as-is by default. In order to make reports more readable, we provide report templates which are in a separate package and must be installed manually:
+Cortex analyzes observables and outputs reports in JSON format. TheHive shows the report as-is by default. In order to make reports more readable, we provide report templates which are in a separate package and must be installed manually:
  - download the report template package from https://dl.bintray.com/cert-bdf/thehive/report-templates.zip
  - log in TheHive using an administrator account
  - go to `Admin` > `Report templates` menu
@@ -238,7 +238,7 @@ This means that TheHive can import events from configured MISP servers _**and**_
 
 
 #### 7.1 Configuration
-To sync with a MISP server and retrieve events or export cases,  edit the `application.conf` file and adjust the example shown below to your setup:
+To sync with a MISP server and retrieve events or export cases, edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
 ## Enable the MISP module (import and export)
@@ -356,7 +356,7 @@ Of course, you can omit some of the filters or all of them.
 
 ### 8. HTTP client configuration
 
-HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contains configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
+HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contain configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
 
  - `ws.followRedirects`: Configures the client to follow 301 and 302 redirects (default is true).
  - `ws.useragent`: To configure the User-Agent header field.
@@ -369,7 +369,7 @@ There are 3 different timeouts in WS. Reaching a timeout causes the WS request t
  - `ws.timeout.request`: The total time you accept a request to take (it will be interrupted even if the remote host is still sending data) (default is 120 seconds).
 
 #### Proxy
-Proxy can be used. By default, proxy configured in JVM is used but one can configured specific configuration for each HTTP client.
+Proxy can be used. By default, the proxy configured in JVM is used but one can configured specific configurations for each HTTP client.
  - `ws.useProxyProperties`: To use the JVM system’s HTTP proxy settings (http.proxyHost, http.proxyPort) (default is true). This setting is ignored if `ws.proxy` settings is present.
  - `ws.proxy.host`: The hostname of the proxy server.
  - `ws.proxy.post`: The port of the proxy server.
@@ -378,7 +378,7 @@ Proxy can be used. By default, proxy configured in JVM is used but one can confi
  - `ws.proxy.password`: The password for the credentials for the proxy server.
  - `ws.proxy.ntlmDomain`: The password for the credentials for the proxy server.
  - `ws.proxy.encoding`: The realm's charset.
- - `ws.proxy.nonProxyHosts`: The list of host on which proxy must not be used.
+ - `ws.proxy.nonProxyHosts`: The list of hosts on which proxy must not be used.
 
 #### SSL
 SSL of HTTP client can be completely configured in `application.conf` file.
@@ -398,7 +398,7 @@ Certificate manager is used to store client certificates and certificate authori
     ]
   }
 ```
-Certificate authorities are configured using `trustManager` key. It is used to establish secure connexion with remote host. Server certificate must be signed by a trusted certificate authority.
+Certificate authorities are configured using `trustManager` key. It is used to establish a secure connection with remote host. Server certificate must be signed by a trusted certificate authority.
 ```
   ws.ssl.trustManager {
     stores = [
@@ -435,7 +435,7 @@ If you want to define the list of enabled protocols, you can do so explicitly:
 ws.ssl.enabledProtocols = ["TLSv1.2", "TLSv1.1", "TLSv1"]
 ```
 ##### Ciphers
-Cipher suite can be configured using `ws.ssl.enabledCipherSuites`:
+Cipher suites can be configured using `ws.ssl.enabledCipherSuites`:
 ```
 ws.ssl.enabledCipherSuites = [
   "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
@@ -521,7 +521,7 @@ To enable HTTPS in the application, add the following lines to `/etc/thehive/app
       password: "password_of_keystore"
     }
 ```
-As HTTPS is enabled HTTP can be disabled by adding `http.port=disabled` in configuration.
+As HTTPS is enabled, HTTP can be disabled by adding `http.port=disabled` in configuration.
 
 To import your certificate in the keystore, depending on your situation, you can follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
 
@@ -529,7 +529,7 @@ To import your certificate in the keystore, depending on your situation, you can
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
 
 ### 11. Miscellaneous
-Case similarity algorithm need a setting that define the maximum number of similar case. By default it is set to 100 but in some circumstances it is not enougth.
+The case similarity algorithm needs a setting that defines the maximum number of similar case. By default it is set to 100 but in some circumstances it is not enough.
 In this case, you can set the setting `maxSimilarCases` in application.conf:
 ```
   maxSimilarCases = 100

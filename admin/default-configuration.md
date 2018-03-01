@@ -1,4 +1,4 @@
-You can find below the default configuration settings of TheHive:
+You can find the default configuration settings of TheHive below:
 
 ```
 # maximum number of similar cases
