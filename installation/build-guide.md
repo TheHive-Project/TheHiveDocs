@@ -10,7 +10,7 @@ The following software is required to download and build TheHive.
   * downloadable from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * git
   * Use the system package or download it from http://www.git-scm.com/downloads
-* ElasticSearch 5.6
+* Elasticsearch 5.6
   * downloadable from https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-5
 * NodeJs with its package manager (NPM)
   * downloadable from https://nodejs.org/en/download/
@@ -38,7 +38,7 @@ sudo yum -y install git bzip2
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
-### 2.1.3. Installation of ElasticSearch
+### 2.1.3. Installation of Elasticsearch
 
 Download and install the public signing key:
 
@@ -59,7 +59,7 @@ enabled=1
 __EOF
 ```
 
-Your repository is ready for use. You can install ElasticSearch with:
+Your repository is ready for use. You can install Elasticsearch with:
 ```
 sudo yum -y install elasticsearch
 ```
@@ -102,7 +102,7 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
-### 2.2.3. Installation of ElasticSearch
+### 2.2.3. Installation of Elasticsearch
 
 ```
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
