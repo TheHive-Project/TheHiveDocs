@@ -1,7 +1,7 @@
 # Backup and restore data
-All persistent data is stored in an ElasticSearch database. The backup and restore procedures are the ones that are
+All persistent data is stored in an Elasticsearch database. The backup and restore procedures are the ones that are
 detailed in
-[ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
+[Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
 
 _Note_: you may have to adapt your indices in the examples below. To find the right index, use the following command :
 
@@ -25,7 +25,7 @@ yellow open   the_hive_12                   Cq4Gc4qkRPaTCqrorFgDRw   5   1      
 
 ## 1. Create a backup repository
 
-First you must define a location in local filesystem (where ElasticSearch instance runs) where the backup will be written. This repository must be declared in the ElasticSearch configuration. Edit _elasticsearch.yml_ file by adding:
+First you must define a location in local filesystem (where Elasticsearch instance runs) where the backup will be written. This repository must be declared in the Elasticsearch configuration. Edit _elasticsearch.yml_ file by adding:
 
 ```
 repo.path: ["/absolute/path/to/backup/directory"]
@@ -34,13 +34,13 @@ repo.path: ["/absolute/path/to/backup/directory"]
 Then, restart the Elasticsearch service.
 
 
-_Note_: Be careful if you run ElasticSearch in Docker, the directory must be mapped in host filesystem using `--volume`
+_Note_: Be careful if you run Elasticsearch in Docker, the directory must be mapped in host filesystem using `--volume`
 parameter (cf. [Docker documentation](https://docs.docker.com/engine/tutorials/dockervolumes/)).
 
 
 ## 2. Register a snapshot repository
 
-Create an ElasticSearch snapshot point named *the_hive_backup* with the following command (set the same path in the location setting as the one set in the configuration file):
+Create an Elasticsearch snapshot point named *the_hive_backup* with the following command (set the same path in the location setting as the one set in the configuration file):
 
 ```
 $ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
@@ -98,13 +98,13 @@ This command terminates only when the backup is complete and the result of the c
 
 
 _Note_:
-You can backup the last index of TheHive (you can list indices in your ElasticSearch cluster with
+You can backup the last index of TheHive (you can list indices in your Elasticsearch cluster with
 `curl -s http://localhost:9200/_cat/indices | cut -d ' '  -f3` ) or all indices with `_all` value.
 
 
 ## 4. Restore data
 
-Restore will do the reverse actions : it reads the backup in your snapshot directory and loads indices into the ElasticSearch
+Restore will do the reverse actions : it reads the backup in your snapshot directory and loads indices into the Elasticsearch
 cluster. This operation is done with the following command :
 ```
 $ curl -XPOST 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore' -d '
@@ -119,7 +119,7 @@ The result of the command should look like this :
 {"accepted":true}
 ```
 
-_Note_: be sure to restore data from the same version of ElasticSearch.
+_Note_: be sure to restore data from the same version of Elasticsearch.
 
 
 ## 5. Moving data from one server to another
@@ -128,6 +128,6 @@ If you want to move your data from one server from another:
 - Create your backup on the origin server (steps [1](1__create_a_backup_repository), [2](2__register_a_snapshot_repository), [3](3__backup_your_data))
 - copy your backup directory from the origin server to the destination server
 - On the destination server :
-    - Register your backup repository in the ElasticSearch configuration (step [1](1__create_a_backup_repository))
+    - Register your backup repository in the Elasticsearch configuration (step [1](1__create_a_backup_repository))
     - Register your snapshot repository with the same snapshot name (step [2](2__register_a_snapshot_repository))
     - Restore your data (step [4](4__restore_data))
