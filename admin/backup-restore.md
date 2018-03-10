@@ -28,7 +28,7 @@ yellow open   the_hive_12                   Cq4Gc4qkRPaTCqrorFgDRw   5   1      
 First you must define a location in local filesystem (where Elasticsearch instance runs) where the backup will be written. This repository must be declared in the Elasticsearch configuration. Edit _elasticsearch.yml_ file by adding:
 
 ```
-repo.path: ["/absolute/path/to/backup/directory"]
+path.repo: ["/absolute/path/to/backup/directory"]
 ```
 
 Then, restart the Elasticsearch service.
