@@ -9,12 +9,12 @@ As of this writing, the training VM includes Cerana 0.3 (TheHive 3.0.3), Cortex 
 
 You can download the VM from the following location:
 
-[https://drive.google.com/open?id=0B3G-Due88gfQMTlrTXF3ZnBIRTA](https://drive.google.com/open?id=0B3G-Due88gfQMmhvdzE0S3R4YTQ)
+[https://drive.google.com/file/d/0B3G-Due88gfQMmhvdzE0S3R4YTQ/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQMmhvdzE0S3R4YTQ/view?usp=sharing)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
 
-`e9970def877ccf151d330219572ebab245dfcc5118a498f6bff2c5b2988dc6ae`
+`8264526a2e330f9023ab0e460e7b7e55a039714f42505c07800b9c0c70464408`
 
 The system’s login is `thehive` and the associated password is `thehive1234`.
 
