@@ -1,7 +1,7 @@
 ## Training Material
 TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex and Cortex analyzers with all dependencies and ElasticSearch installed on top of Ubuntu 16.04 with Oracle JRE 8.
 
-As of this writing, the training VM includes Cerana 0.3 (TheHive 3.0.3), Cortex 1.1.4, TheHive4py 1.4.1, Cortex4py 1.0.0 and the latest Cortex analyzers as of Dec 22, 2017.
+As of this writing, the training VM includes Cerana 0.7 RC1 (TheHive 3.0.7-RC1), Cortex 1.1.4, TheHive4py 1.4.3, Cortex4py 1.0.0 and the latest Cortex analyzers as of Mar 11, 2018.
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
