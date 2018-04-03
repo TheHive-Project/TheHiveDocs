@@ -24,10 +24,10 @@ services:
     	- transport.host=0.0.0.0
     	- xpack.security.enabled=false
     	- cluster.name=hive
-      - script.inline=true
-      - thread_pool.index.queue_size=100000
-      - thread_pool.search.queue_size=100000
-      - thread_pool.bulk.queue_size=100000
+     - script.inline=true
+     - thread_pool.index.queue_size=100000
+     - thread_pool.search.queue_size=100000
+     - thread_pool.bulk.queue_size=100000
   cortex:
     image: certbdf/cortex:latest
     ports:
