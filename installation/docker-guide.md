@@ -20,14 +20,18 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
     environment:
-    	- http.host=0.0.0.0
-    	- transport.host=0.0.0.0
-    	- xpack.security.enabled=false
-    	- cluster.name=hive
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - xpack.security.enabled=false
+      - cluster.name=hive
       - script.inline=true
       - thread_pool.index.queue_size=100000
       - thread_pool.search.queue_size=100000
       - thread_pool.bulk.queue_size=100000
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
   cortex:
     image: certbdf/cortex:latest
     ports:
@@ -54,6 +58,8 @@ You should define where the data (i.e. the ElasticSearch database) will be store
 volumes:
     - /path/to/data:/usr/share/elasticsearch/data
 ```
+
+Running ElasticSearch in production mode requires a minimum `vm.max_map_count` of 262144. [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) provides instructions on how to query and change this value.
 
 
 ### Manual Installation of ElasticSearch

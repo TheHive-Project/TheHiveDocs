@@ -7,6 +7,7 @@ application.conf).
 
 The following table show for each version of TheHive the default name of the
 index:
+
 | TheHive version | Index name  |
 |-----------------|-------------|
 | 2.9.1           | the_hive_7  |
