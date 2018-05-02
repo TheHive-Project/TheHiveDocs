@@ -55,7 +55,7 @@ The first time you access TheHive, you’ll need to create the associated databa
 
 TheHive’s configuration file is located in `/etc/thehive/application.conf`. For additional configuration, [read the documentation](README.md).
 
-**Important notice** : after the first login into TheHive, if Cortex healthcheck fails, it should success after fully reloading the web page. 
+**Note** : after the first login into TheHive, if Cortex healthcheck fails, it should success after fully reloading the web page. 
 
 
 #### Cortex
