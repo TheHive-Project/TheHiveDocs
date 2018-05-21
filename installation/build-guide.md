@@ -40,29 +40,7 @@ sudo yum -y install java-1.8.0-openjdk-devel
 
 ### 2.1.3. Installation of Elasticsearch
 
-Download and install the public signing key:
-
-```
-sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-```
-
-Add the following in your `/etc/yum.repos.d/` directory in a file with a `.repo` suffix, for example `elasticsearch.repo`:
-
-```
-cat << __EOF | sudo tee /etc/yum.repos.d/elasticsearch.repo
-[elasticsearch-2.x]
-name=Elasticsearch repository for 2.x packages
-baseurl=https://packages.elastic.co/elasticsearch/2.x/centos
-gpgcheck=1
-gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
-enabled=1
-__EOF
-```
-
-Your repository is ready for use. You can install Elasticsearch with:
-```
-sudo yum -y install elasticsearch
-```
+Installation of Elasticsearch is described in the following [guide](elasticsearch-guide.md)
 
 ### 2.1.4. Installation of NodeJs
 
@@ -104,11 +82,7 @@ sudo apt-get install oracle-java8-installer
 
 ### 2.2.3. Installation of Elasticsearch
 
-```
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
-echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
-sudo apt-get update && sudo apt-get install elasticsearch
-```
+Installation of Elasticsearch is described in the following [guide](elasticsearch-guide.md)s
 
 ### 2.2.4. Installation of NodeJs
 
