@@ -68,7 +68,6 @@ Yes, this is possible. For each MISP server, add a `misp` section in your `conf/
 ## Miscellaneous Questions
 
 ### Can I Enable HTTPS to Connect to TheHive?
-#### TL;DR
 Add the following lines to `/etc/thehive/application.conf`
 
     https.port: 9443
@@ -78,10 +77,13 @@ Add the following lines to `/etc/thehive/application.conf`
       password: "password_of_keystore"
     }
 
-HTTP can disabled by adding line `http.port=disabled`.
+HTTP can disabled by adding line `http.port=disabled`. Please read the [relevant section](admin/configuration.md#10-https) in the Configuration Guide.
 
-#### Details
-Please read the [relevant section](admin/configuration.md#10-https) in the Configuration Guide.
+* To import your certificate in the keystore, depending on your situation, you can follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
+* Make sure the keystore file is owned/can be accessed by the user running Cortex.
+
+**Additional information**:
+This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
 
 ### Can I connect TheHive to an AWS ElasticSearch service?
 AWS Elasticsearch service only supports HTTP transport protocol. It does not support the binary protocol which the Java client used by TheHive relies on to communicate with ElasticSearch. As a result, it is not possible to setup TheHive with AWS Elasticsearch service. More information is available at the following URLs:
