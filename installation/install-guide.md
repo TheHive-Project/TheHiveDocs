@@ -385,41 +385,46 @@ cd TheHive
 bin/activator clean stage
 ```
 
-This operation may take some time to complete as it will download all dependencies (could be long) then build the back-end.
-This command cleans previous build files and creates an autonomous package in the `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), analyzers (`/analyzers`), configuration files (`/conf`) and startup scripts (`/bin`).
+This operation may take some time to complete as it will download all dependencies  then build the back-end.
+This command cleans previous build files and creates an autonomous package in the `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), configuration files (`/conf`) and startup scripts (`/bin`).
 
-Binaries are built and stored in `TheHive/target/universal/stage/`. Install them in `/opt/thehive` for example.
+Binaries are built and stored in `TheHive/target/universal/stage/`. You can install them in `/opt/thehive` for example.
 
 ```
 sudo cp -r TheHive/target/universal/stage /opt/thehive
 ```
 
+Configure TheHive, read the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
+### 2.4 Configure and Start Elasticsearch
+
+Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
-cd TheHive
-./sbt clean stage
+network.host: 127.0.0.1
+script.inline: on
+cluster.name: hive
+threadpool.index.queue_size: 100000
+threadpool.search.queue_size: 100000
+threadpool.bulk.queue_size: 1000
 ```
 
-This operation may take some time to complete as it will download all dependencies then build the back-end.
-This command cleans any previous build files and create an autonomous package under the `target/universal/stage` directory. This package contains Cortex binaries with the required libraries (`/lib`), configuration files (`/conf`) and startup scripts (`/bin`).
-
-Binaries are built and stored under `Cortex/target/universal/stage/`. You caniInstall them for example in `/opt/cortex`.
+Start the service:
 
 ```
-sudo cp -r Cortex/target/universal/stage /opt/cortex
+service elasticsearch restart
 ```
-
-Proceed to [installing the analyzers](#analyzers-1) as outlined in the next section and configure Cortex using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 ##### 3. First start
-Follow the [first start](#4-first-start) section of the binary installation method above to start using Cortex.
+Follow the [first start](#4-first-start) section of the binary installation method above to start using TheHive.
 
 ##### 4. Build the Front-end Only
+
 Building the back-end builds also the front-end, so you don't need to build it separately. This section is useful only for troubleshooting or for installing the front-end on a reverse proxy.
 
 Go to the front-end directory:
 ```
-cd Cortex/www
+cd TheHive/ui
 ```
 
 Install Node.js libraries, which are required by this step, bower libraries (JavaScript libraries downloaded by the browser). Then
@@ -427,9 +432,12 @@ build the front-end :
 ```
 npm install
 npm run build
+bower install
+grunt build
 ```
 
 This step generates static files (HTML, JavaScript and related resources) in  the `dist` directory. They can be readily imported on a HTTP server.
+
 
 ## Elasticsearch Installation
 If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. The latter is preferred as its installation and update are easier.
