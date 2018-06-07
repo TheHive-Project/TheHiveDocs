@@ -69,7 +69,7 @@ TheHive requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can
 #### Use Docker-compose
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
 
-The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/cortex/docker-compose.yml)
+The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml)
 file starts Elasticsearch and Cortex:
 ```
 version: "2"
@@ -104,7 +104,7 @@ services:
 
 Put this file in an empty folder and run `docker-compose up`. TheHive is exposed on 9000/tcp port and Cortex on 9001/tcp. These ports can be changed by modifying the `docker-compose` file.
 
-You can specify a custom TheHive configuration file (`application.conf`) by adding the following lines in the `cortex` section of your docker-compose file:
+You can specify a custom TheHive configuration file (`application.conf`) by adding the following lines in the `thehive` section of your docker-compose file:
 
 ```
 volumes:
@@ -139,7 +139,7 @@ This behavior can be disabled by adding `--no-config` to the Docker command line
 
 `docker run certbdf/thehive:latest --no-config`
 
-Or by adding the line `command: --no-config` in the `cortex` section of
+Or by adding the line `command: --no-config` in the `thehive` section of
 docker-compose file.
 
 The image accepts more options:
@@ -207,7 +207,7 @@ Download and unzip the chosen binary package. Cortex files can be installed wher
 
 ```bash
 cd /opt
-wget https://dl.bintray.com/cert-bdf/cortex/thehive-latest.zip
+wget https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip
 unzip thehive-latest.zip
 ln -s thehive-x.x.x thehive
 ```
@@ -284,7 +284,7 @@ restart the service.
 ```bash
 service thehive stop
 cd /opt
-wget https://dl.bintray.com/cert-bdf/cortex/thehive-latest.zip
+wget https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip
 unzip thehive-latest.zip
 rm /opt/thehive && ln -s thehive-x.x.x thehive
 chown -R thehive:thehive /opt/thehive /opt/thehive-x.x.x
