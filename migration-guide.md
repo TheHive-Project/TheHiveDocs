@@ -197,16 +197,15 @@ possible options.
 
 #### New RPM and DEB packages
 
-RPM and DEB package is now provided. This make installation easier the using
-binary package (zip). See [Debian installation guide](installation/deb-guide.md)
-and [RPM installation guid](installation/rpm-guide.md).
+RPM and DEB packages are now available. This makes the installation easier than using a
+binary package (ZIP). See the [Installation Guide](installation/install-guide.md) for reference.
 
 #### Docker
 
 All-in-One docker (containing TheHive and Cortex) is not provided any longer.
 New TheHive docker image doesn't contain ElasticSearch. We recommend to use
 docker-compose to link TheHive, ElasticSearch and Cortex dockers. For more
-information, see [docker guide](installation/docker-guide.md).
+information, see the [Installation Guide](installation/install-guide.md) for reference.
 
 TheHive configuration is located at /etc/thehive/application.conf for all
 packages. If you use docker package you must update its location (previously was
