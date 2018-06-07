@@ -14,7 +14,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 
 ## What's New?
 
-- [New Instsallation Guide](installation/install-guide.md)
+- [New Installation Guide](installation/install-guide.md)
 - [Single Sign-On on TheHive with X.509 Certificates](admin/certauth.md) **(Experimental Feature)**
 - [Training Material](training-material.md)
 - [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
