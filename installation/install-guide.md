@@ -268,11 +268,24 @@ Once created, you should be redirected to the login page.
 ![](../files/installguide_login.png)
 
 **Warning**: at this stage, if you missed the creation of the admin account, you will not be able to do it unless you
-delete TheHive's index from Elasticsearch. In the case you made a mistake, just delete the index with the following command
-(beware, it deletes everything from the database):
+delete TheHive's index from Elasticsearch. In the case you made a mistake, first find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
 
 ```bash
-curl -X DELETE http://127.0.0.1:9200/the_hive_13
+$ curl http://127.0.0.1:9200/_cat/indices?v
+```
+
+The indexes that TheHive uses always start with`the_hive_` following by a number. Let's assume that the output of the command is:
+
+```bash
+health status index       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   cortex_1    PC_pLFGBS5G2TNQYr4ajgw   5   1        609            6      2.1mb          2.1mb
+yellow open   the_hive_13 ft7GGTfhTr-4lSzZw5r1DQ   5   1     180131            3     51.3mb         51.3mb
+```
+
+The index used by TheHive is `the_hive_13`. To delete it, run the following command:
+
+```bash
+$ curl -X DELETE http://127.0.0.1:9200/the_hive_13
 ```
 
 Then reload the page or restart TheHive.
