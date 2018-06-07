@@ -1,10 +1,27 @@
 # Installation
-#### Creation of administrator password
-First launch of Web GUI triggers and database update and after db creation user is prompted to create the admin password. If this prompt is not completed there is no way to set admin password and GUI login is not possible. To open the password creation page you need to delete the index from elasticsearch: 
+#### Creation of the First Administrator Account
+After installing TheHive, the first connection to the Web UI triggers a database update. After that operation, you'll be prompted to create an administrator account. If this prompt is not completed, there is no way to set the admin password. Hence it will be impossible to connect to TheHive. To reset the operation, you need to delete the corresponding index from Elasticsearch. First, find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
 
-    curl http://127.0.0.1:9200/_cat/indices?v
-    curl -X DELETE http://127.0.0.1:9200/the_hive_11
-    
+```bash
+$ curl http://127.0.0.1:9200/_cat/indices?v
+```
+
+The indexes that TheHive uses always start with`the_hive_` following by a number. Let's assume that the output of the command is:
+
+```bash
+health status index       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   cortex_1    PC_pLFGBS5G2TNQYr4ajgw   5   1        609            6      2.1mb          2.1mb
+yellow open   the_hive_13 ft7GGTfhTr-4lSzZw5r1DQ   5   1     180131            3     51.3mb         51.3mb
+```
+
+The index used by TheHive is `the_hive_13`. To delete it, run the following command:
+
+```bash
+$ curl -X DELETE http://127.0.0.1:9200/the_hive_13
+```
+
+Then reload the page or restart TheHive.
+
 # Cases and Tasks
 
 - [I Can't Add a Template](#i-cant-add-a-template)
@@ -28,9 +45,11 @@ Definitely! You just need to add a `caseTemplate` parameter in the section corre
 
 ## General
 ### I Would Like to Contribute or Request a New Analyzer
-Analyzers are no longer bundled with TheHive. Since the release of Buckfast (TheHive 2.10), the analysis engine has been released as a separate product called [Cortex](https://github.com/TheHive-Project/Cortex). If you'd like to develop or ask for an analyzer that will help you get the most out of TheHive, please open a [feature request](https://github.com/TheHive-Project/Cortex-Analyzers/issues/new) first. This will give us a chance to validate the use cases and avoid having multiple persons working on the same analyzer.
+If you'd like to develop or ask for an analyzer that will help you get the most out of TheHive, please open a [feature request](https://github.com/TheHive-Project/Cortex-Analyzers/issues/new) first. This will give us a chance to validate the use cases and avoid having multiple persons working on the same analyzer.
 
 Once validated, you can either develop your analyzer or wait for TheHive Project or a contributor to undertake the task and if everything is alright, we will schedule its addition to a future Cortex release.
+
+For a head start on analyzer development, please read the [corresponding page](https://github.com/TheHive-Project/CortexDocs/blob/master/api/how-to-create-an-analyzer.md) on the CortexDocs repository.
 
 # Miscellaneous Questions
 
