@@ -77,8 +77,8 @@ rmdir ${DATA_DIR}/${CLUSTER_NAME}
 #### System requirements
 ElasticSearch 5.x requires at least 262144 memory map areas (vm.max_map_count).
 Run sysctl -w vm.max_map_count=262144. To make this setting persistent after a
-server restart, add "vm.max_map_count = 262144" in /etc/sysctl.conf (or to
-/etc/sysctl.d/80-elasticsearch.conf)
+server restart, add `vm.max_map_count = 262144` in `/etc/sysctl.conf` (or to
+`/etc/sysctl.d/80-elasticsearch.conf`)
 
 #### Configuration
 The configuration of ElasticSearch should contain the following settings:
@@ -207,6 +207,6 @@ New TheHive docker image doesn't contain ElasticSearch. We recommend to use
 docker-compose to link TheHive, ElasticSearch and Cortex dockers. For more
 information, see the [Installation Guide](installation/install-guide.md) for reference.
 
-TheHive configuration is located at /etc/thehive/application.conf for all
+TheHive configuration is located in `/etc/thehive/application.conf` for all
 packages. If you use docker package you must update its location (previously was
-/opt/docker/conf/application.conf).
+`/opt/docker/conf/application.conf`).
