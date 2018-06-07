@@ -29,14 +29,14 @@ RPM packages are published on a Bintray repository. All packages are signed usin
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
 First install the RPM release package:
-```
+```bash
 yum install https://dl.bintray.com/cert-bdf/rpm/thehive-project-release-1.0.0-3.noarch.rpm
 ```
 This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
 `/etc/pki/rpm-gpg/GPG-TheHive-Project`.
 
 Then you will able to install the package using `yum`:
-```
+```bash
 yum install thehive
 ```
 
@@ -48,7 +48,7 @@ Debian packages are published on a Bintray repository. All packages are signed u
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
 To install the Cortex Debian package, use the following commands:
-```
+```bash
 echo 'deb https://dl.bintray.com/cert-bdf/debian any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
 sudo apt-get update
@@ -123,7 +123,7 @@ Running ElasticSearch in production mode requires a minimum `vm.max_map_count` o
 Elasticsearch can be installed on the same server as Cortex or on a different one. You can then configure Cortex according to the
 [documentation](../admin/admin-guide.md) and run Cortex docker as follow:
 
-```
+```bash
 docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.conf certbdf/thehive:latest --no-config
 ```
 
@@ -173,7 +173,7 @@ Install a minimal Ubuntu 16.04 system with the following software:
 
 Make sure your system is up-to-date:
 
-```
+```bash
 sudo apt-get update
 sudo apt-get upgrade
 ```
@@ -182,7 +182,7 @@ sudo apt-get upgrade
 You can install either Oracle Java or OpenJDK.
 
 ##### 2.1. Oracle Java
-```
+```bash
 echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
 sudo apt-get update
@@ -190,7 +190,7 @@ sudo apt-get install oracle-java8-installer
 ```
 
 ##### 2.2 OpenJDK
-```
+```bash
 sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update
 sudo apt-get install openjdk-8-jre-headless
@@ -205,7 +205,7 @@ Binary packages can be downloaded from [Bintray](https://dl.bintray.com/cert-bdf
 
 Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
-```
+```bash
 cd /opt
 wget https://dl.bintray.com/cert-bdf/cortex/thehive-latest.zip
 unzip thehive-latest.zip
@@ -216,7 +216,8 @@ ln -s thehive-x.x.x thehive
 It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
 
 If you'd rather start the application as a service, use the following commands:
-```
+
+```bash
 sudo addgroup thehive
 sudo adduser --system thehive
 sudo cp /opt/thehive/package/thehive.service /usr/lib/systemd/system
@@ -232,7 +233,7 @@ to authenticate cookies that contain data. If TheHive runs in cluster mode, all 
 You can generate the minimal configuration with the following commands (they assume that you have created a
 dedicated user for TheHive, named `thehive`):
 
-```
+```bash
 sudo mkdir /etc/thehive
 (cat << _EOF_
 # Secret key
@@ -246,17 +247,41 @@ _EOF_
 
 Now you can start TheHive. To do so, change your current directory to the TheHive installation directory (`/opt/thehive` in this guide), then execute:
 
-```
+```bash
 bin/thehive -Dconfig.file=/etc/thehive/application.conf
 ```
 
 Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
 
+Please note that the service may take some time to start.
+
+The first time you connect you will have to create the database schema. Click "Migrate database" to create the DB schema.
+
+![](../files/installguide_update_database.png)
+
+Once done, you should be redirected to the page for creating the administrator's account.
+
+![](../files/installguide_create_admin.png)
+
+Once created, you should be redirected to the login page.
+
+![](../files/installguide_login.png)
+
+**Warning**: at this stage, if you missed the creation of the admin account, you will not be able to do it unless you
+delete TheHive's index from Elasticsearch. In the case you made a mistake, just delete the index with the following command
+(beware, it deletes everything from the database):
+
+```bash
+curl -X DELETE http://127.0.0.1:9200/the_hive_13
+```
+
+Then reload the page or restart TheHive.
+
 #### 6. Update
 To update TheHive from binaries, just stop the service, download the latest package, rebuild the link `/opt/thehive` and
 restart the service.
 
-```
+```bash
 service thehive stop
 cd /opt
 wget https://dl.bintray.com/cert-bdf/cortex/thehive-latest.zip
@@ -270,85 +295,112 @@ service thehive start
 To configure TheHive, read the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 ### Build it Yourself
-The following section contains a step-by-step guide to build Cortex from its sources.
+The following section contains a step-by-step guide to build TheHive from its sources.
 
 #### 1. Pre-requisites
-The following software are required to download and build Cortex:
+The following software are required to download and build TheHive:
 
 * [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
 * git: use the system package or [download it](http://www.git-scm.com/downloads)
 * [Node.js](https://nodejs.org/en/download/) with its package manager (NPM)
+* Grunt: after installing Node.js, run `sudo npm install -g grunt-cli`
+* Bower: after installing Node.js, run `sudo npm install -g bower`
+* [Elasticsearch 5.6](https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-9)
 
 ##### 2. Build
-To install the requirements and build Cortex from sources, please follow the instructions below depending on your operating system.
+To install the requirements and build TheHive from sources, please follow the instructions below depending on your operating system.
 
 ###### 2.1. CentOS/RHEL
 
 **Packages**
 
-```
+```bash
 sudo yum -y install git bzip2
 ```
 
 **Installation of OpenJDK**
 
-```
+```bash
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
 **Installation of Node.js**
 
-Install the EPEL repository. You should have the *extras* repository enabled, then:  
-```
+Install the EPEL repository. You should have the *extras* repository enabled, then: 
+ 
+```bash
 sudo yum -y install epel-release
 ```
 
-Then, you can install Node.js:
+Then, you can install Node.js, Grunt, and Bower:
 
-```
+```bash
 sudo yum -y install nodejs
+sudo npm install -g grunt-cli bower
 ```
+
+**Installation of Elasticsearch**
+To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 ###### 2.2. Ubuntu
 
 **Packages**
 
-```
+```bash
 sudo apt-get install git wget
 ```
 
 **Installation of Oracle JDK**
 
-```
+```bash
 echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
-**Installation of Node.js**
+**Installation of Node.js, Grunt and Bower**
 
-```
+```bash
 sudo apt-get install wget
 wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt-get install nodejs
+sudo npm install -g grunt-cli bower
 ```
 
-###### 2.3. Cortex
+**Installation of Elasticsearch**
+To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
+
+###### 2.3. TheHive
 **Download The Source**
 
 ```
-git clone https://github.com/CERT-BDF/Cortex.git
+git clone https://github.com/TheHiveProject/TheHive.git
 ```
 
 **Build the Project**
 
 ```
-cd Cortex
+cd TheHive
+bin/activator clean stage
+```
+
+This operation may take some time to complete as it will download all dependencies (could be long) then build the back-end.
+This command cleans previous build files and creates an autonomous package in the `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), analyzers (`/analyzers`), configuration files (`/conf`) and startup scripts (`/bin`).
+
+Binaries are built and stored in `TheHive/target/universal/stage/`. Install them in `/opt/thehive` for example.
+
+```
+sudo cp -r TheHive/target/universal/stage /opt/thehive
+```
+
+
+```
+cd TheHive
 ./sbt clean stage
 ```
 
-This operation may take as it will download all dependencies then build the back-end.
+This operation may take some time to complete as it will download all dependencies then build the back-end.
 This command cleans any previous build files and create an autonomous package under the `target/universal/stage` directory. This package contains Cortex binaries with the required libraries (`/lib`), configuration files (`/conf`) and startup scripts (`/bin`).
 
 Binaries are built and stored under `Cortex/target/universal/stage/`. You caniInstall them for example in `/opt/cortex`.
@@ -378,84 +430,6 @@ npm run build
 ```
 
 This step generates static files (HTML, JavaScript and related resources) in  the `dist` directory. They can be readily imported on a HTTP server.
-
-## Analyzers
-Analyzers are autonomous applications managed by and run through the Cortex core engine. Analyzers have their
-[own dedicated GitHub repository](https://github.com/TheHive-Project/Cortex-Analyzers). 
-They are included in the Cortex binary, RPM and DEB packages and in the Docker image as well. However, you to get them from the repository if you need to update them after installing one of those packages. This operation is is necessary when new analyzers are released or new versions of existing ones are made available, or if you decide to build Cortex from sources.
-
-### Installation
-Currently, all the analyzers supported by TheHive Project are written in Python 2 or 3. They don't require any build phase but their dependencies have
-to be installed. Before proceeding, you'll need to install the system package dependencies that are required by some of them:
-
-```
-sudo apt-get install -y --no-install-recommends python-pip python2.7-dev python3-pip python3-dev ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl libmagic1 build-essential git libssl-dev
-```
-
-You may need to install Python's `setuptools` and update pip/pip3:
-```
-sudo pip install -U pip setuptools && sudo pip3 install -U pip setuptools
-```
-
-Once finished, clone the Cortex-analyzers repository in the directory of your choosing:
-```
-git clone https://github.com/TheHive-Project/Cortex-Analyzers
-
-```
-
-Each analyzer comes with its own, pip compatible `requirements.txt` file. You can install all requirements with the following commands:
-
-```
-for I in Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
-for I in Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
-```
-
-Next, you'll need to tell Cortex where to find the analyzers. Analyzers may be in different directories as shown in this dummy example of the Cortex configuration file (`application.conf`):
-
-```
-analyzer {
-  # Directory that holds analyzers
-  path = [
-    "/path/to/default/analyzers",
-    "/path/to/my/own/analyzers"
-  ]
-
-  fork-join-executor {
-    # Min number of threads available for analyze
-    parallelism-min = 2
-    # Parallelism (threads) ... ceil(available processors * factor)
-    parallelism-factor = 2.0
-    # Max number of threads available for analyze
-    parallelism-max = 4
-  }
-}
-```
-### Configuration
-All analyzers must be configured using the Web UI. Please read the [Quick Start Guide](../admin/quick-start.md) to create at least one organization then let a user with the `orgAdmin` role configure and enable analyzers for that organization.
-
-Some analyzers can be used out of the box, without any configuration, while others may require various parameters. Please check the [Analyzer Requirements Guide](../analyzer_requirements.md) for further details.
-
-### Updating
-Existing Cortex analyzers are regularly updated and new ones are added. To benefit from the latest bug fixes, enhancements and additions, run the following commands:
-
-```bash
-$ cd /path/to/Cortex-Analyzers
-$ sudo git pull
-```
-Then install any missing requirements:
-
-```bash
-for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
-for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
-```
-After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
-
-If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/cert-bdf/thehive/report-templates.zip) and import them into TheHive.
-
-### Additional Analyzers
-The following analyzers are not supported by THeHive Project at this time:
-
-- [Analyzers written in Go](https://github.com/Rostelecom-CERT/go-cortex-analyzers) by Rosetelecom-CERT
 
 ## Elasticsearch Installation
 If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. The latter is preferred as its installation and update are easier.
