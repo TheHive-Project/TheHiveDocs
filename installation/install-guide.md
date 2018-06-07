@@ -257,7 +257,7 @@ Please note that the service may take some time to start.
 
 The first time you connect you will have to create the database schema. Click "Migrate database" to create the DB schema.
 
-![](../files/installguide_update_database.png)
+![](../images/thehive-first-access_screenshot.png)
 
 Once done, you should be redirected to the page for creating the administrator's account.
 
@@ -265,7 +265,7 @@ Once done, you should be redirected to the page for creating the administrator's
 
 Once created, you should be redirected to the login page.
 
-![](../files/installguide_login.png)
+![](../images/thehive-login_page.png)
 
 **Warning**: at this stage, if you missed the creation of the admin account, you will not be able to do it unless you
 delete TheHive's index from Elasticsearch. In the case you made a mistake, first find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
