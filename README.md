@@ -14,37 +14,23 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 
 ## What's New?
 
+- [New Instsallation Guide](installation/install-guide.md)
 - [Single Sign-On on TheHive with X.509 Certificates](admin/certauth.md) **(Experimental Feature)**
 - [Training Material](training-material.md)
 - [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
 - [Migration Guide](migration-guide.md)
 
-## Installation Guides
-
-TheHive can be installed using:
-- An [RPM package](installation/rpm-guide.md)
-- A [DEB package](installation/deb-guide.md)
-- [Docker](installation/docker-guide.md)
-- [Binary](installation/binary-guide.md)
-- [Ansible script](https://github.com/drewstinnett/ansible-thehive) contributed by
-[@drewstinnett](https://github.com/drewstinnett)
-
-TheHive can also be [built from sources](installation/build-guide.md).
-
-## Administration Guides
-
-- [Administrator's guide](admin/admin-guide.md)
+## Guides
+- [Installation Guide](installation/install-guide.md)
+- [Administration Guide](admin/admin-guide.md)
 - [Configuration guide](admin/configuration.md)
 - [Updating](admin/updating.md)
 - [Backup & Restore](admin/backup-restore.md)
-
-## Developer Guides
-
 - [API documentation](api/README.md)
 
-## Other
+## Miscellaneous Information
+- [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [FAQ](FAQ.md)
-- [Training Material](training-material.md)
 
 ## License
 TheHive is an open source and free software released under the [AGPL](https://github.com/TheHive-Project/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
