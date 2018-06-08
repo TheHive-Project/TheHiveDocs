@@ -169,6 +169,7 @@ cortex {
   #    }
   #  }
   #}
+}
 
 # MISP configuration
 ########
