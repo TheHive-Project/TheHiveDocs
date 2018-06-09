@@ -24,7 +24,7 @@ After installing TheHive, the first connection to the Web UI triggers a database
 $ curl http://127.0.0.1:9200/_cat/indices?v
 ```
 
-The indexes that TheHive uses always start with`the_hive_` following by a number. Let's assume that the output of the command is:
+The indexes that TheHive uses always start with`the_hive_` following by a number. Let's assume that the output of the command is (**Warning**: this will delete everything)):
 
 ```bash
 health status index       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
@@ -32,7 +32,7 @@ yellow open   cortex_1    PC_pLFGBS5G2TNQYr4ajgw   5   1        609            6
 yellow open   the_hive_13 ft7GGTfhTr-4lSzZw5r1DQ   5   1     180131            3     51.3mb         51.3mb
 ```
 
-The index used by TheHive is `the_hive_13`. To delete it, run the following command:
+In this example, the index used by TheHive is `the_hive_13`. To delete it, run the following command:
 
 ```bash
 $ curl -X DELETE http://127.0.0.1:9200/the_hive_13
