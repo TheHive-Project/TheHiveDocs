@@ -259,6 +259,7 @@ misp {
   #     #]
   #    }
   #  }
+
   #}
 
   # Interval between two MISP event import
