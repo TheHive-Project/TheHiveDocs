@@ -1,29 +1,30 @@
 # WebHooks
 
-From TheHive 2.13, you can configure webhooks. In this case, each action done on
-TheHive platform (update a case, add a task, ...) is sent to an http endpoint.
-You can then create a tool that listens on an http port and acts when specific event
-occurs.
+Starting from version 2.13, TheHive supports [webhooks](https://en.wikipedia.org/wiki/Webhook). When enabled, TheHive will send each action that has been performed on it (add case, update case, add task, ...), in real time, to an HTTP endpoint. You can then create a program or application on the HTTP endpoint to react on specific events.
+
+  * [Configuration](#configuration)
+  * [Data Sent to the HTTP Endpoint](#data-sent-to-the-http-endpoint)
+  * [Sample Webhook Server Application](#sample-webhook-server-application)
+    * [Dependencies](#dependencies)
+    * [Python Script](#python-script)
+    * [Run](#run)
 
 ## Configuration
-
-Webhooks are configured under the `webhook` key in configuration file. Minimal
-configuration must contain an arbitrary name and an url:
+Webhooks are configured using the `webhook` key in the configuration file (`/etc/thehive/application.conf` by default). A minimal configuration contains an arbitrary name and an URL. The URL corresponds to the HTTP endpoint:
 ```
 webhooks {
   myLocalWebHook {
-    url = "http://localhost:8000/webhook"
+    url = "http://my_HTTP_endpoint/webhook"
   }
 }
 ```
 
-Proxy and SSL configuration can be added in the same manner as MISP or Cortex
-(cf. [configuration guide, section 8. HTTP client configuration](configuration.md#8-http-client-configuration):
+[Proxy and SSL configuration can be added](configuration.md#8-http-client-configuration) in the same manner as for MISP or Cortex:
 
 ```
 webhooks {
   securedWebHook {
-    url = "https://remoteSSLWebHook.com/webhook"
+    url = "https://my_HTTP_endpoint/webhook"
     ws {
       ssl.trustManager {
         stores = [
@@ -43,9 +44,9 @@ webhooks {
 }
 ```
 
-## Data sent to Webhook
+## Data Sent to the HTTP Endpoint
+For each action performed on it, TheHive sends an audit trail entry in JSON format to the HTTP endpoint. Here is an example corresponding to the creation of a case:
 
-TheHive sent an audit trail to webhook. Here is an example of case creation:
 ```
 {
   "operation": "Creation",                                        # Creation, Update or Delete
@@ -91,7 +92,7 @@ TheHive sent an audit trail to webhook. Here is an example of case creation:
 }
 ```
 
-For an update, data looks like:
+For an update, the data will look like:
 ```
 {
   "operation": "Update",
@@ -127,14 +128,17 @@ For an update, data looks like:
   }
 }
 ```
-## Sample Webhook server application
-This application might help you to get started with webhooks.
-It listens to a local port and displays the contents of received POST json data.
 
+## Sample Webhook Server Application
+The following application is a sample intended to help you get started with webhooks. It is very basic as it listens to a local port and displays the contents of the received POST JSON data.
+
+### Dependencies
 Install dependencies:
 `sudo pip install flask`
 
-Create a simple Python script (e.g. `vi webhooktest.py`):
+### Python Script
+Create a simple Python script (e.g. `webhooktest.py`):
+
 ```
 from flask import Flask, request
 import json
@@ -151,6 +155,6 @@ if __name__ == '__main__':
    app.run()
 
 ```
-
+### Run
 Run the server:
 `python webhooktest.py`

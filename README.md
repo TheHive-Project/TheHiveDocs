@@ -3,7 +3,7 @@
 
 [![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-TheHive is a scalable 3-in-1 open source and free security incident response platform designed to make life easier for SOCs, CSIRTs, CERTs and any information security practitioner dealing with security incidents that need to be investigated and acted upon swiftly.
+TheHive is a scalable 3-in-1 open source and free security incident response platform designed to make life easier for SOCs, CSIRTs, CERTs and any information security practitioner dealing with security incidents that need to be investigated and acted upon swiftly. Thanks to [Cortex](https://github.com/TheHive-Project/Cortex/), our powerful free and open source analysis engine, you can analyze (and triage) observables at scale using more than 80 analyzers. TheHive works very well with [MISP](http://misp-project.org/), as it can pull events from several MISP instances and export investigation cases back to one or several MISP applications.
 
 **Note:**  This is TheHive's documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/TheHive/](https://github.com/CERT-BDF/TheHive/).
 
@@ -12,25 +12,22 @@ TheHive is a scalable 3-in-1 open source and free security incident response pla
 TheHive uses ElasticSearch to store data. Both software use a Java VM. We recommend using a virtual machine with 8vCPU, 8
 GB of RAM and 60 GB of disk. You can also use a physical machine with similar specifications.
 
-## What's New?
-
-- [New Installation Guide](installation/install-guide.md)
-- [Single Sign-On on TheHive with X.509 Certificates](admin/certauth.md) **(Experimental Feature)**
-- [Training Material](training-material.md)
-- [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
-- [Migration Guide](migration-guide.md)
 
 ## Guides
 - [Installation Guide](installation/install-guide.md)
 - [Administration Guide](admin/admin-guide.md)
-- [Configuration guide](admin/configuration.md)
+- [Configuration Guide](admin/configuration.md)
+- [Webhooks](admin/webhooks.md)
 - [Updating](admin/updating.md)
 - [Backup & Restore](admin/backup-restore.md)
-- [API documentation](api/README.md)
+- [Migration Guide](migration-guide.md)
+- [API Documentation](api/README.md) (incomplete)
 
 ## Miscellaneous Information
-- [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
+- [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
 - [FAQ](FAQ.md)
+- [Training Material](training-material.md)
+- [Single Sign-On on TheHive with X.509 Certificates](admin/certauth.md) **(Experimental Feature)**
 
 ## License
 TheHive is an open source and free software released under the [AGPL](https://github.com/TheHive-Project/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
