@@ -4,7 +4,7 @@
 
 Users can be managed through the `Administration` > `Users` page. Only administrators may access it. Each user is identified by their login, full name and role.
 
-![users](../files/adminguide_users.png)
+![users](../images/thehive-user-management.png)
 
 Please note that you still need to create user accounts if you use LDAP or Active Directory authentication. This is necessary for TheHive to retrieve their role and authenticate them against the local database, LDAP and/or AD directories.
 
@@ -18,11 +18,11 @@ There are 4 roles currently:
 
 ## 2. Case template management
 
-Some cases may share the same structure (tags, tasks, description, metrics). Templates are here to automatically add tasks, description or metrics while creating a new case. A user can choose to create an empty case or based on a registered template.
+Some cases may share the same structure (tags, tasks, description, metrics). Templates are here to automatically add tasks, description, metrics and custom fields while creating a new case. A user can choose to create an empty case or based on a registered template.
 
 To create a template, as _admin_ go into the administration menu, and open the "Case templates" item.
 
-![template](../files/adminguide_template.png)
+![template](../images/thehive-case-templates.png)
 
 In this screen, you can add, remove or change template.
 A template contains:
@@ -33,7 +33,8 @@ A template contains:
  * default default
  * task list (title and description)
  * metrics
-
+ * custom fields
+ 
 Except for title prefix, task list and metrics, the user can change values defined in template.
 
 ## 3. Report template management
@@ -52,14 +53,14 @@ Metrics are numerical values associated to cases (for example, the number of imp
 
 Metrics are defined globally. To create metrics, as _admin_ go into the administration menu, and open the "Case metrics" item.
 
-![metrics](../files/adminguide_metrics.png)
+![metrics](../images/thehive-case-metrics.png)
 
 
 Metrics are used to create statistics ("Statistics" item in the user profile menu). They can be filtered on time interval, and case with specific tags.
 
 For example you can show metrics of case with "malspam" tag on January 2016 :
 
-![statistics](../files/adminguide_statistics.png)
+![statistics](../images/thehive-statistics.png)
 
 For graphs based on time, the user can choose metrics to show. They are aggregated on interval of time (by day, week, month of year) using a function (sum, min or max).
 

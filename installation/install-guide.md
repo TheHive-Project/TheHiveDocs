@@ -261,7 +261,7 @@ The first time you connect you will have to create the database schema. Click "M
 
 Once done, you should be redirected to the page for creating the administrator's account.
 
-![](../files/installguide_create_admin.png)
+![](../images/thehive-admin_account_creation.png)
 
 Once created, you should be redirected to the login page.
 

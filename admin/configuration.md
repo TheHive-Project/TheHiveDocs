@@ -303,9 +303,9 @@ The HTTP client used by the MISP connector uses a global configuration (in `play
 #### 7.2 Associate a Case Template to Alerts corresponding to MISP events
 As stated in the subsection above, TheHive is able to automatically import MISP events (they will appear as alerts within the `Alerts` pane) and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
-First, create a case template. Let's call it **MISP_CASETEMPLATE**.
+First, create a case template. Let's call it **MISP-EVENT**.
 
-![](../files/MISP_caseTemplate.png)
+![misp case template](../images/thehive-misp-case-template.png)
 
 Then update TheHive's configuration to add a 'caseTemplate' parameter as shown in the example below:
 
@@ -319,12 +319,12 @@ misp {
     # tags that must be automatically added to the case corresponding to the imported event
     tags = ["misp"]
     # case template
-    caseTemplate = "MISP_CASETEMPLATE"
+    caseTemplate = "MISP-EVENT"
   }
 
 ```
 
-Once the configuration file has been edited, restart TheHive. Every new import of a MISP event will generate a case using to the "MISP_CASETEMPLATE" template by default. The template can be overridden though during the import.
+Once the configuration file has been edited, restart TheHive. Every new import of a MISP event will generate a case using to the *MISP-EVENT* template by default. The template can be overridden though during the event import.
 
 #### 7.3 Event Filters
 When you first connect TheHive to a MISP instance, you can be overwhelmed by the number of alerts that will be generated, particularly if the MISP instance contains a lot of events. Indeed, every event, even those that date back to the beginning of the Internet, will generate an alert. To avoid alert fatigue, and starting from TheHive 3.0.4 (Cerana 0.4), you can exclude MISP events using different filters:
