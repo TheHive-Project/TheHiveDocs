@@ -1,7 +1,10 @@
 # FAQ
 
 ## Table of Contents
-  * [Creation of the First Administrator Account](#creation-of-the-first-administrator-account)
+  * [Installation and Administration](#installation-and-administration)
+    * [Creation of the First Administrator Account](#creation-of-the-first-administrator-account)
+    * [Where Does TheHive Store Its Logs?](#where-does-thehive-store-its-logs)
+    * [Is there an Audit Trail?](#is-there-an-audit-trail)
   * [Templates](#templates)
     * [I Can't Add a Template](#i-cant-add-a-template)
     * [Why My Freshly Added Template Doesn't Show Up?](#why-my-freshly-added-template-doesnt-show-up)
@@ -17,19 +20,19 @@
     * [Do you support Elasticsearch 6\.x or later?](#do-you-support-elasticsearch-6x-or-later)
 
 
-## Creation of the First Administrator Account
+## Installation and Administration
+### Creation of the First Administrator Account
 After installing TheHive, the first connection to the Web UI triggers a database update. After that operation, you'll be prompted to create an administrator account. If this prompt is not completed, there is no way to set the admin password. Hence it will be impossible to connect to TheHive. To reset the operation, you need to delete the corresponding index from Elasticsearch. First, find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
 
 ```bash
-$ curl http://127.0.0.1:9200/_cat/indices?v
+$ curl http://127.0.0.1:9200/_cat/indices
 ```
 
-The indexes that TheHive uses always start with`the_hive_` following by a number. Let's assume that the output of the command is (**Warning**: this will delete everything)):
+The indexes that TheHive uses always start with`the_hive_` followed by a number. Let's assume that the output of the command is (**Warning**: this will delete everything)):
 
 ```bash
-health status index       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-yellow open   cortex_1    PC_pLFGBS5G2TNQYr4ajgw   5   1        609            6      2.1mb          2.1mb
-yellow open   the_hive_13 ft7GGTfhTr-4lSzZw5r1DQ   5   1     180131            3     51.3mb         51.3mb
+yellow open cortex_1    PC_pLFGBS5G2TNQYr4ajgw 5 1    611 6  2.1mb  2.1mb
+yellow open the_hive_13 ft7GGTfhTr-4lSzZw5r1DQ 5 1 180160 4 51.5mb 51.5mb
 ```
 
 In this example, the index used by TheHive is `the_hive_13`. To delete it, run the following command:
@@ -39,6 +42,26 @@ $ curl -X DELETE http://127.0.0.1:9200/the_hive_13
 ```
 
 Then reload the page or restart TheHive.
+
+### Where Does TheHive Store Its Logs?
+Logs are stored in `/var/log/thehive/application.log`.
+
+### Is there an Audit Trail?
+Yes but you have to query directly the underlying Elasticsearch storage to get access to it:
+
+```bash
+curl -XPOST http://localhost:9200/the_hive_13/audit/_search
+```
+
+In the command above, we assume that TheHive's index is `the_hive_13`. To find out what is the current index of TheHive, run the following command on a host where the Elasticsearch DB used by TheHive is located:
+
+```bash
+$ curl http://127.0.0.1:9200/_cat/indices?
+```
+
+The indexes that TheHive uses always start with`the_hive_` followed by a number.
+
+Alternatively, you may configure [Webhooks](admin/webhooks.md). When enabled, TheHive will send each action that has been performed on it (add case, update case, add task, ...), in real time, to an HTTP endpoint.
 
 ## Templates
 ### I Can't Add a Template
