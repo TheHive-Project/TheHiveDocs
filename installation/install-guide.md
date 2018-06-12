@@ -444,7 +444,6 @@ Install Node.js libraries, which are required by this step, bower libraries (Jav
 build the front-end :
 ```
 npm install
-npm run build
 bower install
 grunt build
 ```
