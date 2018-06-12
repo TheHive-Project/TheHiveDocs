@@ -388,7 +388,7 @@ To install Elasticsearch, please read the [Elasticsearch Installation](#elastics
 **Download The Source**
 
 ```
-git clone https://github.com/TheHiveProject/TheHive.git
+git clone https://github.com/TheHive-Project/TheHive.git
 ```
 
 **Build the Project**
