@@ -353,6 +353,7 @@ sudo npm install -g grunt-cli bower
 ```
 
 **Installation of Elasticsearch**
+
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 ###### 2.2. Ubuntu
@@ -382,6 +383,7 @@ sudo npm install -g grunt-cli bower
 ```
 
 **Installation of Elasticsearch**
+
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 ###### 2.3. TheHive
