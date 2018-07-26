@@ -320,6 +320,10 @@ misp {
      organisation = ["bad organisation", "other orga"]
      tags = ["tag1", "tag2"]
     }
+    
+    # MISP purpose define is this MISP can be used to import events (ImportOnly), export case (ExportOnly) or both (ImportAndExport)
+    # default is ImportAndExport
+    purpose = ImportAndExport
   }
 
   # Interval between consecutive MISP event  imports  in  hours  (h)  or
@@ -387,6 +391,9 @@ In the example below, the following MISP events won't generate alerts in TheHive
 ```
 
 Of course, you can omit some of the filters or all of them.
+
+### 7.4 MISP purpose
+TheHive can interact with MISP in two ways: import an event to create a case and export a case to create an event. By default MISP connection can be used in that two ways. If your MISP is used for only way, you can set its purpose `ImportOnly` or `ExportOnly`.
 
 ### 8. HTTP client configuration
 
