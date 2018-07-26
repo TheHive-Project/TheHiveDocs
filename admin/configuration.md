@@ -37,6 +37,34 @@ search {
     # Maximum number of nested fields
     mapping.nested_fields.limit = 100
   }
+
+  ### XPack SSL configuration
+  # Username for XPack authentication
+  #search.username
+  # Password for XPack authentication
+  #search.password
+  # Enable SSL to connect to ElasticSearch
+  search.ssl.enabled = false
+  # Path to certificate authority file
+  #search.ssl.ca
+  # Path to certificate file
+  #search.ssl.certificate
+  # Path to key file
+  #search.ssl.key
+
+  ### SearchGuard configuration
+  # Path to JKS file containing client certificate
+  #search.guard.keyStore.path
+  # Password of the keystore
+  #search.guard.keyStore.password
+  # Path to JKS file containing certificate authorities
+  #search.guard.trustStore.path
+  ## Password of the truststore
+  #search.guard.trustStore.password
+  # Enforce hostname verification
+  #search.guard.hostVerification
+  # If hostname verification is enabled specify if hostname should be resolved
+  #search.guard.hostVerificationResolveHostname
 }
 ```
 
@@ -50,11 +78,13 @@ search {
    ...
 ```
 
-TheHive uses the [`transport`](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/modules-transport.html#_tcp_transport) port (9300/tcp by default) and not the [`http`](https://www.elastic.co/guide/en/Elasticsearch/reference/current/modules-http.html) port (9200/tcp).
+TheHive uses the [`transport`](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-transport.html) port (9300/tcp by default) and not the [`http`](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-http.html) port (9200/tcp).
 
 TheHive versions index schema (mapping) in Elasticsearch. Version numbers are appended to the index base name (the 8th version of the schema uses the index `the_hive_8` if `search.index = the_hive`).
 
-When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
+When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
+
+XPack and SearchGuard are optional and exclusive. If TheHive find a valid configuration for XPack, SearchGuard configuration is ignored.
 
 ### 2. Datastore
 
