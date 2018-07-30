@@ -216,7 +216,7 @@ Download and unzip the chosen binary package. Cortex files can be installed wher
 
 ```bash
 cd /opt
-wget https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip
+wget https://dl.bintray.com/thehive-project/binary/thehive-latest.zip
 unzip thehive-latest.zip
 ln -s thehive-x.x.x thehive
 ```
@@ -306,7 +306,7 @@ restart the service.
 ```bash
 service thehive stop
 cd /opt
-wget https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip
+wget https://dl.bintray.com/thehive-project/binary/thehive-latest.zip
 unzip thehive-latest.zip
 rm /opt/thehive && ln -s thehive-x.x.x thehive
 chown -R thehive:thehive /opt/thehive /opt/thehive-x.x.x

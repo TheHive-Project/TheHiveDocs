@@ -247,7 +247,7 @@ cortex {
 If you connect TheHive with Cortex 2, you must create an user in Cortex, set him an API key and add this key in Cortex server definition in TheHive application.conf. For Cortex 1, authentication is not required, the key is not used.
 
 Cortex analyzes observables and outputs reports in JSON format. TheHive shows the report as-is by default. In order to make reports more readable, we provide report templates which are in a separate package and must be installed manually:
- - download the report template package from https://dl.bintray.com/thehive-project/thehive/report-templates.zip
+ - download the report template package from https://dl.bintray.com/thehive-project/binary/report-templates.zip
  - log in TheHive using an administrator account
  - go to `Admin` > `Report templates` menu
  - click on `Import templates` button and select the downloaded package
@@ -568,10 +568,3 @@ To import your certificate in the keystore, depending on your situation, you can
 
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
-
-### 11. Miscellaneous
-The case similarity algorithm needs a setting that defines the maximum number of similar case. By default it is set to 100 but in some circumstances it is not enough.
-In this case, you can set the setting `maxSimilarCases` in application.conf:
-```
-  maxSimilarCases = 100
-```

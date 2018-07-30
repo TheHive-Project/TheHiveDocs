@@ -43,7 +43,7 @@ When TheHive is connected to a Cortex server, observables can be analyzed to get
 
 For each analyzer available in Cortex you can define two kinds of templates: short and long. A short report exposes synthetic information, shows in top of observable page. With short reports you can see a summary of all run analyzers. Long reports show detailed information only when the user selects the report. Raw data in JSON format is always available.
 
-Report templates can be configured in the `Admin` > `Report templates` menu. We offer report templates for default Cortex analyzers. A package with all report templates can be downloaded at https://dl.bintray.com/thehive-project/thehive/report-templates.zip and can be injected using the `Import templates` button.
+Report templates can be configured in the `Admin` > `Report templates` menu. We offer report templates for default Cortex analyzers. A package with all report templates can be downloaded at https://dl.bintray.com/thehive-project/binary/report-templates.zip and can be injected using the `Import templates` button.
 
 ## 4. Metrics management
 
