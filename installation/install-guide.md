@@ -164,7 +164,8 @@ The image accepts more options:
 | `--cortex-proto <proto>` | Define the protocol to connect to Cortex (default: `http`) |
 | `--cortex-port <port>` | Define the port to connect to Cortex (default: `9001`) |
 | `--cortex-url <url>` | Add the Cortex connection |
-| `cortex-hostname <host>` | Resolve this hostname to find the Cortex instance |
+| `--cortex-hostname <host>` | Resolve this hostname to find the Cortex instance |
+| `--cortex-key <key>` | Define Cortex key |
 
 **Note**: please remember that you must **[install and configure Elasticsearch](#elasticsearch-installation)**.
 
