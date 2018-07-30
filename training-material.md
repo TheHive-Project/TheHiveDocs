@@ -70,7 +70,7 @@ With the new version, analyzers are disabled by default. The training VM is deli
 
 To fully benefit from the latest analyzers, [update them](https://github.com/TheHive-Project/CortexDocs/blob/master/installation/install-guide.md#updating) and install the associated report templates in TheHive:
 
-- [download the report template package](https://dl.bintray.com/cert-bdf/thehive/report-templates.zip)
+- [download the report template package](https://dl.bintray.com/thehive-project/thehive/report-templates.zip)
 - log in TheHive using an administrator account
 - go to Admin > Report templates menu
 - click on Import templates button and select the downloaded package

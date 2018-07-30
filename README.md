@@ -5,7 +5,7 @@
 
 TheHive is a scalable 3-in-1 open source and free security incident response platform designed to make life easier for SOCs, CSIRTs, CERTs and any information security practitioner dealing with security incidents that need to be investigated and acted upon swiftly. Thanks to [Cortex](https://github.com/TheHive-Project/Cortex/), our powerful free and open source analysis engine, you can analyze (and triage) observables at scale using more than 80 analyzers. TheHive works very well with [MISP](http://misp-project.org/), as it can pull events from several MISP instances and export investigation cases back to one or several MISP applications.
 
-**Note:**  This is TheHive's documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/TheHive/](https://github.com/CERT-BDF/TheHive/).
+**Note:**  This is TheHive's documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/TheHive/](https://github.com/TheHive-Project/TheHive/).
 
 ## Hardware Pre-requisites
 

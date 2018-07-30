@@ -99,11 +99,11 @@ services:
         soft: 65536
         hard: 65536
   cortex:
-    image: certbdf/cortex:latest
+    image: thehiveproject/cortex:latest
     ports:
       - "0.0.0.0:9001:9000"
   thehive:
-    image: certbdf/thehive:latest
+    image: thehiveproject/thehive:latest
     depends_on:
       - elasticsearch
       - cortex
@@ -133,7 +133,7 @@ Elasticsearch can be installed on the same server as Cortex or on a different on
 [documentation](../admin/admin-guide.md) and run Cortex docker as follow:
 
 ```bash
-docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.conf certbdf/thehive:latest --no-config
+docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.conf thehiveproject/thehive:latest --no-config
 ```
 
 You can add the `--publish` docker option to expose TheHive HTTP service.
@@ -146,7 +146,7 @@ By default, the Cortex Docker image has minimal configuration:
 
 This behavior can be disabled by adding `--no-config` to the Docker command line:
 
-`docker run certbdf/thehive:latest --no-config`
+`docker run thehiveproject/thehive:latest --no-config`
 
 Or by adding the line `command: --no-config` in the `thehive` section of
 docker-compose file.
@@ -210,13 +210,13 @@ sudo apt-get install openjdk-8-jre-headless
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 #### 4. Install TheHive
-Binary packages can be downloaded from [Bintray](https://dl.bintray.com/cert-bdf/thehive/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip).
+Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/thehive/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip).
 
 Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
 ```bash
 cd /opt
-wget https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip
+wget https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip
 unzip thehive-latest.zip
 ln -s thehive-x.x.x thehive
 ```
@@ -306,7 +306,7 @@ restart the service.
 ```bash
 service thehive stop
 cd /opt
-wget https://dl.bintray.com/cert-bdf/thehive/thehive-latest.zip
+wget https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip
 unzip thehive-latest.zip
 rm /opt/thehive && ln -s thehive-x.x.x thehive
 chown -R thehive:thehive /opt/thehive /opt/thehive-x.x.x

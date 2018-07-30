@@ -247,7 +247,7 @@ cortex {
 If you connect TheHive with Cortex 2, you must create an user in Cortex, set him an API key and add this key in Cortex server definition in TheHive application.conf. For Cortex 1, authentication is not required, the key is not used.
 
 Cortex analyzes observables and outputs reports in JSON format. TheHive shows the report as-is by default. In order to make reports more readable, we provide report templates which are in a separate package and must be installed manually:
- - download the report template package from https://dl.bintray.com/cert-bdf/thehive/report-templates.zip
+ - download the report template package from https://dl.bintray.com/thehive-project/thehive/report-templates.zip
  - log in TheHive using an administrator account
  - go to `Admin` > `Report templates` menu
  - click on `Import templates` button and select the downloaded package
