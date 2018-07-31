@@ -43,7 +43,7 @@ yum install thehive
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release versions
-The RPM release package install two repositories `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release version and is disabled by default. If you want to install them and help us to find bugs, you can enable the repository by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
+The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
 
 ### DEB
 Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
@@ -65,7 +65,7 @@ Some environments may block access to the `pgp.mit.edu` key server. As a result,
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release versions
-If you want to install pre-release version of packages and help us to find bugs, you can add the pre-release repository with the command:
+If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
 ```bash
 echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 ```
@@ -172,6 +172,9 @@ The image accepts more options:
 #### What to Do Next?
 Once the Docker image is up and running, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+#### Pre-release Versions
+If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/thehive:version-RCx`. For example `thehiveproject/thehive:3.1.0-RC1`.
+
 ### Binary
 The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 16.04 LTS**. 
 
@@ -222,7 +225,9 @@ unzip thehive-latest.zip
 ln -s thehive-x.x.x thehive
 ```
 
-#### 4. First start
+**Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://dl.bintray.com/thehive-project/binary/thehive-version-RCx.zip`. For example `https://dl.bintray.com/thehive-project/binary/thehive-3.1.0-RC1.zip`.
+
+#### 5. First start
 It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
 
 If you'd rather start the application as a service, use the following commands:

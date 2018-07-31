@@ -1,26 +1,20 @@
-# TheHive cluster
+# Cluster Configuration
 
-TheHive is horizontally scalable. You can dynamically add node to your cluster
-to increase the performance of the platform.
-TheHive API is stateless, except for stream. For this reason, the cluster nodes
-need to communicate with each other.
-You can configure TheHive in a cluster from version 3.1.0.
+Starting from version 3.1.0, TheHive can scale horizontally very easily. You can dynamically add nodes to your cluster to increase the performance of the platform.
+TheHive API is stateless to the exclusion of the stream (or real-time flow). For this reason, the cluster nodes need to communicate with each other.
 
+The first node of the cluster has a specific role: it must initiate the cluster
+creation. Any additional node only needs to contact at least one node of the
+cluster to join it. This is done by configuring so-called *seed nodes*.
 
-The first node of the cluster has a specific role : it must initiate the cluster
-creation. Then other nodes only needs to contact at least one node of the
-cluster to join it. This is done by configuring "seed nodes".
-
-The first node must have itself in the seed node. The other nodes must have at
-least one already joined node in its seed node list.
+The first node must have itself in the seed node list. The other nodes must have at
+least one entry corresponding to a node that has already joined the seed node list.
 
 **Note** : all cluster nodes must share the same secret (`play.http.secret.key` in
-application.conf)
+`application.conf`).
 
 ## Configuration
-
-Define node1 (10.0.0.1) as first node of the cluster. Its configuration looks
-like :
+Define `node1` (for example with IP address `10.0.0.1`) as the first node of the cluster. The configuration section in `application.conf` should look like the following:
 ```
 akka {
   remote {
@@ -34,7 +28,7 @@ akka {
 }
 ```
 
-Then add another node (node2: 10.0.0.2) to our one-node cluster :
+Then add another node. Let's call it `node2` and assume its IP address is `10.0.0.2` to our one-node cluster. You can see that it is referring to the first node in `cluster.seed-nodes`:
 ```
 akka {
   remote {
@@ -48,7 +42,7 @@ akka {
 }
 ```
 
-It is safer to define several seed nodes, except for first node. For example :
+We recommend defining several seed nodes in the respective configuration files, except for the first one. For example:
 
 node  | configured seed nodes
 ------|----------------------
@@ -57,13 +51,12 @@ node2 | node1, node3
 node3 | node2, node4
 node4 | node1, node2, node3
 
-## Loadbalancer
+## Load Balancing
+In front of TheHive cluster, you can add a load balancer which distributes HTTP
+requests to cluster nodes. One client does not need to always use the same node
+ as affinity is not required.
 
-In front of TheHive cluster, you can add a load-balancer which distributes http
-requests to cluster nodes. One client doesn't need to use the same node
-(affinity is not required).
-
-Below an example (not optimized) of haproxy configuration :
+Below is an non-optimized example of a haproxy configuration:
 ```
 # Global standard configuration, nothing specific for TheHive
 global
@@ -114,9 +107,8 @@ frontend http-in
         server node4 10.0.0.4:9000 check
 ```
 
-## Debug
-
-You can enable debug messages with the following configuration :
+## Troubleshooting
+Should you encounter troubles with your setup, you can enable debug messages with the following configuration:
 ```
 akka {
   actor {
@@ -130,8 +122,7 @@ akka {
 }
 ```
 
-## More details
-
-TheHive uses akka cluster. You can refer to
-[akka documentation](https://doc.akka.io/docs/akka/2.5/index-cluster.html) for
-more details.
+## Additional Information
+TheHive Leverages Akka Cluster. You can refer to the 
+[Akka documentation](https://doc.akka.io/docs/akka/2.5/index-cluster.html) for
+additional information.

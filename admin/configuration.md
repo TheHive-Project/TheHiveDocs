@@ -84,7 +84,7 @@ TheHive versions index schema (mapping) in Elasticsearch. Version numbers are ap
 
 When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
 
-XPack and SearchGuard are optional and exclusive. If TheHive find a valid configuration for XPack, SearchGuard configuration is ignored.
+XPack and SearchGuard are optional and exclusive. If TheHive finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
 ### 2. Datastore
 
@@ -321,8 +321,8 @@ misp {
      tags = ["tag1", "tag2"]
     }
     
-    # MISP purpose define is this MISP can be used to import events (ImportOnly), export case (ExportOnly) or both (ImportAndExport)
-    # default is ImportAndExport
+    # MISP purpose defines if this instance can be used to import events (ImportOnly), export cases (ExportOnly) or both (ImportAndExport)
+    # Default is ImportAndExport
     purpose = ImportAndExport
   }
 
@@ -392,10 +392,10 @@ In the example below, the following MISP events won't generate alerts in TheHive
 
 Of course, you can omit some of the filters or all of them.
 
-### 7.4 MISP purpose
-TheHive can interact with MISP in two ways: import an event to create a case and export a case to create an event. By default MISP connection can be used in that two ways. If your MISP is used for only way, you can set its purpose `ImportOnly` or `ExportOnly`.
+### 7.4 MISP Purpose
+TheHive can interact with MISP in two ways: import a MISP event to create a case in TheHive and export a TheHive case to create a MISP event. By default, any MISP instance that is added to TheHive's configuration will be used for importing events and exporting cases (`ImportAndExport`). If you want to use MISP in only one way, you can set its purpose in the configuration as `ImportOnly` or `ExportOnly`.
 
-### 8. HTTP client configuration
+### 8. HTTP Client Configuration
 
 HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contain configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
 
