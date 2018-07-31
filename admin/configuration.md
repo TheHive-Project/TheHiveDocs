@@ -37,6 +37,34 @@ search {
     # Maximum number of nested fields
     mapping.nested_fields.limit = 100
   }
+
+  ### XPack SSL configuration
+  # Username for XPack authentication
+  #search.username
+  # Password for XPack authentication
+  #search.password
+  # Enable SSL to connect to ElasticSearch
+  search.ssl.enabled = false
+  # Path to certificate authority file
+  #search.ssl.ca
+  # Path to certificate file
+  #search.ssl.certificate
+  # Path to key file
+  #search.ssl.key
+
+  ### SearchGuard configuration
+  # Path to JKS file containing client certificate
+  #search.guard.keyStore.path
+  # Password of the keystore
+  #search.guard.keyStore.password
+  # Path to JKS file containing certificate authorities
+  #search.guard.trustStore.path
+  ## Password of the truststore
+  #search.guard.trustStore.password
+  # Enforce hostname verification
+  #search.guard.hostVerification
+  # If hostname verification is enabled specify if hostname should be resolved
+  #search.guard.hostVerificationResolveHostname
 }
 ```
 
@@ -50,11 +78,13 @@ search {
    ...
 ```
 
-TheHive uses the [`transport`](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/modules-transport.html#_tcp_transport) port (9300/tcp by default) and not the [`http`](https://www.elastic.co/guide/en/Elasticsearch/reference/current/modules-http.html) port (9200/tcp).
+TheHive uses the [`transport`](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-transport.html) port (9300/tcp by default) and not the [`http`](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-http.html) port (9200/tcp).
 
 TheHive versions index schema (mapping) in Elasticsearch. Version numbers are appended to the index base name (the 8th version of the schema uses the index `the_hive_8` if `search.index = the_hive`).
 
-When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
+When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
+
+XPack and SearchGuard are optional and exclusive. If TheHive finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
 ### 2. Datastore
 
@@ -217,7 +247,7 @@ cortex {
 If you connect TheHive with Cortex 2, you must create an user in Cortex, set him an API key and add this key in Cortex server definition in TheHive application.conf. For Cortex 1, authentication is not required, the key is not used.
 
 Cortex analyzes observables and outputs reports in JSON format. TheHive shows the report as-is by default. In order to make reports more readable, we provide report templates which are in a separate package and must be installed manually:
- - download the report template package from https://dl.bintray.com/cert-bdf/thehive/report-templates.zip
+ - download the report template package from https://dl.bintray.com/thehive-project/binary/report-templates.zip
  - log in TheHive using an administrator account
  - go to `Admin` > `Report templates` menu
  - click on `Import templates` button and select the downloaded package
@@ -290,6 +320,10 @@ misp {
      organisation = ["bad organisation", "other orga"]
      tags = ["tag1", "tag2"]
     }
+    
+    # MISP purpose defines if this instance can be used to import events (ImportOnly), export cases (ExportOnly) or both (ImportAndExport)
+    # Default is ImportAndExport
+    purpose = ImportAndExport
   }
 
   # Interval between consecutive MISP event  imports  in  hours  (h)  or
@@ -358,7 +392,10 @@ In the example below, the following MISP events won't generate alerts in TheHive
 
 Of course, you can omit some of the filters or all of them.
 
-### 8. HTTP client configuration
+### 7.4 MISP Purpose
+TheHive can interact with MISP in two ways: import a MISP event to create a case in TheHive and export a TheHive case to create a MISP event. By default, any MISP instance that is added to TheHive's configuration will be used for importing events and exporting cases (`ImportAndExport`). If you want to use MISP in only one way, you can set its purpose in the configuration as `ImportOnly` or `ExportOnly`.
+
+### 8. HTTP Client Configuration
 
 HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contain configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
 
@@ -531,10 +568,3 @@ To import your certificate in the keystore, depending on your situation, you can
 
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
-
-### 11. Miscellaneous
-The case similarity algorithm needs a setting that defines the maximum number of similar case. By default it is set to 100 but in some circumstances it is not enough.
-In this case, you can set the setting `maxSimilarCases` in application.conf:
-```
-  maxSimilarCases = 100
-```
