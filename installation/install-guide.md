@@ -412,7 +412,7 @@ git clone https://github.com/TheHive-Project/TheHive.git
 
 ```
 cd TheHive
-bin/activator clean stage
+./sbt clean stage
 ```
 
 This operation may take some time to complete as it will download all dependencies  then build the back-end.
