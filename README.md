@@ -18,6 +18,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 - [Administration Guide](admin/admin-guide.md)
 - [Configuration Guide](admin/configuration.md)
 - [Webhooks](admin/webhooks.md)
+- [Cluster Configuration](admin/cluster.md)
 - [Updating](admin/updating.md)
 - [Backup & Restore](admin/backup-restore.md)
 - [Migration Guide](migration-guide.md)
