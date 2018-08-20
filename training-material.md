@@ -5,7 +5,6 @@ As of this writing, the training VM includes Cerana 0.10 (TheHive 3.0.10), Corte
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
-
 ### TL;DR
 
 - Training VM system account : `thehive/thehive1234`
@@ -38,6 +37,15 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 `4c1c4d29f5a077cae117555f6e746c83127439d0d07e0061c3547c4430d37397`
 
+#### Beta Version
+
+A training VM containing beta versions of TheHive (TheHive 3.1.0-RC1) and Cortex (Cortex 2.1.0-RC1) is also available. You can download this VM from the following location:
+
+[https://drive.google.com/open?id=0B3G-Due88gfQN2FaM28tVlNrc1k](https://drive.google.com/open?id=0B3G-Due88gfQN2FaM28tVlNrc1k)
+
+To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
+
+`23dfbf40d054688278011565ed06b2be8e0343be23630cf73fee2865dc26e109`
 
 ### Use It
 
