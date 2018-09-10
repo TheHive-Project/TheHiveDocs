@@ -24,7 +24,7 @@ TheHive is available as:
 In addition, TheHive can be also be [built from the source code](#build-it-yourself).
 
 ### RPM
-RPM packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
+RPM packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
@@ -46,11 +46,11 @@ Once the package is installed, proceed to the configuration using the [Configura
 The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
 
 ### DEB
-Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
+Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
-To install the Cortex Debian package, use the following commands:
+To install the x Debian package, use the following commands:
 ```bash
 echo 'deb https://dl.bintray.com/thehive-project/debian-stable any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
@@ -60,7 +60,7 @@ sudo apt-get install thehive
 
 Some environments may block access to the `pgp.mit.edu` key server. As a result, the command `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C` will fail. In that case, you can run the following command instead:
 
-`curl https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY | sudo apt-key add -`
+`curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
@@ -79,7 +79,7 @@ TheHive requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
 
 The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml)
-file starts Elasticsearch and Cortex:
+file starts Elasticsearch and TheHive:
 ```
 version: "2"
 services:
@@ -129,8 +129,8 @@ volumes:
 Running ElasticSearch in production mode requires a minimum `vm.max_map_count` of 262144. [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) provides instructions on how to query and change this value.
 
 #### Manual Installation of Elasticsearch
-Elasticsearch can be installed on the same server as Cortex or on a different one. You can then configure Cortex according to the
-[documentation](../admin/admin-guide.md) and run Cortex docker as follow:
+Elasticsearch can be installed on the same server as TheHive or on a different one. You can then configure TheHive according to the
+[documentation](../admin/admin-guide.md) and run TheHive docker as follow:
 
 ```bash
 docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.conf thehiveproject/thehive:latest --no-config
@@ -139,10 +139,10 @@ docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.c
 You can add the `--publish` docker option to expose TheHive HTTP service.
 
 #### Customize the Docker Image
-By default, the Cortex Docker image has minimal configuration:
+By default, the TheHive Docker image has minimal configuration:
  - choose a random secret (`play.http.secret.key`)
  - search for the Elasticsearch instance (host named `elasticsearch`) and add it to configuration
-  - search for a Cortex instance (host named `cortex`) and add it to configuration
+  - search for a TheHive instance (host named `cortex`) and add it to configuration
 
 This behavior can be disabled by adding `--no-config` to the Docker command line:
 
@@ -155,7 +155,7 @@ The image accepts more options:
 
 | Option | Description |
 | ------ | ----------- |
-| `--no-config` | Do not try to configure Cortex (add the secret and Elasticsearch) |
+| `--no-config` | Do not try to configure TheHive (add the secret and Elasticsearch) |
 | `--no-config-secret` | Do not add the random secret to the configuration |
 | `--no-config-es` | Do not add the Elasticsearch hosts to configuration |
 | `--es-hosts <esconfig>` | Use this string to configure the Elasticsearch hosts (format: `["host1:9300","host2:9300"]`) |
@@ -216,7 +216,7 @@ To install Elasticsearch, please read the [Elasticsearch Installation](#elastics
 #### 4. Install TheHive
 Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/thehive/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip).
 
-Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
+Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
 ```bash
 cd /opt
@@ -498,8 +498,8 @@ If you prefer using Elasticsearch inside a docker, see
 #### Configuration
 It is **highly recommended** to avoid exposing this service to an untrusted zone.
 
-If Elasticsearch and Cortex run on the same host (and not in a docker), edit `/etc/elasticsearch/elasticsearch.yml` and
-set `network.host` parameter with `127.0.0.1`. Cortex use dynamic scripts to make partial updates. Hence, they must be activated using `script.inline: on`.
+If Elasticsearch and TheHive run on the same host (and not in a docker), edit `/etc/elasticsearch/elasticsearch.yml` and
+set `network.host` parameter with `127.0.0.1`. TheHive use dynamic scripts to make partial updates. Hence, they must be activated using `script.inline: on`.
 
 The cluster name must also be set (`hive` for example). Threadpool queue size must be set with a high value (`100000`). The default size will get the queue easily overloaded.
 
