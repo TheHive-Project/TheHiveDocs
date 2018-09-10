@@ -244,7 +244,9 @@ cortex {
 }
 ```
 
-If you connect TheHive with Cortex 2, you must create an user in Cortex, set him an API key and add this key in Cortex server definition in TheHive application.conf. For Cortex 1, authentication is not required, the key is not used.
+If you connect TheHive with Cortex 2, you must create a user in Cortex with the `read, analyze` roles, set an API key and add this key in the Cortex server definition in TheHive `application.conf`. For Cortex 1, authentication is not required, the key is not used.
+
+To create a user with the `read, analyze` role in Cortex 2, you must have at least one organization configured then you can connect to the Cortex 2 Web UI using a `orgAdmin` account for that organization to create the user and generate their API key. Please refer to the Cortex [Quick Start Guide](https://github.com/TheHive-Project/CortexDocs/blob/master/admin/quick-start.md#step-7-optional-create-an-account-for-thehive-integration) for more information.
 
 Cortex analyzes observables and outputs reports in JSON format. TheHive shows the report as-is by default. In order to make reports more readable, we provide report templates which are in a separate package and must be installed manually:
  - download the report template package from https://dl.bintray.com/thehive-project/binary/report-templates.zip
