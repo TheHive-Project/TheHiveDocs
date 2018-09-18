@@ -101,7 +101,7 @@ services:
   cortex:
     image: thehiveproject/cortex:latest
     ports:
-      - "0.0.0.0:9001:9000"
+      - "0.0.0.0:9001:9001"
   thehive:
     image: thehiveproject/thehive:latest
     depends_on:
@@ -109,6 +109,7 @@ services:
       - cortex
     ports:
       - "0.0.0.0:9000:9000"
+    command: --cortex-port 9001 
 ```
 
 Put this file in an empty folder and run `docker-compose up`. TheHive is exposed on 9000/tcp port and Cortex on 9001/tcp. These ports can be changed by modifying the `docker-compose` file.
