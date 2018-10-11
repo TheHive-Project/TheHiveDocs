@@ -1,7 +1,7 @@
 ## Training Material
 TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex and Cortex analyzers with all dependencies and ElasticSearch installed on top of Ubuntu 16.04 with Oracle JRE 8.
 
-As of this writing, the training VM includes Cerana 0.10 (TheHive 3.0.10), Cortex 2.0.4, TheHive4py 1.4.3, Cortex4py 1.0.0 and any available Cortex analyzer as of June 2, 2018.
+As of this writing, the training VM includes Cerana 0.10 (TheHive 3.1.1), Cortex 2.1.1, TheHive4py 1.5.1, Cortex4py 2.0.1 and any available Cortex analyzer as of Oct 11, 2018.
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
@@ -17,11 +17,11 @@ As of this writing, the training VM includes Cerana 0.10 (TheHive 3.0.10), Corte
 
 You can download the VM from the following location:
 
-[https://drive.google.com/open?id=0B3G-Due88gfQMzlfZ2t6RVhqTUk](https://drive.google.com/open?id=0B3G-Due88gfQMzlfZ2t6RVhqTUk)
+[https://drive.google.com/open?id=0B3G-Due88gfQNEdmSk56Sno4Y2M](https://drive.google.com/open?id=0B3G-Due88gfQNEdmSk56Sno4Y2M)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`b5be8c927f37a975a8050d57e907a5b49a090d0dbe21b4b17766d5e10756a673`
+`426063006710c415139d6b5e361706265e94a63e40f779d7d66ba21ac49ece8f`
 
 **Note**: On starting the newly imported VM from OVA file in VMware Fusion, you may encounter a message asking to upgrade the virtual machine. By clicking on the `Upgrade` button you would be able to use the VM as expected.
 
@@ -29,13 +29,13 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 #### Previous Version
 
-The previous version of the training VM, with Cerana 0.9 (TheHive 3.0.9), Cortex 2.0.4, TheHive4py 1.4.3, Cortex4py 1.0.0 and all Cortex analyzers as of Apr 28, 2018 is still available at the following address:
+The previous version of the training VM, Cerana 0.10 (TheHive 3.0.10), Cortex 2.0.4, TheHive4py 1.4.3, Cortex4py 1.0.0  and all Cortex analyzers as of Jun 2, 2018 is still available at the following address:
 
-[https://drive.google.com/open?id=0B3G-Due88gfQMzZoWGdhYUJzZ28](https://drive.google.com/open?id=0B3G-Due88gfQMzdydXFuYXR4bFU)
+[https://drive.google.com/open?id=0B3G-Due88gfQMzlfZ2t6RVhqTUk](https://drive.google.com/open?id=0B3G-Due88gfQMzlfZ2t6RVhqTUk)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`4c1c4d29f5a077cae117555f6e746c83127439d0d07e0061c3547c4430d37397`
+`b5be8c927f37a975a8050d57e907a5b49a090d0dbe21b4b17766d5e10756a673`
 
 #### Beta Version
 
