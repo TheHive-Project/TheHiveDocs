@@ -4,6 +4,12 @@ The configuration file of TheHive is `/etc/thehive/application.conf` by default.
 
 You can have a look at the [default settings](default-configuration.md).
 
+Important note:
+To take effect, be sure that:
+- "/path/to/application.conf" is readable for the user who runs the docker daemon,
+- you specified `command: --no-config` in your `docker-compose.yml` file
+
+
 ### 1. Database
 
 TheHive uses the Elasticsearch search engine to store all persistent data. Elasticsearch is not part of TheHive package. It must be installed and configured as a standalone instance which can be located on the same machine. For more information on how to set up Elasticsearch, please refer to [Elasticsearch installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/setup.html).
