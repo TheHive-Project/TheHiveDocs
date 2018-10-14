@@ -17,15 +17,15 @@ As of this writing, the training VM includes Cerana 0.10 (TheHive 3.1.1), Cortex
 
 You can download the VM from the following location:
 
-[https://drive.google.com/open?id=0B3G-Due88gfQNEdmSk56Sno4Y2M](https://drive.google.com/open?id=0B3G-Due88gfQNEdmSk56Sno4Y2M)
+[https://drive.google.com/open?id=0B3G-Due88gfQNEtPOW16Z3ZhUlU](https://drive.google.com/open?id=0B3G-Due88gfQNEtPOW16Z3ZhUlU)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`426063006710c415139d6b5e361706265e94a63e40f779d7d66ba21ac49ece8f`
+`f139cc9d5b0200b4c234b6ac85273d9c1932abf326b53e0e940712b59be6892a`
 
-**Note**: On starting the newly imported VM from OVA file in VMware Fusion, you may encounter a message asking to upgrade the virtual machine. By clicking on the `Upgrade` button you would be able to use the VM as expected.
+**Note**: On starting the newly imported VM from OVA file in VMware Fusion, you may encounter a message regarding an error with VMWare tools. . By clicking on the `OK` button you would be able to use the VM as expected.
 
-![](images/training-vm-vmware-fusion-ova-upgrade_msg.png)
+![](images/thehive-vm-vmware-vmwaretools_errormsg.png)
 
 #### Previous Version
 
@@ -56,7 +56,6 @@ To access TheHive, point your browser to the following URL:
 To access Cortex, point your browser to the following URL:
 
 [http://IP_OF_VM:(9001)](http://IP_OF_VM:9001)
-
 
 #### Configure TheHive
 
