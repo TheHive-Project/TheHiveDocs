@@ -101,7 +101,7 @@ services:
   cortex:
     image: thehiveproject/cortex:latest
     ports:
-      - "0.0.0.0:9001:9000"
+      - "0.0.0.0:9001:9001"
   thehive:
     image: thehiveproject/thehive:latest
     depends_on:
@@ -109,6 +109,7 @@ services:
       - cortex
     ports:
       - "0.0.0.0:9000:9000"
+    command: --cortex-port 9001 
 ```
 
 Put this file in an empty folder and run `docker-compose up`. TheHive is exposed on 9000/tcp port and Cortex on 9001/tcp. These ports can be changed by modifying the `docker-compose` file.
@@ -432,7 +433,7 @@ Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
 network.host: 127.0.0.1
-script.inline: on
+script.inline: true
 cluster.name: hive
 thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
@@ -499,7 +500,7 @@ If you prefer using Elasticsearch inside a docker, see
 It is **highly recommended** to avoid exposing this service to an untrusted zone.
 
 If Elasticsearch and TheHive run on the same host (and not in a docker), edit `/etc/elasticsearch/elasticsearch.yml` and
-set `network.host` parameter with `127.0.0.1`. TheHive use dynamic scripts to make partial updates. Hence, they must be activated using `script.inline: on`.
+set `network.host` parameter with `127.0.0.1`. TheHive use dynamic scripts to make partial updates. Hence, they must be activated using `script.inline: true`.
 
 The cluster name must also be set (`hive` for example). Threadpool queue size must be set with a high value (`100000`). The default size will get the queue easily overloaded.
 
@@ -507,7 +508,7 @@ Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
 network.host: 127.0.0.1
-script.inline: on
+script.inline: true
 cluster.name: hive
 thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000

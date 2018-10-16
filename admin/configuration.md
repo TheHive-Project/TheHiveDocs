@@ -6,7 +6,7 @@ You can have a look at the [default settings](default-configuration.md).
 
 ### 1. Database
 
-TheHive uses the Elasticsearch search engine to store all persistent data. Elasticsearch is not part of TheHive package. It must be installed and configured as a standalone instance which can be located on the same machine. For more information on how to set up Elasticsearch, please refer to [Elasticsearch installation guide](https://www.elastic.co/guide/en/Elasticsearch/reference/2.3/setup.html).
+TheHive uses the Elasticsearch search engine to store all persistent data. Elasticsearch is not part of TheHive package. It must be installed and configured as a standalone instance which can be located on the same machine. For more information on how to set up Elasticsearch, please refer to [Elasticsearch installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/setup.html).
 
 Three settings are required to connect to Elasticsearch:
  * the base name of the index
@@ -241,6 +241,12 @@ cortex {
   #   proxy {}
   #   ssl {}
   # }
+  # Check job update time interval
+  refreshDelay = 1 minute
+  # Maximum number of successive errors before give up
+  maxRetryOnError = 3
+  # Check remote Cortex status time interval
+  statusCheckInterval = 1 minute
 }
 ```
 
@@ -328,6 +334,9 @@ misp {
     purpose = ImportAndExport
   }
 
+  # Check remote TheHive status time interval
+  statusCheckInterval = 1 minute
+  
   # Interval between consecutive MISP event  imports  in  hours  (h)  or
   # minutes (m).
   interval = 1h
@@ -488,7 +497,7 @@ ws.ssl.enabledCipherSuites = [
 ]
 ```
 
-### 9. Monitoring and Performance Metrics
+### 9. Monitoring and Performance Metrics (deprecated)
 
 Performance metrics (response time, call rate to Elasticsearch and HTTP request, throughput, memory used...) can be collected if enabled in configuration.
 
@@ -555,6 +564,37 @@ metrics {
 }
 ```
 ### 10. HTTPS
+You can enable HTTPS on TheHive application or add a reverse proxy in front of TheHive. The latter solution is recommended.
+
+#### 10.1 HTTPS using a reverse proxy
+You can choose any reverse proxy to add SSL on TheHive. Below an example of NGINX configuration:
+```
+	server {
+			listen 443 ssl;
+			server_name thehive.example.com;
+	
+			ssl on;
+			ssl_certificate			ssl/thehive_cert.pem;
+			ssl_certificate_key		ssl/thehive_key.pem;
+	
+			proxy_connect_timeout   600;
+			proxy_send_timeout      600;
+			proxy_read_timeout      600;
+			send_timeout            600;
+			client_max_body_size    2G;
+			proxy_buffering off;
+			client_header_buffer_size 8k;
+	
+			location / {
+					add_header				Strict-Transport-Security "max-age=31536000; includeSubDomains";
+					proxy_pass              http://127.0.0.1:9000/;
+					proxy_http_version      1.1;
+			}
+	}
+```
+
+#### 10.2 HTTPS without reverse proxy
+
 To enable HTTPS in the application, add the following lines to `/etc/thehive/application.conf`:
 ```
     https.port: 9443
@@ -569,4 +609,12 @@ As HTTPS is enabled, HTTP can be disabled by adding `http.port=disabled` in conf
 To import your certificate in the keystore, depending on your situation, you can follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
 
 **More information**:
-This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
+This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.6.x/ConfiguringHttps](https://www.playframework.com/documentation/2.6.x/ConfiguringHttps).
+
+#### 10.3 Strengthen security
+When SSL is enable (with reverse proxy or not), you can configure cookie to be "secure" (usable only with HTTPS protocol). This is done by adding `session.secure=true` in the application.conf file.
+
+You can also enable [HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security). This header must be configured on the SSL termination component.
+If SSL is configured on TheHive, add `play.filters.https.strictTransportSecurity="max-age=31536000; includeSubDomains"` in application.conf.
+
+For NGINX, use `add_header` directive, as show above. 
