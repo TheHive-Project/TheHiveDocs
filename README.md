@@ -32,6 +32,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 ## Miscellaneous Information
 - [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
 - [FAQ](FAQ.md)
+- [Presentations](presentations/list.md)
 - [Training Material](training-material.md)
 - [Single Sign-On on TheHive with X.509 Certificates](admin/certauth.md) **(Experimental Feature)**
 
