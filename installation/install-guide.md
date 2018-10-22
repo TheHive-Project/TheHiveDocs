@@ -215,7 +215,7 @@ sudo apt-get install openjdk-8-jre-headless
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 #### 4. Install TheHive
-Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/thehive/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/thehive/thehive-latest.zip).
+Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/binary/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/binary/thehive-latest.zip).
 
 Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
