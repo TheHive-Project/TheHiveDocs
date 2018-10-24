@@ -30,6 +30,7 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 - [Cluster Configuration](admin/cluster.md)
 
 ## Miscellaneous Information
+- [Feature Set](feature-set.md) **(Under Progress)**
 - [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
 - [FAQ](FAQ.md)
 - [Presentations](presentations/list.md)
