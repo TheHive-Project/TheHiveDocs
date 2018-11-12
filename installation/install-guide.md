@@ -30,7 +30,7 @@ RPM packages are published on a Bintray repository. All packages are signed usin
 
 First install the RPM release package:
 ```bash
-yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-1.noarch.rpm
+yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
 ```
 This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
 `/etc/pki/rpm-gpg/GPG-TheHive-Project`.
