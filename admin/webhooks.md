@@ -148,7 +148,7 @@ app = Flask(__name__)
 @app.route('/',methods=['POST'])
 def foo():
    data = json.loads(request.data)
-   print json.dumps(data, indent=4)
+   print(json.dumps(data, indent=4))
    return "OK"
 
 if __name__ == '__main__':
