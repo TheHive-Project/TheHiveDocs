@@ -328,6 +328,7 @@ misp {
      organisation = ["bad organisation", "other orga"]
      tags = ["tag1", "tag2"]
     }
+    whitelist.tags = ["whitelist-tag1", "whitelist-tag2"]
     
     # MISP purpose defines if this instance can be used to import events (ImportOnly), export cases (ExportOnly) or both (ImportAndExport)
     # Default is ImportAndExport
@@ -379,6 +380,7 @@ When you first connect TheHive to a MISP instance, you can be overwhelmed by the
  - the age of the last publication (max-age)
  - the organisation is black-listed (exclusion.organisation)
  - one of the tags is black-listed (exclusion.tags)
+ - doesn't contain one of the whitelist tag (whitelist.tags)
 
 Please note that MISP event filters can be adapted to the configuration associated to each MISP server TheHive is connected with.
 
