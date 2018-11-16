@@ -1,40 +1,66 @@
 # Single Sign-On on TheHive with X.509 Certificates
 ## Abstract
-This guide tries to explain how to configure user authentication on TheHive using X.509 client certificates. **This feature is experimental**. There is no guarantee that it will work.
 
-## Step 0: Create the Users in TheHive
-SSO is used for authentication for users which have existing accounts in TheHive. Make sure the users exist in TheHive. PKI authentication doesn't replace user creation.
+SSL managed by TheHive is known to have some stability problem. It is advise to not enable it in production and
+configure SSL on a reverse proxy, in front of TheHive. This make X509 certificate authentication non applicable.
 
-## Step 1: Configure SSL
-The first step consists of configuring SSL on TheHive, without resorting to a reverse proxy such as Nginx for such an endeavor. This can be achieved by appending the following lines to TheHive's configuration file (`/etc/thehive/application.conf`):
+In order to do x509 authentication it is recommended to do it in the reverse proxy and then forward user identity to
+TheHive in a HTTP header. This feature has been added in version 3.2.
+
+**WARNING** This setup is valid only if nobody except the reverse proxy can connect to TheHive. Users must have to
+use the reverse proxy. Otherwise, an user would be able to choose his identity on TheHive.
+ 
+## Setup a reverse proxy
+
+If you use nginx, the site configuration file should look like:
 ```
-https.port: 9443
-play.server.https.keyStore {
-  path: "/path/to/keystore.jks"
-  type: "JKS"
-  password: "password_of_keystore"
+  server {
+      listen 443 ssl;
+      server_name thehive.example.com;
+  
+      ssl on;
+      ssl_certificate         ssl/thehive_cert.pem;
+      ssl_certificate_key     ssl/thehive_key.pem;
+      
+      # Force client to have a certificate
+      ssl_verify_client       on;
+  
+      proxy_connect_timeout   600;
+      proxy_send_timeout      600;
+      proxy_read_timeout      600;
+      send_timeout            600;
+      client_max_body_size    2G;
+      proxy_buffering off;
+      client_header_buffer_size 8k;
+  
+      # Map certificate DN to user login stored in TheHive
+      map $ssl_client_s_dn $thehive_user
+      {
+        default "";
+        /C=FR/O=TheHive-Project/CN=Thomas toom;
+        /C=FR/O=TheHive-Project/CN=Georges bofh;
+      };
+
+      # Redirect all request to local TheHive
+      location / {
+          add_header              Strict-Transport-Security "max-age=31536000; includeSubDomains";
+          # Send the mapped user login to TheHive, in THEHIVE_USER HTTP header
+          proxy_set_header        THEHIVE_USER $thehive_user;
+          proxy_pass              http://127.0.0.1:9000/;
+          proxy_http_version      1.1;
+      }
+  }
+```
+
+## Enable authentication delegation in TheHive
+
+Setup TheHive to identify user by the configured HTTP header (THEHIVE_USER): 
+```
+auth {
+  method.header = true
+  header.name = THEHIVE_USER
 }
-```
-You can find more details in the [configuration guide](configuration.md#10-https) and in the [PlayFramework documentation](https://www.playframework.com/documentation/2.6.x/ConfiguringHttps).
 
-## Step 2: Configure a Certificate Authority
-A certificate must be provided to each user who is going to single-sign on. The certificate authority which is used to to sign the user's certificate must be declared in TheHive. Once setup, all certificates issued by this authority will be trusted.
-
-A certificate authority must be added to a trust store in the same manner as a key store:
-```
-play.server.https.trustStore {
-  path: "/path/to/trustStore.jks"
-  type: "JKS"
-  password: "password_of_truststore"
-}
-```
-
-## Step 3: Tell TheHive where it Can Find the User Name
-The user name must be stored in the user certificate. It can be in the certificate subject (RDN) or in the subject alternative names (SAN). Supported SAN fields are: upn, rfc822Name, dNSName, x400Address, directoryName, ediPartyName, uniformResourceIdentifier, iPAddress and registeredID (even if most of them have no sense for a user).
-
-The setting `auth.pki.certificateField` must contain the name of the field which holds the user name. In the example below, we assume that it is in the CN:
-
-```
-auth.method.pki = true # enable PKI authentication method
-auth.pki.certificateField = cn
+# Listen only on localhost to prevent direct access to TheHive
+http.address=127.0.0.1
 ```
