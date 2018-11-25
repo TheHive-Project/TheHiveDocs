@@ -39,13 +39,13 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 #### Beta Version
 
-A training VM containing beta versions of TheHive (TheHive 3.1.0-RC3) and Cortex (Cortex 2.1.0-RC1) is also available. You can download this VM from the following location:
+A training VM containing beta versions of TheHive (TheHive 3.2.0-RC1), Cortex (Cortex 2.1.2) and TheHive4py 1.5.3 is also available. You can download this VM from the following location:
 
-[https://drive.google.com/file/d/0B3G-Due88gfQNE5nMHBidWpORXM/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQNE5nMHBidWpORXM/view?usp=sharing)
+[https://drive.google.com/file/d/0B3G-Due88gfQNGptUF8wYXNBa1E/view?usp=sharing](https://drive.google.com/file/d/0B3G-Due88gfQNGptUF8wYXNBa1E/view?usp=sharing)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`64ac02664dbdb5ebc56cfe91a760d100898c79ac94ff016bcde64e51bf4634e6`
+`c3ac9c2eab27bdac802906f6d7d8e7bdc8f99a10f78639548933eaaf606377e6`
 
 ### Use It
 
