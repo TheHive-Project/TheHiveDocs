@@ -1,10 +1,29 @@
-## Configuration file
+# Configuration Guide
 
 The configuration file of TheHive is `/etc/thehive/application.conf` by default. This file uses the [HOCON format](https://github.com/typesafehub/config/blob/master/HOCON.md). All configuration parameters should go in this file.
 
 You can have a look at the [default settings](default-configuration.md).
 
-### 1. Database
+## Table of Contents
+  * [1\. Database](#1-database)
+  * [2\. Datastore](#2-datastore)
+  * [3\. Authentication](#3-authentication)
+  * [4\. Streaming (a\.k\.a The Flow)](#4-streaming-aka-the-flow)
+  * [5\. Entity size limit](#5-entity-size-limit)
+  * [6\. Cortex](#6-cortex)
+  * [7\. MISP](#7-misp)
+    * [7\.1 Configuration](#71-configuration)
+    * [7\.2 Associate a Case Template to Alerts corresponding to MISP events](#72-associate-a-case-template-to-alerts-corresponding-to-misp-events)
+    * [7\.3 Event Filters](#73-event-filters)
+  * [7\.4 MISP Purpose](#74-misp-purpose)
+  * [8\. HTTP Client Configuration](#8-http-client-configuration)
+  * [9\. Monitoring and Performance Metrics (deprecated)](#9-monitoring-and-performance-metrics-deprecated)
+  * [10\. HTTPS](#10-https)
+    * [10\.1 HTTPS using a reverse proxy](#101-https-using-a-reverse-proxy)
+    * [10\.2 HTTPS without reverse proxy](#102-https-without-reverse-proxy)
+    * [10\.3 Strengthen security](#103-strengthen-security)
+
+## 1. Database
 
 TheHive uses the Elasticsearch search engine to store all persistent data. Elasticsearch is not part of TheHive package. It must be installed and configured as a standalone instance which can be located on the same machine. For more information on how to set up Elasticsearch, please refer to [Elasticsearch installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/setup.html).
 
@@ -86,7 +105,7 @@ When too many documents are requested to TheHive, it uses the [scroll](https://w
 
 XPack and SearchGuard are optional and exclusive. If TheHive finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
-### 2. Datastore
+## 2. Datastore
 
 TheHive stores attachments as Elasticsearch documents. They are split in chunks and each chunk sent to Elasticsearch is identified by the hash of the entire attachment and the associated chunk number.
 
@@ -116,7 +135,7 @@ datastore {
 }
 ```
 
-### 3. Authentication
+## 3. Authentication
 
 TheHive supports local, LDAP and Active Directory (AD) for authentication. By default, it relies on local credentials stored in Elasticsearch.
 
@@ -191,7 +210,7 @@ keytool -import -file /path/to/your/ca.cert -alias InternalCA -keystore /path/to
 
 Then add `-Djavax.net.ssl.trustStore=/path/to/your/truststore.jks` parameter when you start TheHive or put it in the `JAVA_OPTS` environment variable before starting TheHive.
 
-### 4. Streaming (a.k.a The Flow)
+## 4. Streaming (a.k.a The Flow)
 The user interface is automatically updated when data is changed in the back-end. To do this, the back-end sends events to all the connected front-ends. The mechanism used to notify the front-end is called long polling and its settings are:
 
 * `refresh` : when there is no notification, close the connection after this duration (the default is 1 minute).
@@ -211,7 +230,7 @@ stream.longpolling {
 }
 ```
 
-### 5. Entity size limit
+## 5. Entity size limit
 The Play framework used by TheHive sets the HTTP body size limit to 100KB by default for textual content (json, xml, text, form data) and 10MB for file uploads. This could be too small in most cases so you may want to change it with the following settings in the `application.conf` file:
 
 ```
@@ -223,7 +242,7 @@ play.http.parser.maxDiskBuffer=1G
 
 *Note*: if you are using a NGINX reverse proxy in front of TheHive, be aware that it doesn't distinguish between text data and a file upload. So, you should also set the `client_max_body_size` parameter in your NGINX server configuration to the highest value among the two: file upload and text size defined in TheHive `application.conf` file.
 
-### 6. Cortex
+## 6. Cortex
 TheHive can use one or several [Cortex](https://github.com/TheHive-Project/Cortex) analysis engines to get additional information on observables. When configured, analyzers available in Cortex become usable on TheHive. First you must enable `CortexConnector`, choose an identifier then specify the URL for each Cortex server:
 ```
 ## Enable the Cortex module
@@ -262,7 +281,7 @@ Cortex analyzes observables and outputs reports in JSON format. TheHive shows th
 
 HTTP client used by Cortex connector use global configuration (in `play.ws`) but can be overridden in Cortex section and in each Cortex server configuration. Refer to section 8 for more detail on how to configure HTTP client.
 
-### 7. MISP
+## 7. MISP
 TheHive has the ability to connect to one or several MISP instances in order to import and export events. Hence TheHive is able to:
 
 - receive events as they are added or updated from multiple MISP instances. These events will appear within the `Alerts` pane.
@@ -279,7 +298,7 @@ This means that TheHive can import events from configured MISP servers _**and**_
 **TheHive requires MISP 2.4.73 or better**. Make sure that your are using a compatible version of MISP before reporting problems. MISP 2.4.72 and below do not work correctly with TheHive.
 
 
-#### 7.1 Configuration
+### 7.1 Configuration
 To sync with a MISP server and retrieve events or export cases, edit the `application.conf` file and adjust the example shown below to your setup:
 
 ```
@@ -346,7 +365,7 @@ misp {
 
 The HTTP client used by the MISP connector uses a global configuration (in `play.ws`) but it can be overridden within the MISP section of the configuation file and/or in the configuration section of each MISP server (in `misp.MISP-SERVER-ID.ws`). Refer to section 8 for more details on how to configure the HTTP client.
 
-#### 7.2 Associate a Case Template to Alerts corresponding to MISP events
+### 7.2 Associate a Case Template to Alerts corresponding to MISP events
 As stated in the subsection above, TheHive is able to automatically import MISP events (they will appear as alerts within the `Alerts` pane) and create cases out of them. This operation leverages the template engine. Thus you'll need to create a case template prior to importing MISP events.
 
 First, create a case template. Let's call it **MISP-EVENT**.
@@ -372,7 +391,7 @@ misp {
 
 Once the configuration file has been edited, restart TheHive. Every new import of a MISP event will generate a case using to the *MISP-EVENT* template by default. The template can be overridden though during the event import.
 
-#### 7.3 Event Filters
+### 7.3 Event Filters
 When you first connect TheHive to a MISP instance, you can be overwhelmed by the number of alerts that will be generated, particularly if the MISP instance contains a lot of events. Indeed, every event, even those that date back to the beginning of the Internet, will generate an alert. To avoid alert fatigue, and starting from TheHive 3.0.4 (Cerana 0.4), you can exclude MISP events using different filters:
 
  - the maximum number of attributes (max-attributes)
@@ -405,10 +424,10 @@ In the example below, the following MISP events won't generate alerts in TheHive
 
 Of course, you can omit some of the filters or all of them.
 
-### 7.4 MISP Purpose
+## 7.4 MISP Purpose
 TheHive can interact with MISP in two ways: import a MISP event to create a case in TheHive and export a TheHive case to create a MISP event. By default, any MISP instance that is added to TheHive's configuration will be used for importing events and exporting cases (`ImportAndExport`). If you want to use MISP in only one way, you can set its purpose in the configuration as `ImportOnly` or `ExportOnly`.
 
-### 8. HTTP Client Configuration
+## 8. HTTP Client Configuration
 
 HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contain configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
 
@@ -499,7 +518,7 @@ ws.ssl.enabledCipherSuites = [
 ]
 ```
 
-### 9. Monitoring and Performance Metrics (deprecated)
+## 9. Monitoring and Performance Metrics (deprecated)
 
 Performance metrics (response time, call rate to Elasticsearch and HTTP request, throughput, memory used...) can be collected if enabled in configuration.
 
@@ -565,10 +584,10 @@ metrics {
     }
 }
 ```
-### 10. HTTPS
+## 10. HTTPS
 You can enable HTTPS on TheHive application or add a reverse proxy in front of TheHive. The latter solution is recommended.
 
-#### 10.1 HTTPS using a reverse proxy
+### 10.1 HTTPS using a reverse proxy
 You can choose any reverse proxy to add SSL on TheHive. Below an example of NGINX configuration:
 ```
 	server {
@@ -595,7 +614,7 @@ You can choose any reverse proxy to add SSL on TheHive. Below an example of NGIN
 	}
 ```
 
-#### 10.2 HTTPS without reverse proxy
+### 10.2 HTTPS without reverse proxy
 
 To enable HTTPS in the application, add the following lines to `/etc/thehive/application.conf`:
 ```
@@ -613,7 +632,7 @@ To import your certificate in the keystore, depending on your situation, you can
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.6.x/ConfiguringHttps](https://www.playframework.com/documentation/2.6.x/ConfiguringHttps).
 
-#### 10.3 Strengthen security
+### 10.3 Strengthen security
 When SSL is enable (with reverse proxy or not), you can configure cookie to be "secure" (usable only with HTTPS protocol). This is done by adding `session.secure=true` in the application.conf file.
 
 You can also enable [HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security). This header must be configured on the SSL termination component.
