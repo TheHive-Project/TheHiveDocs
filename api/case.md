@@ -5,7 +5,7 @@
 Required attributes:
  - `title` (text) : title of the case
  - `description` (text) : description of the case
- - `severity` (number) : severity of the case (low; 2: medium; 3: high) **default=2**
+ - `severity` (number) : severity of the case (1: low; 2: medium; 3: high) **default=2**
  - `startDate` (date) : date and time of the begin of the case **default=now**
  - `owner` (string) : user to whom the case has been assigned **default=use who create the case**
  - `flag` (boolean) : flag of the case **default=false**
