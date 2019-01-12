@@ -100,6 +100,8 @@ services:
         hard: 65536
   cortex:
     image: thehiveproject/cortex:latest
+    depends_on:
+      - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
   thehive:
