@@ -37,7 +37,7 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 |POST        |/api/alert/_search                      |Find alerts                           |
 |PATCH       |/api/alert/_bulk                        |Update alerts in bulk                 |
 |POST        |/api/alert/_stats                       |Compute stats on alerts               |
-|POST        |/api/alert                              |[Create an alert](#create-an-alert)    |
+|POST        |/api/alert                              |[Create an alert](#create-an-alert)   |
 |GET         |/api/alert/:alertId                     |[Get an alert](#get-an-alert)         |
 |PATCH       |/api/alert/:alertId                     |Update an alert                       |
 |DELETE      |/api/alert/:alertId                     |Delete an alert                       |
@@ -46,6 +46,7 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 |POST        |/api/alert/:alertId/createCase          |Create a case from an alert           |
 |POST        |/api/alert/:alertId/follow              |Follow an alert                       |
 |POST        |/api/alert/:alertId/unfollow            |Unfollow an alert                     |
+|POST        |/api/alert/:alertId/merge/:caseId       |[Merge an alert in a case](#merge-an-alert)              |
 
 ### Get an alert
 
@@ -208,4 +209,43 @@ curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: applicati
   ],
   "caseTemplate": "external-alert"
 }'
+```
+
+### Merge an alert
+An alert can be merge in a case using the URL:
+```
+POST     /api/alert/:alertId/merge/:caseId
+```
+Each observable of the alert will be added to the case if it doesn't exist in the case. The description of the alert will be appended to the case's description.
+
+The HTTP response contains the updated case.
+
+#### Example
+Merge the alert `ce2c00f17132359cb3c50dfbb1901810` in case `AVXeF-pZmeHK_2HEYj2z`:
+```
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810/AVXeF-pZmeHK_2HEYj2z
+```
+The call returns:
+```
+{
+  "severity": 3,
+  "createdBy": "myuser",
+  "createdAt": 1488918582777,
+  "caseId": 1,
+  "title": "My first case",
+  "startDate": 1488918582836,
+  "owner": "myuser",
+  "status": "Open",
+  "description": "This case has been created by my custom script
+  
+  ### Merged with alert #10 my alert title
+  
+  This is my alert description",
+  "user": "myuser",
+  "tlp": 2,
+  "flag": false,
+  "id": "AVXeF-pZmeHK_2HEYj2z",
+  "_id": "AVXeF-pZmeHK_2HEYj2z",
+  "_type":"case"
+}
 ```
