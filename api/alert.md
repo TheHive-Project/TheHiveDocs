@@ -223,7 +223,7 @@ The HTTP response contains the updated case.
 #### Example
 Merge the alert `ce2c00f17132359cb3c50dfbb1901810` in case `AVXeF-pZmeHK_2HEYj2z`:
 ```
-curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810/AVXeF-pZmeHK_2HEYj2z
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/alert/ce2c00f17132359cb3c50dfbb1901810/merge/AVXeF-pZmeHK_2HEYj2z
 ```
 The call returns:
 ```
