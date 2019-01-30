@@ -46,7 +46,8 @@ Alert ID is computed from `type`, `source` and`sourceRef`.
 |POST        |/api/alert/:alertId/createCase          |Create a case from an alert           |
 |POST        |/api/alert/:alertId/follow              |Follow an alert                       |
 |POST        |/api/alert/:alertId/unfollow            |Unfollow an alert                     |
-|POST        |/api/alert/:alertId/merge/:caseId       |[Merge an alert in a case](#merge-an-alert)              |
+|POST        |/api/alert/:alertId/merge/:caseId       |[Merge an alert in a case](#merge-an-alert) |
+|POST        |/api/alert/merge/_bulk                  |[Merge several alerts in one case](#bulk-merge-alert) |
 
 ### Get an alert
 
@@ -237,10 +238,48 @@ The call returns:
   "owner": "myuser",
   "status": "Open",
   "description": "This case has been created by my custom script
-  
+
   ### Merged with alert #10 my alert title
-  
+
   This is my alert description",
+  "user": "myuser",
+  "tlp": 2,
+  "flag": false,
+  "id": "AVXeF-pZmeHK_2HEYj2z",
+  "_id": "AVXeF-pZmeHK_2HEYj2z",
+  "_type":"case"
+}
+```
+
+### Bulk merge alert
+This API merge several alerts with one case:
+```
+POST     /api/alert/merge/_bulk
+```
+The observable of each alert listed in `alertIds` field will be imported into the case (identified by `caseId` field). The description of the case *is not* modified.
+
+The HTTP response contains the case.
+
+#### Example
+Merge the alerts `ce2c00f17132359cb3c50dfbb1901810` and `a97148693200f731cfa5237ff2edf67b` in case `AVXeF-pZmeHK_2HEYj2z`:
+```
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' -H 'Content-Type: application/json' http://127.0.0.1:9000/api/alert/merge/_bulk -d '{
+  "caseId": "AVXeF-pZmeHK_2HEYj2z",
+  "alertIds": ["ce2c00f17132359cb3c50dfbb1901810", "a97148693200f731cfa5237ff2edf67b"]
+}'
+```
+The call returns:
+```
+{
+  "severity": 3,
+  "createdBy": "myuser",
+  "createdAt": 1488918582777,
+  "caseId": 1,
+  "title": "My first case",
+  "startDate": 1488918582836,
+  "owner": "myuser",
+  "status": "Open",
+  "description": "This case has been created by my custom script",
   "user": "myuser",
   "tlp": 2,
   "flag": false,
