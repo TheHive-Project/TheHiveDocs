@@ -427,6 +427,20 @@ Of course, you can omit some of the filters or all of them.
 ## 7.4 MISP Purpose
 TheHive can interact with MISP in two ways: import a MISP event to create a case in TheHive and export a TheHive case to create a MISP event. By default, any MISP instance that is added to TheHive's configuration will be used for importing events and exporting cases (`ImportAndExport`). If you want to use MISP in only one way, you can set its purpose in the configuration as `ImportOnly` or `ExportOnly`.
 
+Starting from TheHive 3.3, when exporting a case to a MISP instance, you can export all its tags to the freshly created MISP event. This behaviour is not enabled by default. If you want to enable it you must set the `exportCaseTags` variable to `true` as shown below:
+
+```
+misp {
+  "local" {
+    url = "http://127.0.0.1"
+    key = "<the_auth_key_goes_here>"
+    exportCaseTags = true
+    [...] # additional parameters go here
+  }
+}
+
+```
+
 ## 8. HTTP Client Configuration
 
 HTTP client can be configured by adding `ws` key in sections that needs to connect to remote HTTP service. The key can contain configuration items defined in [play WS configuration](https://www.playframework.com/documentation/2.6.x/ScalaWS#Configuring-WS):
