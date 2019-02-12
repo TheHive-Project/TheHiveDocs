@@ -396,18 +396,18 @@ When you first connect TheHive to a MISP instance, you can be overwhelmed by the
 
  - the maximum number of attributes (max-attributes)
  - the maximum size of the event's JSON message (max-size)
- - the age of the last publication (max-age)
+ - the maximum age of the last publication (max-age)
  - the organisation is black-listed (exclusion.organisation)
  - one of the tags is black-listed (exclusion.tags)
  - doesn't contain one of the whitelist tag (whitelist.tags)
 
-Please note that MISP event filters can be adapted to the configuration associated to each MISP server TheHive is connected with.
+Please note that MISP event filters can be adapted to the configuration associated to each MISP server TheHive is connected with. As regards the `max-age` filter, it applies to the publication date of MISP events and not to the creation date.
 
 In the example below, the following MISP events won't generate alerts in TheHive:
 
 - events that have more than 1000 attributes
 - events which JSON message size is greater than 1MB
-- events that are more than one week old
+- events that have been published more than one week from the current date
 - events that have been created by `bad organisation` or `other orga`
 - events that contain `tag1` or `tag2`
 
