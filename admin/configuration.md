@@ -348,7 +348,7 @@ misp {
      tags = ["tag1", "tag2"]
     }
     whitelist.tags = ["whitelist-tag1", "whitelist-tag2"]
-    
+
     # MISP purpose defines if this instance can be used to import events (ImportOnly), export cases (ExportOnly) or both (ImportAndExport)
     # Default is ImportAndExport
     purpose = ImportAndExport
@@ -356,7 +356,7 @@ misp {
 
   # Check remote TheHive status time interval
   statusCheckInterval = 1 minute
-  
+
   # Interval between consecutive MISP event  imports  in  hours  (h)  or
   # minutes (m).
   interval = 1h
@@ -607,11 +607,11 @@ You can choose any reverse proxy to add SSL on TheHive. Below an example of NGIN
 	server {
 			listen 443 ssl;
 			server_name thehive.example.com;
-	
+
 			ssl on;
 			ssl_certificate			ssl/thehive_cert.pem;
 			ssl_certificate_key		ssl/thehive_key.pem;
-	
+
 			proxy_connect_timeout   600;
 			proxy_send_timeout      600;
 			proxy_read_timeout      600;
@@ -619,7 +619,7 @@ You can choose any reverse proxy to add SSL on TheHive. Below an example of NGIN
 			client_max_body_size    2G;
 			proxy_buffering off;
 			client_header_buffer_size 8k;
-	
+
 			location / {
 					add_header				Strict-Transport-Security "max-age=31536000; includeSubDomains";
 					proxy_pass              http://127.0.0.1:9000/;
@@ -652,4 +652,4 @@ When SSL is enable (with reverse proxy or not), you can configure cookie to be "
 You can also enable [HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security). This header must be configured on the SSL termination component.
 If SSL is configured on TheHive, add `play.filters.https.strictTransportSecurity="max-age=31536000; includeSubDomains"` in application.conf.
 
-For NGINX, use `add_header` directive, as show above. 
+For NGINX, use `add_header` directive, as show above.
