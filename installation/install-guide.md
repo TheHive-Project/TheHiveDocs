@@ -111,7 +111,7 @@ services:
       - cortex
     ports:
       - "0.0.0.0:9000:9000"
-    command: --cortex-port 9001 
+    command: --cortex-port 9001
 ```
 
 Put this file in an empty folder and run `docker-compose up`. TheHive is exposed on 9000/tcp port and Cortex on 9001/tcp. These ports can be changed by modifying the `docker-compose` file.
@@ -179,7 +179,7 @@ Once the Docker image is up and running, proceed to the configuration using the 
 If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/thehive:version-RCx`. For example `thehiveproject/thehive:3.1.0-RC1`.
 
 ### Binary
-The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 16.04 LTS**. 
+The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 16.04 LTS**.
 
 #### 1. Minimal Ubuntu Installation
 Install a minimal Ubuntu 16.04 system with the following software:
@@ -357,8 +357,8 @@ sudo yum -y install java-1.8.0-openjdk-devel
 
 **Installation of Node.js**
 
-Install the EPEL repository. You should have the *extras* repository enabled, then: 
- 
+Install the EPEL repository. You should have the *extras* repository enabled, then:
+
 ```bash
 sudo yum -y install epel-release
 ```
@@ -472,10 +472,12 @@ This step generates static files (HTML, JavaScript and related resources) in  th
 
 
 ## Elasticsearch Installation
-If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. The latter is preferred as its installation and update are easier.
+If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. Version 5.X must be used. From version 6, Elasticsearch drops [mapping type](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/removal-of-types.html#removal-of-types).
 
 ### System Package
-Install the Elasticsearch package provided by Elastic:
+Install the Elasticsearch package provided by Elastic
+
+#### Debian, Ubuntu
 ```
 # PGP key installation
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
@@ -494,6 +496,38 @@ sudo apt update && sudo apt install elasticsearch
 ```
 
 The Debian package does not start up the service by default,  to prevent the instance from accidentally joining a cluster, without being configured appropriately.
+
+#### CentOS, RedHat, OpenSuSE
+```
+# PGP key installation
+sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+```
+
+Create the file `elasticsearch.repo` in `/etc/yum/repos.d/` for RedHat and CentOS, or in `/etc/zypp/repos.d/` for OpenSuSE distributions, and add the following lines:
+
+```
+[elasticsearch-5.x]
+name=Elasticsearch repository for 5.x packages
+baseurl=https://artifacts.elastic.co/packages/5.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+```
+
+Then, you can use the following command:
+
+```
+# On CentOS and older Red Hat based distributions.
+sudo yum install elasticsearch
+
+# On Fedora and other newer Red Hat distributions.
+sudo dnf install elasticsearch
+
+# On OpenSUSE based distributions.
+sudo zypper install elasticsearch
+```
 
 If you prefer using Elasticsearch inside a docker, see
 [Elasticsearch inside a Docker](#elasticsearch-inside-a-docker).
