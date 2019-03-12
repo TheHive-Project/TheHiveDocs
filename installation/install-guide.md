@@ -123,6 +123,10 @@ volumes:
     - /path/to/application.conf:/etc/thehive/application.conf
 ```
 
+To take effect, be sure that:
+- '/path/to/application.conf' is readable for the user who runs the docker daemon (typically 644)
+- you specified `command: --no-config` in your `docker-compose.yml` file
+
 You should define where the data (i.e. the Elasticsearch database) will be located on your operating system by adding the following lines in the `elasticsearch` section of your docker-compose file:
 ```
 volumes:
