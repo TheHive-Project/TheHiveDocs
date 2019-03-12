@@ -472,10 +472,12 @@ This step generates static files (HTML, JavaScript and related resources) in  th
 
 
 ## Elasticsearch Installation
-If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. The latter is preferred as its installation and update are easier.
+If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. Version 5.X is recommended due to script execution behaviour.
 
 ### System Package
-Install the Elasticsearch package provided by Elastic:
+Install the Elasticsearch package provided by Elastic
+
+#### Debian, Ubuntu
 ```
 # PGP key installation
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
@@ -494,6 +496,38 @@ sudo apt update && sudo apt install elasticsearch
 ```
 
 The Debian package does not start up the service by default,  to prevent the instance from accidentally joining a cluster, without being configured appropriately.
+
+#### CentOS, RedHat, OpenSuSE
+```
+# PGP key installation
+sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+```
+
+Create the file `elasticsearch.repo` in `/etc/yum/repos.d/` for RedHat and CentOS, or in `/etc/zypp/repos.d/` for OpenSuSE distributions, and add the following lines:
+
+```
+[elasticsearch-5.x]
+name=Elasticsearch repository for 5.x packages
+baseurl=https://artifacts.elastic.co/packages/5.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+```
+
+Then, you can use the following command:
+
+```
+# On CentOS and older Red Hat based distributions.
+sudo yum install elasticsearch 
+
+# On Fedora and other newer Red Hat distributions.
+sudo dnf install elasticsearch 
+
+# On OpenSUSE based distributions.
+sudo zypper install elasticsearch 
+```
 
 If you prefer using Elasticsearch inside a docker, see
 [Elasticsearch inside a Docker](#elasticsearch-inside-a-docker).
