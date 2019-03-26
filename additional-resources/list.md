@@ -1,5 +1,14 @@
+# Additional Resources
+The following page lists additional resources that should help you get more acquainted with TheHive, Cortex & our other products.
+
+## Table of Contents
+  * [Presentations](#presentations)
+  * [Workshops and Trainings](#workshops-and-trainings)
+    * [Botconf 2018](#botconf-2018)
+  * [User Contributions](#user-contributions)
+
 ## Presentations
-We make several presentations throughout the year during conferences and various events:
+We make several presentations throughout the year during conferences and various events. Please find below some of the latest presentation material we produced:
 
 - Cruising Ocean Threat without Sinking Using TheHive, Cortex & MISP. [BSidesLisbon](https://bsideslisbon.org) 2018. November 29, 2018. ([PDF](TLP-WHITE-Bsides_Lisbon2018-TheHive_Cortex_MISP.pdf))
 - TheHive & Cortex [UYBHYS](https://www.unlockyourbrain.bzh/) 2018. November 17, 2018. ( [PDF](TLP-WHITE-TheHive-Cortex_UYBHYS18.pdf))
@@ -28,3 +37,8 @@ Before undertaking the workshop, we highly recommend reading the following slide
 - [Detect, Investigate & Respond with MISP, TheHive & Cortex](Botconf%202018/Instructions%20&%20Slides/TLP-WHITE-Botconf2018-WS3-MISP_TheHive_Cortex.pdf)
 
 **Important Note**: you won't be able to do case study 3 as it requires access to the instructors' MISP instance which is only available during the workshops and trainings. You must also skip the steps which ask you to synchronize your MISP instance with the instructors' (unless you have access to an instance pre-populated with events) or configure TheHive to leverage the instructors' Cortex instance.
+
+## User Contributions
+The resources below have been contributed by our user community. Please note that the fact that they are listed here does not mean that they have been checked, validated or endorsed in any way by TheHive Project. Use your own judgment if you decide to read them.
+
+- [TheHive Scripting: Task Imports](https://medium.com/@bromiley/thehive-scripting-task-imports-91a38480fac9), Matt B. Last accessed on March 26, 2019.

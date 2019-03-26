@@ -30,11 +30,11 @@ GB of RAM and 60 GB of disk. You can also use a physical machine with similar sp
 - [Cluster Configuration](admin/cluster.md)
 
 ## Miscellaneous Information
-- [Feature Set](feature-set.md) **(Under Progress)**
+- [Feature Set](feature-set.md) **(In Progress)**
 - [Changelog](https://github.com/TheHive-Project/TheHive/blob/master/CHANGELOG.md)
 - [FAQ](FAQ.md)
-- [Presentations](presentations/list.md)
 - [Training Material](training-material.md)
+- [Additional Resources](additional-resources/list.md)
 - [Single Sign-On on TheHive with X.509 Certificates](admin/certauth.md) **(Experimental Feature)**
 
 ## License
