@@ -313,7 +313,7 @@ misp {
     # Authentication key.
     key = "<the_auth_key_goes_here>"
 
-    # Name of the case template in TheHive that shall be used to import
+    # Name of the case template created in TheHive that shall be used to import
     # MISP events as cases by default.
     caseTemplate = "<Template_Name_goes_here>"
 
@@ -329,9 +329,6 @@ misp {
     #  path: "/path/to/truststore.jks"
     #}
     #]
-
-    # Case template created in TheHive for MISP events
-    caseTemplate = "<Template_Name_goes_here>"
 
     # HTTP client configuration, more details in section 8
     # ws {
