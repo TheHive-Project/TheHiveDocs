@@ -65,7 +65,7 @@ RPM packages are published on a Bintray repository. All packages are signed usin
 
 
 <a name="rpm-download"></a>
-### 1.Download and install
+### 1. Download and install
 
 First install the RPM release package:
 ```bash
@@ -80,12 +80,12 @@ yum install thehive
 ```
 
 <a name="rpm-first-start"></a>
-### 2.First start
+### 2. First start
 Follow the [first start](#start) section of the binary installation method above to start using TheHive.
 
 
 <a name="rpm-pre-release-versions"></a>
-### 3.Pre-release versions
+### 3. Pre-release versions
 The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
 
 <a name="deb"></a>
@@ -95,7 +95,7 @@ Debian packages are published on a Bintray repository. All packages are signed u
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
 <a name="deb-download"></a>
-### 1.Download and install
+### 1. Download and install
 
 To install the x Debian package, use the following commands:
 ```bash
@@ -112,11 +112,11 @@ curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC
 ```
 
 <a name="deb-first-start"></a>
-### 2.First start
+### 2. First start
 Follow the [first start](#start) section of the binary installation method above to start using TheHive.
 
 <a name="deb-pre-release-versions"></a>
-### 3.Pre-release versions
+### 3. Pre-release versions
 If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
 ```bash
 echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
