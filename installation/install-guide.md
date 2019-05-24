@@ -325,7 +325,7 @@ To install the requirements and build TheHive from sources, please follow the in
 <a name="build-pre-cent-rh"></a>
 #### 1.1 Prepare CentOS/RHEL
 
-*Packages*
+**Packages**
 
 ```bash
 sudo yum -y install git bzip2
