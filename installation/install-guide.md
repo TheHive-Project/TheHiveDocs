@@ -1,19 +1,53 @@
 # Installation Guide
 Before installing TheHive, you need to choose the installation option which suits your environment as described below. Once you have a chosen an option and installed the software, read the [Configuration Guide](../admin/configuration.md). We also advise reading the [Administration Guide](../admin/admin-guide.md).
 
-## Table of Contents
+
+# Table of Contents
   * [Installation Options](#installation-options)
     * [RPM](#rpm)
+   		* [Download and install](#rpm-download)
+   		* [First start](#rpm-first-start)
+   		* [Pre release versions](#rpm-pre-release-versions)
     * [DEB](#deb)
-    * [Docker](#docker)
-    * [Binary](#binary)
-    * [Build it Yourself](#build-it-yourself)
-  * [Elasticsearch Installation](#elasticsearch-installation)
+    	* [Download and install](#deb-download)
+   		* [First start](#deb-first-start)
+    	* [Pre release versions](#deb-pre-release-versions)
+    * [Docker](#dkr)
+    	* [Use Docker-compose](#dkr-compose)
+    	* [Manual Installation of Elasticsearch](#dkr-elastic)
+    	* [Customize the Docker Image](#dkr-customize)
+    	* [First start](#dkr-start)
+    	* [Pre release versions](#dkr-pre-release)
+    * [Binary (Ubuntu)](#bin)
+    	* [Minimal Ubuntu Installation](#bin-min)
+    	* [Install Java Virtual Machine](#bin-jvm)
+    	* [Install Elasticsearch](#bin-elasstic)
+    	* [Install TheHive](#bin-hive)
+    	* [First start](#bin-start)
+    	* [Configuration](#bin-conf)
+    * [Build it Yourself](#build)
+    	* [Pre-requisites](#build-pre)
+    		* [Prepare CentOS/RHEL](#build-pre-cent-rh)
+    		* [Prepare Ubuntu](#build-pre-ub)
+    	* [Install TheHive](#build-hive)
+    	* [First start](#build-start)
+    	* [Build the Front-end Only](#build-front)
+  * [First start](#start)
+  	* [Check permissions](#start-perm)
+  	* [Generate secret key](#start-key)
+  	* [Missing admin account](#start-oops)
+  * [Update](#update)
+  * [Elasticsearch Installation](#elastic)
     * [System Package](#system-package)
-    * [Start the Service](#start-the-service)
-    * [Elasticsearch inside a Docker](#elasticsearch-inside-a-docker)
+    	* [Debian, Ubuntu](#system-package-deb-ub)
+    	* [CentOS, RedHat, OpenSuSE](#system-package-cent-rh-suse)
+    * [Configuration](#elastic-conf)
+    * [Start the Service](#elastic-start)
+    * [Elasticsearch inside a Docker](#elastic-dkr)
 
-## Installation Options
+
+<a name="installation-options"></a>
+# Installation Options
 TheHive is available as:
 
 - an [RPM package](#rpm)
@@ -21,12 +55,17 @@ TheHive is available as:
 - a [Docker image](#docker)
 - a [binary package](#binary)
 
-In addition, TheHive can be also be [built from the source code](#build-it-yourself).
+In addition, TheHive can be also be [built from the source code](#build).
 
-### RPM
+<a name="rpm"></a>
+## RPM
 RPM packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
+
+
+<a name="rpm-download"></a>
+### 1. Download and install
 
 First install the RPM release package:
 ```bash
@@ -40,15 +79,23 @@ Then you will able to install the package using `yum`:
 yum install thehive
 ```
 
-Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+<a name="rpm-first-start"></a>
+### 2. First start
+Follow the [first start](#start) section of the binary installation method above to start using TheHive.
 
-#### Pre-release versions
+
+<a name="rpm-pre-release-versions"></a>
+### 3. Pre-release versions
 The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
 
-### DEB
+<a name="deb"></a>
+## DEB
 Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
+
+<a name="deb-download"></a>
+### 1. Download and install
 
 To install the x Debian package, use the following commands:
 ```bash
@@ -60,22 +107,29 @@ sudo apt-get install thehive
 
 Some environments may block access to the `pgp.mit.edu` key server. As a result, the command `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C` will fail. In that case, you can run the following command instead:
 
-`curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -`
+```bash
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+```
 
-Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+<a name="deb-first-start"></a>
+### 2. First start
+Follow the [first start](#start) section of the binary installation method above to start using TheHive.
 
-#### Pre-release versions
+<a name="deb-pre-release-versions"></a>
+### 3. Pre-release versions
 If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
 ```bash
 echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 ```
 
-### Docker
+<a name="dkr"></a>
+## Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
 
-TheHive requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
+TheHive requires [Elasticsearch](#elastic-dkr) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
 
-#### Use Docker-compose
+<a name="dkr-compose"></a>
+### Use Docker-compose
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
 
 The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml)
@@ -124,7 +178,7 @@ volumes:
 ```
 
 To take effect, be sure that:
-- '/path/to/application.conf' is readable for the user who runs the docker daemon (typically 644)
+- `/path/to/application.conf` is readable for the user who runs the docker daemon (typically 644)
 - you specified `command: --no-config` in your `docker-compose.yml` file
 
 You should define where the data (i.e. the Elasticsearch database) will be located on your operating system by adding the following lines in the `elasticsearch` section of your docker-compose file:
@@ -135,7 +189,8 @@ volumes:
 
 Running ElasticSearch in production mode requires a minimum `vm.max_map_count` of 262144. [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) provides instructions on how to query and change this value.
 
-#### Manual Installation of Elasticsearch
+<a name="dkr-elastic"></a>
+### Manual Installation of Elasticsearch
 Elasticsearch can be installed on the same server as TheHive or on a different one. You can then configure TheHive according to the
 [documentation](../admin/admin-guide.md) and run TheHive docker as follow:
 
@@ -145,7 +200,8 @@ docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.c
 
 You can add the `--publish` docker option to expose TheHive HTTP service.
 
-#### Customize the Docker Image
+<a name="dkr-customize"></a>
+### Customize the Docker Image
 By default, the TheHive Docker image has minimal configuration:
  - choose a random secret (`play.http.secret.key`)
  - search for the Elasticsearch instance (host named `elasticsearch`) and add it to configuration
@@ -174,18 +230,22 @@ The image accepts more options:
 | `--cortex-hostname <host>` | Resolve this hostname to find the Cortex instance |
 | `--cortex-key <key>` | Define Cortex key |
 
-**Note**: please remember that you must **[install and configure Elasticsearch](#elasticsearch-installation)**.
+**Note**: please remember that you must **[install and configure Elasticsearch](#elastic)**.
 
-#### What to Do Next?
-Once the Docker image is up and running, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+<a name="dkr-start"></a>
+### First start
+Follow the [first start](#start) section of the binary installation method above to start using TheHive.
 
-#### Pre-release Versions
+<a name="dkr-pre-release"></a>
+### Pre-release Versions
 If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/thehive:version-RCx`. For example `thehiveproject/thehive:3.1.0-RC1`.
 
-### Binary
+<a name="bin"></a>
+## Binary (Ubuntu)
 The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 16.04 LTS**.
 
-#### 1. Minimal Ubuntu Installation
+<a name="bin-min"></a>
+### 1. Minimal Ubuntu Installation
 Install a minimal Ubuntu 16.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
@@ -197,11 +257,11 @@ Make sure your system is up-to-date:
 sudo apt-get update
 sudo apt-get upgrade
 ```
-
-#### 2. Install a Java Virtual Machine
+<a name="bin-jvm"></a>
+### 2. Install a Java Virtual Machine
 You can install either Oracle Java or OpenJDK.
 
-##### 2.1. Oracle Java
+#### 2.1 Oracle Java
 ```bash
 echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
@@ -209,7 +269,7 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
-##### 2.2 OpenJDK
+#### 2.2 OpenJDK
 ```bash
 sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update
@@ -217,10 +277,12 @@ sudo apt-get install openjdk-8-jre-headless
 
 ```
 
-#### 3. Install Elasticsearch
-To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
+<a name="bin-elasstic"></a>
+### 3. Install Elasticsearch
+To install Elasticsearch, please read the [Elasticsearch Installation](#elastic) section below.
 
-#### 4. Install TheHive
+<a name="bin-hive"></a>
+### 4. Install TheHive
 Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/binary/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/binary/thehive-latest.zip).
 
 Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
@@ -234,7 +296,155 @@ ln -s thehive-x.x.x thehive
 
 **Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://dl.bintray.com/thehive-project/binary/thehive-version-RCx.zip`. For example `https://dl.bintray.com/thehive-project/binary/thehive-3.1.0-RC1.zip`.
 
-#### 5. First start
+<a name="bin-start"></a>
+### 5. First start
+To start TheHive, please read the [First start](#start) section below.
+
+<a name="bin-conf"></a>
+### 6. Configuration
+To configure TheHive, read the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
+<a name="build"></a>
+## Build it Yourself
+The following section contains a step-by-step guide to build TheHive from its sources.
+
+<a name="build-pre"></a>
+### 1. Pre-requisites
+The following software are required to download and build TheHive:
+
+* [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
+* git: use the system package or [download it](http://www.git-scm.com/downloads)
+* [Node.js](https://nodejs.org/en/download/) with its package manager (NPM)
+* Grunt: after installing Node.js, run `sudo npm install -g grunt-cli`
+* Bower: after installing Node.js, run `sudo npm install -g bower`
+* [Elasticsearch 5.6](https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-9)
+
+
+To install the requirements and build TheHive from sources, please follow the instructions below depending on your operating system.
+
+<a name="build-pre-cent-rh"></a>
+#### 1.1 Prepare CentOS/RHEL
+
+**Packages**
+
+```bash
+sudo yum -y install git bzip2
+```
+
+**Installation of OpenJDK**
+
+```bash
+sudo yum -y install java-1.8.0-openjdk-devel
+```
+
+**Installation of Node.js**
+
+Install the EPEL repository. You should have the *extras* repository enabled, then:
+
+```bash
+sudo yum -y install epel-release
+```
+
+Then, you can install Node.js, Grunt, and Bower:
+
+```bash
+sudo yum -y install nodejs
+sudo npm install -g grunt-cli bower
+```
+
+**Installation of Elasticsearch**
+
+To install Elasticsearch, please read the [Elasticsearch Installation](#elastic) section below.
+
+<a name="build-pre-ub"></a>
+#### 1.2 Prepare Ubuntu
+
+**Packages**
+
+```bash
+sudo apt-get install git wget
+```
+
+**Installation of Oracle JDK**
+
+```bash
+echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+```
+
+**Installation of Node.js, Grunt and Bower**
+
+```bash
+sudo apt-get install wget
+wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash -
+sudo apt-get install nodejs
+sudo npm install -g grunt-cli bower
+```
+
+**Installation of Elasticsearch**
+
+To install Elasticsearch, please read the [Elasticsearch Installation](#elastic) section below.
+
+<a name="build-hive"></a>
+### 2. Install TheHive
+After preparation download and build TheHive.
+
+**Download The Source**
+
+```
+git clone https://github.com/TheHive-Project/TheHive.git
+```
+
+**Build the Project**
+
+```
+cd TheHive
+./sbt clean stage
+```
+
+This operation may take some time to complete as it will download all dependencies  then build the back-end.
+This command cleans previous build files and creates an autonomous package in the `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), configuration files (`/conf`) and startup scripts (`/bin`).
+
+Binaries are built and stored in `TheHive/target/universal/stage/`. You can install them in `/opt/thehive` for example.
+
+```
+sudo cp -r TheHive/target/universal/stage /opt/thehive
+```
+
+Configure TheHive, read the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
+<a name="build-start"></a>
+### 3. First start
+Follow the [first start](#start) section of the binary installation method above to start using TheHive.
+
+<a name="build-front"></a>
+### 4. Build the Front-end Only
+
+Building the back-end builds also the front-end, so you don't need to build it separately. This section is useful only for troubleshooting or for installing the front-end on a reverse proxy.
+
+Go to the front-end directory:
+```
+cd TheHive/ui
+```
+
+Install Node.js libraries, which are required by this step, bower libraries (JavaScript libraries downloaded by the browser). Then
+build the front-end :
+```
+npm install
+bower install
+grunt build
+```
+
+This step generates static files (HTML, JavaScript and related resources) in  the `dist` directory. They can be readily imported on a HTTP server.
+
+
+<a name="start"></a>
+# First start
+
+<a name="start-perm"></a>
+## Check permissions
 It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
 
 If you'd rather start the application as a service, use the following commands:
@@ -250,6 +460,8 @@ sudo systemctl enable thehive
 sudo service thehive start
 ```
 
+<a name="start-key"></a>
+## Generate secret key
 The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used
 to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
 You can generate the minimal configuration with the following commands (they assume that you have created a
@@ -289,6 +501,10 @@ Once created, you should be redirected to the login page.
 
 ![](../images/thehive-login_page.png)
 
+Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
+<a name="start-oops"></a>
+## Missing admin account
 **Warning**: at this stage, if you missed the creation of the admin account, you will not be able to do it unless you
 delete TheHive's index from Elasticsearch. In the case you made a mistake, first find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
 
@@ -312,7 +528,8 @@ $ curl -X DELETE http://127.0.0.1:9200/the_hive_13
 
 Then reload the page or restart TheHive.
 
-#### 6. Update
+<a name="update"></a>
+# Update
 To update TheHive from binaries, just stop the service, download the latest package, rebuild the link `/opt/thehive` and
 restart the service.
 
@@ -326,162 +543,17 @@ chown -R thehive:thehive /opt/thehive /opt/thehive-x.x.x
 service thehive start
 ```
 
-#### 7. Configuration
-To configure TheHive, read the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
-### Build it Yourself
-The following section contains a step-by-step guide to build TheHive from its sources.
-
-#### 1. Pre-requisites
-The following software are required to download and build TheHive:
-
-* [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
-* git: use the system package or [download it](http://www.git-scm.com/downloads)
-* [Node.js](https://nodejs.org/en/download/) with its package manager (NPM)
-* Grunt: after installing Node.js, run `sudo npm install -g grunt-cli`
-* Bower: after installing Node.js, run `sudo npm install -g bower`
-* [Elasticsearch 5.6](https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-9)
-
-##### 2. Build
-To install the requirements and build TheHive from sources, please follow the instructions below depending on your operating system.
-
-###### 2.1. CentOS/RHEL
-
-**Packages**
-
-```bash
-sudo yum -y install git bzip2
-```
-
-**Installation of OpenJDK**
-
-```bash
-sudo yum -y install java-1.8.0-openjdk-devel
-```
-
-**Installation of Node.js**
-
-Install the EPEL repository. You should have the *extras* repository enabled, then:
-
-```bash
-sudo yum -y install epel-release
-```
-
-Then, you can install Node.js, Grunt, and Bower:
-
-```bash
-sudo yum -y install nodejs
-sudo npm install -g grunt-cli bower
-```
-
-**Installation of Elasticsearch**
-
-To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
-
-###### 2.2. Ubuntu
-
-**Packages**
-
-```bash
-sudo apt-get install git wget
-```
-
-**Installation of Oracle JDK**
-
-```bash
-echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-```
-
-**Installation of Node.js, Grunt and Bower**
-
-```bash
-sudo apt-get install wget
-wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash -
-sudo apt-get install nodejs
-sudo npm install -g grunt-cli bower
-```
-
-**Installation of Elasticsearch**
-
-To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
-
-###### 2.3. TheHive
-**Download The Source**
-
-```
-git clone https://github.com/TheHive-Project/TheHive.git
-```
-
-**Build the Project**
-
-```
-cd TheHive
-./sbt clean stage
-```
-
-This operation may take some time to complete as it will download all dependencies  then build the back-end.
-This command cleans previous build files and creates an autonomous package in the `target/universal/stage` directory. This packages contains TheHive binaries with required libraries (`/lib`), configuration files (`/conf`) and startup scripts (`/bin`).
-
-Binaries are built and stored in `TheHive/target/universal/stage/`. You can install them in `/opt/thehive` for example.
-
-```
-sudo cp -r TheHive/target/universal/stage /opt/thehive
-```
-
-Configure TheHive, read the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
-
-### 2.4 Configure and Start Elasticsearch
-
-Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
-
-```
-network.host: 127.0.0.1
-script.inline: true
-cluster.name: hive
-thread_pool.index.queue_size: 100000
-thread_pool.search.queue_size: 100000
-thread_pool.bulk.queue_size: 1000
-```
-
-Start the service:
-
-```
-service elasticsearch restart
-```
-
-##### 3. First start
-Follow the [first start](#4-first-start) section of the binary installation method above to start using TheHive.
-
-##### 4. Build the Front-end Only
-
-Building the back-end builds also the front-end, so you don't need to build it separately. This section is useful only for troubleshooting or for installing the front-end on a reverse proxy.
-
-Go to the front-end directory:
-```
-cd TheHive/ui
-```
-
-Install Node.js libraries, which are required by this step, bower libraries (JavaScript libraries downloaded by the browser). Then
-build the front-end :
-```
-npm install
-bower install
-grunt build
-```
-
-This step generates static files (HTML, JavaScript and related resources) in  the `dist` directory. They can be readily imported on a HTTP server.
-
-
-## Elasticsearch Installation
+<a name="elastic"></a>
+# Elasticsearch Installation
 If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. Version 5.X must be used. From version 6, Elasticsearch drops [mapping type](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/removal-of-types.html#removal-of-types).
 
-### System Package
+<a name="system-package"></a>
+## System Package
 Install the Elasticsearch package provided by Elastic
 
-#### Debian, Ubuntu
+<a name="system-package-deb-ub"></a>
+### Debian, Ubuntu
 ```
 # PGP key installation
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
@@ -501,7 +573,8 @@ sudo apt update && sudo apt install elasticsearch
 
 The Debian package does not start up the service by default,  to prevent the instance from accidentally joining a cluster, without being configured appropriately.
 
-#### CentOS, RedHat, OpenSuSE
+<a name="system-package-cent-rh-suse"></a>
+### CentOS, RedHat, OpenSuSE
 ```
 # PGP key installation
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -534,9 +607,10 @@ sudo zypper install elasticsearch
 ```
 
 If you prefer using Elasticsearch inside a docker, see
-[Elasticsearch inside a Docker](#elasticsearch-inside-a-docker).
+[Elasticsearch inside a Docker](#elastic-dkr).
 
-#### Configuration
+<a name="elastic-conf"></a>
+## Configuration
 It is **highly recommended** to avoid exposing this service to an untrusted zone.
 
 If Elasticsearch and TheHive run on the same host (and not in a docker), edit `/etc/elasticsearch/elasticsearch.yml` and
@@ -554,8 +628,8 @@ thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
 thread_pool.bulk.queue_size: 100000
 ```
-
-### Start the Service
+<a name="elastic-start"></a>
+## Start the Service
 Now that Elasticsearch is configured, start it as a service and check whether it's running:
 ```
 sudo systemctl enable elasticsearch.service
@@ -570,7 +644,8 @@ sudo journalctl -u elasticsearch.service
 
 Note that by default, the database is stored in `/var/lib/elasticsearch` and the logs in `/var/log/elasticsearch`
 
-### Elasticsearch inside a Docker
+<a name="elastic-dkr"></a>
+## Elasticsearch inside a Docker
 You can also start Elasticsearch inside a docker. Use the following command and do not forget to specify the absolute path for persistent data on your host :
 
 ```
