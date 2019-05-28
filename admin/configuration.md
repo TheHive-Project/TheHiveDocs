@@ -640,13 +640,23 @@ As HTTPS is enabled, HTTP can be disabled by adding `http.port=disabled` in conf
 
 To import your certificate in the keystore, depending on your situation, you can follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
 
+You can also use a PKCS12 certificate:
+```
+    https.port: 9443
+    play.server.https.keyStore {
+      path: "/path/to/certificate.p12"
+      type: "pkcs12"
+      password: "password_of_keystore"
+    }
+```
+
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.6.x/ConfiguringHttps](https://www.playframework.com/documentation/2.6.x/ConfiguringHttps).
 
 ### 10.3 Strengthen security
-When SSL is enable (with reverse proxy or not), you can configure cookie to be "secure" (usable only with HTTPS protocol). This is done by adding `session.secure=true` in the application.conf file.
+When SSL is enable (with reverse proxy or not), you can configure cookie to be "secure" (usable only with HTTPS protocol). This is done by adding `play.http.session.secure=true` in the application.conf file.
 
 You can also enable [HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security). This header must be configured on the SSL termination component.
-If SSL is configured on TheHive, add `play.filters.https.strictTransportSecurity="max-age=31536000; includeSubDomains"` in application.conf.
+If SSL is configured on TheHive, add `play.filters.https.strictTransportSecurity="max-age=31536000; includeSubDomains"` in application.conf. To enable automatic redirection from HTTP to HTTPS add a filter to application.conf as follows: `play.filters.enabled += play.filters.https.RedirectHttpsFilter`.
 
 For NGINX, use `add_header` directive, as show above.
