@@ -2,42 +2,47 @@
 
 
 ## from 3.3.x to 3.4.0
-From version 3.4.0-RC1, TheHive supports ElasticSearch 6 (and continues to work with ElasticSearch 5.x). TheHive now uses HTTP communication (9200/tcp by default) instead of binary protocol (9300/tcp by default). If you have a firewall between TheHive and ElasticSearch, you probably need to update its rules to allow 9200/tcp.
+Starting from version 3.4.0-RC1, TheHive supports Elasticsearch 6 and will continue to work with Elasticsearch 5.x.
+                        
+TheHive 3.4.0-RC1 and later versions communicate with Elasticsearch using its HTTP service (9200/tcp by default) instead of its legacy binary protocol (9300/tcp by default). If you have a firewall between TheHive and Elasticsearch, you probably need to update its rules to change to the new port number.
+                        
+The configuration file (`application.conf`) needs some modifications to reflect the protocol change:
 
-The configuration file (application.conf) need some modification to reflect the protocol change. The setting `search.host` is replaced by `search.uri`. The general format of the URI is: `http(s)://host:port,host:port(/prefix)?querystring`. Multiple host:port combinations can be specified, separated by commas. Options can be specified using standard uri query string syntax, eg cluster.name=hive. The `search.cluster` setting  is not used any more.
+- The setting `search.host` is replaced by `search.uri`
+- The general format of the URI is: `http(s)://host:port,host:port(/prefix)?querystring`. Multiple `host:port` combinations can be specified, separated by commas. Options can be specified using a standard URI query string syntax, eg. `cluster.name=hive`.
+- The `search.cluster`setting is no longer used.
+- Authentication can be configured with the `search.user` and `search.password` settings.
 
-Authentication can be configured with the setting `search.user` and `search.password`.
-
-When SSL is enable, you can set a truststore and a keystore. The truststore contains the certificate authorities used to validate remote certificate. The keystore contain the certificate and the private key used to connect to ElasticSearch cluster. The configuration is:
+When SSL/TLS is enabled, you can set a truststore and a keystore. The truststore contains the certificate authorities used to validate remote certificates. The keystore contains the certificate and the private key used to connect to the Elasticsearch cluster. The configuration is:
 ```hocon
 search {
   keyStore {
-    path: "/path/to/keystore/file"
-    type: "JKS" # or PKCS12
-    password: "secret.password.of.keystore"
+	path: "/path/to/keystore/file"
+	type: "JKS" # or PKCS12
+	password: "secret.password.of.keystore"
   }
   trustStore {
-    path: "/path/to/truststore/file"
-    type: "JKS"
-    password: "secret.password.of.truststore"
+	path: "/path/to/truststore/file"
+	type: "JKS"
+	password: "secret.password.of.truststore"
   }
 }
 ```
 
-The ElasticSearch client also accepts the following settings:
- - circularRedirectsAllowed (true/false)
- - connectionRequestTimeout (number of seconds)
- - connectTimeout
- - contentCompressionEnabled").foreach(requestConfigBuilder.setContentCompressionEnabled)
- - search.cookieSpec (??)
- - expectContinueEnabled (true/false)
- - maxRedirects (number)
- - proxy -- not yet supported
- - proxyPreferredAuthSchemes -- not yet supported
- - redirectsEnabled (true/false)
- - relativeRedirectsAllowed (true/false)
- - socketTimeout (number of seconds)
- - targetPreferredAuthSchemes (??) 
+The Elasticsearch client also accepts the following settings:
+ - `circularRedirectsAllowed` (`true`/`false`)
+ - `connectionRequestTimeout` (number of seconds)
+ - `connectTimeout`
+ - `contentCompressionEnabled.foreach(requestConfigBuilder.setContentCompressionEnabled)`
+ - `search.cookieSpec` (??)
+ - `expectContinueEnabled` (`true`/`false`)
+ - `maxRedirects` (number)
+ - `proxy` -- not yet supported
+ - `proxyPreferredAuthSchemes` -- not yet supported
+ - `redirectsEnabled` (`true`/`false`)
+ - `relativeRedirectsAllowed` (`true`/`false`)
+ - `socketTimeout` (number of seconds)
+ - `targetPreferredAuthSchemes` (??) 
 
 The configuration items `keepalive`, `pageSize`, `nbshards` and `nbreplicas` are still valid.
 
