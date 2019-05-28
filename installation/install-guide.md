@@ -183,10 +183,10 @@ Once the Docker image is up and running, proceed to the configuration using the 
 If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/thehive:version-RCx`. For example `thehiveproject/thehive:3.1.0-RC1`.
 
 ### Binary
-The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 16.04 LTS**.
+The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 18.04 LTS**.
 
 #### 1. Minimal Ubuntu Installation
-Install a minimal Ubuntu 16.04 system with the following software:
+Install a minimal Ubuntu 18.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
 - Elasticsearch 5.x
@@ -199,21 +199,10 @@ sudo apt-get upgrade
 ```
 
 #### 2. Install a Java Virtual Machine
-You can install either Oracle Java or OpenJDK.
+You can install either Oracle Java or OpenJDK. The latter is recommended.
 
-##### 2.1. Oracle Java
 ```bash
-echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
-```
-
-##### 2.2 OpenJDK
-```bash
-sudo add-apt-repository ppa:openjdk-r/ppa
-sudo apt-get update
-sudo apt-get install openjdk-8-jre-headless
+sudo apt-get install openjdk-11-jre-headless
 
 ```
 
@@ -335,7 +324,7 @@ The following section contains a step-by-step guide to build TheHive from its so
 #### 1. Pre-requisites
 The following software are required to download and build TheHive:
 
-* [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
+* [Java Development Kit 11](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
 * git: use the system package or [download it](http://www.git-scm.com/downloads)
 * [Node.js](https://nodejs.org/en/download/) with its package manager (NPM)
 * Grunt: after installing Node.js, run `sudo npm install -g grunt-cli`
@@ -356,7 +345,7 @@ sudo yum -y install git bzip2
 **Installation of OpenJDK**
 
 ```bash
-sudo yum -y install java-1.8.0-openjdk-devel
+sudo yum -y install java-11-openjdk-devel
 ```
 
 **Installation of Node.js**
@@ -389,18 +378,15 @@ sudo apt-get install git wget
 **Installation of Oracle JDK**
 
 ```bash
-echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
-sudo apt-get update
-sudo apt-get install oracle-java8-installer
+sudo apt install openjdk-11-jdk-headless
 ```
 
 **Installation of Node.js, Grunt and Bower**
 
 ```bash
-sudo apt-get install wget
-wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash -
-sudo apt-get install nodejs
+sudo apt-get install curl
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+sudo apt-get install -y nodejs
 sudo npm install -g grunt-cli bower
 ```
 
