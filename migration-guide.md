@@ -46,6 +46,8 @@ The Elasticsearch client also accepts the following settings:
 
 The configuration items `keepalive`, `pageSize`, `nbshards` and `nbreplicas` are still valid.
 
+For practical details, you can have a look [here](admin/upgrade_to_thehive_3_4_and_es_6_x) for an example of migration of TheHive and Elasticsearch.
+
 ## From 3.0.x to 3.0.4
 
 TheHive 3.0.4 (Cerana 0.4) comes with new MISP settings to filter events that will be imported as alerts. Please refer to [MISP event filters](admin/configuration.md#73-event-filters) configuration section.
