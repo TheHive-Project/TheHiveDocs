@@ -1,4 +1,4 @@
-
+This document is related to upgrading TheHive and Elasticsearch on **Ubuntu 16.04**.
 
 ### Upgrade TheHive to version 3.4
 
