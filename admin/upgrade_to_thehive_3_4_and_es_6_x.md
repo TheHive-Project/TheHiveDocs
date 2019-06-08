@@ -72,7 +72,7 @@ Output example:
 
 
 
-You can find more information about backup and restore in the dedicated documentation. 
+You can find more information about backup and restore in the [dedicated documentation](https://github.com/TheHive-Project/TheHiveDocs/blob/master/admin/backup-restore.md). 
 
 #### Stop TheHive service
 
