@@ -1,7 +1,7 @@
 ## Training Material
 TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex and Cortex analyzers with all dependencies and ElasticSearch installed on top of Ubuntu 18.04 with Oracle JRE 8.
 
-As of this writing, the training VM includes TheHive 3.2.1, Cortex 2.1.3, TheHive4py 1.6.0, Cortex4py 2.0.1 and any available Cortex analyzer as of Jan 12, 2019.
+As of this writing, the training VM includes TheHive 3.3.1, Cortex 2.1.3, TheHive4py 1.6.0, Cortex4py 2.0.1 and any available Cortex analyzer as of Jun 22, 2019.
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
@@ -17,11 +17,11 @@ As of this writing, the training VM includes TheHive 3.2.1, Cortex 2.1.3, TheHiv
 
 You can download the VM from the following location:
 
-[https://drive.google.com/open?id=1KXL7kzH7Pc2jSL2o1m1_RwVc3FGw-ixQ](https://drive.google.com/open?id=1KXL7kzH7Pc2jSL2o1m1_RwVc3FGw-ixQ)
+[https://drive.google.com/open?id=1v_8GMdXrZnWRiW2X5zw6fXYnCjUD2DPm](https://drive.google.com/open?id=1v_8GMdXrZnWRiW2X5zw6fXYnCjUD2DPm)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`387e8a62a82d56fb6fac3f63630733afb98d9c1f4e5f17056d19bc6a82670675`
+`d0473d7208af9c7010280cbfa75d4e7d34d971b40f053fff65689d12382cd3f0`
 
 **Note**: On starting the newly imported VM from OVA file in VMware Fusion, you may encounter a message regarding an error with VMWare tools. . By clicking on the `OK` button you would be able to use the VM as expected.
 
@@ -29,13 +29,13 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 #### Previous Version
 
-The previous version of the training VM, TheHive 3.1.2, Cortex 2.1.2, TheHive4py 1.5.1, Cortex4py 2.0.1 and any available Cortex analyzer as of Oct 14, 2018 is still available at the following address:
+The previous version of the training VM, TheHive 3.2.1, Cortex 2.1.3, TheHive4py 1.6.0, Cortex4py 2.0.1 and any available Cortex analyzer as of Jan 12, 2019 is still available at the following address:
 
-[https://drive.google.com/open?id=0B3G-Due88gfQNEtPOW16Z3ZhUlU](https://drive.google.com/open?id=0B3G-Due88gfQNEtPOW16Z3ZhUlU)
+[https://drive.google.com/open?id=1KXL7kzH7Pc2jSL2o1m1_RwVc3FGw-ixQ](https://drive.google.com/open?id=1KXL7kzH7Pc2jSL2o1m1_RwVc3FGw-ixQ)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`f139cc9d5b0200b4c234b6ac85273d9c1932abf326b53e0e940712b59be6892a`
+`387e8a62a82d56fb6fac3f63630733afb98d9c1f4e5f17056d19bc6a82670675`
 
 #### Beta Version
 
