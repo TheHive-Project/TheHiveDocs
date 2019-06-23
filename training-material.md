@@ -1,7 +1,13 @@
 ## Training Material
-TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex and Cortex analyzers with all dependencies and ElasticSearch installed on top of Ubuntu 18.04 with Oracle JRE 8.
+TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex as well as Cortex analyzers and responders with all their dependencies included, and ElasticSearch. The training VM runs Ubuntu 18.04 with Oracle JRE 8.
 
-As of this writing, the training VM includes TheHive 3.3.1, Cortex 2.1.3, TheHive4py 1.6.0, Cortex4py 2.0.1 and any available Cortex analyzer as of Jun 22, 2019.
+The most recent training VM includes:
+
+- TheHive **3.3.1**
+- Cortex **2.1.3**
+- TheHive4py **1.6.0**
+- Cortex4py **2.0.1** 
+- and all Cortex analyzers and responders as of **Jun 22, 2019**.
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
@@ -29,17 +35,32 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 #### Previous Version
 
-The previous version of the training VM, TheHive 3.2.1, Cortex 2.1.3, TheHive4py 1.6.0, Cortex4py 2.0.1 and any available Cortex analyzer as of Jan 12, 2019 is still available at the following address:
+The previous version of the training VM is still available for download from the following address:
 
 [https://drive.google.com/open?id=1KXL7kzH7Pc2jSL2o1m1_RwVc3FGw-ixQ](https://drive.google.com/open?id=1KXL7kzH7Pc2jSL2o1m1_RwVc3FGw-ixQ)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
 `387e8a62a82d56fb6fac3f63630733afb98d9c1f4e5f17056d19bc6a82670675`
+ 
+This version includes the following software:
+
+- TheHive **3.2.1**
+- Cortex **2.1.3**
+- TheHive4py **1.6.0**
+- Cortex4py **2.0.1** 
+- and all available Cortex analyzers and responders as of **Jan 12, 2019**.
 
 #### Beta Version
 
-A training VM containing beta versions of TheHive (TheHive 3.4.0-RC1), Cortex (Cortex 3.0.0-RC3), TheHive4py( thehive4py 1.6.0) and Cortex4py (cortex4py 2.0.1) is also available. You can download this VM from the following location:
+We also provide a *beta* training VM containing recent if not the latest release candidates for TheHive, Cortex, TheHive4py and Cortex4py. It contains:
+- TheHive **3.4.0-RC1**
+- Cortex **3.0.0-RC3**
+- TheHive4py **1.6.0**
+- Cortex4py **2.0.1** 
+- and all available Cortex analyzers and responders as of **June 18, 2019**.
+
+You can download the *beta* training VM from the following location:
 
 [https://drive.google.com/open?id=1jZzinj87IW2cur73NDcqixa5BkrVfDCj](https://drive.google.com/open?id=1jZzinj87IW2cur73NDcqixa5BkrVfDCj)
 
