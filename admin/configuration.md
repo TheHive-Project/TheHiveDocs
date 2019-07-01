@@ -621,6 +621,7 @@ You can choose any reverse proxy to add SSL on TheHive. Below an example of NGIN
 					add_header				Strict-Transport-Security "max-age=31536000; includeSubDomains";
 					proxy_pass              http://127.0.0.1:9000/;
 					proxy_http_version      1.1;
+					proxy_set_header Connection ""; # cf. https://github.com/akka/akka/issues/19542
 			}
 	}
 ```
