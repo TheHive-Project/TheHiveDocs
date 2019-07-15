@@ -59,31 +59,31 @@ search {
 
   ### XPack SSL configuration
   # Username for XPack authentication
-  #search.username
+  #username
   # Password for XPack authentication
-  #search.password
+  #password
   # Enable SSL to connect to ElasticSearch
-  search.ssl.enabled = false
+  ssl.enabled = false
   # Path to certificate authority file
-  #search.ssl.ca
+  #ssl.ca
   # Path to certificate file
-  #search.ssl.certificate
+  #ssl.certificate
   # Path to key file
-  #search.ssl.key
+  #ssl.key
 
   ### SearchGuard configuration
   # Path to JKS file containing client certificate
-  #search.guard.keyStore.path
+  #guard.keyStore.path
   # Password of the keystore
-  #search.guard.keyStore.password
+  #guard.keyStore.password
   # Path to JKS file containing certificate authorities
-  #search.guard.trustStore.path
+  #guard.trustStore.path
   ## Password of the truststore
-  #search.guard.trustStore.password
+  #guard.trustStore.password
   # Enforce hostname verification
-  #search.guard.hostVerification
+  #guard.hostVerification
   # If hostname verification is enabled specify if hostname should be resolved
-  #search.guard.hostVerificationResolveHostname
+  #guard.hostVerificationResolveHostname
 }
 ```
 
