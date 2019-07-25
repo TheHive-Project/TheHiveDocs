@@ -54,19 +54,19 @@ This version includes the following software:
 #### Beta Version
 
 We also provide a *beta* training VM containing recent if not the latest release candidates for TheHive, Cortex, TheHive4py and Cortex4py. It contains:
-- TheHive **3.4.0-RC1**
-- Cortex **3.0.0-RC3**
+- TheHive **3.4.0-RC2**
+- Cortex **3.0.0-RC4**
 - TheHive4py **1.6.0**
 - Cortex4py **2.0.1** 
-- and all available Cortex analyzers and responders as of **June 18, 2019**.
+- and all available Cortex analyzers and responders as of **July 25, 2019**.
 
 You can download the *beta* training VM from the following location:
 
-[https://drive.google.com/open?id=1jZzinj87IW2cur73NDcqixa5BkrVfDCj](https://drive.google.com/open?id=1jZzinj87IW2cur73NDcqixa5BkrVfDCj)
+[https://drive.google.com/open?id=1y0ZHK_vrcauNFEnrD7N92xxGdbUP9TS1](https://drive.google.com/open?id=1y0ZHK_vrcauNFEnrD7N92xxGdbUP9TS1)
 
 To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
 
-`3ffa5989b768e87b2d1fd57623d8daabebba86178cf4a29066f8887d403160b3`
+`6615de7ab24b8b70b0b895aaecf88e84601f6fab4751069d3923051f3b92e282`
 
 ### Use It
 
