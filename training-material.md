@@ -13,7 +13,7 @@ The most recent training VM includes:
 
 ### TL;DR
 
-- Training VM system account : `thehive/thehive1234`
+- Training VM system account : `admin/thehive1234`
 - TheHive URL : http://IP_OF_VM:9000
 - Cortex URL : http://IP_OF_VM:9001
 - Cortex superAdmin account : `admin/thehive1234`
