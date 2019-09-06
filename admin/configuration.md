@@ -8,6 +8,8 @@ You can have a look at the [default settings](default-configuration.md).
   * [1\. Database](#1-database)
   * [2\. Datastore](#2-datastore)
   * [3\. Authentication](#3-authentication)
+    * [3\.1 LDAP/AD](#31-ldapad)
+    * [3\.2 OAuth2/OpenID Connect](#32-oauth2openid-connect)
   * [4\. Streaming (a\.k\.a The Flow)](#4-streaming-aka-the-flow)
   * [5\. Entity size limit](#5-entity-size-limit)
   * [6\. Cortex](#6-cortex)
@@ -137,59 +139,116 @@ datastore {
 
 ## 3. Authentication
 
-TheHive supports local, LDAP and Active Directory (AD) for authentication. By default, it relies on local credentials stored in Elasticsearch.
+TheHive supports local, LDAP, Active Directory (AD) or OAuth2/OpenID Connect for authentication. By default, it relies on local credentials stored in Elasticsearch.
 
 Authentication methods are stored in the `auth.provider` parameter, which is multi-valued. When a user logs in, each authentication method is tried in order until one succeeds. If no authentication method works, an error is returned and the user cannot log in.
 
-The Default values within the configuration file are:
+The default values within the configuration file are:
 ```
 auth {
-	# "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
-	# available auth types are:
-	# services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration is required.
-	# ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
-	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
-	provider = [local]
+  # "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
+  # available auth types are:
+  # services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration is required.
+  # ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
+  # ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
+  # oauth2 : use OAuth/OIDC to authenticate users. Configuration is under "auth.oauth2" and "auth.sso" keys
+  provider = [local]
 
   # By default, basic authentication is disabled. You can enable it by setting "method.basic" to true.
-  method.basic = false
+  #method.basic = true
 
-	ad {
-		# The name of the Microsoft Windows domain using the DNS format. This parameter is required.
-		#domainFQDN = "mydomain.local"
+  ad {
+    # The Windows domain name in DNS format. This parameter is required if you do not use
+    # 'serverNames' below.
+    #domainFQDN = "mydomain.local"
 
-    # Optionally you can specify the host names of the domain controllers. If not set, TheHive uses "domainFQDN".
+    # Optionally you can specify the host names of the domain controllers instead of using 'domainFQDN
+    # above. If this parameter is not set, TheHive uses 'domainFQDN'.
     #serverNames = [ad1.mydomain.local, ad2.mydomain.local]
 
-		# The Microsoft Windows domain name using the short format. This parameter is required.
-		#domainName = "MYDOMAIN"
+    # The Windows domain name using short format. This parameter is required.
+    #domainName = "MYDOMAIN"
 
-		# Use SSL to connect to the domain controller(s).
-		#useSSL = true
-	}
+    # If 'true', use SSL to connect to the domain controller.
+    #useSSL = true
+  }
 
-	ldap {
-		# LDAP server name or address. Port can be specified (host:port). This parameter is required.
-		#serverName = "ldap.mydomain.local:389"
+  ldap {
+    # The LDAP server name or address. The port can be specified using the 'host:port'
+    # syntax. This parameter is required if you don't use 'serverNames' below.
+    #serverName = "ldap.mydomain.local:389"
 
-    # If you have multiple ldap servers, use the multi-valued settings.
+    # If you have multiple LDAP servers, use the multi-valued setting 'serverNames' instead.
     #serverNames = [ldap1.mydomain.local, ldap2.mydomain.local]
 
-		# Use SSL to connect to directory server
-		#useSSL = true
+    # Account to use to bind to the LDAP server. This parameter is required.
+    #bindDN = "cn=thehive,ou=services,dc=mydomain,dc=local"
 
-		# Account to use to bind on LDAP server. This parameter is required.
-		#bindDN = "cn=thehive,ou=services,dc=mydomain,dc=local"
+    # Password of the binding account. This parameter is required.
+    #bindPW = "***secret*password***"
 
-		# Password of the binding account. This parameter is required.
-		#bindPW = "***secret*password***"
+    # Base DN to search users. This parameter is required.
+    #baseDN = "ou=users,dc=mydomain,dc=local"
 
-		# Base DN to search users. This parameter is required.
-		#baseDN = "ou=users,dc=mydomain,dc=local"
+    # Filter to search user in the directory server. Please note that {0} is replaced
+    # by the actual user name. This parameter is required.
+    #filter = "(cn={0})"
 
-		# Filter to search user {0} is replaced by user name. This parameter is required.
-		#filter = "(cn={0})"
-	}
+    # If 'true', use SSL to connect to the LDAP directory server.
+    #useSSL = true
+  }
+
+  oauth2 {
+    # URL of the authorization server
+    #clientId = "client-id"
+    #clientSecret = "client-secret"
+    #redirectUri = "https://my-thehive-instance.example/index.html#!/login"
+    #responseType = "code"
+    #grantType = "authorization_code"
+
+    # URL from where to get the access token
+    #authorizationUrl = "https://auth-site.com/OAuth/Authorize"
+    #tokenUrl = "https://auth-site.com/OAuth/Token"
+
+    # The endpoint from which to obtain user details using the OAuth token, after successful login
+    #userUrl = "https://auth-site.com/api/User"
+    #scope = "openid profile"
+  }
+
+  # Single-Sign On
+  sso {
+    # Autocreate user in database?
+    #autocreate = false
+
+    # Autoupdate its profile and roles?
+    #autoupdate = false
+
+    # Autologin user using SSO?
+    #autologin = false
+    # Attributes mappings
+    #attributes {
+    #  login = "sub"
+    #  name = "name"
+    #  groups = "groups"
+    #  #roles = "roles"
+    #}
+
+    # Name of mapping class from user resource to backend user ('simple' or 'group')
+    #mapper = group
+    # Default roles for users with no groups mapped ("read", "write", "admin")
+    #defaultRoles = []
+
+    #groups {
+    #  # URL to retreive groups (leave empty if you are using OIDC)
+    #  #url = "https://auth-site.com/api/Groups"
+    #  # Group mappings, you can have multiple roles for each group: they are merged
+    #  mappings {
+    #    admin-profile-name = ["admin"]
+    #    editor-profile-name = ["write"]
+    #    reader-profile-name = ["read"]
+    #  }
+    #}
+  }
 }
 
 # Maximum time between two requests without requesting authentication
@@ -199,6 +258,7 @@ session {
 }
 ```
 
+### 3.1. LDAP/AD
 To enable authentication using AD or LDAP, edit the `application.conf` file and supply the values for your environment. Then you need to create an account on TheHive for each AD or LDAP user in `Administration > Users` page (which can only be accessed by an administrator). This is required as TheHive needs to look up the role associated with the user and that role is stored locally by TheHive. Obviously, you don't need to supply a password as TheHive will check the credentials against the remote directory.
 
 In order to use SSL on LDAP or AD, TheHive must be able to validate remote certificates. To that end, the Java truststore must contain certificate authorities used to generate the AD and/or LDAP certificates. The Default JVM truststore contains the main official authorities but LDAP and AD certificates are probably not issued by them.
@@ -209,6 +269,65 @@ keytool -import -file /path/to/your/ca.cert -alias InternalCA -keystore /path/to
 ```
 
 Then add `-Djavax.net.ssl.trustStore=/path/to/your/truststore.jks` parameter when you start TheHive or put it in the `JAVA_OPTS` environment variable before starting TheHive.
+
+### 3.2. OAuth2/OpenID Connect
+To enable authentication using OAuth2/OpenID Connect, edit the `application.conf` file and supply the values of `auth.oauth2` according to your environment. In addition, you need to supply:
+
+- `auth.sso.attributes.login`: name of the attribute containing the OAuth2 user's login in retreived user info (mandatory)
+- `auth.sso.attributes.name`: name of the attribute containing the OAuth2 user's name in retreived user info (mandatory)
+- `auth.sso.attributes.groups`: name of the attribute containing the OAuth2 user's groups (mandatory using groups mappings)
+- `auth.sso.attributes.roles`: name of the attribute containing the OAuth2 user's roles in retreived user info (mandatory using simple mapping)
+
+##### Important notes
+
+To have the OAuth2 functionnality working, you need to provide the granted code after the `#!/login` in the URL. Thus, the redirect URI has to be:
+```
+https://my-hive-instance.com/index.html#!/login
+```
+If your identity provider doesn't support `#!` in the redirect URI, you can make a redirection using a reverse proxy. Please find bellow an example config using Apache httpd:
+```
+Redirect          "/redirect_uri"  "/index.html#!/login"
+ProxyPass         "/redirect_uri"  !
+ProxyPass         "/"              "http://localhost:9000/"
+ProxyPassReverse  "/"              "http://localhost:9000/"
+```
+
+In addition, you need to configure your token endpoint (`auth.oauth2.tokenUrl`) to accept requests without HTTP basic auth because TheHive doesn't support it. The request performed by TheHive to this endpoint will follow this format:
+```
+##Header
+"Content-type":"application/x-www-form-urlencoded"
+##Body
+"grant_type":"authorization_code"
+"client_id":"thehive"
+"client_secret":"thehivesecret"
+"redirect_uri":"https://my-hive-instance.com/index.html"
+"code":"returned_code_in_the_url_by_the_hive"
+```
+
+#### 3.2.1. Roles mappings
+You can choose a roles mappings with the `auth.sso.mapper` parameter. The available options are `simple` and `group`:
+
+- Using simple mapping, we assume that the user info retreived from `auth.oauth2.userUrl` contains the roles associated to the OAuth2 user. They can be: `read`, `write` or `admin`.
+- Using groups mappings, we assume the retreived user info contains groups that have to be associated to internal roles. In that case, you have to define mapppings in `auth.sso.groups.mappings`. If a user has multiple groups, mapped roles are merged. If you need to retreive groups from another endpoint that the one used for user info, you can provide it in `auth.sso.groups.url`.
+
+Finally, you can setup default roles associated with user with no roles/groups retreived, using the `auth.sso.defaultRoles`.
+
+#### 3.2.2. User autocreation, autoupdate and autologin
+The main advantage of OAuth2/OpenID Connect authentication is you won't need to create an account on TheHive for each OAuth2 user if you set the config parameter `auth.sso.autocreate` to `true`. However, by default, OAuth2 users won't be updated on SSO login unless you set `auth.sso.autoupdate` to `true`. If you set this last parameter, roles and name will be fetched from retrieved user info and will be updated in local database on each login of the user.
+
+With `auth.sso.autologin` set to `true`, each user connecting to TheHive will automatically be redirected to `auth.oauth2.authorizationUrl`. The only way to authenticate in TheHive using a local user will be either:
+
+- Connecting to TheHive using `https://my-hive-instance.com/index.html#!/login?code=BAD_CODE`. You will get an `Authentication Failure` but will then be able to authenticate.
+- Connecting to TheHive using a real OAuth2 account, then disconnect. On disconnection, you won't be redirected to authorization URL.
+
+#### 3.2.3. Debugging
+To debug the OAuth2 feature, you can uncomment the following lines in `/etc/thehive/logback.xml`:
+```
+<!-- Uncomment the next lines to log debug information for OAuth/OIDC login -->
+<logger name="org.elastic4play.services.auth" level="DEBUG" />
+<logger name="services.OAuth2Srv" level="DEBUG" />
+<logger name="services.mappers" level="DEBUG" />
+```
 
 ## 4. Streaming (a.k.a The Flow)
 The user interface is automatically updated when data is changed in the back-end. To do this, the back-end sends events to all the connected front-ends. The mechanism used to notify the front-end is called long polling and its settings are:
