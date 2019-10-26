@@ -1,9 +1,10 @@
 # Additional Resources
-The following page lists additional resources that should help you get more acquainted with TheHive, Cortex & our other products.
+The following page lists additional resources that should help you get more acquainted with TheHive, Cortex & other tools.
 
 ## Table of Contents
   * [Presentations](#presentations)
   * [Workshops and Trainings](#workshops-and-trainings)
+    * [Hack\.lu 2019](#hacklu-2019)
     * [Botconf 2018](#botconf-2018)
   * [User Contributions](#user-contributions)
 
@@ -21,6 +22,11 @@ We frequently organize workshops and trainings, often with our friends from the 
 If you'd like to attend a future workshop or training, please follow us on [https://twitter.com/thehive_project](Twitter) or regularly visit our [blog](https://blog.thehive-project.org). 
 
 However, if you'd like to do the training at your own pace, you can find below the materials used for some of the workshops and trainings we gave in the past. Please note that you might have some difficulties completing the case studies without access to the commercial analyzers highlighted above.
+
+### Hack.lu 2019
+We gave a workshop during [Hack.lu](https://2019.hack.lu) on Thu Oct 24, 2019. We prepared a MISP and Cortex instance on the cloud as well as a custom built training VM containing TheHive 3.4.0 which took advantage of those cloud instances.The VM was shared with the attendees during the workshop but will not be posted online. Indeed, the above-mentioned cloud instances were turned off after the workshop.
+
+That being said, you can still get a look at the [slides](TLP-WHITE-Hack_lu2019-TheHive_Cortex_Workshop-v1.pdf) we used to set the stage for the workshop. They contain some valuable information if you are considering installing TheHive, Cortex & MISP or just beginning with the trio.
 
 ### Botconf 2018
 We gave a workshop during [Botconf](https://www.botconf.eu/) on Tue Dec 4, 2018. If you'd like to give it a try on your own, you will need:
