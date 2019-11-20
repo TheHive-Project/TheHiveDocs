@@ -43,7 +43,7 @@ parameter (cf. [Docker documentation](https://docs.docker.com/engine/tutorials/d
 Create an Elasticsearch snapshot point named *the_hive_backup* with the following command (set the same path in the location setting as the one set in the configuration file):
 
 ```
-$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
+$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -H 'Content-Type: application/json' -d '{
     "type": "fs",
     "settings": {
         "location": "/absolute/path/to/backup/directory",
@@ -66,7 +66,7 @@ Since, everything is fine to backup and restore data.
 Create a backup named *snapshot_1* of all your data by executing the following command :
 
 ```
-$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true&pretty' -d '{
+$ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true&pretty' -H 'Content-Type: application/json' -d '{
   "indices": "<INDEX>"
 }'
 ```
