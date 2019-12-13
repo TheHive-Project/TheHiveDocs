@@ -388,6 +388,8 @@ misp {
 
 Once the configuration file has been edited, restart TheHive. Every new import of a MISP event will generate a case using to the *MISP-EVENT* template by default. The template can be overridden though during the event import.
 
+MISP events will only be imported by TheHive if they have at least one attribute and were published.
+
 ### 7.3 Event Filters
 When you first connect TheHive to a MISP instance, you can be overwhelmed by the number of alerts that will be generated, particularly if the MISP instance contains a lot of events. Indeed, every event, even those that date back to the beginning of the Internet, will generate an alert. To avoid alert fatigue, and starting from TheHive 3.0.4 (Cerana 0.4), you can exclude MISP events using different filters:
 
