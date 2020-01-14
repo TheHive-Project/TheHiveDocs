@@ -109,7 +109,10 @@ HTTP can disabled by adding line `http.port=disabled`. Please read the [relevant
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
 
 ### Can I connect TheHive to an AWS ElasticSearch service?
-AWS Elasticsearch service only supports HTTP transport protocol. It does not support the binary protocol which the Java client used by TheHive relies on to communicate with ElasticSearch. As a result, it is not possible to setup TheHive with AWS Elasticsearch service. More information is available at the following URLs:
+For TheHive versions >= 3.4.0, yes! A small amount of additional plumbing is required - see [this blog post](https://robertheaton.com/2020/01/14/how-to-set-up-the-hive-on-aws-elasticsearch/) for a guide.
+
+For TheHive versions < 3.4.0, you can't use AWS ElasticSearch. This is because AWS Elasticsearch service only supports HTTP transport protocol. It does not support the binary protocol which the Java client used by previous versions of TheHive relies on to communicate with ElasticSearch. As a result, it is not possible to setup previous versions of TheHive with AWS Elasticsearch service. More information is available at the following URLs:
+
 - [http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/aes-limits.html](https://www.elastic.co/guide/en/elasticsearch/reference/5.1/modules-network.html#_transport_and_http_protocols )
 
 > “TCP Transport	: The service supports HTTP on port 80, but does not support TCP transport”
