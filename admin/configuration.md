@@ -751,7 +751,6 @@ You can choose any reverse proxy to add SSL on TheHive. Below an example of NGIN
 			listen 443 ssl;
 			server_name thehive.example.com;
 
-			ssl on;
 			ssl_certificate			ssl/thehive_cert.pem;
 			ssl_certificate_key		ssl/thehive_key.pem;
 
