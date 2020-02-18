@@ -125,4 +125,4 @@ For TheHive versions < 3.4.0, you can't use AWS ElasticSearch. This is because A
 Elasticsearch 5.x is supported starting from TheHive 2.13.0 (Mellifera 13). Please note that all versions starting from TheHive 2.13.0 support **only** ES 5 and **do not support ES2** anymore as it is very hard to support both. All versions preceding TheHive 2.13.0 supports only ES2.
 
 ### Do you support Elasticsearch 6.x or later?
-No. Support for Elasticsearch 6.x or later is not currently planned as we are considering moving away from Elasticsearch in a future major release.
+Yes. Support for Elasticsearch 6.x has been added from TheHive 3.4.0. Elasticsearch 7.x is not supported. Note that we are considering moving away from Elasticsearch in a future major release.
