@@ -11,9 +11,10 @@
 
 ## Installation and configuration Guides
 
+This section aims to document how to get an instance of TheHive 4 up and running.
 
-- [Prepare your environment](Installation/Prepare.md)
-- [Installation](Installation/Installation.md)
+- [Prepare your environment](Installation/Prepare.md) by installing dependencies and database softwares
+- [Install TheHive](Installation/Installation.md)
 	- Using DEB package
 	- Using RPM package
 	- Using binaries
@@ -22,26 +23,7 @@
 
 ## Administration Guides
 
-- [Authentication](Administration/Authentication.md)
-	- LDAP/AD
-	- OAuth2/OpenID Connect
-	- Single Sign-On TheHive with X.509 Certificates
-- [Connectors](Administration/Connectors.md) 
-	- Connect TheHive to one or more Cortex instances
-	- Connect TheHive to one or more MISP instances
-- [HTTPS](Administration/HTTPS.md)
-	- HTTPS using a reverse proxy
-	- HTTPS without reverse proxy
-	- Strenghten security
-- [Migration](Administration/Migration.md)
-	- Migrate your data from TheHive 3.4.x to TheHive 4.0-RC1
-- [Backup & Restore](Administration/Backup_Restore.md)
-	- Backup and Restore Cassandra database
-	- Backup and Restore Hadoop distributed FileSystem
-- [Clustering TheHive](Administration/Clustering.md)
-	- Cassandra database advanced configuration
-	- Using Hadoop filesystem
-	- Insert TheHive in a cluster
+[Administration guides](Administration/README.md) can help you leverage or enable more advanced features, or setup a more complex architecture. 
 
 ## User guides
 
