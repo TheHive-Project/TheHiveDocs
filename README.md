@@ -9,7 +9,12 @@ Additionally and starting from TheHive 3.1.0, you can actively respond to threat
 
 Last but not least, TheHive is highly integrated with [MISP](http://misp-project.org/), the *de facto* standard of threat sharing, as it can pull events from several MISP instances and export investigation cases back to one or several ones. It also has additional features such as MISP extended events and health checking.
 
-**Note:**  This is TheHive's documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/TheHive/](https://github.com/TheHive-Project/TheHive/).
+**Notes:**  
+
+- You are looking for documentation related to TheHive 4.0  ? Please follow [ the 🐝](TheHive4/README.md).
+- This is TheHive's documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/TheHive/](https://github.com/TheHive-Project/TheHive/).
+
+
 
 ## Hardware Pre-requisites
 
