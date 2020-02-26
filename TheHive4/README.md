@@ -11,14 +11,10 @@
 
 ## Installation and configuration Guides
 
-This section aims to document how to get an instance of TheHive 4 up and running.
+This section is a step-by-step [installation and configuration guide](Instatallation/README.md) aiming at getting an instance of TheHive 4 up and running. This guide contains everything to:
 
-- [Prepare your environment](Installation/Prepare.md) by installing dependencies and database softwares
-- [Install TheHive](Installation/Installation.md)
-	- Using DEB package
-	- Using RPM package
-	- Using binaries
-- [Base configuration](Installation/Base_configuration.md)
+- [Prepare your environment](Installation/README.md#) by installing and configuring dependencies and database softwares
+- [Get and install TheHive binaries](Installation/Packages_binaries.md)
 
 
 ## Administration Guides

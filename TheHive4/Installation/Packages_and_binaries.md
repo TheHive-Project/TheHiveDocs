@@ -1,3 +1,5 @@
+# Packages and binaries
+
 ## Using DEB package
 
 Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
