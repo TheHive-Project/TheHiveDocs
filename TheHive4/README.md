@@ -1,5 +1,28 @@
 # TheHive 4 : Installation, administration and user guides
 
+![](files/thehive-logo.png)
+
+[![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+This is the dedicated documentation for TheHive 4. The current version released is TheHive 4.0-RC1. 
+
+
+
+---
+
+⚠️ This version - like all RCx versions - is **not recommended** for production use ⚠️
+
+---
+
+
+
+Starting from TheHive 4.0-RC1, the application stack has completely been reviewed. TheHive do not rely on Elasticsearch anymore to store its data and the backend has been rewritten to support graph database schema.
+
+TheHive is now supporting different data and files storages methods. However, even for a standalone server and for production uses, we strongly recommend: 
+
+- Using Apache Cassandra as a scalable and fault-tolerant database;
+- Using Apache Hadoop as a distributed filesystem to store files.
+
 
 
 
