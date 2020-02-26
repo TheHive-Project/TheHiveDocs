@@ -18,16 +18,13 @@ This is the dedicated documentation for TheHive 4. The current version released 
 
 Starting from TheHive 4.0-RC1, the application stack has completely been reviewed. TheHive do not rely on Elasticsearch anymore to store its data and the backend has been rewritten to support graph database schema.
 
-TheHive is now supporting different data and files storages methods. However, even for a standalone server and for production uses, we strongly recommend: 
+TheHive is now supporting different data and files storage methods. However, even for a standalone server and for production uses:
 
-- Using Apache Cassandra as a scalable and fault-tolerant database;
-- Using Apache Hadoop as a distributed filesystem to store files.
+- We strongly recommend using Apache Cassandra as a scalable and fault-tolerant database;
 
+- For files, local filesystem is a god and simple choice.
 
-
-## To read before installation
-
-We strongly recommend using Cassandra and Hadoop even for standalone production servers. This way, if you change your mind building a clustered application, this will be easy to add nodes. We do not have any migration tools between databases and filesystems.
+For cluster configuration, we strongly recommends using Apache Hadoop as a distributed filesystem to store files.
 
 
 ## Notes
