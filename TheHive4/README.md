@@ -40,7 +40,7 @@ TheHive uses ElasticSearch to store data. Both software use a Java VM. We recomm
 This section is a step-by-step [installation and configuration guide](Installation/README.md) aiming at getting an instance of TheHive 4 up and running. This guide contains everything to:
 
 - [Prepare your environment](Installation/README.md#java_virtual_machine) by installing and configuring dependencies and database softwares
-- [Get and install TheHive binaries](Installation/Packages_binaries.md)
+- [Get and install TheHive binaries](Installation/Packages_and_binaries.md)
 
 
 ## Administration Guides
