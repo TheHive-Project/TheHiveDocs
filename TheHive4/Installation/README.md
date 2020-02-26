@@ -72,6 +72,10 @@ service cassandra restart
 
 By default Cassandra listen on `7000/tcp` (inter-node), `9042/tcp` (client).
 
+#### Add nodes
+
+To add Cassandra nodes, refer the the [related administration guide](../Administration/Clustering.md).
+
 ## Choose and install attachment storage
 
 Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database. The localsystem can't be used on a cluster setup and the latter is discouraged as it has performance issue on large file.
@@ -229,6 +233,12 @@ cd /opt/hadoop
 bin/hdfs namenode -format
 ```
 
+#### Run it as a service
+
+---
+
+XXX TO BE UPDATED OR DELETED XXX
+
 - Start the namenode
 
 ```bash
@@ -237,7 +247,10 @@ cd /opt/hadoop
 sbin/start-dfs.sh
 ```
 
-You can check cluster status in [http://namenode:9870](http://namenode:9870/)
+---
+
+
+You can check cluster status in [http://thehive1:9870](http://thehive1:9870/)
 
 
 

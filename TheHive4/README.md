@@ -25,6 +25,10 @@ TheHive is now supporting different data and files storages methods. However, ev
 
 
 
+## To read before installation
+
+We strongly recommend using Cassandra and Hadoop even for standalone production servers. This way, if you change your mind building a clustered application, this will be easy to add nodes. We do not have any migration tools between databases and filesystems.
+
 
 ## Notes
 
@@ -36,7 +40,7 @@ TheHive is now supporting different data and files storages methods. However, ev
 
 This section is a step-by-step [installation and configuration guide](Instatallation/README.md) aiming at getting an instance of TheHive 4 up and running. This guide contains everything to:
 
-- [Prepare your environment](Installation/README.md#) by installing and configuring dependencies and database softwares
+- [Prepare your environment](Installation/README.md#java_virtual_machine) by installing and configuring dependencies and database softwares
 - [Get and install TheHive binaries](Installation/Packages_binaries.md)
 
 
