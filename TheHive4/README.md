@@ -36,6 +36,8 @@ We strongly recommend using Cassandra and Hadoop even for standalone production 
 
 ## Hardware Pre-requisites
 
+TheHive uses ElasticSearch to store data. Both software use a Java VM. We recommend using a virtual machine with 8vCPU, 8GB of RAM and 60 GB of disk. You can also use a physical machine with similar specifications.
+
 ## Installation and configuration Guides
 
 This section is a step-by-step [installation and configuration guide](Instatallation/README.md) aiming at getting an instance of TheHive 4 up and running. This guide contains everything to:
