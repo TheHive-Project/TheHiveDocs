@@ -240,6 +240,67 @@ sbin/start-dfs.sh
 You can check cluster status in [http://namenode:9870](http://namenode:9870/)
 
 
-## Run TheHive
+
+#### Add nodes
+
+To add Hadoop nodes, refer the the [related administration guide](../Administration/Clustering.md).
+
+
+## TheHive
+
+### Installation
+
+Choose the way or package relevant package repository for your system and installation TheHive 4 by following [this documentation](Packages_and_binaries.md). 
+
+### Configuration 
+
+#### Database
+
+To use Cassandra database, TheHive configuration file (`/etc/thehive/conf/application.conf`) has to be edited and configured:
+
+```yaml
+db {
+  janusgraph {
+    storage.backend: cql
+    storage.hostname: ["127.0.0.1"]
+    # storage.username = new_super_user
+    # storage.password = some_secure_password
+    cql.read-consistency-level: ONE
+    cql.write-consistency-level: ONE
+  }
+}
+```
+
+#### Filesystem
+
+- Local filesystem : add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
+
+```yml
+storage {
+  provider = localfs
+  localfs.directory = /opt/files/thehive
+}
+```
+
+- Hadoop filesystem
+
+```yaml
+storage {
+  provider: hdfs
+  hdfs {
+    root: "hdfs://thehive1:10000" # namenode server
+    location: "/thehive"
+    username: thehive
+  }
+}
+```
+
+
+### Run
+
+```
+service thehive start
+```
+
 Then proceed to [installation](Installation.md) of TheHive and [configure](Base_configuration.md) everything before starting.
 

@@ -25,15 +25,9 @@ This section is a step-by-step [installation and configuration guide](Instatalla
 
 ### Quick start
 
-By default, TheHive comes with a default local organisation named `thehive.local` and a default Admin user `admin@thehive.local`. The associated default password is `secret`.  You are strongly invited to update the password as soon as possible.
+After installation, follow the [quick start guide](User/Quick-start.md) to access TheHive 4 with administrative permissions and create your first organisation. 
 
-The organisation `thehive.local` is the Organisation that contains global administration users and are in charge of managing:
-
-- Organisations and users,
-- TheHive report templates, 
-- Custom Fields
-
-### Administration space
+### Use TheHive as Administrator
 
 - [Manage Organisations & Users](User/manage_orgs_users.md)
 	- Introducing Roles and Shares
@@ -42,6 +36,10 @@ The organisation `thehive.local` is the Organisation that contains global admini
 	- Link Organisations
 - [Add report templates](User/Report_templates.md)
 - [CustomFields](User/CustomFields.md)
+
+### < TBC > 
+
+
 
 
 ## REST API
