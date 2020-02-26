@@ -27,12 +27,12 @@ RPM packages are published on a our RPM repository. All packages are signed usin
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
-First setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repo.d/thehive--project.repo`: 
+First setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repo.d/thehive-project.repo`: 
 ```bash
 [thehive-project]
 enabled=1
 priority=1
-name=TheHive-Project Packages beta - noarch
+name=TheHive-Project RPM repository
 baseurl=http://rpm.thehive-project.org/beta/noarch
 gpgcheck=1
 ```

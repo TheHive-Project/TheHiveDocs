@@ -6,9 +6,9 @@ This page is a step by step installation and configuration guide to get an TheHi
 
 
 ```bash
-apt-get install -y openjdk-11-jre-headless
-echo JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/jre" >> /etc/environment
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/jre"
+apt-get install -y openjdk-8-jre-headless
+echo JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 ```
 
 
@@ -78,7 +78,9 @@ To add Cassandra nodes, refer the the [related administration guide](../Administ
 
 ## Choose and install attachment storage
 
-Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database. The localsystem can't be used on a cluster setup and the latter is discouraged as it has performance issue on large file.
+Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database. 
+
+For standalone production and test servers , we recommends using local filesystem. If you think about building a cluster with TheHive, use Hadoop filesystem.
 
 ### Option 1: Local filesystem
 
@@ -140,7 +142,7 @@ chmod 0600 ~/.ssh/authorized_keys
 - Update `.bashrc`file for `hadoop user  in `/etc/environment`. Add following lines: 
 
 ```
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export HADOOP_HOME=/opt/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin
 export PATH=$PATH:$HADOOP_HOME/sbin
@@ -159,8 +161,9 @@ export YARN_HOME=$HADOOP_HOME
 Configuration files are located in `etc/hadoop` (`/opt/hadoop/etc/hadoop`). They must be identical in all nodes. 
 
 **Notes**: 
+
+- The configuration described there is for a single node server. This node is the master node, namenode and datanode (refer to [Hadoop documentation](https://hadoop.apache.org/docs/current/) for more information). After validating this node is running successfully, refer to the [related administration guide](../Administration/Clustering.md) to add nodes;
 - Ensure you **update** the port value to something different than `9000` as it is already reserved for TheHive application service;
-- **Only if you are using a standalone server**, hostname or address can be limited to `localhost` or `127.0.0.1` for the value of `fs.defaultFS` property. Else use the hostname of your machine ; 
 
 
 - Edit the file `core-site.xml`:
@@ -237,22 +240,64 @@ bin/hdfs namenode -format
 
 ---
 
-XXX TO BE UPDATED OR DELETED XXX
+Create the `/etc/systemd/system/hadoop.service` file with the following content: 
 
-- Start the namenode
+```
+[Unit]
+Description=Hadoop
+Documentation=https://hadoop.apache.org/docs/current/index.html
+Wants=network-online.target
+After=network-online.target
 
-```bash
-su - hadoop
-cd /opt/hadoop
-sbin/start-dfs.sh
+[Service]
+WorkingDirectory=/opt/hadoop
+Type=forking
+
+User=hadoop
+Group=hadoop
+Environment=JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+Environment=HADOOP_HOME=/opt/hadoop
+Environment=YARN_HOME=/opt/hadoop
+Environment=HADOOP_COMMON_HOME=/opt/hadoop
+Environment=HADOOP_HDFS_HOME=/opt/hadoop
+Environment=HADOOP_MAPRED_HOME=/opt/hadoop
+Restart=on-failure
+
+TimeoutStartSec=2min
+
+
+ExecStart=/opt/hadoop/sbin/start-all.sh
+ExecStop=/opt/hadoop/sbin/stop-all.sh
+
+StandardOutput=null
+StandardError=null
+
+# Specifies the maximum file descriptor number that can be opened by this process
+LimitNOFILE=65536
+
+# Disable timeout logic and wait until process is stopped
+TimeoutStopSec=0
+
+# SIGTERM signal is used to stop the Java process
+KillSignal=SIGTERM
+
+# Java process is never killed
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target
 ```
 
----
+
+
+#### Start the service 
+
+```bash
+service hadoop start
+```
 
 
 You can check cluster status in [http://thehive1:9870](http://thehive1:9870/)
-
-
 
 #### Add nodes
 
@@ -265,28 +310,49 @@ To add Hadoop nodes, refer the the [related administration guide](../Administrat
 
 Choose the way or package relevant package repository for your system and installation TheHive 4 by following [this documentation](Packages_and_binaries.md). 
 
-### Configuration 
+### Configuration
 
 #### Database
 
-To use Cassandra database, TheHive configuration file (`/etc/thehive/conf/application.conf`) has to be edited and configured:
+To use Cassandra database, TheHive configuration file (`/etc/thehive/conf/application.conf`) has to be edited and updated with following lines:
 
 ```yaml
 db {
+  provider: janusgraph
   janusgraph {
-    storage.backend: cql
-    storage.hostname: ["127.0.0.1"]
-    # storage.username = new_super_user
-    # storage.password = some_secure_password
-    cql.read-consistency-level: ONE
-    cql.write-consistency-level: ONE
+    storage {
+      backend: cql
+      hostname: [
+        "127.0.0.1"
+      ] # seed node ip addresses
+
+      #username: "<cassandra_username>"       # login to connect to database (if configured in Cassandra)
+      #password: "<cassandra_passowrd"
+
+      cql {
+        cluster-name: thp       # cluster name
+        keyspace: thehive           # name of the keyspace
+        local-datacenter: dc1   # name of the datacenter where TheHive runs (relevant only on multi datacenter setup)
+        # replication-factor: 2 # number of replica
+        read-consistency-level: ONE
+        write-consistency-level: ONE
+      }
+    }
   }
 }
 ```
 
-#### Filesystem
+#### Local filesystem
 
-- Local filesystem : add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
+If you chose [Option 1: Local filesystem](#option:1_local_filesystem) to store files:
+
+- Update permission of the folder
+
+```bash
+chown -R thehive:thehive /opt/thp_data/files/thehive
+```
+
+- add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
 
 ```yml
 storage {
@@ -295,7 +361,9 @@ storage {
 }
 ```
 
-- Hadoop filesystem
+#### Hadoop
+
+If you chose [Option 2: Hadoop](#option:2_hadoop) to store files in a distrubuted filesystem, add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
 
 ```yaml
 storage {
@@ -308,12 +376,13 @@ storage {
 }
 ```
 
-
 ### Run
+
+Save configuration file and run the service:
 
 ```
 service thehive start
 ```
 
-Then proceed to [installation](Installation.md) of TheHive and [configure](Base_configuration.md) everything before starting.
+
 
