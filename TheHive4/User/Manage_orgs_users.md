@@ -39,9 +39,9 @@ Read information doesn’t require specific permission. By default, users in an 
 
 TheHive comes with default profiles but they can be updated and removed (if not used), except for “all”. New profile can be created.
 
-![list profiles](../images/admin-list-profile.png 'List of user profiles')
+![list profiles](./files/admin-list-profile.png 'List of user profiles')
 
-![create profiles](../images/admin-add-profile.png 'Create a new profile')
+![create profiles](./files/admin-add-profile.png 'Create a new profile')
 
 If it is used, a profile can’t be remove but can be updated.
 
