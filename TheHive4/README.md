@@ -41,6 +41,10 @@ This section contains step-by-step [installation and configuration guides](Insta
 
 This guides contains everything to install TheHive 4 for differents operating systems as well as with binaries archive.
 
+## Migration Guide
+
+If you want to test migration of your data from TheHive 3.4.x, follow the [migration guide](Administration/migration.md).
+
 
 ## Administration Guides
 
