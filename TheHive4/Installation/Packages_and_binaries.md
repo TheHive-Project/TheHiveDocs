@@ -19,7 +19,7 @@ sudo apt-get update
 sudo apt-get install thehive
 ```
 
-Once the package is installed, proceed to the configuration using the [Configuration Guide](Base_configuration.md). For additional configuration options, please refer to the [Administration Guide](/admin/admin-guide.md).
+Once the package is installed, proceed to the configuration using the [Configuration Guide](README.md). For additional configuration options, please refer to the [Administration Guide](/admin/admin-guide.md).
 
 ## Using RPM package
 

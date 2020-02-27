@@ -14,11 +14,11 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
 ## Cassandra database
 
-Apache Cassandra is a scalable and high available database. TheHive supports version of  **3.11.x** of Cassandra.
+Apache Cassandra is a scalable and high available database. TheHive supports version  **3.11.x** of Cassandra.
 
 ### Install from repository
 
-- Reference Apache repository
+- Add Apache repository references
 
 ```bash
 curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
@@ -71,6 +71,10 @@ service cassandra restart
 ```
 
 By default Cassandra listen on `7000/tcp` (inter-node), `9042/tcp` (client).
+
+#### Security
+
+To add security measures in Cassandra , refer the the [related administration guide](../Administration/Cassandra_security.md).
 
 #### Add nodes
 
@@ -332,7 +336,7 @@ db {
       cql {
         cluster-name: thp       # cluster name
         keyspace: thehive           # name of the keyspace
-        local-datacenter: dc1   # name of the datacenter where TheHive runs (relevant only on multi datacenter setup)
+        local-datacenter: datacenter1   # name of the datacenter where TheHive runs (relevant only on multi datacenter setup)
         # replication-factor: 2 # number of replica
         read-consistency-level: ONE
         write-consistency-level: ONE
@@ -340,6 +344,20 @@ db {
     }
   }
 }
+```
+
+**Hints** 
+
+- Check `datacenter` name used by Cassandra with the following `cqlsh` command: 
+
+```bash
+cqlsh
+cqlsh> use system;
+cqlsh:system> select data_center from local;
+
+data_center
+-------------
+datacenter1 
 ```
 
 #### Local filesystem
