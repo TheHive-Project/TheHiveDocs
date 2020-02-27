@@ -2,11 +2,10 @@
 
 
 
-- [Quick start with TheHive 4](#quick-start-with-thehive-4)
-  * [TL;DR](#tl-dr)
-  * [Intialize TheHive 4](#intialize-thehive-4)
-    + [Create an organisation](#create-an-organisation)
-    + [Create a user](#create-a-user)
+* [TL;DR](#tl-dr)
+* [Intialize TheHive 4](#intialize-thehive-4)
+  + [Create an organisation](#create-an-organisation)
+  + [Create a user](#create-a-user)
 
 
 
