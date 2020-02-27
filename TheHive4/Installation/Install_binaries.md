@@ -340,19 +340,16 @@ wget https://github.com/TheHive-Project/TheHive/blob/master/package/thehive.serv
 cp thehive.service /etc/systemd/system/thehive.service
 ```
 
-Now TheHive can be started
-
-```bash
-systemctl service 
-```
-
-Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
 
 ### Configuration
 
-#### Minimal required configuration
-`
-The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
+Following configurations are required to start TheHive successfully: 
+
+- Secret key configuration
+- Database configuration
+- File storage configuration
+
+#### Secret key configuration
 
 Setup a secret key in the `/etc/thehive/secret.conf` file by running the following command:
 
@@ -362,17 +359,11 @@ play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | hea
 _EOF_
 ```
 
-This secret key is a random string, you can generate one with the following command:
-
-```bash
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
-```
-
 #### Database
 
 To use Cassandra database, TheHive configuration file (`/etc/thehive/application.conf`) has to be edited and updated with following lines:
 
-```yaml
+```yaml 
 db {
   provider: janusgraph
   janusgraph {

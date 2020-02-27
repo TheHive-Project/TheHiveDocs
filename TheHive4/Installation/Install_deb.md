@@ -351,21 +351,15 @@ sudo apt-get install thehive4
 
 ### Configuration
 
-#### Minimal required configuration
+Following configurations are required to start TheHive successfully: 
 
-The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
+- Secret key configuration
+- Database configuration
+- File storage configuration
 
-Setup a secret key in the `/etc/thehive/conf/application.conf` file:
+#### Secret key configuration
 
-```
-play.http.secret.key:<SECRET_KEY>
-```
-
-This secret key is a random string, you can generate one with the following command:
-
-```bash
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
-```
+The secret key is automatically generated and stored in `/etc/thehive/secret.conf` by package installation script.
 
 #### Database
 
