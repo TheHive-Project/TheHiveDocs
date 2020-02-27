@@ -3,7 +3,7 @@
 
 
 - Install and configure TheHive 4 on a [Debian](Install_deb.md) like operating system;
-- Install and configure TheHive 4 on a [Redhat](Install_rpm) like operating system;
+- Install and configure TheHive 4 on a [Redhat](Install_rpm.md) like operating system;
 - Install and configure TheHive 4 from [binaries](Install_binaries.md) packages;
 
 
