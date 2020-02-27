@@ -43,7 +43,7 @@ This guides contains everything to install TheHive 4 for differents operating sy
 
 ## Migration Guide
 
-If you want to test migration of your data from TheHive 3.4.x, follow the [migration guide](Administration/migration.md).
+If you want to test migration of your data from TheHive 3.4.0+, follow the [migration guide](Administration/migration.md).
 
 
 ## Administration Guides
@@ -55,6 +55,8 @@ If you want to test migration of your data from TheHive 3.4.x, follow the [migra
 ### Quick start
 
 After installation, follow the [quick start guide](User/Quick-start.md) to access TheHive 4 with administrative permissions and create your first organisation. 
+
+
 
 ### Use TheHive as Administrator
 
