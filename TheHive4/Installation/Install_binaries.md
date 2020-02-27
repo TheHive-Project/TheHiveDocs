@@ -1,6 +1,6 @@
-# Installation Guide
+# Installation Guide on Debian-based OS
 
-This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running.
+This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using DEB packages repositories.
 
 ## Java Virtual Machine
 
@@ -16,37 +16,17 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
 Apache Cassandra is a scalable and high available database. TheHive supports version  **3.11.x** of Cassandra.
 
-### Install from repository
-
-- Add Apache repository references
-
-```bash
-curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
-echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-```
-
-- Install the package
-
-```bash
-apt update
-apt install cassandra
-```
-
-By default, data is stored in `/var/lib/cassandra`.
-
 ### Install from Apache TGZ archive
 
 Download and untgz archive from http://cassandra.apache.org/download/ in the folder of your choice.
 
 ### Configuration
 
-Configure Cassandra by editing `conf/cassandra.yaml`, or `/etc/cassandra/cassandra.yaml` with package installation 
-
-**Notes**: 
-- if data is set in another folder than the default one, change `/var/lib/cassandra` with your folder for data in the following configuration;
-- For production purpose, it is recommended that commitlogs and data be in separated physical disk. Other settings can be let as is.
+Configure Cassandra by editing `cassandra.yaml` present in your configuration folder: 
 
 ```yml
+# content from /etc/cassandra/cassandra.yaml
+
 cluster_name: 'thp'
 listen_address: 'xx.xx.xx.xx' # address for nodes
 rpc_address: 'xx.xx.xx.xx' # address for clients
@@ -62,15 +42,17 @@ saved_caches_directory: '/var/lib/cassandra/saved_caches'
 hints_directory: '/var/lib/cassandra/hints'
 ```
 
-Then, delete default data and restart the service: 
+Then start the service.
 
-```bash
-cd /var lib
-rm -rf cassandra && mkdir cassandra && chown -R cassandra:cassandra cassandra
-service cassandra restart
-```
+By default Cassandra listens on `7000/tcp` (inter-node), `9042/tcp` (client).
 
-By default Cassandra listen on `7000/tcp` (inter-node), `9042/tcp` (client).
+#### Additional configuration
+
+For additional configuration options, refer to:
+
+- [Cassandra documentation page](https://cassandra.apache.org/doc/latest/getting_started/configuring.html)
+- [Datastax documentation page](https://docs.datastax.com/en/ddac/doc/datastax_enterprise/config/configTOC.html)
+
 
 #### Security
 
@@ -323,20 +305,25 @@ TheHive4 can't be installed on the same OS than older versions.
 
 ### Installation
 
-Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
-
-`0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
-
-To install the  Debian package, use the following commands:
-
-```bash
-curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
-echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
-sudo apt-get update
-sudo apt-get install thehive
-```
+< TBD >
 
 ### Configuration
+
+#### Minimal required configuration
+
+The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
+
+Setup a secret key in the `/etc/thehive/conf/application.conf` file:
+
+```
+play.http.secret.key:<SECRET_KEY>
+```
+
+This secret key is a random string, you can generate one with the following command:
+
+```bash
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
+```
 
 #### Database
 
@@ -366,20 +353,6 @@ db {
     }
   }
 }
-```
-
-**Hints** 
-
-- Check `datacenter` name used by Cassandra with the following `cqlsh` command: 
-
-```bash
-cqlsh
-cqlsh> use system;
-cqlsh:system> select data_center from local;
-
-data_center
--------------
-datacenter1 
 ```
 
 #### Local filesystem
@@ -418,10 +391,10 @@ storage {
 
 ### Run
 
-Save configuration file and run the service:
+Save configuration file and run the program:
 
 ```
-service thehive start
+
 ```
 
 ## Advanced configuration

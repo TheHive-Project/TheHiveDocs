@@ -36,10 +36,6 @@ By default, data is stored in `/var/lib/cassandra`.
 
 ### Configuration
 
-**Notes**: 
-- if data is set in another folder than the default one, change `/var/lib/cassandra` with your folder for data in the following configuration;
-- For production purpose, it is recommended that commitlogs and data be in separated physical disk. Other settings can be let as is.
-
 Start by changing the `cluster_name` with `thp`. Run the command `sqlsh`: 
 
 ```bash
@@ -350,10 +346,26 @@ To install the  Debian package, use the following commands:
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
 echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
-sudo apt-get install thehive
+sudo apt-get install thehive4
 ```
 
 ### Configuration
+
+#### Minimal required configuration
+
+The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
+
+Setup a secret key in the `/etc/thehive/conf/application.conf` file:
+
+```
+play.http.secret.key:<SECRET_KEY>
+```
+
+This secret key is a random string, you can generate one with the following command:
+
+```bash
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
+```
 
 #### Database
 
@@ -383,20 +395,6 @@ db {
     }
   }
 }
-```
-
-**Hints** 
-
-- Check `datacenter` name used by Cassandra with the following `cqlsh` command: 
-
-```bash
-cqlsh
-cqlsh> use system;
-cqlsh:system> select data_center from local;
-
-data_center
--------------
-datacenter1 
 ```
 
 #### Local filesystem
