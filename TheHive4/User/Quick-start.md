@@ -2,6 +2,15 @@
 
 
 
+- [Quick start with TheHive 4](#quick-start-with-thehive-4)
+  * [TL;DR](#tl-dr)
+  * [Intialize TheHive 4](#intialize-thehive-4)
+    + [Create an organisation](#create-an-organisation)
+    + [Create a user](#create-a-user)
+
+
+
+
 ## TL;DR
 
 0. Default administrator account: `admin@thehive.local`/`secret`
@@ -13,7 +22,7 @@
 
 This version of TheHive comes with a big improvement: multi-tenancy and fine tuning permissions. 
 
-A default system group name "*admin*" belong to the application and is dedicated to user accounts in charge of administrating the solution. This group contains one default accont named "*admin@thehive.local*" with the password `thehive1234`.
+A default system group name "*admin*" belong to the application and is dedicated to user accounts in charge of administrating the solution. This group contains one default account named "*admin@thehive.local*" with the password `secret`.
 
 This default group cannot create and own *Cases* of any other related objects like *Tasks* or *Observables*.
 

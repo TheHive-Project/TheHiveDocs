@@ -26,54 +26,16 @@ TheHive is now supporting different data and files storage methods. However, eve
 
 For cluster configuration, we strongly recommends using Apache Hadoop as a distributed filesystem to store files.
 
-
-## Notes
-
-- The documentation is illustrated using Ubuntu 18.04 LTS as base system. 
-
 ## Hardware Pre-requisites
 
-TheHive uses ElasticSearch to store data. Both software use a Java VM. We recommend using a virtual machine with 8vCPU, 8GB of RAM and 60 GB of disk. You can also use a physical machine with similar specifications.
+~~TheHive uses ElasticSearch to store data. Both software use a Java VM. We recommend using a virtual machine with 8vCPU, 8GB of RAM and 60 GB of disk. You can also use a physical machine with similar specifications~~
 
-## Installation and configuration Guides
+## Guides
 
-This section contains step-by-step [installation and configuration guides](Installation/README.md) aiming at getting an instance of TheHive 4 up and running. 
-
-This guides contains everything to install TheHive 4 for differents operating systems as well as with binaries archive.
-
-## Migration Guide
-
-If you want to test migration of your data from TheHive 3.4.0+, follow the [migration guide](Administration/migration.md).
-
-
-## Administration Guides
-
-[Administration guides](Administration/README.md) can help you leverage or enable more advanced features, or setup a more complex architecture. 
-
-## User guides
-
-### Quick start
-
-After installation, follow the [quick start guide](User/Quick-start.md) to access TheHive 4 with administrative permissions and create your first organisation. 
-
-
-
-### Use TheHive as Administrator
-
-- [Manage Organisations & Users](User/manage_orgs_users.md)
-	- Introducing Roles and Shares
-	- Create/Update/Delete Organisations
-	- Create/Update/Delete Users
-	- Link Organisations
-- [Add report templates](User/Report_templates.md)
-- [CustomFields](User/CustomFields.md)
-
-### < TBC > 
-
-
-
-
-## REST API
+- [Installation and configuration guides](Installation/README.md) : contain step-by-step instructions to install TheHive 4 for differents operating systems as well as with binaries archive.
+- [Migration guide](Administration/migration.md): how to migrate your data from TheHive 3.4.0+
+- [Administration guides](Administration/README.md): can help you leverage or enable more advanced features, or setup a more complex architecture
+- [Quick start guide](User/Quick-start.md): get your TheHive ready to use
 
 
 ## License
