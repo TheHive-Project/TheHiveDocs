@@ -467,6 +467,10 @@ Save configuration file and run the service:
 service thehive start
 ```
 
+Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
+
+You can refer now to the [Quick-start guide](../User/Quick-start.md) to start using TheHive.
+
 ## Advanced configuration
 
 For additional configuration options, please refer to the [Administration Guide](/admin/admin-guide.md).

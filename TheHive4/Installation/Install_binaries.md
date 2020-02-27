@@ -302,18 +302,59 @@ TheHive4 can't be installed on the same OS than older versions.
 
 ---
 
-
 ### Installation
 
-< TBD >
+Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/binary/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/binary/thehive-latest.zip).
+
+Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
+
+```bash
+cd /opt
+wget https://dl.bintray.com/thehive-project/binary/thehive-latest.zip
+unzip thehive-latest.zip
+ln -s thehive-x.x.x thehive
+```
+
+#### Prepare the system
+
+It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
+
+If you'd rather start the application as a service, use the following commands:
+
+```bash
+addgroup thehive
+adduser --system thehive
+chown -R thehive:thehive /opt/thehive
+mkdir /etc/thehive
+touch /etc/thehive/application.conf
+chown root:thehive /etc/thehive
+chgrp thehive /etc/thehive/application.conf
+chmod 640 /etc/thehive/application.conf
+```
+
+Copy the systemd script  in `/etc/systemd/system/thehive.service`.
+
+```bash
+cd /tmp
+wget https://github.com/TheHive-Project/TheHive/blob/master/package/thehive.service
+cp thehive.service /etc/systemd/system/thehive.service
+```
+
+Now TheHive can be started
+
+```bash
+systemctl service 
+```
+
+Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
 
 ### Configuration
 
 #### Minimal required configuration
-
+`
 The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
 
-Setup a secret key in the `/etc/thehive/conf/application.conf` file:
+Setup a secret key in the `/etc/thehive/application.conf` file:
 
 ```
 play.http.secret.key:<SECRET_KEY>
@@ -327,7 +368,7 @@ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
 
 #### Database
 
-To use Cassandra database, TheHive configuration file (`/etc/thehive/conf/application.conf`) has to be edited and updated with following lines:
+To use Cassandra database, TheHive configuration file (`/etc/thehive/application.conf`) has to be edited and updated with following lines:
 
 ```yaml
 db {
@@ -376,7 +417,7 @@ storage {
 
 #### Hadoop
 
-If you chose [Option 2: Hadoop](#option:2_hadoop) to store files in a distrubuted filesystem, add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
+If you chose [Option 2: Hadoop](#option:2_hadoop) to store files in a distrubuted filesystem, add following lines to TheHive configuration file (`/etc/thehive/application.conf`)
 
 ```yaml
 storage {
@@ -393,9 +434,14 @@ storage {
 
 Save configuration file and run the program:
 
+```bash
+systemctl daemon-reload
+service start thehive
 ```
 
-```
+Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
+
+You can refer now to the [Quick-start guide](../User/Quick-start.md) to start using TheHive.
 
 ## Advanced configuration
 
