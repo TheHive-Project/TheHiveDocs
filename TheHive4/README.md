@@ -22,7 +22,7 @@ TheHive is now supporting different data and files storage methods. However, eve
 
 - We strongly recommend using Apache Cassandra as a scalable and fault-tolerant database;
 
-- For files, local filesystem is a god and simple choice.
+- For files, local filesystem is a good and simple choice.
 
 For cluster configuration, we strongly recommends using Apache Hadoop as a distributed filesystem to store files.
 

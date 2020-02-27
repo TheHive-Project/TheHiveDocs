@@ -1,6 +1,6 @@
-# Installation Guide
+# Installation Guide on Debian-based OS
 
-This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running.
+This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using DEB packages repositories.
 
 ## Java Virtual Machine
 
@@ -34,19 +34,30 @@ apt install cassandra
 
 By default, data is stored in `/var/lib/cassandra`.
 
-### Install from Apache TGZ archive
-
-Download and untgz archive from http://cassandra.apache.org/download/ in the folder of your choice.
-
 ### Configuration
-
-Configure Cassandra by editing `conf/cassandra.yaml`, or `/etc/cassandra/cassandra.yaml` with package installation 
 
 **Notes**: 
 - if data is set in another folder than the default one, change `/var/lib/cassandra` with your folder for data in the following configuration;
 - For production purpose, it is recommended that commitlogs and data be in separated physical disk. Other settings can be let as is.
 
+Start by changing the `cluster_name` with `thp`. Run the command `sqlsh`: 
+
+```bash
+UPDATE system.local SET cluster_name = 'thp' where key='local';
+```
+
+Then run: 
+
+```
+nodetool flush
+```
+
+Configure Cassandra by editing `/etc/cassandra/cassandra.yaml` file. 
+
+
 ```yml
+# content from /etc/cassandra/cassandra.yaml
+
 cluster_name: 'thp'
 listen_address: 'xx.xx.xx.xx' # address for nodes
 rpc_address: 'xx.xx.xx.xx' # address for clients
@@ -62,15 +73,21 @@ saved_caches_directory: '/var/lib/cassandra/saved_caches'
 hints_directory: '/var/lib/cassandra/hints'
 ```
 
-Then, delete default data and restart the service: 
+Then restart the service:
 
-```bash
-cd /var lib
-rm -rf cassandra && mkdir cassandra && chown -R cassandra:cassandra cassandra
+```
 service cassandra restart
 ```
 
-By default Cassandra listen on `7000/tcp` (inter-node), `9042/tcp` (client).
+By default Cassandra listens on `7000/tcp` (inter-node), `9042/tcp` (client).
+
+#### Additional configuration
+
+For additional configuration options, refer to:
+
+- [Cassandra documentation page](https://cassandra.apache.org/doc/latest/getting_started/configuring.html)
+- [Datastax documentation page](https://docs.datastax.com/en/ddac/doc/datastax_enterprise/config/configTOC.html)
+
 
 #### Security
 
