@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-0. Default administrator account: `admin@thehive.local`/`thehive1234`
+0. Default administrator account: `admin@thehive.local`/`secret`
 1. Login with default account
 2. Create an organisaton
 3. Create a user account
