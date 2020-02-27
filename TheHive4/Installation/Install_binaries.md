@@ -354,10 +354,12 @@ Please note that the service may take some time to start. Once it is started, yo
 `
 The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
 
-Setup a secret key in the `/etc/thehive/application.conf` file:
+Setup a secret key in the `/etc/thehive/secret.conf` file by running the following command:
 
 ```
-play.http.secret.key:<SECRET_KEY>
+cat > /etc/thehive/secret.conf << _EOF_ 
+play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+_EOF_
 ```
 
 This secret key is a random string, you can generate one with the following command:
