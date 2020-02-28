@@ -35,7 +35,7 @@ For cluster configuration, we strongly recommends using Apache Hadoop as a distr
 - [Installation and configuration guides](Installation/README.md) : contain step-by-step instructions to install TheHive 4 for differents operating systems as well as with binaries archive.
 - [Migration guide](Administration/Migration.md): how to migrate your data from TheHive 3.4.0+
 - [Administration guides](Administration/README.md): can help you leverage or enable more advanced features, or setup a more complex architecture
-- [Quick start guide](User/Quick-start.md): get your TheHive ready to use
+- [User guides](User/README.md): including a [Quick start guide](User/Quick-start.md) to get your TheHive ready to use
 
 
 ## License
