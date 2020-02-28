@@ -10,12 +10,21 @@
 
 
 
+
 ## TL;DR
 
 0. Default administrator account: `admin@thehive.local`/`secret`
 1. Login with default account
 2. Create an organisaton
 3. Create a user account
+
+
+
+## Before starting
+
+Starting from TheHive 4.0-RC1, an email address is requested, and is mandatory to register a new user, and to log in the application. 
+
+
 
 ## Intialize TheHive 4
 
