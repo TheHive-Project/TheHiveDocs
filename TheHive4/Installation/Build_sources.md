@@ -27,6 +27,7 @@ npm install -g bower grunt
 
 ```bash
 cd /opt
+git clone https://github.com/TheHive-Project/TheHive.git
 cd TheHive
 git checkout scalligraph
 git submodule init
