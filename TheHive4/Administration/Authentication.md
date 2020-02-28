@@ -11,6 +11,7 @@ auth {
     {name: local}
     {name: key}
   ]
+}
 ```
 Below the available authentication modules:
 
