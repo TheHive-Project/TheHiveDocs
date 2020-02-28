@@ -48,7 +48,7 @@ TheHive is an open source and free software released under the [AGPL](https://gi
 Information, news and updates are regularly posted on [TheHive Project Twitter account](https://twitter.com/thehive_project) and on [the blog](https://blog.thehive-project.org/).
 
 ## Contributing
-We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests using [issues](https://github.com/TheHive-Project/TheHive/issues).
+We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests using [issues](https://github.com/TheHive-Project/TheHiveDocs/issues).
 
 We do have a [Code of conduct](code_of_conduct.md). Make sure to check it out before contributing.
 

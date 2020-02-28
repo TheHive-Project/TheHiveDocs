@@ -471,5 +471,5 @@ You can refer now to the [Quick-start guide](../User/Quick-start.md) to start us
 
 ## Advanced configuration
 
-For additional configuration options, please refer to the [Administration Guide](/admin/admin-guide.md).
+For additional configuration options, please refer to the [Administration Guide](./Administration/README.md).
 
