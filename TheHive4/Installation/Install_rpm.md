@@ -390,7 +390,7 @@ Run the following command to import the GPG key :
 sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
 
-And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repo.d/thehive-project.repo`: 
+And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`: 
 
 ```bash
 [thehive-project]
