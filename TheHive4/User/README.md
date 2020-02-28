@@ -8,7 +8,7 @@ Following guides illustrate how to use TheHive as an administrator and organisat
 
 - [Quick start guide](Quick-start.md)
 
-- [Profiles and permissions management](Profile-permissions.md)
+- [Profiles and permissions management](Profiles-permissions.md)
 - [Custom fields management](./Custom-fields.md)
 - [Observable types management](./Observable-types.md)
 - [Analyzer templates management](./Analyzer-templates.md)
