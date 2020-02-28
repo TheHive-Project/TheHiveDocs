@@ -7,7 +7,7 @@ Authentication consists of a set of module. Each one tries to authenticate the u
 auth {
   providers = [
     {name: session}
-    {name: basic}
+    {name: basic, realm: thehive}
     {name: local}
     {name: key}
   ]
