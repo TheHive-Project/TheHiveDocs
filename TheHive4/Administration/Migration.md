@@ -1,20 +1,23 @@
-Migration from version of TheHive older than 3.4.0 is not possible.
+# Migration to TheHive 4
 
-If you want to test the migration, update your TheHive instance to TheHive 3.4.0+ before.
+## Supported version
 
-The package TheHive4 comes with a migration tool (in /opt/thehive/bin/migrate)
-which can be used to import data from TheHive 3.4.0+.
-In order to migration the data, TheHive4 must be configured, in particular
-database and file storage. It also needs to connect to Elasticsearch instance.
+The migration of TheHive from versions older than 3.4.0 is not possible. This is because the fact that the migration tool requires the database format that has been introduced by TheHive 3.4.0 and the migration to Elasticsearch 6 that came with some data structure changes (mostrly related to the definition of document relations)
 
-*⚠️* **Note:**
-In TheHive4 users are identified by his email address. In order to migrate users
-from TheHive3, a domain will be appended. The default domain is `thehive.local`,
-which should be changed *before* starting the migration. This domain is
-configure in TheHive4 configuration file, in `auth.defaultUserDomain` setting.
+So, if you want to test the migration, update your TheHive instance to TheHive 3.4.0+ before.
 
-Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly
-filled you can run migration tool:
+## How it works
+
+The package TheHive4 comes with a migration tool (in /opt/thehive/bin/migrate) which can be used to import data from TheHive 3.4.0+.
+
+In order to migration the data, TheHive4 must be configured, in particular **database** and **file storage**. It also needs to connect to Elasticsearch instance used by your TheHive 3.4.0+
+
+*⚠️* **Important Note:**
+In TheHive4, users are identified by their email addresses. In order to migrate users from TheHive3, a domain will be appended. The default domain is `thehive.local`, which must be changed *before* starting the migration. 
+
+This domain is configured in TheHive4 configuration file (`/etc/thehive/application.conf`), in `auth.defaultUserDomain` setting.
+
+Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool:
 
 ```
 /opt/thehive/bin/migration \
@@ -23,13 +26,9 @@ filled you can run migration tool:
   --es-uri http://127.0.0.1:9200
 ```
 
-Users, cases and alerts from TheHive3 will be created under the organisation
-specified by `--main-organisation` parameter.
+Users, cases and alerts from TheHive3 will be created under the organisation specified by `--main-organisation` parameter.
 
-More parameters are available, run `/opt/thehive/bin/migration --help`
-for a summary.
+More parameters are available, run `/opt/thehive/bin/migration --help` for a summary.
 
 *⚠️* **Note:**
-The migration process can be very long, from several hours to several days,
-depending on the volume of data to migrate. TheHive4 can be started and used
-during migration. More recent data are migrated first.
+The migration process can be very long, from several hours to several days, depending on the volume of data to migrate. TheHive4 can be started and used during migration. More recent data are migrated first.
