@@ -13,7 +13,7 @@ Starting from TheHive4, short reports have been removed, and TheHive will displa
 
 ## List analyzer templates
 
-The management page is accessible from the header menu through the *Admin > Analyzer templates* menu and required a use with the `manageAnalyzerTemplate` permission  (refer to [Organisations, Users and sharing](./Manage-orgs-users.md#permissions)).
+The management page is accessible from the header menu through the *Admin > Analyzer templates* menu and required a use with the `manageAnalyzerTemplate` permission (refer to [Profiles and permissions](./Profiles-permissions.md)).
 
 Note that analyzer templates are global and common to all the organisations.
 
