@@ -17,5 +17,5 @@ Following guides illustrate how to use TheHive as an administrator and organisat
 
 ## Guides for organisation users
 
-- [Organisations, users and profiles management](./Manage-orgs-types.md)
+- [Organisations, users and profiles management](./Manage-orgs-users.md)
 
