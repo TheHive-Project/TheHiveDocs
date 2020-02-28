@@ -1,6 +1,6 @@
-# Installation Guide on Debian-based OS
+# Installation Guide from binaries
 
-This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using DEB packages repositories.
+This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using binaries package.
 
 ## Table of content
 
@@ -33,12 +33,7 @@ This page is a step by step installation and configuration guide to get an TheHi
 
 ## Java Virtual Machine
 
-
-```bash
-apt-get install -y openjdk-8-jre-headless
-echo JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-```
+The installation requires Java 8, so refer to your system documentation to install it.
 
 
 ## Cassandra database
