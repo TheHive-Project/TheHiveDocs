@@ -8,6 +8,7 @@
     + [First login](#first-login)
     + [Create an organisation](#create-an-organisation)
     + [Create a user](#create-a-user)
+    + [Login as org-admin user](#login-as-org-admin-user)
 
 
 
@@ -117,6 +118,8 @@ Once you have created the users, you can set their passwords (they will be able 
 ![Set user's password](./files/admin-user-password.png)
 
 
+
+### Login as org-admin user
 
 Once the user is created, (s)he can connect to TheHive and start using it based on the profile.
 
