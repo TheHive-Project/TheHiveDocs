@@ -32,7 +32,7 @@ To share a case with another organisation, a user must be able to see it: its or
 
 ###  Share and effective permissions
 
-When a user creates a case, the case is linked to the user’s organisation with the profile “all”. It means that there is no restriction, the effective permissions are the permissions the user has in his organisation.
+When a user creates a case, the case is linked to the user’s organisation with the profile “org-admin”. It means that there is no restriction, the effective permissions are the permissions the user has in his organisation.
 
 If he decides to share that case with another organisation, he must choose the profile applied on that share.
 
