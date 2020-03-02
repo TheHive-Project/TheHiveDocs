@@ -334,9 +334,9 @@ Download and unzip the chosen binary package. TheHive files can be installed whe
 
 ```bash
 cd /opt
-wget https://dl.bintray.com/thehive-project/binary/thehive-latest.zip
-unzip thehive-latest.zip
-ln -s thehive-x.x.x thehive
+wget https://download.thehive-project.org/thehive4-latest.zip
+unzip thehive4-latest.zip
+ln -s thehive4-x.x.x thehive
 ```
 
 #### Prepare the system
