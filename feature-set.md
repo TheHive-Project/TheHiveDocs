@@ -36,14 +36,14 @@ TheHive supports multiple authentication methods:
 
 ## Alert Management
 
-Alerts are a sort of incidents not yet qualified as a Case. The Alerts sections allows:
+Alerts are a sort of incident not yet qualified as a Case. The Alerts sections allows:
 
 - Listing and searching for alerts
-- Marking alerts read
-- Ignoring alerts update
+- Marking alerts as read
+- Ignoring alert updates
 - Previewing alert details
   - Display alert details and editable custom fields
-  - Display alert's observables
+  - Display alerts observables
   - Display similar cases
 - Importing an alert as an emtpty case or using a case template
 - Merging an alert into an existing case
