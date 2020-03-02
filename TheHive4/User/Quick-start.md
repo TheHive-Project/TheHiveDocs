@@ -25,15 +25,13 @@
 
 Starting from TheHive 4.0-RC1, an email address is requested, and is mandatory to register a new user, and to log in the application. 
 
-
-
 ## Intialize TheHive 4
 
 This version of TheHive comes with a big improvement: 
 
-- multi-tenancy support 
-- fine grained permissions
-- customized user profiles (a set of permissions)
+- Multi-tenancy support 
+- Fine grained permissions
+- Customized user profiles (a set of permissions)
 
 After TheHive installation, a default organisation called *"admin"* is created and contains the initial default super administrator user, having a profile called *"admin"*. We will discuss the *user profiles* later, but note that the *"admin"* user has all the administration permissions like:
 
@@ -55,19 +53,17 @@ This default group cannot create and own *Cases* or any other related objects li
 
 ### First login
 
-When TheHive starts the first time, you need to login using the credential of the *"admin"* user indicated above (`admin@thehive.local` / `secret`), and you will be redirected to the administration home page: **List of organisations**
+When TheHive starts the first time, you need to login using the credential of the *"admin"* user indicated above (`admin@thehive.local` / `secret`), and you will be redirected to the administration home page: **List of organisations**.
 
 ![initial-page](./files/initial-page.png)
 
-Note that this organisation cannot be deleted.
+Note that this organisation **cannot be deleted**.
 
 Possible operations for the *"admin"* users (members of the *"admin"* organisation) are accessible from the "Admin" menu located on the header bar:
 
 ![Admin menu](./files/admin-menu.png)
 
-
-
-Let's create an organisation and its users.
+*admin* Organisation cannot manage Cases. so let's create an organisation and its users.
 
 ### Create an organisation
 
@@ -89,20 +85,18 @@ Once you have created an organisation you can open its details page by clicking 
 
 You can see on this page:
 
-- the details of the organisation: name, description, the user that created it
-- a tab to manage users:
-  - create them
-  - edit their password, api key
-  - edit their profile
-  - lock and delete them
+- The details of the organisation: name, description, the user that created it
+- A tab to manage users:
+  - Create them
+  - Edit their password, api key
+  - Edit their profile
+  - Lock and delete them
 
 To create a user, just click the "Create new user" button, that opens the user creation dialog.
 
 ![admin-add-user](./files/admin-add-user.png)
 
 Note: The *"Profile"* field will be populated by the profiles that can be assigned to organisation users only. (Administration profiles will not be listed).
-
-
 
 The first user you must create for each organisation, should be a user with *"org-admin"* profile. That profile allows all the operations withing an organisation. 
 
