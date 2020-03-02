@@ -28,7 +28,13 @@ For cluster configuration, we strongly recommends using Apache Hadoop as a distr
 
 ## Hardware Pre-requisites
 
-~~TheHive uses ElasticSearch to store data. Both software use a Java VM. We recommend using a virtual machine with 8vCPU, 8GB of RAM and 60 GB of disk. You can also use a physical machine with similar specifications~~
+Hardware requirements depends on the number of concurrent users and how they use the system. The following table give some information to choose the hardware.
+
+| Number of users | CPU  | RAM   |
+| --------------- | ---- | ----- |
+| < 3             | 2    | 4-8   |
+| < 10            | 4    | 8-16  |
+| < 20            | 8    | 16-32 |
 
 ## Guides
 
