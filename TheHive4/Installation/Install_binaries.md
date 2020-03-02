@@ -339,6 +339,8 @@ unzip thehive4-latest.zip
 ln -s thehive4-x.x.x thehive
 ```
 
+You can check that the fingerprint for `thehive4-latest.zip` archive is  `eca8065f35184aa3ea78eec5fca0a3a44838b08e725ed7b5d6efe191801d045c`.
+
 #### Prepare the system
 
 It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
