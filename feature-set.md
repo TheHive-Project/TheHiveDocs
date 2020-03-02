@@ -1,11 +1,11 @@
 # Feature set
 
-This document will list the features provided by TheHive either from the UI or using APIs and Webhooks.
+This document lists the features provided by TheHive in either the UI or APIs and Webhooks.
 
 TheHive comes with the native support of integrating:
 
-- one or multiple Cortex instances
-- one or multiple MISP instances
+- one or more Cortex instances
+- one or more MISP instances
 
 ## Authentication
 
@@ -52,7 +52,7 @@ Alerts are a sort of incidents not yet qualified as a Case. The Alerts sections 
 
 MISP is natively integrated to TheHive allowing:
 
-- Declaring one or multiple MISP instances
+- The declaration of one or more MISP instances
 - Each instance can be used to Import and/or Export events from MISP or cases to MISP
 - Imported MISP events are made available as Alerts
 - Imporing is configurable using filters (configuration files)
@@ -60,7 +60,7 @@ MISP is natively integrated to TheHive allowing:
 ### Feeders
 
 - Feeders are external tools designed to send alerts to TheHive leveraging the REST APIs Thehive offers
-- Feeders can be written and any programming language as long as they can play with TheHive APIs
+- Feeders can be written and any programming language as long as it is compatible with TheHive APIs
 - Feeders can be written in Python and use TheHive4Py
 
 ## Search capabilities
@@ -115,7 +115,7 @@ The dashboards section allows:
 
 ### Analyzer report templates
 
-Report templates are used to display the raw reports from Cortex in a human readable format. This section allows:
+Report templates are used to display the raw reports from Cortex in a text format. This section allows:
 
 - Importing short and long reports
 - Customize short and long reports for each analyzer
@@ -126,7 +126,7 @@ TheHive uses Cortex to have access to analyzers and responsders
 
 - Analyzers can be launched against observables to get more details about a given observable
 - Responders can be launched against case, tasks, observables, logs, and alerts to execute an action
-- One or multiple Cortex instances can be connected to TheHive
+- One or more Cortex instances can be connected to TheHive
 
 ## Database migration
 
