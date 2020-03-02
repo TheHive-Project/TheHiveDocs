@@ -10,25 +10,39 @@ So, if you want to test the migration, update your TheHive instance to TheHive 3
 
 The package TheHive4 comes with a migration tool (in /opt/thehive/bin/migrate) which can be used to import data from TheHive 3.4.0+.
 
-In order to migration the data, TheHive4 must be configured, in particular **database** and **file storage**. It also needs to connect to Elasticsearch instance used by your TheHive 3.4.0+
+In order to migrate the data, TheHive4 must be configured, in particular **database** and **file storage**. It also needs to connect to Elasticsearch instance used by your TheHive 3.4.0+
 
-*⚠️* **Important Note:**
+---
+
+*⚠️* **Important Note**
 In TheHive4, users are identified by their email addresses. In order to migrate users from TheHive3, a domain will be appended. The default domain is `thehive.local`, which must be changed *before* starting the migration. 
 
-This domain is configured in TheHive4 configuration file (`/etc/thehive/application.conf`), in `auth.defaultUserDomain` setting.
+---
+
+The default domain used to import existing users in, is configured in TheHive4 configuration file (`/etc/thehive/application.conf`), in `auth.defaultUserDomain` setting: 
+
+```yaml
+auth.defaultUserDomain: "myOrganisation"
+```
+
+or specify it as an option in the command line. 
 
 Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool:
 
-```
+```bash
 /opt/thehive/bin/migration \
   --output /etc/thehive/application.conf \
   --main-organisation myOrganisation \
-  --es-uri http://127.0.0.1:9200
+  --es-uri http://ELASTICSEARCH_IP_ADDRESS:9200
 ```
 
 Users, cases and alerts from TheHive3 will be created under the organisation specified by `--main-organisation` parameter.
 
 More parameters are available, run `/opt/thehive/bin/migration --help` for a summary.
 
-*⚠️* **Note:**
+---
+
+⚠️ **Note**
 The migration process can be very long, from several hours to several days, depending on the volume of data to migrate. TheHive4 can be started and used during migration. More recent data are migrated first.
+
+---
