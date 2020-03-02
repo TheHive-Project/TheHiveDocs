@@ -7,7 +7,7 @@
 The Cortex connector module needs to be enabled to allow TheHive work with Cortex.
 TheHive is able to connect more than one Cortex server.
 
-several parameters can be configured for one server :
+Several parameters can be configured for one server :
 
 - **name**: name given to the Cortex instance (eg: _Cortex-Internal_)
 - **url**: url to connect to the Cortex instance
@@ -54,6 +54,36 @@ cortex {
 
 
 ## MISP
+
+The MISP connector module needs to be enabled to allow TheHive work with MISP.
+TheHive is able to connect more than one MISP server.
+
+Several parameters can be configured for one server :
+
+- **interval**: delay between to pull/push events to remote MISP servers. This is a common parameter for all configured server
+- **name**: name given to the MISP instance (eg: _MISP-MyOrg_)
+- **url**: url to connect to the MISP instance
+- **auth**: method used to authenticate on the server (_bearer_ if using API keys)
+- **wsConfig**: network configuration dedicated to Play Framework for SSL and proxy
+- **caseTemplate**: case template used by default in TheHive to import events as Alerts
+- **tags**: tags to be added to events imported as Alerts in TheHive
+
+Optional parameters can be added to filter out some events coming into TheHive:
+
+- **max-attributes**: maximum number a attributes that a event could contain to be added as an Alert in TheHive
+- **max-size**:  the maximum size of the  JSON representation of an event allowed to be imported in TheHive
+- **max-age**: maximum age of the last publish date of event to be imported in TheHive 
+
+Additionnaly, some organisations or tags from MISP can be defined to exclude events. 
+
+---
+**Note**
+
+By default, adding a MISP server in TheHive configuration make it available for all organisations added on the instance.
+
+---
+
+This configuration has to be added to TheHive `conf/application.conf` file:
 
 
 
