@@ -498,7 +498,9 @@ You can refer now to the [Quick-start guide](../User/Quick-start.md) to start us
 
 ---
 
-SELINUX et firewall-cmd
+⚠️ **Note**
+
+Depending on the base system used, you might need to adjust *selinux* of *firewall-cmd* configuration to be able to connect TheHive application remotely.
 
 ---
 
