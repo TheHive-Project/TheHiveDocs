@@ -22,10 +22,10 @@ In TheHive4, users are identified by their email addresses. In order to migrate 
 The default domain used to import existing users in, is configured in TheHive4 configuration file (`/etc/thehive/application.conf`), in `auth.defaultUserDomain` setting: 
 
 ```yaml
-auth.defaultUserDomain: "myOrganisation"
+auth.defaultUserDomain: "mydomain.com"
 ```
 
-or specify it as an option in the command line. 
+This domain will be appended to user accounts from TheHive 3.4.x.
 
 Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool:
 
@@ -36,7 +36,7 @@ Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly 
   --es-uri http://ELASTICSEARCH_IP_ADDRESS:9200
 ```
 
-Users, cases and alerts from TheHive3 will be created under the organisation specified by `--main-organisation` parameter.
+The *Organisation* named *myOrganisation* is created by the migration tool and Users, Cases and Alerts from TheHive3 are created under that organisation.
 
 More parameters are available, run `/opt/thehive/bin/migration --help` for a summary.
 
