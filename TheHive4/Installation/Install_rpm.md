@@ -494,6 +494,16 @@ Please note that the service may take some time to start. Once it is started, yo
 
 You can refer now to the [Quick-start guide](../User/Quick-start.md) to start using TheHive.
 
+
+
+---
+
+SELINUX et firewall-cmd
+
+---
+
+
+
 ## Advanced configuration
 
 For additional configuration options, please refer to the [Administration Guide](./Administration/README.md).
