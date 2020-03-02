@@ -102,10 +102,8 @@ The first user you must create for each organisation, should be a user with *"or
 
 A user with *"org-admin"* profile will be able to connect and configure its organisation by at least:
 
-- creating other users
-- creating case templates
-
-
+- Creating other users
+- Creating case templates
 
 Once you have created the users, you can set their passwords (they will be able to change them from their own account page). To do that, click on the *"New password"* button on the corresponding user's row and then hit *ENTER* or click the green check button:
 

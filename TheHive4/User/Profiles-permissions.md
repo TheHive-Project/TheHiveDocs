@@ -28,7 +28,13 @@ A *Profile* is a set of permissions attached to a *User* and an *Organisation*. 
 (1) Organisations, configuration, profiles and tags are global objects. The related permissions are effective only on *“admin”* organisation.
 (2) Actions, analysis and template is available only if Cortex connector is enabled
 
-Read information doesn’t require specific permission. By default, users in an organisation can see all data shared with that organisation (cf. shares, discussed in [Manage Organisations and Users](Manage-orgs-users.md)).
+---
+
+**Note**
+
+**Read** information doesn’t require specific permission. By default, users in an organisation can see all data shared with that organisation (cf. shares, discussed in [Organisations,Users and sharing](Organisations-users-sharing.md)).
+
+---
 
 
 

@@ -2,11 +2,19 @@
 
 In TheHive 4, *Metrics* have been removed. Why? Because metrics are simply, numeric custom fields.
 
-To manage *Custom fields* you need to login as an *"admin"* user (Member of the *"admin"* organisation) that has a profile including the `manageCustomField` permission (refer to [Profiles and permissions](./Profiles-permissions.md)).
+To manage *Custom fields* you need to login as an *"admin"* user (Member of the *"admin"* organisation) that has a profile including the `manageCustomField` permission (refer to [Profiles and permissions](./Profiles-permissions.md) for detailed information).
 
 The default *"admin"* user has that permission.
 
+---
+
+⚠️ **Note**
+
 Custom fields are global to all the organisation.
+
+---
+
+
 
 ![Custom fields page](./files/initi-custom-fields.png)
 
