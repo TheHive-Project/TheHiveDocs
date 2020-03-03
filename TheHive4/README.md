@@ -4,27 +4,22 @@
 
 [![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This is the dedicated documentation for TheHive 4. The current version released is TheHive 4.0-RC1. 
-
-
+This documentation is dedicated to the all new TheHive 4. As of this writing, the latest release is TheHive 4.0-RC1. 
 
 ---
 
-⚠️ This version - like all RCx versions - is **not recommended** for production use ⚠️
+⚠️ A Release Candidate (RC) is **not recommended** for production use ⚠️
 
 ---
 
+The application stack of TheHive 4 has been completely changed. TheHive 4 does not rely on Elasticsearch anymore to
+ store its data and the backend has been rewritten to support graph databases.
 
+TheHive now supports different data and files storage methods. However, even for a standalone, production server, we
+ strongly recommend using Apache Cassandra as a scalable and fault-tolerant database. Files (attached to cases) can
+  be stored on the local filesystem.
 
-Starting from TheHive 4.0-RC1, the application stack has completely been reviewed. TheHive do not rely on Elasticsearch anymore to store its data and the backend has been rewritten to support graph database schema.
-
-TheHive is now supporting different data and files storage methods. However, even for a standalone server and for production uses:
-
-- We strongly recommend using Apache Cassandra as a scalable and fault-tolerant database;
-
-- For files, local filesystem is a good and simple choice.
-
-For cluster configuration, we strongly recommends using Apache Hadoop as a distributed filesystem to store files.
+For cluster configurations, we strongly recommend using Apache Hadoop as a distributed filesystem to store files.
 
 ## Hardware Pre-requisites
 
@@ -38,11 +33,17 @@ Hardware requirements depends on the number of concurrent users and how they use
 
 ## Guides
 
-- [Installation and configuration guides](Installation/README.md) : contain step-by-step instructions to install TheHive 4 for differents operating systems as well as with binaries archive.
-- [Migration guide](Administration/Migration.md): how to migrate your data from TheHive 3.4.0+
-- [Administration guides](Administration/README.md): can help you leverage or enable more advanced features, or setup a more complex architecture
-- [User guides](User/README.md): including a [Quick start guide](User/Quick-start.md) to get your TheHive ready to use
+- [Installation and configuration guides](Installation/README.md) : contain step-by-step installation instructions for
+ TheHive 4 for different operating systems as well as corresponding binary archives.
+- [Migration guide](Administration/Migration.md): how to migrate your data from TheHive 3.4.0+.
+- [Administration guides](Administration/README.md): can help you leverage or enable more advanced features, or setup
+ a more complex architecture.
+- [User guides](User/README.md): including a [Quick start guide](User/Quick-start.md) to get your instance of TheHive
+ ready to use.
 
+## Webhooks & TheHive 4.0-RC1
+Webhooks have not been integrated in TheHive 4.0-RC1. They are now part of a new notification system that is almost
+ ready but which still needs some work. We couldn't integrate it in RC1. However, it will be introduced in a future RC, before the stable release and then webhooks will make a reappearance.
 
 ## License
 TheHive is an open source and free software released under the [AGPL](https://github.com/TheHive-Project/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
