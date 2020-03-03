@@ -53,7 +53,9 @@ Apache Cassandra is a scalable and high available database. TheHive supports ver
 - Add Apache repository references
 
 ```bash
-curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+# curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add - 
+# "gpg: no valid OpenPGP data found."
+wget -q -O - https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
 echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
 ```
 
@@ -68,7 +70,7 @@ By default, data is stored in `/var/lib/cassandra`.
 
 ### Configuration
 
-Start by changing the `cluster_name` with `thp`. Run the command `sqlsh`: 
+Start by changing the `cluster_name` with `thp`. Run the command `cqlsh`: 
 
 ```bash
 UPDATE system.local SET cluster_name = 'thp' where key='local';
@@ -168,7 +170,7 @@ ln -s hadoop-3.1.3 hadoop
 - Create a user and update permissions
 
 ```bash
-useradd hadoop
+adduser hadoop
 chown hadoop:root -R /opt/hadoop*
 ```
 
