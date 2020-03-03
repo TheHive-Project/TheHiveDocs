@@ -170,7 +170,7 @@ ln -s hadoop-3.1.3 hadoop
 - Create a user and update permissions
 
 ```bash
-adduser hadoop
+useradd hadoop
 chown hadoop:root -R /opt/hadoop*
 ```
 
@@ -190,7 +190,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
 ```
 
-- Update `.bashrc`file for `hadoop user  in `/etc/environment`. Add following lines: 
+- Update `.bashrc`file for `hadoop` user. Add following lines: 
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -397,7 +397,7 @@ The secret key is automatically generated and stored in `/etc/thehive/secret.con
 
 #### Database
 
-To use Cassandra database, TheHive configuration file (`/etc/thehive/conf/application.conf`) has to be edited and updated with following lines:
+To use Cassandra database, TheHive configuration file (`/etc/thehive/application.conf`) has to be edited and updated with following lines:
 
 ```yaml
 db {
@@ -435,7 +435,7 @@ If you chose [Option 1: Local filesystem](#option:1_local_filesystem) to store f
 chown -R thehive:thehive /opt/thp_data/files/thehive
 ```
 
-- add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
+- add following lines to TheHive configuration file (`/etc/thehive/application.conf`)
 
 ```yml
 storage {
@@ -446,7 +446,7 @@ storage {
 
 #### Hadoop
 
-If you chose [Option 2: Hadoop](#option:2_hadoop) to store files in a distrubuted filesystem, add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
+If you chose [Option 2: Hadoop](#option:2_hadoop) to store files in a distrubuted filesystem, add following lines to TheHive configuration file (`/etc/thehive/application.conf`)
 
 ```yaml
 storage {
