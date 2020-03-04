@@ -55,8 +55,8 @@ cortex {
 
 ## MISP
 
-The MISP connector module needs to be enabled to allow TheHive work with MISP.
-TheHive is able to connect more than one MISP server.
+The MISP connector module needs to be enabled to allow TheHive to interact with MISP.
+TheHive is able to connect to more than one MISP server for pulling, pushing or both.
 
 Several parameters can be configured for one server :
 
@@ -79,7 +79,7 @@ Optional parameters can be added to filter out some events coming into TheHive:
 - **includedTheHiveOrganisations**: list of TheHive organisations which can use this MISP server (default: _all ("\*")_ )
 - **excludedTheHiveOrganisations**: list of TheHive organisations which cannot use this MISP server (default: _None_ )
 
-Additionnaly, some organisations or tags from MISP can be defined to exclude events. 
+Additionally, some organisations or tags from MISP can be defined to exclude events. 
 
 ---
 **Note**
@@ -96,7 +96,7 @@ This configuration has to be added to TheHive `conf/application.conf` file:
 ## MISP configuration
 # More information at https://github.com/TheHive-Project/TheHiveDocs/TheHive4/Administration/Connectors.md
 # Enable MISP connector
-play.modules.enabled += org.thp.thehive.connector.mips.MISPModule
+play.modules.enabled += org.thp.thehive.connector.misp.MispModule
 misp {
   interval: 1 hour
   servers: [
@@ -127,7 +127,8 @@ misp {
       # whitelist {
       #   tags = {"tag1", "tag2"}
       # }
+    }
   ]
-}
+} 
 ```
 
