@@ -59,7 +59,7 @@ It returns:
 
 If log contains an attachment, the request must be in multipart format:
 ```
-curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/case/AVqqdpY2yQ6w1DNC8aDh/task -F '_json={"message": "Screenshot of fake site"};type=application/json' -F 'attachment=@screenshot1.png;type=image/png'
+curl -XPOST -H 'Authorization: Bearer ***API*KEY***' http://127.0.0.1:9000/api/case/task/AVqqeXc9yQ6w1DNC8aDj/log -F '_json={"message": "Screenshot of fake site"};type=application/json' -F 'attachment=@screenshot1.png;type=image/png'
 ```
 It returns:
 ```
