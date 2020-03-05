@@ -46,7 +46,7 @@ Download and untgz archive from http://cassandra.apache.org/download/ in the fol
 
 ### Configuration
 
-Configure Cassandra by editing `cassandra.yaml` present in your configuration folder: 
+Configure Cassandra by editing `cassandra.yaml` present in your configuration folder:
 
 ```yml
 # content from /etc/cassandra/cassandra.yaml
@@ -88,13 +88,13 @@ To add Cassandra nodes, refer the the [related administration guide](../Administ
 
 ## Choose and install attachment storage
 
-Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database. 
+Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database.
 
 For standalone production and test servers , we recommends using local filesystem. If you think about building a cluster with TheHive, use Hadoop filesystem.
 
 ### Option 1: Local filesystem
 
-**Note**: This option is perfect if you **do not** intend to build a cluster for your instance of TheHive 4. 
+**Note**: This option is perfect if you **do not** intend to build a cluster for your instance of TheHive 4.
 
 To store files on the local filesystem, start by choosing the dedicated folder:
 
@@ -102,11 +102,11 @@ To store files on the local filesystem, start by choosing the dedicated folder:
 mkdir -p /opt/thp_data/files/thehive
 ```
 
-This path will be used in the configuration of TheHive. 
+This path will be used in the configuration of TheHive.
 
 Later, after having installed TheHive, ensure the user `thehive` owns the path chosen for storing files:
 
-``` 
+```
 chown -R thehive:thehive /opt/thp_data/files/thehive
 ```
 
@@ -114,7 +114,7 @@ chown -R thehive:thehive /opt/thp_data/files/thehive
 
 If you choose Hadoop distributed filesystem, proceed to installation of the software before configuring it.
 
-#### Installation 
+#### Installation
 
 - Download hadoop distribution from https://hadoop.apache.org/releases.html and uncompress.
 
@@ -140,7 +140,7 @@ mkdir /opt/thp_data/hdfs
 chown hadoop:root -R /opt/thp_data/hdfs
 ```
 
-- Create ssh keys for `hadoop` user: 
+- Create ssh keys for `hadoop` user:
 
 ```bash
 su - hadoop
@@ -149,7 +149,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
 ```
 
-- Update `.bashrc`file for `hadoop user  in `/etc/environment`. Add following lines: 
+- Update `.bashrc`file for `hadoop user  in `/etc/environment`. Add following lines:
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -163,14 +163,14 @@ export YARN_HOME=$HADOOP_HOME
 ```
 
 
-**Note**: Apache has a well detailed [documentation](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html) for more advanced configuration with Hadoop. 
+**Note**: Apache has a well detailed [documentation](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html) for more advanced configuration with Hadoop.
 
 
 #### Configuration the Hadoop Master
 
-Configuration files are located in `etc/hadoop` (`/opt/hadoop/etc/hadoop`). They must be identical in all nodes. 
+Configuration files are located in `etc/hadoop` (`/opt/hadoop/etc/hadoop`). They must be identical in all nodes.
 
-**Notes**: 
+**Notes**:
 
 - The configuration described there is for a single node server. This node is the master node, namenode and datanode (refer to [Hadoop documentation](https://hadoop.apache.org/docs/current/) for more information). After validating this node is running successfully, refer to the [related administration guide](../Administration/Clustering.md) to add nodes;
 - Ensure you **update** the port value to something different than `9000` as it is already reserved for TheHive application service;
@@ -250,7 +250,7 @@ bin/hdfs namenode -format
 
 ---
 
-Create the `/etc/systemd/system/hadoop.service` file with the following content: 
+Create the `/etc/systemd/system/hadoop.service` file with the following content:
 
 ```
 [Unit]
@@ -300,7 +300,7 @@ WantedBy=multi-user.target
 
 
 
-#### Start the service 
+#### Start the service
 
 ```bash
 service hadoop start
@@ -369,7 +369,7 @@ cp thehive.service /etc/systemd/system/thehive.service
 
 ### Configuration
 
-Following configurations are required to start TheHive successfully: 
+Following configurations are required to start TheHive successfully:
 
 - Secret key configuration
 - Database configuration
@@ -380,7 +380,7 @@ Following configurations are required to start TheHive successfully:
 Setup a secret key in the `/etc/thehive/secret.conf` file by running the following command:
 
 ```
-cat > /etc/thehive/secret.conf << _EOF_ 
+cat > /etc/thehive/secret.conf << _EOF_
 play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 ```
@@ -389,7 +389,7 @@ _EOF_
 
 To use Cassandra database, TheHive configuration file (`/etc/thehive/application.conf`) has to be edited and updated with following lines:
 
-```yaml 
+```yaml
 db {
   provider: janusgraph
   janusgraph {
