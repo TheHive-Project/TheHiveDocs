@@ -221,12 +221,12 @@ unzip thehive-latest.zip
 ln -s thehive-x.x.x thehive
 ```
 
-**Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://dl.bintray.com/thehive-project/binary/thehive-version-RCx.zip`. For example `https://dl.bintray.com/thehive-project/binary/thehive-3.1.0-RC1.zip`.
+**Note**: If you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://dl.bintray.com/thehive-project/binary/thehive-version-RCx.zip`. For example `https://dl.bintray.com/thehive-project/binary/thehive-3.1.0-RC1.zip`.
 
 #### 5. First start
-It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
-
-If you'd rather start the application as a service, use the following commands:
+You may start the application by using creating a non-previlidged user account or starting the application as a service.
+If you choose to start the application by creating a non-previlidged user account ensure that it can create log files in `/opt/thehive/logs`.
+Or if you choose to start the application as a service, use the following commands:
 
 ```bash
 sudo addgroup thehive
@@ -239,8 +239,10 @@ sudo systemctl enable thehive
 sudo service thehive start
 ```
 
-The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used
-to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
+To start TheHive you must use the secret key (`play.http.secret.key`), which is used
+to authenticate cookies that contain data.
+
+Note: If you are running TheHive in the cluster mode, all instances must share the same key.
 You can generate the minimal configuration with the following commands (they assume that you have created a
 dedicated user for TheHive, named `thehive`):
 
@@ -264,8 +266,6 @@ bin/thehive -Dconfig.file=/etc/thehive/application.conf
 
 Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
 
-Please note that the service may take some time to start.
-
 The first time you connect you will have to create the database schema. Click "Migrate database" to create the DB schema.
 
 ![](../images/thehive-first-access_screenshot.png)
@@ -279,7 +279,7 @@ Once created, you should be redirected to the login page.
 ![](../images/thehive-login_page.png)
 
 **Warning**: at this stage, if you missed the creation of the admin account, you will not be able to do it unless you
-delete TheHive's index from Elasticsearch. In the case you made a mistake, first find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
+delete TheHive's index from Elasticsearch. In case you made this mistake, first find out what is the current index of TheHive by running the following command on a host where the Elasticsearch DB used by TheHive is located:
 
 ```bash
 $ curl http://127.0.0.1:9200/_cat/indices?v
