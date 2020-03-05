@@ -188,7 +188,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
 ```
 
-- Update `.bashrc`file for `hadoop user  in `/etc/environment`. Add following lines: 
+- Update `.bashrc`file for `hadoop` user. Add following lines: 
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
