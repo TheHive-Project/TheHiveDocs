@@ -425,12 +425,12 @@ If you chose [Option 1: Local filesystem](#option:1_local_filesystem) to store f
 chown -R thehive:thehive /opt/thp_data/files/thehive
 ```
 
-- add following lines to TheHive configuration file (`/etc/thehive/conf/application.conf`)
+- add following lines to TheHive configuration file (`/etc/thehive/application.conf`)
 
 ```yml
 storage {
   provider = localfs
-  localfs.directory = /opt/files/thehive
+  localfs.location = /opt/files/thehive
 }
 ```
 
