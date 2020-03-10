@@ -42,6 +42,24 @@ auth {
 
 This domain will be appended to user accounts from TheHive 3.4.x.
 
+Prior to running the `migrate` tool, connectivity can be tested by using
+```bash
+$curl http://ELASTICSEARCH_IP_ADDRESS:9200
+{
+  "name" : "R2-U361",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "***UUID***",
+  "version" : {
+    "number" : "5.6.16",
+    "build_hash" : "3a740d1",
+    "build_date" : "2019-03-13T15:33:36.565Z",
+    "build_snapshot" : false,
+    "lucene_version" : "6.6.1"
+  },
+  "tagline" : "You Know, for Search"
+}
+```
+
 Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool:
 
 ```bash
