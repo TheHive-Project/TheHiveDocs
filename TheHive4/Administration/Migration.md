@@ -25,12 +25,27 @@ The default domain used to import existing users in, is configured in TheHive4 c
 auth.defaultUserDomain: "mydomain.com"
 ```
 
+In addition, update the authentication information as well. For instance, if a key is being used the authentication configuration block would be as follows:
+```yaml
+auth {
+  providers: [
+//    {name: session}               # required !
+//    {name: basic, realm: thehive}
+//    {name: local}
+    {name: "bearer ***APIKEY***"}
+  ]
+# The format of logins must be valid email address format. If the provided login doesn't contain `@` the following
+# domain is automatically appended
+  defaultUserDomain: "example.com"
+}
+```
+
 This domain will be appended to user accounts from TheHive 3.4.x.
 
 Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool:
 
 ```bash
-/opt/thehive/bin/migration \
+/opt/thehive/bin/migrate \
   --output /etc/thehive/application.conf \
   --main-organisation myOrganisation \
   --es-uri http://ELASTICSEARCH_IP_ADDRESS:9200
@@ -38,7 +53,7 @@ Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly 
 
 The *Organisation* named *myOrganisation* is created by the migration tool and Users, Cases and Alerts from TheHive3 are created under that organisation.
 
-More parameters are available, run `/opt/thehive/bin/migration --help` for a summary.
+More parameters are available, run `/opt/thehive/bin/migrate --help` for a summary.
 
 ---
 
