@@ -328,7 +328,7 @@ TheHive4 can't be installed on the same OS than older versions.
 
 ### Installation
 
-Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/binary/). The latest version is called [thehive-latest.zip](https://dl.bintray.com/thehive-project/binary/thehive-latest.zip).
+Binary packages can be downloaded from [TheHive Project](https://download.thehive-project.org/thehive4-latest.zip).
 
 Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
