@@ -68,7 +68,7 @@ By default, data is stored in `/var/lib/cassandra`.
 
 ### Configuration
 
-Start by changing the `cluster_name` with `thp`. Run the command `sqlsh`: 
+Start by changing the `cluster_name` with `thp`. Run the command `cqlsh`: 
 
 ```bash
 UPDATE system.local SET cluster_name = 'thp' where key='local';
@@ -168,7 +168,7 @@ ln -s hadoop-3.1.3 hadoop
 - Create a user and update permissions
 
 ```bash
-useradd hadoop
+useradd -m -s /bin/bash hadoop
 chown hadoop:root -R /opt/hadoop*
 ```
 
