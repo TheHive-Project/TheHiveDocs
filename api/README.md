@@ -12,3 +12,6 @@ TheHive exposes REST APIs through JSON over HTTP.
 - [Log](log.md)
 - [User](user.md)
 - [Connectors](connectors)
+
+Caveats:
+- Not all information is output using the API. In order to get information about more cases/alerts, please use *?range=a-b* in the URL (e.g. curl -XGET -H 'Authorization: Bearer KEY' -H 'Content-Type: application/json' http://domain:9000/api/case?range=0-200), where a and b specify the range.

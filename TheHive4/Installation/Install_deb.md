@@ -168,7 +168,7 @@ ln -s hadoop-3.1.3 hadoop
 - Create a user and update permissions
 
 ```bash
-useradd hadoop
+useradd -m -s /bin/bash hadoop
 chown hadoop:root -R /opt/hadoop*
 ```
 
