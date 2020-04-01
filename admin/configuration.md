@@ -58,35 +58,23 @@ search {
     # Maximum number of nested fields
     mapping.nested_fields.limit = 100
   }
+  
+  ## Authentication configuration
+  #search.username = ""
+  #search.password = ""
 
-  ### XPack SSL configuration
-  # Username for XPack authentication
-  #username
-  # Password for XPack authentication
-  #password
-  # Enable SSL to connect to ElasticSearch
-  ssl.enabled = false
-  # Path to certificate authority file
-  #ssl.ca
-  # Path to certificate file
-  #ssl.certificate
-  # Path to key file
-  #ssl.key
-
-  ### SearchGuard configuration
-  # Path to JKS file containing client certificate
-  #guard.keyStore.path
-  # Password of the keystore
-  #guard.keyStore.password
-  # Path to JKS file containing certificate authorities
-  #guard.trustStore.path
-  ## Password of the truststore
-  #guard.trustStore.password
-  # Enforce hostname verification
-  #guard.hostVerification
-  # If hostname verification is enabled specify if hostname should be resolved
-  #guard.hostVerificationResolveHostname
-}
+  ## SSL configuration
+  #search.keyStore {
+  #  path = "/path/to/keystore"
+  #  type = "JKS" # or PKCS12
+  #  password = "keystore-password"
+  #}
+  #search.trustStore {
+  #  path = "/path/to/trustStore"
+  #  type = "JKS" # or PKCS12
+  #  password = "trustStore-password"
+  #}
+ }
 ```
 
 If you use a different configuration, modify the parameters accordingly in the `application.conf` file.
