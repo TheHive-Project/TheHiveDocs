@@ -39,12 +39,12 @@ The Defaults settings are:
 ```
 # Elasticsearch
 search {
-  # Name of the index
+  ## Basic configuration
+  # Index name.
   index = the_hive
-  # Name of the Elasticsearch cluster
-  cluster = hive
-  # Address of the Elasticsearch instance
-  host = ["127.0.0.1:9300"]
+  # ElasticSearch instance address.
+  uri = "http://127.0.0.1:9200/"
+  
   # Scroll keepalive
   keepalive = 1m
   # Size of the page for scroll
@@ -79,21 +79,19 @@ search {
 
 If you use a different configuration, modify the parameters accordingly in the `application.conf` file.
 
-If multiple Elasticsearch nodes are used as a cluster, addresses of the master nodes must be used for the `search.host` setting. All cluster nodes must use the same cluster name:
+If multiple Elasticsearch nodes are used as a cluster, you should add addresses of the master nodes in the url like this:
 
 ```
 search {
-    host = ["node1:9300", "node2:9300"]
+    uri = http://node1:9200,node2:9200/
    ...
 ```
 
-TheHive uses the [`transport`](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-transport.html) port (9300/tcp by default) and not the [`http`](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/modules-http.html) port (9200/tcp).
+TheHive uses the http port of Elasticsearch (9200/tcp by default).
 
 TheHive versions index schema (mapping) in Elasticsearch. Version numbers are appended to the index base name (the 8th version of the schema uses the index `the_hive_8` if `search.index = the_hive`).
 
 When too many documents are requested to TheHive, it uses the [scroll](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-scroll.html) feature: the results are retrieved through pagination. You can specify the size of the page (`search.pagesize`) and how long pages are kept in Elasticsearch ((`search.keepalive`) before purging.
-
-XPack and SearchGuard are optional and exclusive. If TheHive finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
 ## 2. Datastore
 
