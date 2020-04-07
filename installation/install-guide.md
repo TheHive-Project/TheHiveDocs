@@ -84,16 +84,10 @@ file starts Elasticsearch and TheHive:
 version: "2"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+    image: elasticsearch:6.8.8
     environment:
       - http.host=0.0.0.0
       - transport.host=0.0.0.0
-      - xpack.security.enabled=false
-      - cluster.name=hive
-      - script.inline=true
-      - thread_pool.index.queue_size=100000
-      - thread_pool.search.queue_size=100000
-      - thread_pool.bulk.queue_size=100000
     ulimits:
       nofile:
         soft: 65536
@@ -149,7 +143,7 @@ You can add the `--publish` docker option to expose TheHive HTTP service.
 By default, the TheHive Docker image has minimal configuration:
  - choose a random secret (`play.http.secret.key`)
  - search for the Elasticsearch instance (host named `elasticsearch`) and add it to configuration
-  - search for a TheHive instance (host named `cortex`) and add it to configuration
+ - search for a Cortex instance (host named `cortex`) and add it to configuration
 
 This behavior can be disabled by adding `--no-config` to the Docker command line:
 
@@ -158,21 +152,31 @@ This behavior can be disabled by adding `--no-config` to the Docker command line
 Or by adding the line `command: --no-config` in the `thehive` section of
 docker-compose file.
 
-The image accepts more options:
+It is possible to start database migration at startup with the parameter `--auto-migration`.
+If the initial administrator doesn't exist yet, you can request its creation with `--create-admin` followed by the user login and its password.
+You can also create a normal user with `--create-user` followed by the user login and its roles and its password.
 
-| Option | Description |
-| ------ | ----------- |
-| `--no-config` | Do not try to configure TheHive (add the secret and Elasticsearch) |
-| `--no-config-secret` | Do not add the random secret to the configuration |
-| `--no-config-es` | Do not add the Elasticsearch hosts to configuration |
-| `--es-hosts <esconfig>` | Use this string to configure the Elasticsearch hosts (format: `["host1:9300","host2:9300"]`) |
-| `--es-hostname <host>` | Resolve this hostname to find Elasticsearch instances |
-| `--secret <secret>` | Cryptographic secret needed to secure sessions |
-| `--cortex-proto <proto>` | Define the protocol to connect to Cortex (default: `http`) |
-| `--cortex-port <port>` | Define the port to connect to Cortex (default: `9001`) |
-| `--cortex-url <url>` | Add the Cortex connection |
-| `--cortex-hostname <host>` | Resolve this hostname to find the Cortex instance |
-| `--cortex-key <key>` | Define Cortex key |
+The image accepts more options. All options are available using environment variables.
+For boolean variable, `1` means true and other value means false. For multivalued variables, values are separated by coma. This is possible only with `--create-admin`.
+
+| Option | Env variable | Description |
+| ------ | ------------ | ----------- |
+| `--no-config` | TH_NO_CONFIG | Do not try to configure TheHive (add the secret and Elasticsearch) |
+| `--no-config-secret` | TH_NO_CONFIG_SECRET | Do not add the random secret to the configuration |
+| `--secret <secret>` | TH_SECRET | Cryptographic secret needed to secure sessions |
+| `--show-secret` | TH_SHOW_SECRET | Show the generated secret |
+| `--no-config-es` | TH_NO_CONFIG_ES | Do not add the Elasticsearch hosts to configuration |
+| `--es-uri <uri>` | TH_CONFIG_ES | Use this string to configure elasticsearch hosts (format: http(s)://host:port,host:port(/prefix)?querystring) |
+| `--es-hostname <host>` | TH_ES_HOSTNAME | Resolve this hostname to find Elasticsearch instances |
+| `--no-config-cortex` | TH_NO_CONFIG_CORTEX | Do not add Cortex configuration |
+| `--cortex-proto <proto>` | TH_CORTEX_PROTO | Define the protocol to connect to Cortex (default: `http`) |
+| `--cortex-port <port>` | TH_CORTEX_PORT | Define the port to connect to Cortex (default: `9001`) |
+| `--cortex-url <url>` | TH_CORTEX_URL | Add the Cortex connection |
+| `--cortex-hostname <host>` | TH_CORTEX_HOSTNAME | Resolve this hostname to find the Cortex instance |
+| `--cortex-key <key>` | TH_CORTEX_KEY | Define Cortex key |
+| `--auto-migration` | TH_AUTO_MIGRATION | Migrate the database, if needed |
+| `--create-admin <user> <password` | TH_CREATE_ADMIN_LOGIN TH_CREATE_ADMIN_PASSWORD | Create the first admin user, if not exist yet |
+| `--create-user <user> <role> <password>` | TH_CREATE_USER_LOGIN TH_CREATE_USER_ROLE TH_CREATE_USER_PASSWORD | Create a user, only in conjunction with admin creation | 
 
 **Note**: please remember that you must **[install and configure Elasticsearch](#elasticsearch-installation)**.
 
