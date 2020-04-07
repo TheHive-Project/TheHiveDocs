@@ -129,6 +129,8 @@ volumes:
 
 Running ElasticSearch in production mode requires a minimum `vm.max_map_count` of 262144. [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) provides instructions on how to query and change this value.
 
+If you want to make Cortex be available on TheHive, you must create an account on Cortex, define an API key for it and provide that key to TheHive container using parameter `--cortex-key` or environment `TH_CORTEX_KEY`.
+
 #### Manual Installation of Elasticsearch
 Elasticsearch can be installed on the same server as TheHive or on a different one. You can then configure TheHive according to the
 [documentation](../admin/admin-guide.md) and run TheHive docker as follow:
