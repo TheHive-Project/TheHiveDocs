@@ -60,8 +60,8 @@ echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /
 - Install the package
 
 ```bash
-apt update
-apt install cassandra
+sudo apt update
+sudo apt install cassandra
 ```
 
 By default, data is stored in `/var/lib/cassandra`.
@@ -69,12 +69,15 @@ By default, data is stored in `/var/lib/cassandra`.
 ### Configuration
 
 Start by changing the `cluster_name` with `thp`. Run the command `cqlsh`: 
+```
+cqlsh localhost 9042
+```
 
 ```bash
 UPDATE system.local SET cluster_name = 'thp' where key='local';
 ```
 
-Then run:
+Exit and then run:
 
 ```
 nodetool flush
@@ -98,7 +101,8 @@ data_file_directories:
   - '/var/lib/cassandra/data'
 commitlog_directory: '/var/lib/cassandra/commitlog'
 saved_caches_directory: '/var/lib/cassandra/saved_caches'
-hints_directory: '/var/lib/cassandra/hints'
+hints_directory: 
+  - '/var/lib/cassandra/hints'
 ```
 
 Then restart the service:
