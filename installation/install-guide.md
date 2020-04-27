@@ -87,7 +87,7 @@ services:
     image: elasticsearch:6.8.8
     environment:
       - http.host=0.0.0.0
-      - transport.host=0.0.0.0
+      - discovery.type=single-node
     ulimits:
       nofile:
         soft: 65536
