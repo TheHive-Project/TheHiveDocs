@@ -13,7 +13,7 @@ auth {
   ]
 }
 ```
-Below the available authentication modules:
+Below are the available authentication modules:
 
 ## session
 Authenticates HTTP requests using a cookie. This module manage the cookie creation and expiration. It accepts the configuration:
@@ -46,7 +46,7 @@ Use Microsoft ActiveDirectory to authenticate the user. The configuration is:
 - hosts (list of string) the addresses of the domain controllers. If missing, the dnsDomain is used.
 
 ## ldap
-Use LDAP directiry server to authenticate the user. The configuration is:
+Use LDAP directory server to authenticate the user. The configuration is:
 
 - bindDN (string) DN of the service account in LDAP. This account is used to search the user.
 - bindPW (string) password of the service account.
@@ -57,7 +57,7 @@ Use LDAP directiry server to authenticate the user. The configuration is:
 
 ## oauth2
 Authenticate the user using an external OAuth2 authenticator server. The configuration is:
-- clientId (string) client ID in the OAth2 server.
+- clientId (string) client ID in the OAuth2 server.
 - clientSecret (string) client secret in the OAuth2 server.
 - redirectUri (string) the url of TheHive home page (.../index.html).
 - responseType (string) type of the response. Currently only "code" is accepted.
