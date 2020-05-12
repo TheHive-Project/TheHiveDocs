@@ -17,7 +17,11 @@ Following guides illustrate how to use TheHive as:
 ## Guides for organisation users
 
 - [Organisations, users and sharing](./Organisations-users-sharing.md)
+- Manage Case templates (**TODO**)
 
-## Guides for analyst users
+## Guides for analysts
 
 - [User settings](./analyst_users/Users-settings.md)
+- Alert management (**TODO**)
+- Case management (**TODO**)
+- Dashboard building (**TODO**)
