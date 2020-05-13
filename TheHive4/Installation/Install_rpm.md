@@ -68,7 +68,7 @@ By default, data is stored in `/var/lib/cassandra`.
 
 ### Configuration
 
-Start by changing the `cluster_name` with `thp`. Run the command `sqlsh`:
+Start by changing the `cluster_name` with `thp`. Run the command `cqlsh`:
 
 ```bash
 UPDATE system.local SET cluster_name = 'thp' where key='local';
