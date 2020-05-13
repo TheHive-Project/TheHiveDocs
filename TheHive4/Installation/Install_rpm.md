@@ -6,33 +6,31 @@ This page is a step by step installation and configuration guide to get an TheHi
 
 - [Java Virtual Machine](#java-virtual-machine)
 - [Cassandra database](#cassandra-database)
-  * [Install from repository](#install-from-repository)
-  * [Configuration](#configuration)
-    + [Additional configuration](#additional-configuration)
-    + [Security](#security)
-    + [Add nodes](#add-nodes)
+  - [Install from repository](#install-from-repository)
+  - [Configuration](#configuration)
+    - [Additional configuration](#additional-configuration)
+    - [Security](#security)
+    - [Add nodes](#add-nodes)
 - [Choose and install attachment storage](#choose-and-install-attachment-storage)
-  * [Option 1: Local filesystem](#option-1--local-filesystem)
-  * [Option 2: Hadoop](#option-2--hadoop)
-    + [Installation](#installation)
-    + [Configuration the Hadoop Master](#configuration-the-hadoop-master)
-    + [Format the volume and start services](#format-the-volume-and-start-services)
-    + [Run it as a service](#run-it-as-a-service)
-    + [Start the service](#start-the-service)
-    + [Add nodes](#add-nodes-1)
+  - [Option 1: Local filesystem](#option-1--local-filesystem)
+  - [Option 2: Hadoop](#option-2--hadoop)
+    - [Installation](#installation)
+    - [Configuration the Hadoop Master](#configuration-the-hadoop-master)
+    - [Format the volume and start services](#format-the-volume-and-start-services)
+    - [Run it as a service](#run-it-as-a-service)
+    - [Start the service](#start-the-service)
+    - [Add nodes](#add-nodes-1)
 - [TheHive](#thehive)
-  * [Installation](#installation-1)
-  * [Configuration](#configuration-1)
-    + [Secret key configuration](#secret-key-configuration)
-    + [Database](#database)
-    + [Local filesystem](#local-filesystem)
-    + [Hadoop](#hadoop)
-  * [Run](#run)
+  - [Installation](#installation-1)
+  - [Configuration](#configuration-1)
+    - [Secret key configuration](#secret-key-configuration)
+    - [Database](#database)
+    - [Local filesystem](#local-filesystem)
+    - [Hadoop](#hadoop)
+  - [Run](#run)
 - [Advanced configuration](#advanced-configuration)
 
-
 ## Java Virtual Machine
-
 
 ```bash
 yum install -y java-1.8.0-openjdk-headless.x86_64
@@ -40,10 +38,9 @@ echo JAVA_HOME="/usr/lib/jvm/jre-1.8.0" >> /etc/environment
 export JAVA_HOME="/usr/lib/jvm/jre-1.8.0"
 ```
 
-
 ## Cassandra database
 
-Apache Cassandra is a scalable and high available database. TheHive supports version  **3.11.x** of Cassandra.
+Apache Cassandra is a scalable and high available database. TheHive supports version **3.11.x** of Cassandra.
 
 ### Install from repository
 
@@ -82,7 +79,6 @@ nodetool flush
 
 Configure Cassandra by editing `/etc/cassandra/conf/cassandra.yaml` file.
 
-
 ```yml
 # content from /etc/cassandra/conf/cassandra.yaml
 
@@ -90,18 +86,16 @@ cluster_name: 'thp'
 listen_address: 'xx.xx.xx.xx' # address for nodes
 rpc_address: 'xx.xx.xx.xx' # address for clients
 seed_provider:
-    - class_name: org.apache.cassandra.locator.SimpleSeedProvider
-      parameters:
-          # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: 'xx.xx.xx.xx' # self for the first node
+  - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    parameters:
+      # Ex: "<ip1>,<ip2>,<ip3>"
+      - seeds: 'xx.xx.xx.xx' # self for the first node
 data_file_directories:
   - '/var/lib/cassandra/data'
 commitlog_directory: '/var/lib/cassandra/commitlog'
 saved_caches_directory: '/var/lib/cassandra/saved_caches'
 hints_directory: '/var/lib/cassandra/hints'
 ```
-
-
 
 Run the service and ensure it restart after a reboot:
 
@@ -128,7 +122,6 @@ For additional configuration options, refer to:
 - [Cassandra documentation page](https://cassandra.apache.org/doc/latest/getting_started/configuring.html)
 - [Datastax documentation page](https://docs.datastax.com/en/ddac/doc/datastax_enterprise/config/configTOC.html)
 
-
 #### Security
 
 To add security measures in Cassandra , refer the the [related administration guide](../Administration/Cassandra_security.md).
@@ -139,7 +132,7 @@ To add Cassandra nodes, refer the the [related administration guide](../Administ
 
 ## Choose and install attachment storage
 
-Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database.
+Files uploaded in TheHive (in _task logs_ or in _observables_) can be stores in localsystem, in a Hadoop filesystem (recommended) or in the graph database.
 
 For standalone production and test servers , we recommends using local filesystem. If you think about building a cluster with TheHive, use Hadoop filesystem.
 
@@ -200,7 +193,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
 ```
 
-- Update `.bashrc`file for `hadoop user  in `/etc/environment`. Add following lines:
+- Update `.bashrc`file for `hadoop user in`/etc/environment`. Add following lines:
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -213,9 +206,7 @@ export HADOOP_HDFS_HOME=$HADOOP_HOME
 export YARN_HOME=$HADOOP_HOME
 ```
 
-
 **Note**: Apache has a well detailed [documentation](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html) for more advanced configuration with Hadoop.
-
 
 #### Configuration the Hadoop Master
 
@@ -226,8 +217,7 @@ Configuration files are located in `etc/hadoop` (`/opt/hadoop/etc/hadoop`). They
 - The configuration described there is for a single node server. This node is the master node, namenode and datanode (refer to [Hadoop documentation](https://hadoop.apache.org/docs/current/) for more information). After validating this node is running successfully, refer to the [related administration guide](../Administration/Clustering.md) to add nodes;
 - Ensure you **update** the port value to something different than `9000` as it is already reserved for TheHive application service;
 
-
-- Edit the file `core-site.xml`:
+* Edit the file `core-site.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -289,7 +279,7 @@ Configuration files are located in `etc/hadoop` (`/opt/hadoop/etc/hadoop`). They
 
 #### Format the volume and start services
 
-- Format  the volume
+- Format the volume
 
 ```bash
 su - hadoop
@@ -349,21 +339,17 @@ SendSIGKILL=no
 WantedBy=multi-user.target
 ```
 
-
-
 #### Start the service
 
 ```bash
 service hadoop start
 ```
 
-
 You can check cluster status in [http://thehive1:9870](http://thehive1:9870/)
 
 #### Add nodes
 
 To add Hadoop nodes, refer the the [related administration guide](../Administration/Clustering.md).
-
 
 ## TheHive
 
@@ -377,12 +363,11 @@ TheHive4 can't be installed on the same OS than older versions.
 
 ---
 
-
 ### Installation
 
 RPM packages are published on a our RPM repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
-`0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
+`0CD5 AC59 DE5C 5A8E 0EE1 3849 3D99 BB18 562C BC1C`
 
 Run the following command to import the GPG key :
 
@@ -402,6 +387,7 @@ gpgcheck=1
 ```
 
 Then you will able to install the package using `yum`:
+
 ```bash
 yum install thehive4
 ```
@@ -462,8 +448,8 @@ chown -R thehive:thehive /opt/thp_data/files/thehive
 
 ```yml
 storage {
-  provider = localfs
-  localfs.location = /opt/files/thehive
+provider = localfs
+localfs.location = /opt/files/thehive
 }
 ```
 
@@ -494,19 +480,14 @@ Please note that the service may take some time to start. Once it is started, yo
 
 You can refer now to the [Quick-start guide](../User/Quick-start.md) to start using TheHive.
 
-
-
 ---
 
 ⚠️ **Note**
 
-Depending on the base system used, you might need to adjust *selinux* of *firewall-cmd* configuration to be able to connect TheHive application remotely.
+Depending on the base system used, you might need to adjust _selinux_ of _firewall-cmd_ configuration to be able to connect TheHive application remotely.
 
 ---
 
-
-
 ## Advanced configuration
 
-For additional configuration options, please refer to the [Administration Guide](./Administration/README.md).
-
+For additional configuration options, please refer to the [Administration Guide](../Administration/README.md).
