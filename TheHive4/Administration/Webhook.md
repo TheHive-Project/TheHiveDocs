@@ -30,11 +30,13 @@ read -p 'Enter your login: ' thehive_user
 read -s -p 'Enter your password: ' thehive_password
 
 curl -XPUT -u$thehive_user:$thehive_password -H 'Content-type: application/json' $thehive_url/api/config/organisation/notification -d '
-[
-  {
-    "delegate": false,
-    "trigger": { "name": "AnyEvent"},
-    "notifier": { "name": "webhook", "endpoint": "local" }
-  }
-]'
+{
+  "value": [
+    {
+      "delegate": false,
+      "trigger": { "name": "AnyEvent"},
+      "notifier": { "name": "webhook", "endpoint": "local" }
+    }
+  ]
+}'
 ```
