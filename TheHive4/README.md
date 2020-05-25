@@ -42,7 +42,7 @@ Hardware requirements depends on the number of concurrent users and how they use
  ready to use.
 
 ## Webhooks
-Webhooks were not integrated in TheHive 4.0-RC1, but are available since TheHive-4.0-RC2. They are now part of a new notification system that is almost ready but which still needs some work. The basic webhook functionality of the TheHive-3.x releases can be configured described at [[Administration/Webhook.md]]. 
+Webhooks were not integrated in TheHive 4.0-RC1, but are available since TheHive-4.0-RC2. They are now part of a new notification system that is almost ready but which still needs some work. The basic webhook functionality of the TheHive-3.x releases can be configured as described [here](Administration/Webhook.md). 
 
 ## License
 TheHive is an open source and free software released under the [AGPL](https://github.com/TheHive-Project/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
