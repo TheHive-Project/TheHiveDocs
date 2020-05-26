@@ -70,7 +70,7 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 
 - clientId (string) client ID in the OAuth2 server.
 - clientSecret (string) client secret in the OAuth2 server.
-- redirectUri (string) the url of TheHive home page (.../index.html).
+- redirectUri (string) the url of TheHive AOuth2 page (.../api/ssoLogin).
 - responseType (string) type of the response. Currently only "code" is accepted.
 - grantType (string) type of the grant. Currently only "authorization_code" is accepted.
 - authorizationUrl (string) the url of the OAuth2 server.
@@ -78,9 +78,9 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 - userUrl (string) the url to get user information in OAuth2 server.
 - scope (list of string) list of scope
 - userIdField (string) the field that contains the id of the user in user info
-- userOrganisationField (string)
-- defaultOrganisation (string)
-- authorizationHeader (string)
+- organisationField (string, optional) the field that contains the organisation name in user info
+- defaultOrganisation (string, optional) the default organisation used to login if not present on user info
+- authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
 
 ## pki
 
