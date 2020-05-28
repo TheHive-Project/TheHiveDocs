@@ -86,17 +86,19 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 
 This module is deprecated.
 
-## Enable Multi-Factor Authentication
+## Multi-Factor Authentication
 
-This feature requires a config property to be set to true:
+Multi-Factor Authentication is enabled by default. This means users can configure their MFA through their User Settings page (top-Right corner button > Settings).
 
-```
-auth.multifactor.enabled = true
-```
-
-Once enabled, users can configure their MFA through their User Settings page (top-Right corner button > Settings).
+Once enabled, users 
 
 User administrators can:
 
 - See which users have activated MFA
 - Reset MFA settings of any user
+
+This feature can be disabled by setting a config property tofalse:
+
+```
+auth.multifactor.enabled = false
+```
