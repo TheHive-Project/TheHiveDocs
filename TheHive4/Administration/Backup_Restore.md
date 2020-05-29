@@ -14,7 +14,8 @@ To backup or export database from Cassandra, following information are required:
 
 - keyspace used by thehive (default = `thehive`). This can be checked in the `application.conf`configuration file, in the database configuration in *storage*, *cql* and `keyspace` attribute. 
 
-    ```json
+    ```
+    [..]
     db.janusgraph {
       storage {
         backend: cql
@@ -25,6 +26,7 @@ To backup or export database from Cassandra, following information are required:
           keyspace: thehive
         }
       }
+    [..]
     ```
 
     
