@@ -82,6 +82,38 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 - defaultOrganisation (string, optional) the default organisation used to login if not present on user info
 - authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
 
+Example with **Keycloak**:
+
+```json
+auth {
+  providers: [
+    {name: session}               # required !
+    {name: basic, realm: thehive}
+    {name: local}
+    {name: key}    
+    {
+      ##############
+      # Keycloak
+      ##############
+      name: oauth2
+      clientId: "CLIENT_ID"
+      clientSecret: "CLIENT_SECRET" # or empty
+      redirectUri: "http://THEHIVE/api/ssoLogin"
+      responseType: "code"
+      grantType: "authorization_code"
+      authorizationUrl: "http://KEYCLOAK/auth/realms/TENANT/protocol/openid-connect/auth"
+      authorizationHeader: "Bearer"
+      tokenUrl: "http://KEYCLOAK/auth/realms/TENANT/protocol/openid-connect/token"
+      userUrl: "http://KEYCLOAK/auth/realms/TENANT/protocol/openid-connect/userinfo"
+      scope: ["openid", "email"]
+      userIdField: "email"
+    }
+  ]
+}
+```
+
+
+
 ## pki
 
 This module is deprecated.
