@@ -84,7 +84,7 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 
 Example with **Keycloak**:
 
-```json
+```
 auth {
   providers: [
     {name: session}               # required !
@@ -92,9 +92,6 @@ auth {
     {name: local}
     {name: key}    
     {
-      ##############
-      # Keycloak
-      ##############
       name: oauth2
       clientId: "CLIENT_ID"
       clientSecret: "CLIENT_SECRET" # or empty
