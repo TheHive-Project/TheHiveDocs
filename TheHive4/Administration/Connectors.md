@@ -36,6 +36,10 @@ cortex {
       }
       # HTTP client configuration (SSL and proxy)
       #  wsConfig {}
+     # List TheHive organisation which can use this Cortex server. All ("*") by default
+     # includedTheHiveOrganisations = ["*"]
+     # List TheHive organisation which cannot use this Cortex server. None by default
+     # excludedTheHiveOrganisations = []
     }
   ]
   # Check job update time intervalcortex
@@ -44,10 +48,6 @@ cortex {
   maxRetryOnError = 3
   # Check remote Cortex status time interval
   statusCheckInterval = 1 minute
-  # List TheHive organisation which can use this Cortex server. All ("*") by default
-  # includedTheHiveOrganisations = ["*"]
-  # List TheHive organisation which cannot use this Cortex server. None by default
-  # excludedTheHiveOrganisations = []
 }
 ```
 
