@@ -7,7 +7,7 @@ Every TheHive user, has a set of settings that can be updated through the `Setti
 This page allows the following operations:
 
 - [Update basic info](#update-basic-info)
-- [Update passwor](#update-password)
+- [Update password](#update-password)
 - [Configure MFA](#configure-mfa)
 
 ![user-settings-page](./files/user-settings-page.png)
@@ -18,7 +18,7 @@ This section gives the user the ability to update the his/her name and upload an
 
 ## Update password
 
-This section is hidden by default, the user needs to enable it, set the current pssword and the new one twice. Clicking _Save_ button to submit the form
+This section is hidden by default, the user needs to enable it, set the current password and the new one twice. Clicking _Save_ button to submit the form
 
 ## Configure MFA
 
