@@ -135,7 +135,7 @@ CLIENT_ID and CLIENT_SECRET are created in the _OAuth Apps_ section at [https://
 
 ### Example with Microsoft 365
 
-```json
+```
     {
       name: oauth2
       clientId: "CLIENT_ID"
