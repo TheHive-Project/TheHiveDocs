@@ -148,7 +148,7 @@ CLIENT_ID and CLIENT_SECRET are created in the _OAuth Apps_ section at [https://
       tokenUrl: "https://login.microsoftonline.com/TENANT/oauth2/v2.0/token"
       userUrl: "https://graph.microsoft.com/v1.0/me"
       scope: ["User.Read"]
-      userIdField: "email" 
+      userIdField: "mail" 
       #userOrganisation: "" ## if not existing in the response, use default organisation
     }
 
