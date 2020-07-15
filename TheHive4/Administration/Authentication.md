@@ -82,7 +82,7 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 - defaultOrganisation (string, optional) the default organisation used to login if not present on user info
 - authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
 
-Example with **Keycloak**:
+### Example with **Keycloak**:
 
 ```
 auth {
@@ -94,8 +94,8 @@ auth {
     {
       name: oauth2
       clientId: "CLIENT_ID"
-      clientSecret: "CLIENT_SECRET" # or empty
-      redirectUri: "http://THEHIVE/api/ssoLogin"
+      clientSecret: "CLIENT_SECRET"
+      redirectUri: "http://THEHIVE_URL/api/ssoLogin"
       responseType: "code"
       grantType: "authorization_code"
       authorizationUrl: "http://KEYCLOAK/auth/realms/TENANT/protocol/openid-connect/auth"
@@ -109,6 +109,54 @@ auth {
 }
 ```
 
+### Example with **Github**: 
+
+```
+   {
+      name: oauth2
+      clientId: "CLIENT_ID"
+      clientSecret: "CLIENT_SECRET"
+      redirectUri: "http://THEHIVE_URL/api/ssoLogin"
+      responseType: code
+      grantType: "authorization_code"
+      authorizationUrl: "https://github.com/login/oauth/authorize"
+      authorizationHeader: "token"
+      tokenUrl: "https://github.com/login/oauth/access_token"
+      userUrl: "https://api.github.com/user"
+      scope: ["user"]
+      userIdField: "email" 
+      #userOrganisation: ""
+    }
+```
+
+CLIENT_ID and CLIENT_SECRET are created in the _OAuth Apps_ section at [https://github.com/settings/developers](https://github.com/settings/developers).
+
+**Note**: this configuration requires that users set the _Public email_ in their Public Profile on [https://github.com/settings/profile](https://github.com/settings/profile).
+
+### Example with Microsoft 365
+
+```json
+    {
+      name: oauth2
+      clientId: "CLIENT_ID"
+      clientSecret: "CLIENT_SECRET"
+      redirectUri: "http://THEHIVE_URL/api/ssoLogin"
+      responseType: code
+      grantType: "authorization_code"
+      authorizationUrl: "https://login.microsoftonline.com/TENANT/oauth2/v2.0/authorize"
+      authorizationHeader: "Bearer "
+      tokenUrl: "https://login.microsoftonline.com/TENANT/oauth2/v2.0/token"
+      userUrl: "https://graph.microsoft.com/v1.0/me"
+      scope: ["User.Read"]
+      userIdField: "email" 
+      #userOrganisation: "" ## if not existing in the response, use default organisation
+    }
+
+```
+
+To create CLIENT_ID, CLIENT_SECRET and TENANT, register a new app at [https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps](https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps).
+
+ 
 
 
 ## pki
