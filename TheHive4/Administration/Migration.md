@@ -132,6 +132,7 @@ with:
 ---
 
 ⚠️ **Note**
+
 The migration process can be very long, from several hours to several days, depending on the volume of data to migrate. TheHive4 can be started and used during migration. More recent data are migrated first.
 
 ---
@@ -158,6 +159,7 @@ The migration tool generates some logs during the process. By default, every 10 
 
 ---
 ⚠️ **Note**
+
 Numbers of Observables, Cases and others are estimations and not a definite value as computing these number can be very tedious. 
 
 ---
