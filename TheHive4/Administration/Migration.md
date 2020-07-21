@@ -2,7 +2,7 @@
 
 TheHive 4.0 is delivered with a tool to migrate your data from TheHive 3.x. stored in Elasticsearch. 
 
-## Supported version
+## Supported versions
 
 The tool only support migration **from TheHive 3.4.0** and higher. 
 
@@ -41,7 +41,7 @@ auth.defaultUserDomain: "mydomain.com"
 
 This way, the domain `mydomain.com` will be appended to user accounts imported from TheHive 3.4+ (`user@mydomain.com`).
 
-### Process to the migration
+### Run the migration
 
 Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool.
 
