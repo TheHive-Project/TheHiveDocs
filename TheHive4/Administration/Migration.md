@@ -4,14 +4,14 @@ TheHive 4.0 is delivered with a tool to migrate your data from TheHive 3.x. stor
 
 ## Supported versions
 
-The tool only support migration **from TheHive 3.4.0** and higher. 
+The tool only supports migration **from TheHive 3.4.0** and higher. 
 
 Technically, many reasons explain this limitation: 
 
 - A new database format has been introduced with TheHive 3.4.0,
 - Elasticsearch 6.x came with changes in data structure (mostly related to the definition of document relations)  
 
-So, if you want to migrate your date from TheHive 3 to TheHive 4.0, you are invited to update your current instance to TheHive 3.4.0+ before.
+So, if you want to migrate your data from TheHive 3 to TheHive 4.0, you are invited to update your current instance to TheHive 3.4.0+ before.
 
 ## How it works
 
@@ -28,7 +28,7 @@ This tools **must** also have access to Elasticsearch database (http://ES:9200) 
 ---
 ⚠️ **Important Note**
 
-In TheHive4, users are identified by their email addresses. Thus,  a domain will be appended to usernames in order to migrate users from TheHive 3. 
+In TheHive4, users are identified by their email addresses. Thus, a domain will be appended to usernames in order to migrate users from TheHive 3. 
 TheHive 4.0 comes with a default domain named `thehive.local`. Starting the migration without explicitely specifying a domain name will result in migrating all users with a username formatted like  `user@thehive.local`. 
 
 ---
@@ -45,7 +45,7 @@ This way, the domain `mydomain.com` will be appended to user accounts imported f
 
 Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly filled you can run migration tool.
 
-The programs comes with a large set of options: 
+The program comes with a large set of options: 
 
 ```
 $ /opt/thehive/bin/migrate --help
