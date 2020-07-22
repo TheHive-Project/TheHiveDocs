@@ -19,7 +19,12 @@ All packages of TheHive4 distributed come with the migration program which can b
 
 ### Pre-requisite
 
-In order to migrate the data, TheHive4 **must** be configured ; in particular **database** and **file storage**. 
+In order to migrate the data: 
+
+- TheHive 4 **must** be installed on the system running the migration tool; 
+
+- TheHive4 **must** be configured ; in particular **database** and **file storage** ;  
+- The service `thehive` **must be stopped** (`service thehive stop`) . 
 
 This tools **must** also have access to Elasticsearch database (http://ES:9200) used by TheHive 3, and the configuration file of TheHive 3.x instance. 
 
@@ -133,7 +138,7 @@ with:
 
 ⚠️ **Note**
 
-The migration process can be very long, from several hours to several days, depending on the volume of data to migrate. TheHive4 can be started and used during migration. More recent data are migrated first.
+The migration process can be very long, from several hours to several days, depending on the volume of data to migrate. We **highly** recommand to not start the application during the migration.
 
 ---
 
