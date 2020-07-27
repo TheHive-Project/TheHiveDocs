@@ -3,12 +3,12 @@ TheHive Project maintains training virtual machines (OVA) containing TheHive, Co
 
 **Stable versions:**
 
-- [TheHive 4.0.0](#thehive-4-0)
-- [TheHive 3.4.0](#thehive-4-0)
+- [TheHive 4.0.0](#thehive-40)
+- [TheHive 3.4.0](#thehive-340)
 
 **Beta versions:**
 
-- [TheHive 3.4.0-RC2](#thehive-3-4-0-RC2)
+- [TheHive 3.4.0-RC2](#beta-version)
 
 
 **Warning**: The training VMs are solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
