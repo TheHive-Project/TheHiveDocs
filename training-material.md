@@ -21,7 +21,7 @@ The most recent training VM includes:
 
 - TheHive **4.0.0-1** using a local BerkeleyDB and file storage, 
 - Cortex **3.0.1**, and Elasticsearch **6.8**.
-- TheHive4py **1.7.0**
+- TheHive4py **1.7.2**
 - Cortex4py **2.0.1** 
 - Cortex Analyzers and Responders running with Docker 
 
