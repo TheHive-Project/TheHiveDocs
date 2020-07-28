@@ -330,6 +330,8 @@ TheHive4 can't be installed on the same OS than older versions.
 
 Binary packages can be downloaded from [TheHive Project](https://download.thehive-project.org/thehive4-latest.zip).
 
+#### Stable versions
+
 Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
 ```bash
@@ -339,7 +341,16 @@ unzip thehive4-latest.zip
 ln -s thehive4-x.x.x thehive
 ```
 
-You can check that the fingerprint for `thehive4-latest.zip` archive is  `eca8065f35184aa3ea78eec5fca0a3a44838b08e725ed7b5d6efe191801d045c`.
+#### Following beta versions
+
+```bash
+cd /opt
+wget https://download.thehive-project.org/thehive4-beta-latest.zip
+unzip thehive4-beta-latest.zip
+ln -s thehive4-x.x.x thehive
+```
+
+⚠️ **We do not recommend that configuration for production servers**
 
 #### Prepare the system
 
