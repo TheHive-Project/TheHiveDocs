@@ -376,6 +376,8 @@ Debian packages are published on a our DEB packages repository. All packages are
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
+#### Stable versions
+
 To install the  Debian package, use the following commands:
 
 ```bash
@@ -384,6 +386,20 @@ echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/so
 sudo apt-get update
 sudo apt-get install thehive4
 ```
+
+#### Following beta versions
+
+To follow beta versions of TheHive4, use the following commands:
+
+```bash
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+sudo apt-get update
+sudo apt-get install thehive4
+```
+
+⚠️ **We do not recommend that configuration for production servers**
+
 
 ### Configuration
 

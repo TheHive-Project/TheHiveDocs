@@ -375,6 +375,8 @@ Run the following command to import the GPG key :
 sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
 
+#### Stable versions
+
 And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
 ```bash
@@ -391,6 +393,29 @@ Then you will able to install the package using `yum`:
 ```bash
 yum install thehive4
 ```
+
+#### Following beta versions
+
+To follow beta versions of TheHive4, use the following setup:
+
+And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=http://rpm.thehive-project.org/beta/noarch
+gpgcheck=1
+```
+
+Then you will able to install the package using `yum`:
+
+```bash
+yum install thehive4
+```
+
+⚠️ **We do not recommend that configuration for production servers**
 
 ### Configuration
 
