@@ -147,7 +147,7 @@ Now the new index `new_the_hive_15` is created and similar the_hive_15,  older i
 curl -XDELETE http://localhost:9200/the_hive_15
 ```
 
-Run the same command for older indexesif exist (the_hive_14, the_hive_13....). Elasticsearch 7.x cannot run with index created with Elasticsearch 5.x.
+Run the same command for older indexes if exist (the_hive_14, the_hive_13....). Elasticsearch 7.x cannot run with index created with Elasticsearch 5.x.
 
 ## Create an alias 
 
