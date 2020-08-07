@@ -90,6 +90,7 @@ You can see on this page:
   - Create them
   - Edit their password, api key
   - Edit their profile
+  - Reset their 2FA settings
   - Lock and delete them
 
 To create a user, just click the "Create new user" button, that opens the user creation dialog.

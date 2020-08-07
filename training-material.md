@@ -1,4 +1,51 @@
 ## Training Material
+TheHive Project maintains training virtual machines (OVA) containing TheHive, Cortex as well as Cortex analyzers and responders: 
+
+**Stable versions:**
+
+- [TheHive 4.0.0](#thehive-40)
+- [TheHive 3.4.0](#thehive-340)
+
+**Beta versions:**
+
+- [TheHive 3.4.0-RC2](#beta-version)
+
+
+**Warning**: The training VMs are solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
+
+
+### TheHive 4.0
+
+The training VM runs Ubuntu 20.04 with OpenJDK JRE 8.
+The most recent training VM includes:
+
+- TheHive **4.0.0-1** using a local BerkeleyDB and file storage, 
+- Cortex **3.0.1**, and Elasticsearch **6.8**.
+- TheHive4py **1.7.2**
+- Cortex4py **2.0.1** 
+- Cortex Analyzers and Responders running with Docker 
+
+#### Accounts and credentials
+
+- Training VM system account (ssh) : `thehive/thehive1234`
+- TheHive URL : http://IP_OF_VM:9000
+- TheHive superAdmin account: `admin/secret` or `admin@thehive.local/secret` 
+- Cortex URL : http://IP_OF_VM:9001
+- Cortex superAdmin account : `admin/thehive1234`
+- Cortex "training" Org admin account  : `thehive/thehive1234` (its key API is used to enable Cortex service in TheHive)
+
+#### Download information
+
+You can download the VM from the following location:
+
+[https://download.thehive-project.org/thehive-training-4.0.ova](https://download.thehive-project.org/thehive-training-4.0.ova)
+
+To ensure that your download went through nicely, **check the file’s SHA256 hash** which must be equal to the following value:
+
+`530639b1c4793216ed025063dc79806607884be00e8a1bcd6fc643751d84e7ed`
+
+### TheHive 3.4.0
+
 TheHive Project maintains a training virtual machine (OVA) containing TheHive, Cortex as well as Cortex analyzers and responders with all their dependencies included, and ElasticSearch. The training VM runs Ubuntu 18.04 with Oracle JRE 8.
 
 The most recent training VM includes:
@@ -11,7 +58,7 @@ The most recent training VM includes:
 
 **Warning**: The training VM is solely intended to be used for testing or training purposes. **We strongly encourage you to refrain from using it in production**.
 
-### TL;DR
+#### Accounts and credentials
 
 - Training VM system account (ssh) : `thehive/thehive1234`
 - TheHive URL : http://IP_OF_VM:9000
@@ -20,7 +67,7 @@ The most recent training VM includes:
 - Cortex superAdmin account : `admin/thehive1234`
 - Cortex "training" Org admin account  : `thehive/thehive1234` (its key API is used to enable Cortex service in TheHive)
 
-### Get It
+#### Download information
 
 You can download the VM from the following location:
 
@@ -69,6 +116,7 @@ To ensure that your download went through nicely, **check the file’s SHA256 ha
 
 `6615de7ab24b8b70b0b895aaecf88e84601f6fab4751069d3923051f3b92e282`
 
+
 ### Use It
 
 To access TheHive, point your browser to the following URL:
@@ -81,28 +129,34 @@ To access Cortex, point your browser to the following URL:
 
 #### Configure TheHive
 
-The first time you access TheHive, you’ll need to create the associated database by clicking on the `Update Database` button as shown below:
+TheHive is already configured and comes with a default superAdmin account:
 
-![](images/thehive-first-access_screenshot.png)
-
-TheHive’s configuration file is located in `/etc/thehive/application.conf`. For additional configuration, [read the documentation](README.md).
+- `admin/thehive1234` for TheHive 3.x versions
+- `admin/secret` or `admin@thehive.local/secret` for thehive 4.x versions
 
 **Note** : after the first login into TheHive, if the Cortex health check fails (look at the Cortex icon at the bottom right side of the UI), it should success after fully reloading the web page. 
 
 #### Configure Cortex
 
-Cortex is already configured with a superAdmin account `admin/thehive1234`. An organization `training` is also pre-installed with an account `thehive/thehive1234`. This account has `read/analyze/orgAdmin` privileges and TheHive is already configured to use the Cortex service with its key API.
+Cortex is already configured with a superAdmin account `admin/thehive1234`.
+An organization `training` is also pre-installed with an account `thehive/thehive1234`. This account has `read/analyze/orgAdmin` privileges and TheHive is already configured to use the Cortex service with its key API.
 
-#### Update Analyzers and Use their Report Templates
+####  Analyzers, Responders and their Report Templates
 
-With the new version, analyzers are disabled by default. The training VM is delivered with _Abuse Finder_, _File_Info_, _Msg_Parser_ and _MaxMind GeoIP_ enabled.
+TheHive and Cortex are configured and integrated. Few analyzers are enabled in the training VM:  
 
-To fully benefit from the latest analyzers, [update them](https://github.com/TheHive-Project/CortexDocs/blob/master/installation/install-guide.md#updating) and install the associated report templates in TheHive:
+- _Abuse Finder_,
+- _CyberCrime-Tracker_,
+- _DShield\_lookup_,
+- _File_Info_, _EMLParser_,
+- _Fortiguard\_URLCategory_,
+- _MaxMind GeoIP_,
+- _UnshortenLink_,
+- _TalosReputation_,
+- _URLHaus, 
+- _Urlscan\_io\_Search_ .
 
-- [download the report template package](https://dl.bintray.com/thehive-project/binary/report-templates.zip)
-- log in TheHive using an administrator account
-- go to Admin > Report templates menu
-- click on Import templates button and select the downloaded package
+Report templates are preinstalled in all virtual machines.
 
 #### Plug it with MISP
 
