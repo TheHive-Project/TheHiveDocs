@@ -1,14 +1,14 @@
 # Migration from Elasticsearch 6.8.2 to ES 7.8.1
 
-> ⚠️ IMPORTANT NOTE
-> 
-> - This migration process is intended for single node of Elasticsearch database
->
-> - The current version of this document provided for testing purpose **ONLY!** Use it on backups of your data. 
->
-> - This guide has been written and tested to migrate data from ES 6.8.2 to ES 7.8.1, and TheHive 3.4.2 to TheHive 3.5.0-RC1 **only!**
->
-> - This guide starts with Elasticsearch version 6.8.2  up and running, indexes and data. To test this guide, we recommend using a backup of you production server. (see Backup and Restore page for more information) 
+---
+⚠️ IMPORTANT NOTE
+ 
+- This migration process is intended for single node of Elasticsearch database
+- The current version of this document is provided for testing purpose **ONLY!**  
+- This guide has been written and tested to migrate data from ES 6.8.2 to ES 7.8.1, and TheHive 3.4.2 to TheHive 3.5.0-RC1 **only!**
+- This guide starts with Elasticsearch version 6.8.2  up and running, indexes and data. To test this guide, we recommend using a backup of you production server. (see Backup and Restore page for more information)
+- This guide is illustrated with TheHive index. The process is identical for Cortex, you just have to adjust index names.
+---
 
 ## Prerequisite
 
@@ -18,8 +18,7 @@ The software `jq` is required to manipulate JSON and create new indexes. More in
 
 Current context is: 
 - Elasticsearch 6.8.2
-- TheHive 3.4.2
-- Cortex 3.0.1
+- TheHive 3.4.2 and/or Cortex 3.0.1
 
 All up and running. 
 
@@ -37,7 +36,7 @@ green  open   the_hive_15     Oap-I61ySgyv6EAI1ZUTFQ   5   0      30977         
 ```
 
 
-The index name is `the_hive_15`. Record this somewhere.
+The index name is `the_hive_15`. Record this somewhere. (default index for Cortex is `cortex_4`)
 
 ## Stop services
 
@@ -216,7 +215,7 @@ thread_pool.write.queue_size: 10000   # ES 7
 path.repo: backup
 ```
 
-Now, upgrade the application following the documentation for your Operating System, and ensure the service start successfully.
+Now, upgrade Elasticsearch to version 7.x following the documentation for your Operating System, and ensure the service start successfully.
 
 ## Update TheHive 3.5.0-RC1
 
