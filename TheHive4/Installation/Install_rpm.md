@@ -474,7 +474,7 @@ chown -R thehive:thehive /opt/thp_data/files/thehive
 ```yml
 storage {
 provider = localfs
-localfs.location = /opt/files/thehive
+localfs.location = /opt/thp_data/files/thehive
 }
 ```
 
