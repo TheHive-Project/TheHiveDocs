@@ -4,13 +4,7 @@
 
 [![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This documentation is dedicated to the all new TheHive 4. As of this writing, the latest release is TheHive 4.0-RC1. 
-
----
-
-⚠️ A Release Candidate (RC) is **not recommended** for production use ⚠️
-
----
+This documentation is dedicated to the all new TheHive 4. As of this writing, the latest release is TheHive 4.0.0-1. 
 
 The application stack of TheHive 4 has been completely changed. TheHive 4 does not rely on Elasticsearch anymore to
  store its data and the backend has been rewritten to support graph databases.
