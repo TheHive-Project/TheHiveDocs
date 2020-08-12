@@ -2,7 +2,7 @@
 
 ---
 ⚠️ IMPORTANT NOTE
- 
+
 - This migration process is intended for single node of Elasticsearch database
 - The current version of this document is provided for testing purpose **ONLY!**  
 - This guide has been written and tested to migrate data from ES 6.8.2 to ES 7.8.1, and TheHive 3.4.2 to TheHive 3.5.0-RC1 **only!**
@@ -217,7 +217,7 @@ path.repo: backup
 
 Now, upgrade Elasticsearch to version 7.x following the documentation for your Operating System, and ensure the service start successfully.
 
-## Update TheHive 3.5.0-RC1
+## Install or update to TheHive 3.5.0-RC1 (or Cortex 3.1.0-RC1)
 
 ### DEB package
 
@@ -229,6 +229,8 @@ echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sour
 sudo apt-get update
 sudo apt-get install thehive
 ```
+
+or `sudo apt-get install cortex` if updating Cortex.
 
 ### RPM
 
@@ -249,6 +251,25 @@ Then you will able to install the package using yum:
 sudo yum install thehive
 ```
 
+or  `sudo yum install cortex` if updating Cortex.
+
+### Docker images
+
+Docker images are also provided on Dockerhub. 
+
+#### TheHive
+
+```
+docker pull thehiveproject/thehive:3.5.0-RC1
+```
+
+#### Cortex
+
+```
+docker pul thehiveproject/cortex:3.1.0-RC1
+```
+
+Starting from this version, Docker image of Cortex now rely on docker socket of the host to run _Analyzers_ and _Responders_ ; we have remove "docker in docker". The Cortex docker image is not provided  with Cortex-Analyzers and python dependencies.
 
 
 ### Update Database
@@ -257,7 +278,7 @@ Connect to TheHive (and Cortex), the maintenance page should ask to update.
 
 ![](/images/thehive-first-access_screenshot.png)
 
-Once updated, ensure a new index named "the_hive_16" has been created.
+Once updated, ensure a new index named `the_hive_16` has been created (or `cortex_5` for Cortex).
 
 
 ```
