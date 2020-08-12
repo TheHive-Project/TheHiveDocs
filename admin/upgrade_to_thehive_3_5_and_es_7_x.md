@@ -247,11 +247,23 @@ gpgcheck=1
 
 Then you will able to install the package using yum:
 
-```
+```bash
 sudo yum install thehive
 ```
 
 or  `sudo yum install cortex` if updating Cortex.
+
+### Install binaries
+
+```bash
+cd /opt
+wget https://download.thehive-project.org/thehive-beta-latest.zip
+unzip thehive-beta-latest.zip
+ln -s thehive-x.x.x thehive
+
+```
+
+
 
 ### Docker images
 
@@ -259,13 +271,13 @@ Docker images are also provided on Dockerhub.
 
 #### TheHive
 
-```
+```bash
 docker pull thehiveproject/thehive:3.5.0-RC1
 ```
 
 #### Cortex
 
-```
+```bash
 docker pul thehiveproject/cortex:3.1.0-RC1
 ```
 
@@ -281,7 +293,7 @@ Connect to TheHive (and Cortex), the maintenance page should ask to update.
 Once updated, ensure a new index named `the_hive_16` has been created (or `cortex_5` for Cortex).
 
 
-```
+```bash
 curl -XGET http://localhost:9200/_cat/indices\?v
 ```
 
@@ -292,3 +304,4 @@ health status index           uuid                   pri rep docs.count docs.del
 green  open   new_the_hive_15 GV-3Y8QjTjWw0F-p2sjW6Q   5   0      30977            0       26mb           26mb
 yellow open   the_hive_16     Nz0vCKqhRK2xkx1t_WF-0g   5   1      30977            0     26.1mb         26.1mb
 ```
+
