@@ -281,7 +281,7 @@ docker pull thehiveproject/thehive:3.5.0-RC1
 docker pul thehiveproject/cortex:3.1.0-RC1
 ```
 
-Starting from this version, Docker image of Cortex now rely on docker socket of the host to run _Analyzers_ and _Responders_ ; we have remove "docker in docker". The Cortex docker image is not provided  with Cortex-Analyzers and python dependencies.
+Starting from this version, Docker image of Cortex now relies on docker socket of the host to run _Analyzers_ and _Responders_ ; we have removed "docker in docker". The Cortex docker image is not provided with Cortex-Analyzers and python dependencies.
 
 
 ### Update Database
