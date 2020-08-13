@@ -19,12 +19,12 @@ The software `jq` is required to manipulate JSON and create new indexes. More in
 You can easily identify if indexes should be reindexed or not. On the index named `the_hive_15` run the following command: 
 
 ```
-curl -s http://127.0.0.1:9200/the_hive_15 | jq '.the_hive_15.settings.index.version.created'
+curl -s http://127.0.0.1:9200/the_hive_15?human | jq '.the_hive_15.settings.index.version.created'
 ```
 
-if the output is similar to `"5061399"`  then reindexing is required, you should follow this guide. 
+if the output is similar to `"5.x.x"`  then reindexing is required, you should follow this guide. 
 
-If it is similar to  `"6080099"` then the index can be read by Elasticsearch 7.8.x. Upgrade Elasticsearch, and TheHive-3.5.0-RC1 or Cortex 3.1.0-RC1.
+If it is   `"6.x.x"` then the index can be read by Elasticsearch 7.8.x. Upgrade Elasticsearch, and TheHive-3.5.0-RC1 or Cortex 3.1.0-RC1.
 
 ### Migration guide
 
