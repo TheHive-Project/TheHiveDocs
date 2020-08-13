@@ -208,10 +208,10 @@ http.host: 127.0.0.1
 discovery.type: single-node
 cluster.name: hive
 script.allowed_types: inline
-# thread_pool.index.queue_size: 100000   # ES7
-thread_pool.search.queue_size: 100000
+# thread_pool.index.queue_size: 100000   # ES 6
+thread_pool.search.queue_size: 100000    # ES 7
 # thread_pool.bulk.queue_size: 100000    # ES 6
-thread_pool.write.queue_size: 10000   # ES 7
+thread_pool.write.queue_size: 10000      # ES 7
 path.repo: backup
 ```
 
