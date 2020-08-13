@@ -14,6 +14,20 @@
 
 The software `jq` is required to manipulate JSON and create new indexes. More information at [https://stedolan.github.io/jq/](). 
 
+## How to identify if your index should be reindexed
+
+You can easily identify if indexes should be reindexed or not. On the index named `the_hive_15` run the following command: 
+
+```
+curl -s http://127.0.0.1:9200/the_hive_15 | jq '.the_hive_15.settings.index.version.created'
+```
+
+if the output is similar to `"5061399"`  then reindexing is required, you should follow this guide. 
+
+If it is similar to  `"6080099"` then the index can be read by Elasticsearch 7.8.x. Upgrade Elasticsearch, and TheHive-3.5.0-RC1 or Cortex 3.1.0-RC1.
+
+### Migration guide
+
 ## Current status
 
 Current context is: 
@@ -281,7 +295,11 @@ docker pull thehiveproject/thehive:3.5.0-RC1
 docker pul thehiveproject/cortex:3.1.0-RC1
 ```
 
-Starting from this version, Docker image of Cortex now relies on docker socket of the host to run _Analyzers_ and _Responders_ ; we have removed "docker in docker". The Cortex docker image is not provided with Cortex-Analyzers and python dependencies.
+
+
+⚠️  Starting from this version, docker image doesn't contain analyzers anymore. _Analyzers__/__Responders_ and Cortex have different life-cycles, their update including their dependencies should not be correlated to Cortex update. 
+
+It is recommended to use docker version of analyzers : this can be done by binding docker service docket inside cortex container (run with `-v /var/run/docker.sock:/var/run/docker.sock`).
 
 
 ### Update Database
