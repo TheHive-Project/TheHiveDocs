@@ -292,7 +292,7 @@ docker pull thehiveproject/thehive:3.5.0-RC1
 #### Cortex
 
 ```bash
-docker pull thehiveproject/cortex:3.1.0-0.1RC1
+docker pull thehiveproject/cortex:3.1.0-0.2RC1
 ```
 
 
