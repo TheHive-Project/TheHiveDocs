@@ -70,12 +70,12 @@ The First operation lies in creating a new index named `new_the_hive_15` with se
 curl -XPUT 'http://localhost:9200/new_the_hive_15' \
   -H 'Content-Type: application/json' \
   -d "$(curl http://localhost:9200/the_hive_15 |\
-   jq '.the_hive_15 |\
-   del(.settings.index.provided_name,\
-    .settings.index.creation_date,\
-    .settings.index.uuid,\
-    .settings.index.version,\
-    .settings.index.mapping.single_type,\
+   jq '.the_hive_15 |
+   del(.settings.index.provided_name,
+    .settings.index.creation_date,
+    .settings.index.uuid,
+    .settings.index.version,
+    .settings.index.mapping.single_type,
     .mappings.doc._all)'
     )"
 ```
