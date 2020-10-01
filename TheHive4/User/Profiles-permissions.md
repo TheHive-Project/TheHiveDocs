@@ -1,6 +1,6 @@
 # User Profiles management
 
-User profiles is a new concept introduced by TheHive4 and comming from the support of role based access control aka RBAC.
+User profiles is a new concept introduced by TheHive4 and coming from the support of role based access control aka RBAC.
 
 In TheHive4, users will be assigned a *Profile*, within an *Organisation*. A *Profile* is composed by a set of predefined permissions.
 

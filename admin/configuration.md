@@ -225,7 +225,7 @@ auth {
     #defaultRoles = []
 
     #groups {
-    #  # URL to retreive groups (leave empty if you are using OIDC)
+    #  # URL to retrieve groups (leave empty if you are using OIDC)
     #  #url = "https://auth-site.com/api/Groups"
     #  # Group mappings, you can have multiple roles for each group: they are merged
     #  mappings {
@@ -293,8 +293,8 @@ In addition, you need to configure your token endpoint (`auth.oauth2.tokenUrl`) 
 #### 3.2.1. Roles mappings
 You can choose a roles mapping with the `auth.sso.mapper` parameter. The available options are `simple` and `group`:
 
-- Using simple mapping, we assume that the user info retreived from `auth.oauth2.userUrl` contains the roles associated to the OAuth2 user. They can be: `read`, `write` or `admin`.
-- Using groups mappings, we assume the retreived user info contains groups that have to be associated to internal roles. In that case, you have to define mapppings in `auth.sso.groups.mappings`. If a user has multiple groups, mapped roles are merged. If you need to retreive groups from another endpoint that the one used for user info, you can provide it in `auth.sso.groups.url`.
+- Using simple mapping, we assume that the user info retrieved from `auth.oauth2.userUrl` contains the roles associated to the OAuth2 user. They can be: `read`, `write` or `admin`.
+- Using groups mappings, we assume the retrieved user info contains groups that have to be associated to internal roles. In that case, you have to define mapppings in `auth.sso.groups.mappings`. If a user has multiple groups, mapped roles are merged. If you need to retreive groups from another endpoint that the one used for user info, you can provide it in `auth.sso.groups.url`.
 
 The retrieved groups can be a valid JSON array or a string listing them:
 ```
@@ -321,7 +321,7 @@ OR
 }
 ```
 
-Finally, you can setup default roles associated with user with no roles/groups retreived, using the `auth.sso.defaultRoles` parameter.
+Finally, you can setup default roles associated with user with no roles/groups retrieved, using the `auth.sso.defaultRoles` parameter.
 
 #### 3.2.2. User autocreation, autoupdate and autologin
 The main advantage of OAuth2/OpenID Connect authentication is you won't need to create an account on TheHive for each OAuth2 user if you set the config parameter `auth.sso.autocreate` to `true`. However, by default, OAuth2 users won't be updated on SSO login unless you set `auth.sso.autoupdate` to `true`. If you set this last parameter, roles and name will be fetched from retrieved user info and will be updated in local database on each login of the user.

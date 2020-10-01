@@ -172,7 +172,7 @@ Numbers of Observables, Cases and others are estimations and not a definite valu
 
 #### Warning regarding some files
 
-It is important to notice that migrating Cases/Alerts containing MISP event that were imported with TheHive 2.13 (_Sept 2017_) or older, will cause observable files not beeing imported in TheHive 4. Indeed, until this version, TheHive referenced the file to the `AttributeId` in MISP and was not automatically downloaded. It then could generate a log like this: 
+It is important to notice that migrating Cases/Alerts containing MISP event that were imported with TheHive 2.13 (_Sept 2017_) or older, will cause observable files not being imported in TheHive 4. Indeed, until this version, TheHive referenced the file to the `AttributeId` in MISP and was not automatically downloaded. It then could generate a log like this: 
 
 ```
 [warn] o.t.t.m.t.Input - Pre 2.13 file observables are ignored in MISP alert ffa3a8503ab0cd4f99fc6937a8e9b827

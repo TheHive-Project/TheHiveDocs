@@ -99,7 +99,7 @@ To create a user, just click the "Create new user" button, that opens the user c
 
 Note: The *"Profile"* field will be populated by the profiles that can be assigned to organisation users only. (Administration profiles will not be listed).
 
-The first user you must create for each organisation, should be a user with *"org-admin"* profile. That profile allows all the operations withing an organisation. 
+The first user you must create for each organisation, should be a user with *"org-admin"* profile. That profile allows all the operations within an organisation. 
 
 A user with *"org-admin"* profile will be able to connect and configure its organisation by at least:
 
