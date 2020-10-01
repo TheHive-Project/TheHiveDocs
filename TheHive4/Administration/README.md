@@ -16,7 +16,7 @@
 
   - HTTPS using a reverse proxy
   - HTTPS without reverse proxy
-  - Strenghten security
+  - Strengthen security
 
 - [Migration](Migration.md)
 
