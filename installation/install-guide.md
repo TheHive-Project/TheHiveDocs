@@ -24,51 +24,89 @@ TheHive is available as:
 In addition, TheHive can be also be [built from the source code](#build-it-yourself).
 
 ### RPM
-RPM packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
-`0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
+RPM packages are published on a our RPM repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
-First install the RPM release package:
+`0CD5 AC59 DE5C 5A8E 0EE1 3849 3D99 BB18 562C BC1C`
+
+Run the following command to import the GPG key :
+
 ```bash
-yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
+sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
-This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
-`/etc/pki/rpm-gpg/GPG-TheHive-Project`.
+
+#### Stable versions
+
+And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=http://rpm.thehive-project.org/stable/noarch
+gpgcheck=1
+```
 
 Then you will able to install the package using `yum`:
+
 ```bash
 yum install thehive
 ```
 
+#### Following beta versions
+
+To follow beta versions of TheHive4, use the following setup:
+
+And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=http://rpm.thehive-project.org/beta/noarch
+gpgcheck=1
+```
+
+Then you will able to install the package using `yum`:
+
+```bash
+yum install thehive
+```
+
+⚠️ **We do not recommend that configuration for production servers**
+
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
-#### Pre-release versions
-The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
-
 ### DEB
-Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
+Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
-To install the x Debian package, use the following commands:
+#### Stable versions
+
+To install the  Debian package, use the following commands:
+
 ```bash
-echo 'deb https://dl.bintray.com/thehive-project/debian-stable any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
-sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
 sudo apt-get install thehive
 ```
 
-Some environments may block access to the `pgp.mit.edu` key server. As a result, the command `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C` will fail. In that case, you can run the following command instead:
+#### Following beta versions
 
-`curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -`
+To follow beta versions of TheHive, use the following commands:
 
-Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
-
-#### Pre-release versions
-If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
 ```bash
-echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+sudo apt-get update
+sudo apt-get install thehive
 ```
+
+⚠️ **We do not recommend that configuration for production servers**
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
@@ -178,7 +216,7 @@ For boolean variable, `1` means true and other value means false. For multivalue
 | `--cortex-key <key>` | TH_CORTEX_KEY | Define Cortex key |
 | `--auto-migration` | TH_AUTO_MIGRATION | Migrate the database, if needed |
 | `--create-admin <user> <password` | TH_CREATE_ADMIN_LOGIN TH_CREATE_ADMIN_PASSWORD | Create the first admin user, if not exist yet |
-| `--create-user <user> <role> <password>` | TH_CREATE_USER_LOGIN TH_CREATE_USER_ROLE TH_CREATE_USER_PASSWORD | Create a user, only in conjunction with admin creation | 
+| `--create-user <user> <role> <password>` | TH_CREATE_USER_LOGIN TH_CREATE_USER_ROLE TH_CREATE_USER_PASSWORD | Create a user, only in conjunction with admin creation |
 
 **Note**: please remember that you must **[install and configure Elasticsearch](#elasticsearch-installation)**.
 
