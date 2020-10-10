@@ -4,6 +4,16 @@
 
 - https://docs.datastax.com/en/archived/cassandra/3.0/cassandra/operations/opsBackupRestore.html
 
+
+
+---
+
+⚠️ **This guide has only been tested on single node Cassandra server**
+
+---
+
+
+
 ## Cassandra
 
 ### Backup
@@ -35,24 +45,67 @@ Considering that your keyspace is `thehive` and `backup_name` is the name of the
 
 - Before taking snapshots
 
-```
-nodetool cleanup cycling
+```bash
+nodetool cleanup thehive
 ```
 
 - Take a snapshot
-```
+- 
+```bash
 nodetool snapshot thehive -t backup_name
 ```
 
 - Create and archive with the snapshot data: 
 
-```
+```bash
 tar cjf backup.tbz /var/lib/cassandra/data/thehive/*/snapshots/backup_name/
 ```
 
 - Remove old snapshots
-```
+
+```bash
 nodetool -h localhost -p 7199 clearsnapshot -t <snapshotname>
 ```
 
+
+
+### Restore
+
+- Unarchive backup files: 
+
+```bash
+tar jxf /PATH/TO/backup.tbz -C /
+```
+
+
+- And restore snapshots files:
+
+```bash
+cd /var/lib/cassandra/data/thehive
+
+for I in `ls /var/lib/cassandra/data/thehive`  ; do cp /var/lib/cassandra/data/thehive/$I/snapshots/backup_name/* /var/lib/cassandra/data/thehive/$I/ ; done
+
+```
+
+- Ensure Cassandra user keep ownership on the files: 
+
+```bash
+chown -R cassandra:cassandra /var/lib/cassandra/data/thehive
+```
+
+
+- Restart services
+
+```bash
+service cassandra restart
+service thehive restart
+```
+
+---
+
+**Note:**
+
+- Ensure no Commitlog file exist before restarting Cassandra service. (`/var/lib/cassandra/commitlog`).
+
+---
 
