@@ -537,7 +537,7 @@ The Debian package does not start up the service by default,  to prevent the ins
 sudo rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 ```
 
-Create the file `elasticsearch.repo` in `/etc/yum/repos.d/` for RedHat and CentOS, or in `/etc/zypp/repos.d/` for OpenSuSE distributions, and add the following lines:
+Create the file `elasticsearch.repo` in `/etc/yum.repos.d/` for RedHat and CentOS, or in `/etc/zypp/repos.d/` for OpenSuSE distributions, and add the following lines:
 
 ```
 [elasticsearch-5.x]
