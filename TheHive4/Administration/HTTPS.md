@@ -1,10 +1,13 @@
+To use TheHive with HTTPS it's necessary a signed certificate. From step 1 to 5 is a way to created self-signed certificate using OpenSSL.
+If the certificates are already created then it's just following step 6 to step 7
+
 ### Step 1: Install openSSL
 
 ### Step 2: Create an RSA Keypair:
 
  > openssl genrsa -des3 -passout pass:x -out xxx.key 2048
   
-### Step 3: Extract the Private Key into the “httpd” Folder:
+### Step 3: Extract the Private Key into the “httpd” Folder: 
 
  > sudo mkdir /path/to/certificate/
   
