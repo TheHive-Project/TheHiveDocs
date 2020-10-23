@@ -12,7 +12,7 @@
   
 ### Step 4: Creating a “Certificate Signing Request” (CSR) File:
 
- > openssl req -new -key /etc/httpd/httpscertificate/xx.xx.xx.xx.key -out /path/to/certificate//xx.xx.xx.xx.csr
+ > openssl req -new -key /path/to/certificate/xx.xx.xx.xx.key -out /path/to/certificate//xx.xx.xx.xx.csr
   
 ### Step 5: Creating the Certificate “.crt” File:
 
