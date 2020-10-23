@@ -7,7 +7,7 @@ If the certificates are already created then it's just following step 6 to step 
 
  > openssl genrsa -des3 -passout pass:x -out xxx.key 2048
   
-### Step 3: Extract the Private Key into the “httpd” Folder: 
+### Step 3: Extract the Private Key into the “/path/to/certificate/” Folder: 
 
  > sudo mkdir /path/to/certificate/
   
