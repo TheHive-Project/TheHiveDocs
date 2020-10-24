@@ -1,4 +1,5 @@
 # Installation Guide
+
 Before installing TheHive, you need to choose the installation option which suits your environment as described below. Once you have a chosen an option and installed the software, read the [Configuration Guide](../admin/configuration.md). We also advise reading the [Administration Guide](../admin/admin-guide.md).
 
 ## Table of Contents

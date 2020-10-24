@@ -1,7 +1,66 @@
 # Migration guide
 
 
-## from 3.3.x to 3.4.0
+## From 3.4.x to 3.5.0
+
+Taking into account the EoL of version 6.x. of Elasticsearch, TheHive 3.5.0 is the first version to support Elasticsearch 7.x. This version introduce breaking changes.  This time,  we had no choice, we were not able to make TheHive support smoothly the ES upgrade. 
+
+TheHive 3.5.0 supports Elasticsearch 7.x **ONLY**.
+
+This first steps before starting the upgrade process are: 
+
+- Identify the version of Elasticsearch which created your index
+- Stop TheHive service
+- Stop Elasticsearch service
+
+### How to identify the version of Elasticsearch which created your database index ?
+
+---
+
+The software `jq` is required to manipulate JSON and create new indexes. More information at [https://stedolan.github.io/jq/](). 
+
+---
+
+Run the following command : 
+
+```bash
+curl -s http://127.0.0.1:9200/the_hive_15?human | jq '.the_hive_15.settings.index.version.created'
+```
+
+- if the output is similar to `"5xxxxxx"`  then your database index has been created with Elasticsearch 5.x  reindexing is required, you should follow [a dedicated process to upgrade](../admin/upgrade_to_thehive_3_5_and_es_7_x.md). 
+- If it is   `"6xxxxxx"` then your database has been created with Elasticsearch 6.
+
+### Your database was created with Elasticsearch 5.x or earlier
+
+This is where things might be complicated. This upgrade progress  requires handling the database index by updating parameters, and reindex before updating Elasticsearch, and updating TheHive.
+
+Read carefully [the dedicated documentation](../admin/upgrade_to_thehive_3_5_and_es_7_x.md). It should help you run this specific actions on your Elasticsearch database, and also install or update application whether you are using DEB, RPM or binary packages, and even docker images.
+
+### Your database was created with Elasticsearch 6.x
+
+If you started using TheHive with Elasticsearch 6.x, then you just need to update the configuration of Elasticsearch to reflect this one: 
+
+```
+[..]
+http.host: 127.0.0.1
+discovery.type: single-node
+cluster.name: hive
+script.allowed_types: inline
+thread_pool.search.queue_size: 100000
+thread_pool.write.queue_size: 10000
+```
+
+Following parameters **are not accepted anymore* by Elasticsearch 7: 
+
+- `thread_pool.index.queue_size`
+- `thread_pool.bulk.queue_size` 
+
+With TheHive service stopped, ensure the new version of Elasticsearch starts.
+
+If everything is ok, then TheHive 3.5.0 can be installed. To run this operation successfully, you need to **update your repository configuration**  if you are using DEB and RPM packages, or specify the right version to install if using docker. Read carefully the [installation guide](../installation/install-guide.md). 
+
+
+## From 3.3.x to 3.4.0
 Starting from version 3.4.0-RC1, TheHive supports Elasticsearch 6 and will continue to work with Elasticsearch 5.x.
                         
 TheHive 3.4.0-RC1 and later versions communicate with Elasticsearch using its HTTP service (9200/tcp by default) instead of its legacy binary protocol (9300/tcp by default). If you have a firewall between TheHive and Elasticsearch, you probably need to update its rules to change to the new port number.
