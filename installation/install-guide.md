@@ -48,12 +48,11 @@ Run the following command to import the GPG key :
 sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
 
+---
+
 #### Release versions
 
----
 The release repository contains packages for **TheHive 3.5.0+** and **TheHive 4.0.0+**
-
----
 
 Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
@@ -78,13 +77,11 @@ or  install **TheHive 4.0.0+**:
 yum install thehive4
 ```
 
+---
+
 #### Stable versions (or legacy versions)
 
-
----
 The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
-
----
 
 Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
@@ -102,6 +99,8 @@ Then you will able to install **TheHive 3.4.3** package using `yum`:
 ```bash
 yum install thehive
 ```
+
+---
 
 #### Following beta versions
 
@@ -134,18 +133,18 @@ yum install thehive4
 
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+---
 
 ### DEB
 Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
+---
+
 #### Release versions
 
----
 The release repository contains packages for **TheHive 3.5.0+** and **TheHive 4.0.0+**
-
----
 
 Setup apt configuration  with the `release` repository:
 
@@ -167,13 +166,11 @@ or  install **TheHive 4.0.0+**:
 apt install thehive4
 ```
 
+---
 
 #### Stable versions (or legacy versions)
 
----
 The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
-
----
 
 Setup apt configuration  with the `main` repository:
 
@@ -189,8 +186,9 @@ Then you will able to install  **TheHive 3.4.3**   package using `apt` command:
 apt install thehive
 ```
 
+---
 
-#### Following beta versions
+#### Beta versions
 
 To follow beta versions of TheHive, use the following commands:
 
@@ -202,6 +200,8 @@ sudo apt-get install thehive
 ```
 
 ⚠️ **We do not recommend that configuration for production servers**
+
+---
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
