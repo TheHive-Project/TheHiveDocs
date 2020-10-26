@@ -231,7 +231,7 @@ If using Debian based Linux operating system, configure it to follow our beta re
 
 ```bash
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
-echo 'deb https://deb.thehive-project.org stable main es7' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://deb.thehive-project.org release main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
 ```
 Then install it by running:
@@ -255,7 +255,7 @@ Setup your system to connect the RPM repository. Create and edit the file  `/etc
 enabled=1
 priority=1
 name=TheHive-Project RPM repository
-baseurl=http://rpm.thehive-project.org/stable/es7
+baseurl=http://rpm.thehive-project.org/release/noarch
 gpgcheck=1
 ```
 
