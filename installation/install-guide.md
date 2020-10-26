@@ -5,9 +5,9 @@
 
 Current supported versions of TheHive are:
 - Version 3.5.0 and later that supports **only** Elasticsearch 7.x.
-- Verions 4.0 and later.
+- Version 4.0 and later.
 
-Instruction to  install TheHive with Elasticsearch 6.x (EoL in Nov. 2020) are still detailled in this documentation. 
+Instruction to  install TheHive supporting Elasticsearch 6.x (EoL in Nov. 2020) are still detailled in this documentation. 
 
 ---
 
@@ -78,7 +78,7 @@ or  install **TheHive 4.0.0+**:
 yum install thehive4
 ```
 
-#### main versions (or legacy versions)
+#### Stable versions (or legacy versions)
 
 
 ---
@@ -118,7 +118,7 @@ baseurl=http://rpm.thehive-project.org/beta/noarch
 gpgcheck=1
 ```
 
-Then you will able to install  beta version of **TheHive 3.x**   package using `yum`:
+Then you will able to install  beta version of  **TheHive 3.x**   package using `yum`:
 
 ```bash
 yum install thehive
@@ -168,7 +168,7 @@ apt install thehive4
 ```
 
 
-#### Main (or legacy) versions
+#### Stable versions (or legacy versions)
 
 ---
 The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
