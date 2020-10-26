@@ -1,5 +1,16 @@
 # Installation Guide
 
+---
+⚠️ _**Please read carrefully this documentation. Depending on you make a fresh installation or update an existing version, install version 3 or version 4, repository or packages names may vary.**_
+
+Current supported versions of TheHive are:
+- Version 3.5.0 and later that supports **only** Elasticsearch 7.x.
+- Verions 4.0 and later.
+
+Instruction to  install TheHive with Elasticsearch 6.x (EoL in Nov. 2020) are still detailled in this documentation. 
+
+---
+
 Before installing TheHive, you need to choose the installation option which suits your environment as described below. Once you have a chosen an option and installed the software, read the [Configuration Guide](../admin/configuration.md). We also advise reading the [Administration Guide](../admin/admin-guide.md).
 
 ## Table of Contents
@@ -24,6 +35,7 @@ TheHive is available as:
 
 In addition, TheHive can be also be [built from the source code](#build-it-yourself).
 
+
 ### RPM
 
 RPM packages are published on a our RPM repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
@@ -36,20 +48,56 @@ Run the following command to import the GPG key :
 sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
 
-#### Stable versions
+#### Release versions
 
-And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+---
+The release repository contains packages for **TheHive 3.5.0+** and **TheHive 4.0.0+**
+
+---
+
+Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
 ```bash
 [thehive-project]
 enabled=1
 priority=1
 name=TheHive-Project RPM repository
-baseurl=http://rpm.thehive-project.org/stable/es7
+baseurl=https://rpm.thehive-project.org/release/noarch
 gpgcheck=1
 ```
 
-Then you will able to install the package using `yum`:
+Then you will able to install  **TheHive 3.5.0+**  the package using `yum`:
+
+```bash
+yum install thehive
+```
+
+or  install **TheHive 4.0.0+**:
+
+```bash
+yum install thehive4
+```
+
+#### main versions (or legacy versions)
+
+
+---
+The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
+
+---
+
+Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=https://rpm.thehive-project.org/stable/noarch
+gpgcheck=1
+```
+
+Then you will able to install **TheHive 3.4.3** package using `yum`:
 
 ```bash
 yum install thehive
@@ -57,7 +105,7 @@ yum install thehive
 
 #### Following beta versions
 
-To follow beta versions of TheHive4, use the following setup:
+To follow beta versions of TheHive, use the following setup:
 
 And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
@@ -70,31 +118,77 @@ baseurl=http://rpm.thehive-project.org/beta/noarch
 gpgcheck=1
 ```
 
-Then you will able to install the package using `yum`:
+Then you will able to install  beta version of **TheHive 3.x**   package using `yum`:
 
 ```bash
 yum install thehive
+```
+
+or  install beta version of **TheHive 4.x**:
+
+```bash
+yum install thehive4
 ```
 
 ⚠️ **We do not recommend that configuration for production servers**
 
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+
 ### DEB
 Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
-#### Stable versions
+#### Release versions
 
-To install the  Debian package, use the following commands:
+---
+The release repository contains packages for **TheHive 3.5.0+** and **TheHive 4.0.0+**
+
+---
+
+Setup apt configuration  with the `release` repository:
 
 ```bash
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
-echo 'deb https://deb.thehive-project.org stable main es7' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://deb.thehive-project.org release main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
-sudo apt-get install thehive
 ```
+
+Then you will able to install  **TheHive 3.5.0+**  the package using `apt` command:
+
+```bash
+apt install thehive
+```
+
+or  install **TheHive 4.0.0+**:
+
+```bash
+apt install thehive4
+```
+
+
+#### Main (or legacy) versions
+
+---
+The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
+
+---
+
+Setup apt configuration  with the `main` repository:
+
+```bash
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org main main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+sudo apt-get update
+```
+
+Then you will able to install  **TheHive 3.4.3**   package using `apt` command:
+
+```bash
+apt install thehive
+```
+
 
 #### Following beta versions
 
