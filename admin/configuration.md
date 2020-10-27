@@ -188,7 +188,7 @@ auth {
     # URL of the authorization server
     #clientId = "client-id"
     #clientSecret = "client-secret"
-    #redirectUri = "https://my-thehive-instance.example/index.html#!/login"
+    #redirectUri = "https://my-thehive-instance.example/api/ssoLogin"
     #responseType = "code"
     #grantType = "authorization_code"
 
@@ -198,7 +198,7 @@ auth {
 
     # The endpoint from which to obtain user details using the OAuth token, after successful login
     #userUrl = "https://auth-site.com/api/User"
-    #scope = "openid profile"
+    #scope = ["openid profile"]
   }
 
   # Single-Sign On
@@ -243,6 +243,41 @@ session {
   inactivity = 1h
 }
 ```
+
+#### OAUTH2 Example
+
+```
+	oauth2 {
+		name: oauth2
+		clientId: "client-id"
+		clientSecret: "client-secret"
+		redirectUri: "http://localhost:9112/api/ssoLogin"
+		responseType: code
+		grantType: "authorization_code"
+		authorizationUrl: "https://github.com/login/oauth/authorize"
+		authorizationHeader: "token"
+		tokenUrl: "https://github.com/login/oauth/access_token"
+		userUrl: "https://api.github.com/user"
+		scope: ["user"]
+	}
+	
+sso {
+		autocreate: false
+		autoupdate: false
+		mapper: "simple"
+		attributes {
+		login: "login"
+		name: "name"
+		roles: "role"
+		}
+		defaultRoles: ["read", "write"]
+		defaultOrganization: "demo"
+    }
+    
+
+```
+
+
 
 ### 3.1. LDAP/AD
 To enable authentication using AD or LDAP, edit the `application.conf` file and supply the values for your environment. Then you need to create an account on TheHive for each AD or LDAP user in `Administration > Users` page (which can only be accessed by an administrator). This is required as TheHive needs to look up the role associated with the user and that role is stored locally by TheHive. Obviously, you don't need to supply a password as TheHive will check the credentials against the remote directory.
