@@ -251,7 +251,7 @@ session {
 		name: oauth2
 		clientId: "client-id"
 		clientSecret: "client-secret"
-		redirectUri: "http://localhost:9112/api/ssoLogin"
+		redirectUri: "http://localhost:9000/api/ssoLogin"
 		responseType: code
 		grantType: "authorization_code"
 		authorizationUrl: "https://github.com/login/oauth/authorize"
