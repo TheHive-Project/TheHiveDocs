@@ -301,29 +301,37 @@ To enable authentication using OAuth2/OpenID Connect, edit the `application.conf
 
 ##### Important notes
 
-To have the OAuth2 functionnality working, you need to provide the granted code after the `#!/login` in the URL. Thus, the redirect URI has to be:
-```
-https://my-hive-instance.com/index.html#!/login
-```
-If your identity provider doesn't support `#!` in the redirect URI, you can make a redirection using a reverse proxy. Please find bellow an example config using Apache httpd:
-```
-Redirect          "/redirect_uri"  "/index.html#!/login"
-ProxyPass         "/redirect_uri"  !
-ProxyPass         "/"              "http://localhost:9000/"
-ProxyPassReverse  "/"              "http://localhost:9000/"
-```
+Authenticate the user using an external OAuth2 authenticator server. The configuration is:
 
-In addition, you need to configure your token endpoint (`auth.oauth2.tokenUrl`) to accept requests without HTTP basic auth because TheHive doesn't support it. The request performed by TheHive to this endpoint will follow this format:
-```
-##Header
-"Content-type":"application/x-www-form-urlencoded"
-##Body
-"grant_type":"authorization_code"
-"client_id":"thehive"
-"client_secret":"thehivesecret"
-"redirect_uri":"https://my-hive-instance.com/index.html"
-"code":"returned_code_in_the_url_by_the_hive"
-```
+- clientId (string) client ID in the OAuth2 server.
+- clientSecret (string) client secret in the OAuth2 server.
+- redirectUri (string) the url of TheHive AOuth2 page (.../api/ssoLogin).
+- responseType (string) type of the response. Currently only "code" is accepted.
+- grantType (string) type of the grant. Currently only "authorization_code" is accepted.
+- authorizationUrl (string) the url of the OAuth2 server.
+- authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
+- tokenUrl (string) the token url of the OAuth2 server.
+- userUrl (string) the url to get user information in OAuth2 server.
+- scope (list of string) list of scope.
+
+
+
+Example:
+
+	oauth2 {
+		name: oauth2
+		clientId: "client-id"
+		clientSecret: "client-secret"
+		redirectUri: "http://localhost:9000/api/ssoLogin"
+		responseType: code
+		grantType: "authorization_code"
+		authorizationUrl: "https://github.com/login/oauth/authorize"
+		authorizationHeader: "token"
+		tokenUrl: "https://github.com/login/oauth/access_token"
+		userUrl: "https://api.github.com/user"
+		scope: ["user"]
+	}
+
 
 #### 3.2.1. Roles mappings
 You can choose a roles mapping with the `auth.sso.mapper` parameter. The available options are `simple` and `group`:
