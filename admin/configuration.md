@@ -299,14 +299,14 @@ auth {
       name: "name"
       roles: "role"
     }
-    defaultRoles: ["read", "analyze"]
+    defaultRoles: ["read", "write"]
     defaultOrganization: "demo"
   }  
   oauth2 {
     name: oauth2
-    clientId: "ed630d47c1863cf8fd02"
-    clientSecret: "31b14bff999b676844728e0b4405c95ff1923de3"
-    redirectUri: "http://localhost:9112/api/ssoLogin"
+    clientId: "Client_ID"
+    clientSecret: "Client_ID"
+    redirectUri: "http://localhost:9000/api/ssoLogin"
     responseType: code
     grantType: "authorization_code"
     authorizationUrl: "https://github.com/login/oauth/authorize"
