@@ -244,39 +244,6 @@ session {
 }
 ```
 
-#### OAUTH2 Example
-
-```
-	oauth2 {
-		name: oauth2
-		clientId: "client-id"
-		clientSecret: "client-secret"
-		redirectUri: "http://localhost:9000/api/ssoLogin"
-		responseType: code
-		grantType: "authorization_code"
-		authorizationUrl: "https://github.com/login/oauth/authorize"
-		authorizationHeader: "token"
-		tokenUrl: "https://github.com/login/oauth/access_token"
-		userUrl: "https://api.github.com/user"
-		scope: ["user"]
-	}
-	
-sso {
-		autocreate: false
-		autoupdate: false
-		mapper: "simple"
-		attributes {
-		login: "login"
-		name: "name"
-		roles: "role"
-		}
-		defaultRoles: ["read", "write"]
-		defaultOrganization: "demo"
-    }
-    
-
-```
-
 
 
 ### 3.1. LDAP/AD
@@ -314,22 +281,29 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 - userUrl (string) the url to get user information in OAuth2 server.
 - scope (list of string) list of scope.
 
+##### Example
 
-
-Example:
-
-	oauth2 {
-		name: oauth2
-		clientId: "client-id"
-		clientSecret: "client-secret"
-		redirectUri: "http://localhost:9000/api/ssoLogin"
-		responseType: code
-		grantType: "authorization_code"
-		authorizationUrl: "https://github.com/login/oauth/authorize"
-		authorizationHeader: "token"
-		tokenUrl: "https://github.com/login/oauth/access_token"
-		userUrl: "https://api.github.com/user"
-		scope: ["user"]
+	auth {
+		
+		provider = [local, oauth2]
+	[..]
+	
+		oauth2 {
+            name: oauth2
+            clientId: "client-id"
+            clientSecret: "client-secret"
+            redirectUri: "http://localhost:9000/api/ssoLogin"
+            responseType: code
+            grantType: "authorization_code"
+            authorizationUrl: "https://github.com/login/oauth/authorize"
+            authorizationHeader: "token"
+            tokenUrl: "https://github.com/login/oauth/access_token"
+            userUrl: "https://api.github.com/user"
+            scope: ["user"]
+        }
+	
+	[..]
+	
 	}
 
 
