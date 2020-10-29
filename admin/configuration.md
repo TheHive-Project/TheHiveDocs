@@ -283,28 +283,42 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 
 ##### Example
 
-	auth {
+```
+auth {
 		
-		provider = [local, oauth2]
-	[..]
-	
-		oauth2 {
-            name: oauth2
-            clientId: "client-id"
-            clientSecret: "client-secret"
-            redirectUri: "http://localhost:9000/api/ssoLogin"
-            responseType: code
-            grantType: "authorization_code"
-            authorizationUrl: "https://github.com/login/oauth/authorize"
-            authorizationHeader: "token"
-            tokenUrl: "https://github.com/login/oauth/access_token"
-            userUrl: "https://api.github.com/user"
-            scope: ["user"]
-        }
-	
-	[..]
-	
-	}
+  provider = [local, oauth2]
+
+  [..]
+
+  sso {
+    autocreate: false
+    autoupdate: false
+    mapper: "simple"
+    attributes {
+      login: "login"
+      name: "name"
+      roles: "role"
+    }
+    defaultRoles: ["read", "analyze"]
+    defaultOrganization: "demo"
+  }  
+  oauth2 {
+    name: oauth2
+    clientId: "ed630d47c1863cf8fd02"
+    clientSecret: "31b14bff999b676844728e0b4405c95ff1923de3"
+    redirectUri: "http://localhost:9112/api/ssoLogin"
+    responseType: code
+    grantType: "authorization_code"
+    authorizationUrl: "https://github.com/login/oauth/authorize"
+    authorizationHeader: "token"
+    tokenUrl: "https://github.com/login/oauth/access_token"
+    userUrl: "https://api.github.com/user"
+    scope: ["user"]
+  }
+
+  [..]	
+}
+```
 
 
 #### 3.2.1. Roles mappings
