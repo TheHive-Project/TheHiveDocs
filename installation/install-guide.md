@@ -1,4 +1,16 @@
 # Installation Guide
+
+---
+⚠️ _**Please read carrefully this documentation. Depending on you make a fresh installation or update an existing version, install version 3 or version 4, repository or packages names may vary.**_
+
+Current supported versions of TheHive are:
+- Version 3.5.0 and later that supports **only** Elasticsearch 7.x.
+- Version 4.0 and later.
+
+Instruction to  install TheHive supporting Elasticsearch 6.x (EoL in Nov. 2020) are still detailled in this documentation. 
+
+---
+
 Before installing TheHive, you need to choose the installation option which suits your environment as described below. Once you have a chosen an option and installed the software, read the [Configuration Guide](../admin/configuration.md). We also advise reading the [Administration Guide](../admin/admin-guide.md).
 
 ## Table of Contents
@@ -23,6 +35,7 @@ TheHive is available as:
 
 In addition, TheHive can be also be [built from the source code](#build-it-yourself).
 
+
 ### RPM
 
 RPM packages are published on a our RPM repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
@@ -35,28 +48,63 @@ Run the following command to import the GPG key :
 sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
 
-#### Stable versions
+---
 
-And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+#### Release versions
+
+The release repository contains packages for **TheHive 3.5.0+** and **TheHive 4.0.0+**
+
+Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
 ```bash
 [thehive-project]
 enabled=1
 priority=1
 name=TheHive-Project RPM repository
-baseurl=http://rpm.thehive-project.org/stable/noarch
+baseurl=https://rpm.thehive-project.org/release/noarch
 gpgcheck=1
 ```
 
-Then you will able to install the package using `yum`:
+Then you will able to install  **TheHive 3.5.0+**  the package using `yum`:
 
 ```bash
 yum install thehive
 ```
 
+or  install **TheHive 4.0.0+**:
+
+```bash
+yum install thehive4
+```
+
+---
+
+#### Stable versions (or legacy versions)
+
+The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
+
+Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=https://rpm.thehive-project.org/stable/noarch
+gpgcheck=1
+```
+
+Then you will able to install **TheHive 3.4.3** package using `yum`:
+
+```bash
+yum install thehive
+```
+
+---
+
 #### Following beta versions
 
-To follow beta versions of TheHive4, use the following setup:
+To follow beta versions of TheHive, use the following setup:
 
 And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
@@ -69,33 +117,78 @@ baseurl=http://rpm.thehive-project.org/beta/noarch
 gpgcheck=1
 ```
 
-Then you will able to install the package using `yum`:
+Then you will able to install  beta version of  **TheHive 3.x**   package using `yum`:
 
 ```bash
 yum install thehive
+```
+
+or  install beta version of **TheHive 4.x**:
+
+```bash
+yum install thehive4
 ```
 
 ⚠️ **We do not recommend that configuration for production servers**
 
 Once the package is installed, proceed to the configuration using the [Configuration Guide](../admin/configuration.md). For additional configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+---
+
 ### DEB
 Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
-#### Stable versions
+---
 
-To install the  Debian package, use the following commands:
+#### Release versions
+
+The release repository contains packages for **TheHive 3.5.0+** and **TheHive 4.0.0+**
+
+Setup apt configuration  with the `release` repository:
+
+```bash
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org release main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+sudo apt-get update
+```
+
+Then you will able to install  **TheHive 3.5.0+**  the package using `apt` command:
+
+```bash
+apt install thehive
+```
+
+or  install **TheHive 4.0.0+**:
+
+```bash
+apt install thehive4
+```
+
+---
+
+#### Stable versions (or legacy versions)
+
+The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
+
+Setup apt configuration  with the `main` repository:
 
 ```bash
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
 echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
-sudo apt-get install thehive
 ```
 
-#### Following beta versions
+Then you will able to install  **TheHive 3.4.3**   package using `apt` command:
+
+```bash
+apt install thehive
+```
+
+---
+
+#### Beta versions
 
 To follow beta versions of TheHive, use the following commands:
 
@@ -107,6 +200,8 @@ sudo apt-get install thehive
 ```
 
 ⚠️ **We do not recommend that configuration for production servers**
+
+---
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
@@ -122,7 +217,7 @@ file starts Elasticsearch and TheHive:
 version: "2"
 services:
   elasticsearch:
-    image: elasticsearch:6.8.8
+    image: elasticsearch:7.9.1
     environment:
       - http.host=0.0.0.0
       - discovery.type=single-node
@@ -131,13 +226,13 @@ services:
         soft: 65536
         hard: 65536
   cortex:
-    image: thehiveproject/cortex:latest
+    image: thehiveproject/cortex:3.1.0-1
     depends_on:
       - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
   thehive:
-    image: thehiveproject/thehive:latest
+    image: thehiveproject/thehive:3.5.0-1
     depends_on:
       - elasticsearch
       - cortex
@@ -227,13 +322,13 @@ Once the Docker image is up and running, proceed to the configuration using the 
 If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/thehive:version-RCx`. For example `thehiveproject/thehive:3.1.0-RC1`.
 
 ### Binary
-The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 18.04 LTS**.
+The following section contains the instructions to manually install TheHive using binaries on **Ubuntu 20.04 LTS**.
 
 #### 1. Minimal Ubuntu Installation
-Install a minimal Ubuntu 18.04 system with the following software:
+Install a minimal Ubuntu 20.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
-- Elasticsearch 5.x
+- Elasticsearch 7.x
 
 Make sure your system is up-to-date:
 
@@ -260,12 +355,12 @@ Download and unzip the chosen binary package. TheHive files can be installed whe
 
 ```bash
 cd /opt
-wget https://dl.bintray.com/thehive-project/binary/thehive-latest.zip
+wget https://download.thehive-project.org/thehive-latest.zip
 unzip thehive-latest.zip
 ln -s thehive-x.x.x thehive
 ```
 
-**Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://dl.bintray.com/thehive-project/binary/thehive-version-RCx.zip`. For example `https://dl.bintray.com/thehive-project/binary/thehive-3.1.0-RC1.zip`.
+**Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://download.thehive-project.org/thehive-version-RCx.zip`. For example `https://download.thehive-project.org/thehive-3.5.0-RC1-1.zip`.
 
 #### 5. First start
 It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
@@ -352,7 +447,7 @@ restart the service.
 ```bash
 service thehive stop
 cd /opt
-wget https://dl.bintray.com/thehive-project/binary/thehive-latest.zip
+wget https://download.thehive-project.org/thehive-latest.zip
 unzip thehive-latest.zip
 rm /opt/thehive && ln -s thehive-x.x.x thehive
 chown -R thehive:thehive /opt/thehive /opt/thehive-x.x.x
@@ -468,12 +563,10 @@ Configure TheHive, read the [Configuration Guide](../admin/configuration.md). Fo
 Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
-network.host: 127.0.0.1
-script.inline: true
+http.host: 127.0.0.1
+discovery.type: single-node
 cluster.name: hive
-thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
-thread_pool.bulk.queue_size: 1000
 ```
 
 Start the service:
@@ -520,7 +613,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
 # wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 
 # Debian repository configuration
-echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 
 # Install https support for apt
 sudo apt install apt-transport-https
@@ -541,8 +634,8 @@ Create the file `elasticsearch.repo` in `/etc/yum/repos.d/` for RedHat and CentO
 
 ```
 [elasticsearch-5.x]
-name=Elasticsearch repository for 5.x packages
-baseurl=https://artifacts.elastic.co/packages/5.x/yum
+name=Elasticsearch repository for 7.x packages
+baseurl=https://artifacts.elastic.co/packages/7.x/yum
 gpgcheck=1
 gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 enabled=1
@@ -577,12 +670,9 @@ The cluster name must also be set (`hive` for example). Threadpool queue size mu
 Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
-network.host: 127.0.0.1
-script.inline: true
+http.host: 127.0.0.1
 cluster.name: hive
-thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
-thread_pool.bulk.queue_size: 100000
 ```
 
 ### Start the Service
@@ -609,15 +699,14 @@ docker run \
   --hostname elasticsearch \
   --rm \
   --publish 127.0.0.1:9200:9200 \
-	--publish 127.0.0.1:9300:9300 \
-  --volume ***DATA_DIR***:/usr/share/elasticsearch/data \
+	  --volume ***DATA_DIR***:/usr/share/elasticsearch/data \
 	-e "http.host=0.0.0.0" \
-	-e "transport.host=0.0.0.0" \
+	-e "discovery.type=single-node" \
 	-e "xpack.security.enabled=false" \
 	-e "cluster.name=hive" \
   -e "script.inline=true" \
   -e "thread_pool.index.queue_size=100000" \
   -e "thread_pool.search.queue_size=100000" \
   -e "thread_pool.bulk.queue_size=100000" \
-	docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+	docker.elastic.co/elasticsearch/elasticsearch:7.9.1
 ```

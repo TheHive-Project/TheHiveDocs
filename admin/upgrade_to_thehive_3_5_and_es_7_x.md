@@ -1,4 +1,4 @@
-# Migration from Elasticsearch 6.8.2 to ES 7.8.1
+# Migration from Elasticsearch 6.8.2 to ES 7.x
 
 ---
 ⚠️ IMPORTANT NOTE
@@ -14,7 +14,7 @@
 
 The software `jq` is required to manipulate JSON and create new indexes. More information at [https://stedolan.github.io/jq/](). 
 
-## How to identify if your index should be reindexed
+## Identify if your index should be reindexed
 
 You can easily identify if indexes should be reindexed or not. On the index named `the_hive_15` run the following command: 
 
@@ -22,17 +22,17 @@ You can easily identify if indexes should be reindexed or not. On the index name
 curl -s http://127.0.0.1:9200/the_hive_15?human | jq '.the_hive_15.settings.index.version.created'
 ```
 
-if the output is similar to `"5.x.x"`  then reindexing is required, you should follow this guide. 
+if the output is similar to `"5xxxxxx"`  then reindexing is required, you should follow this guide. 
 
-If it is   `"6.x.x"` then the index can be read by Elasticsearch 7.8.x. Upgrade Elasticsearch, and TheHive-3.5.0-RC1 or Cortex 3.1.0-RC1.
+If it is   `"6xxxxxx"` then the index can be read by Elasticsearch 7.8.x. Upgrade Elasticsearch, and TheHive-3.5.0.
 
-### Migration guide
+## Migration guide
 
-## Current status
+### Current status
 
 Current context is: 
 - Elasticsearch 6.8.2
-- TheHive 3.4.2 and/or Cortex 3.0.1
+- TheHive 3.4.2
 
 All up and running. 
 
@@ -50,18 +50,17 @@ green  open   the_hive_15     Oap-I61ySgyv6EAI1ZUTFQ   5   0      30977         
 ```
 
 
-The index name is `the_hive_15`. Record this somewhere. (default index for Cortex is `cortex_4`)
+The index name is `the_hive_15`. Record this somewhere.
 
-## Stop services
+### Stop services
 
 Before starting updating the database, lets stop applications:
 
 ```
 sudo service thehive stop 
-sudo service cortex stop
 ```
 
-## Create a new index
+### Create a new index
 
 
 The First operation lies in creating a new index named `new_the_hive_15` with settings from current index `the_hive_15` (ensure to keep index version, needed for future upgrade).
@@ -95,7 +94,7 @@ yellow open   new_the_hive_15 A2KLoZPpSXygutlfy_RNCQ   5   1          0         
 green  open   the_hive_15     Oap-I61ySgyv6EAI1ZUTFQ   5   0      30977           36     33.2mb         33.2mb
 ```
 
-## Proceed to Reindex 
+### Proceed to Reindex 
 
 Next operation lies in running the reindex command in the newly created index:
 
@@ -135,7 +134,7 @@ After a moment, you should get a similar output:
 }
 ```
 
-## Ensure new index has been created
+### Ensure new index has been created
 
 Run the following command, and ensure the new index is like the current one (size can vary):
 
@@ -151,7 +150,7 @@ green  open   new_the_hive_15 GV-3Y8QjTjWw0F-p2sjW6Q   5   0      30977         
 green  open   the_hive_15     Oap-I61ySgyv6EAI1ZUTFQ   5   0      30977           36     33.2mb         33.2mb
 ```
 
-## Delete old indices
+### Delete old indices
 
 This is the thrilling part. 
 Now the new index `new_the_hive_15` is created and similar the_hive_15,  older indexes **should be completely deleted** from the database. To delete index named `the_hive_15`, run the following command:  
@@ -162,7 +161,7 @@ curl -XDELETE http://localhost:9200/the_hive_15
 
 Run the same command for older indexes if exist (the_hive_14, the_hive_13....). Elasticsearch 7.x cannot run with index created with Elasticsearch 5.x.
 
-## Create an alias 
+### Create an alias 
 
 Before stopping Elasticsearch service, let’s create an alias to keep index names in the future.  
 
@@ -201,10 +200,6 @@ The output should look like:
 ```
 
 
-## Run the same operations for Cortex index
-
-If you are using the same Elasticsearch database for Cortex, run same operations for cortex index (for example, named `cortex_4`). 
-
 ## Stop Elasticsearch version 6.8.2
 
 ```bash
@@ -222,16 +217,13 @@ http.host: 127.0.0.1
 discovery.type: single-node
 cluster.name: hive
 script.allowed_types: inline
-# thread_pool.index.queue_size: 100000   # ES 6
-thread_pool.search.queue_size: 100000    # ES 7
-# thread_pool.bulk.queue_size: 100000    # ES 6
-thread_pool.write.queue_size: 10000      # ES 7
-path.repo: backup
+thread_pool.search.queue_size: 100000
+thread_pool.write.queue_size: 10000    
 ```
 
 Now, upgrade Elasticsearch to version 7.x following the documentation for your Operating System, and ensure the service start successfully.
 
-## Install or update to TheHive 3.5.0-RC1 (or Cortex 3.1.0-RC1)
+## Install or update to TheHive 3.5.0
 
 ### DEB package
 
@@ -239,12 +231,20 @@ If using Debian based Linux operating system, configure it to follow our beta re
 
 ```bash
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
-echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://deb.thehive-project.org release main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
-sudo apt-get install thehive
+```
+Then install it by running:
+
+```bash
+sudo apt install thehive
 ```
 
-or `sudo apt-get install cortex` if updating Cortex.
+or
+
+```bash
+sudo apt install thehive=3.5.0-1
+```
 
 ### RPM
 
@@ -255,60 +255,46 @@ Setup your system to connect the RPM repository. Create and edit the file  `/etc
 enabled=1
 priority=1
 name=TheHive-Project RPM repository
-baseurl=http://rpm.thehive-project.org/beta/noarch
+baseurl=http://rpm.thehive-project.org/release/noarch
 gpgcheck=1
 ```
 
-Then you will able to install the package using yum:
+Then install it by running:
 
 ```bash
 sudo yum install thehive
 ```
 
-or  `sudo yum install cortex` if updating Cortex.
+or 
+
+```bash
+sudo yum install thehive-3.5.0-1
+```
 
 ### Install binaries
 
 ```bash
 cd /opt
-wget https://download.thehive-project.org/thehive-beta-latest.zip
-unzip thehive-beta-latest.zip
-ln -s thehive-x.x.x thehive
-
+wget https://download.thehive-project.org/thehive-3.5.0-1.zip
+unzip thehive-3.5.0-1.zip
+ln -s thehive-3.5.0-1 thehive
 ```
-
-
 
 ### Docker images
 
 Docker images are also provided on Dockerhub. 
 
-#### TheHive
-
 ```bash
-docker pull thehiveproject/thehive:3.5.0-RC1
+docker pull thehiveproject/thehive:3.5.0-1
 ```
-
-#### Cortex
-
-```bash
-docker pull thehiveproject/cortex:3.1.0-0.2RC1
-```
-
-
-
-⚠️  Starting from this version, docker image doesn't contain analyzers anymore. _Analyzers__/__Responders_ and Cortex have different life-cycles, their update including their dependencies should not be correlated to Cortex update. 
-
-It is recommended to use docker version of analyzers : this can be done by binding docker service docket inside cortex container (run with `-v /var/run/docker.sock:/var/run/docker.sock`).
-
 
 ### Update Database
 
-Connect to TheHive (and Cortex), the maintenance page should ask to update. 
+Connect to TheHive, the maintenance page should ask to update. 
 
 ![](/images/thehive-first-access_screenshot.png)
 
-Once updated, ensure a new index named `the_hive_16` has been created (or `cortex_5` for Cortex).
+Once updated, ensure a new index named `the_hive_16` has been created.
 
 
 ```bash
