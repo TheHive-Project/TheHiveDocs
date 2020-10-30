@@ -57,7 +57,7 @@ Following parameters **are not accepted anymore* by Elasticsearch 7:
 
 With TheHive service stopped, ensure the new version of Elasticsearch starts.
 
-If everything is ok, then TheHive 3.5.0 can be installed. To run this operation successfully, you need to **update your repository configuration**  if you are using DEB and RPM packages, or specify the right version to install if using docker. Read carefully the [installation guide](../installation/install-guide.md). 
+If everything is ok, then TheHive 3.5.0 can be installed. To run this operation successfully, you need to **update your repository configuration**  if you are using DEB and RPM packages, or specify the right version to install if using docker. Read carefully the [installation guide](installation/install-guide.md). 
 
 
 ## From 3.3.x to 3.4.0
