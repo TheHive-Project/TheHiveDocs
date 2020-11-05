@@ -3,7 +3,7 @@
 **References**
 - [https://docs.datastax.com/en/archived/cassandra/3.0/cassandra/configuration/secureInternalAuthenticationTOC.html](https://docs.datastax.com/en/archived/cassandra/3.0/cassandra/configuration/secureInternalAuthenticationTOC.html)
 
-##Authentication with Cassandra
+## Authentication with Cassandra
 
 ### Cassandra Configurration 
 
