@@ -170,7 +170,7 @@ apt install thehive4
 
 #### Stable versions (or legacy versions)
 
-The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
+The main repository  is a legacy repository and contains packages for **TheHive 3.4.4** that **does not support Elasticsearch version 7.x**, but version 6.x.
 
 Setup apt configuration  with the `main` repository:
 
@@ -180,7 +180,7 @@ echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/so
 sudo apt-get update
 ```
 
-Then you will able to install  **TheHive 3.4.3**   package using `apt` command:
+Then you will able to install  **TheHive 3.4.4**   package using `apt` command:
 
 ```bash
 apt install thehive
