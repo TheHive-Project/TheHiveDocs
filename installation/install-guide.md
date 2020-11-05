@@ -1,7 +1,7 @@
 # Installation Guide
 
 ---
-⚠️ _**Please read carrefully this documentation. Depending on you make a fresh installation or update an existing version, install version 3 or version 4, repository or packages names may vary.**_
+⚠️ _**Please read this documentation carefully. Depending on if you make a fresh installation or update an existing version, install version 3 or version 4, the repository or packages names may vary.**_
 
 Current supported versions of TheHive are:
 - Version 3.5.0 and later that supports **only** Elasticsearch 7.x.
