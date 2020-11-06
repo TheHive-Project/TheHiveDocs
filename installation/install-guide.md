@@ -81,7 +81,7 @@ yum install thehive4
 
 #### Stable versions (or legacy versions)
 
-The main repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
+The Stable repository  is a legacy repository and contains packages for **TheHive 3.4.3** that **does not support Elasticsearch version 7.x**, but version 6.x.
 
 Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
