@@ -121,7 +121,7 @@ Taking the assumption that you are migrating a database hosted in a remote serve
 /opt/thehive/bin/migrate \
   --output /etc/thehive/application.conf \
   --main-organisation myOrganisation \
-  --es-uri http://ELASTICSEARCH_IP_ADDRESS:9200
+  --es-uri http://ELASTICSEARCH_IP_ADDRESS:9200 \
   --index the_hive
 ```
 
