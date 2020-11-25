@@ -1,6 +1,6 @@
 # Installation Guide on RedHat-like OS
 
-This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using DEB packages repositories.
+This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using RPM packages repositories.
 
 ## Table of contents
 
