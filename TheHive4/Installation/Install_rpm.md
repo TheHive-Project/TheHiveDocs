@@ -44,7 +44,7 @@ Apache Cassandra is a scalable and high available database. TheHive supports ver
 
 ### Install from repository
 
-- Add the Apache repository of Cassandra to `/etc/yum.repos.d/cassandra.repo`
+- Add the Apache repository of Cassandra by creating and editing `/etc/yum.repos.d/cassandra.repo`
 
 ```bash
 [cassandra]
