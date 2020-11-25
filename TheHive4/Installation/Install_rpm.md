@@ -84,7 +84,12 @@ Then run:
 nodetool flush
 ```
 
-Configure Cassandra by editing `/etc/cassandra/conf/cassandra.yaml` file.
+Configure Cassandra by backing up and then editing `/etc/cassandra/conf/cassandra.yaml` file.
+
+```bash
+cd /etc/cassandra
+cp cassandra.yaml cassandra.yaml.backup
+```
 
 ```yml
 # content from /etc/cassandra/conf/cassandra.yaml
