@@ -2,7 +2,7 @@
 
 This page is a step by step installation and configuration guide to get an TheHive 4 instance up and running on systems using DEB packages repositories.
 
-## Table of content
+## Table of contents
 
 - [Java Virtual Machine](#java-virtual-machine)
 - [Cassandra database](#cassandra-database)
@@ -63,7 +63,14 @@ yum install -y cassandra
 
 By default, data is stored in `/var/lib/cassandra`.
 
+- Start the service
+
+```bash
+service cassandra start
+```
+
 ### Configuration
+⚠️ **Note** Python3 is not supported in Cassandra v 3.11 (v 2.7 required for cqlsh)
 
 Start by changing the `cluster_name` with `thp`. Run the command `cqlsh`:
 
