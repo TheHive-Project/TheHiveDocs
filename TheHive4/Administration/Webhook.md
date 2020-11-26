@@ -40,3 +40,5 @@ curl -XPUT -u$thehive_user:$thehive_password -H 'Content-type: application/json'
   ]
 }'
 ```
+
+If this account is part of multiple organisations, the header `X-Organisation` may have to be added in order to activate the webhook on the specified organisation.
