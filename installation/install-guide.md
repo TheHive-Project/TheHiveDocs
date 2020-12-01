@@ -113,7 +113,7 @@ And setup your system to connect the RPM repository. Create and edit the file `/
 enabled=1
 priority=1
 name=TheHive-Project RPM repository
-baseurl=http://rpm.thehive-project.org/beta/noarch
+baseurl=https://rpm.thehive-project.org/beta/noarch
 gpgcheck=1
 ```
 
