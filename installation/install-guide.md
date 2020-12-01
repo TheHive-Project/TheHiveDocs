@@ -94,7 +94,7 @@ baseurl=https://rpm.thehive-project.org/stable/noarch
 gpgcheck=1
 ```
 
-Then you will able to install **TheHive 3.4.4* package using `yum`:
+Then you will able to install **TheHive 3.4.4** package using `yum`:
 
 ```bash
 yum install thehive
