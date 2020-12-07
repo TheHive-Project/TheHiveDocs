@@ -5,7 +5,35 @@
 
 ## Authentication with Cassandra
 
-### Cassandra Configurration 
+
+### Cassandra Configuration 
+
+Enable Password Authentication in /etc/cassandra/conf/cassandra.yaml (by default, authentication is set to allow all)
+
+```yml
+authenticator: PasswordAuthenticator
+```
+
+Create new Super User
+
+```bash
+cqlsh -u cassandra -p cassandra
+```
+
+```sql
+CREATE ROLE root_user_name with SUPERUSER = true AND LOGIN = true and PASSWORD = 'password';
+EXIT;
+```
+
+Authenticate with new Super User Role and Drop Default cassandra role
+
+```sql
+LIST ROLES;
+DROP ROLE cassandra;
+LIST ROLES;
+```
+
+Creation of TheHive Role
 
 ```sql
 CREATE ROLE thehive WITH PASSWORD = 'thehive1234' AND LOGIN = true;
