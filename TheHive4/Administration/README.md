@@ -20,7 +20,7 @@
 
 - [Migration](Migration.md)
 
-  - Migrate your data from TheHive 3.4.x to TheHive 4.0-RC1
+  - Migrate your data from TheHive 3.4.x to TheHive 4.0.x
 
 - [Backup & Restore](Backup_Restore.md)
 
