@@ -1,4 +1,29 @@
 
+## TheHive 
+
+- akka configuration
+
+```
+akka {
+  cluster.enable = on actor {
+    provider = cluster
+  }
+remote.artery {
+  canonical {
+
+  }
+    hostname = "<My IP address>"
+    port = 2551
+  }
+}
+# seed node list contains at least one active node
+cluster.seed-nodes = [
+                      "akka://application@<Node 1 IP address>:2551",
+                      "akka://application@<Node 2 IP address>:2551",
+                      "akka://application@<Node 3 IP address>:2551"
+                     ]
+}
+```
 
 ## Cassandra
 
@@ -135,5 +160,125 @@ db.janusgraph {
     ALTER KEYSPACE system_auth WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3 };
     ```
 
+## MinIO
+
+MinIO distributed mode requires fresh directories. Here is an example of implementation of MinIO with TheHive.
+
+The following procedure should be performed on all servers belonging the the cluster. We are considering the setup where the cluster is composed of 3 servers named minio1, minio2 & minio3.
 
 
+### Create a dedicated system account
+
+Create a dedicated user with `/opt/minio` as homedir. 
+
+```
+adduser minio
+```
+
+### Create at least 2 data volumes on each server
+
+Create 2 folders on each server: 
+
+```
+mkdir -p /srv/minio/{1,2}
+chown -R minio:minio /srv/minio
+```
+
+### Setup hosts files 
+
+Edit `/etc/hosts` of all servers 
+
+```
+ip-minio-1     minio1
+ip-minio-2     minio2
+ip-minio-3     minio3
+```
+
+### installation
+
+```
+cd /opt/minio
+mkdir /opt/minio/{bin,etc}
+wget -O /opt/minio/bin https://dl.minio.io/server/minio/release/linux-amd64/minio
+chown -R minio:minio /opt/minio
+```
+
+### Configuration
+
+Create or edit file `/opt/minio/etc/minio.conf
+
+```
+MINIO_OPTS="server --address :9100 http://minio{1...3}/srv/hadoop/minio/{1...2}"
+MINIO_ACCESS_KEY="<ACCESS_KEY>"
+MINIO_SECRET_KEY="<SECRET_KEY>"
+```
+
+Create a service file named `/usr/lib/systemd/system/minio.service` 
+
+```
+[Unit]
+Description=minio
+Documentation=https://docs.min.io
+Wants=network-online.target
+After=network-online.target
+AssertFileIsExecutable=/opt/minio/bin/minio
+
+[Service]
+WorkingDirectory=/opt/minio
+User=minio
+Group=minio
+EnvironmentFile=/opt/minio/etc/minio.conf
+ExecStart=/opt/minio/bin/minio $MINIO_OPTS
+Restart=always
+LimitNOFILE=65536
+TimeoutStopSec=0
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Enable and start the service
+
+```bash
+systemctl daemon-reload
+systemctl enable minio
+systemctl start minio.service
+```
+
+### Prepare the service for TheHive
+
+Following operations should be performed once all servers are up and running. A new server CAN NOT be added afterward.  
+Connect using the _access key_ and _secret key_  to one server with your browser on port 9100: `http://minio:9100`
+
+![](files/minio_login.png)
+
+
+Create a bucket named `thehive`
+
+![](files/minio_create_bucket.png)
+
+
+The bucket should be created and available on all your servers. 
+
+
+### TheHive configuration
+
+For each TheHive node of the cluster, add the relevant storage configuration. Example for the first node thehive1: 
+
+```
+storage {
+  provider: s3
+  s3 {
+    bucket = "thehive"
+    readTimeout = 1 minute
+    writeTimeout = 1 minute
+    chunkSize = 1 MB
+    endpoint = "http://<IP_MINIO_1>:9100"
+    accessKey = "<MINIO ACCESS KEY>"
+    secretKey = "<MINIO SECRET KEY>"
+  }
+}
+```
+
+Each TheHive server can connect to one MinIO server.
