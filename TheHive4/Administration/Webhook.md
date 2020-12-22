@@ -11,7 +11,7 @@ notification.webhook.endpoints = [
     url: "http://127.0.0.1:5000/"
     version: 0
     wsConfig: {}
-    includedTheHiveOrganisations: []
+    includedTheHiveOrganisations: ["*"]
     excludedTheHiveOrganisations: []
   }
 ]
