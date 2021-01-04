@@ -74,6 +74,7 @@ Optional parameters can be added to filter out some events coming into TheHive:
 
 - **exclusion.organisations**: list of MISP organisation from which event will not be imported
 - **exclusion.tags**: don't import MISP events which have one of these tags
+- **whitelist.organisations**: import only events from these MISP organisations
 - **whitelist.tags**: import only MISP events which have one of these tags
 - **max-age**: maximum age of the last publish date of event to be imported in TheHive 
 - **includedTheHiveOrganisations**: list of TheHive organisations which can use this MISP server (default: _all ("\*")_ )
