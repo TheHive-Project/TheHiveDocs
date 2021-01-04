@@ -258,12 +258,12 @@ systemctl start minio.service
 Following operations should be performed once all servers are up and running. A new server CAN NOT be added afterward.  
 Connect using the _access key_ and _secret key_  to one server with your browser on port 9100: `http://minio:9100`
 
-![](files/minio_login.png)
+![](images/minio_login.png)
 
 
 Create a bucket named `thehive`
 
-![](files/minio_create_bucket.png)
+![](images/minio_create_bucket.png)
 
 
 The bucket should be created and available on all your servers. 
