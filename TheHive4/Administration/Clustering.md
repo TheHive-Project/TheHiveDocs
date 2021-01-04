@@ -1,7 +1,14 @@
+# Use TheHive as a cluster
+
+This guide provides configuration examples for TheHive, Cassandra and MinIO to build a fault-tolerant cluster of 3 active nodes. 
+
+## Prerequisite
+
+3 servers with TheHive and Cassandra installed. 
 
 ## TheHive 
 
-- akka configuration
+In this guide, we are considering the node 1 to be the master node. Start by configuring `akka` component by editing the `/etc/thehive/application.conf` file of each node like this:
 
 ```
 akka {
@@ -262,7 +269,7 @@ Create a bucket named `thehive`
 The bucket should be created and available on all your servers. 
 
 
-### TheHive configuration
+### TheHive associated configuration
 
 For each TheHive node of the cluster, add the relevant storage configuration. Example for the first node thehive1: 
 
