@@ -135,6 +135,8 @@ Files uploaded in TheHive (in *task logs* or in *observables*) can be stores in 
 
 For standalone production and test servers , we recommends using local filesystem. If you think about building a cluster with TheHive, use Hadoop filesystem.
 
+If you think about building a cluster with TheHive, you have several possible solutions. 
+
 ### Option 1: Local filesystem
 
 **Note**: This option is perfect if you **do not** intend to build a cluster for your instance of TheHive 4.
