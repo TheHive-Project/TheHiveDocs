@@ -4,7 +4,7 @@
 
 Authentication consists of a set of module. Each one tries to authenticate the user. If it fails, the next one in the list is tried until the end of the list. The default configuration for authentication is:
 
-```
+```yaml
 auth {
   providers = [
     {name: session}
@@ -84,13 +84,13 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 
 ### Example with **Keycloak**:
 
-```
+```yaml
 auth {
   providers: [
     {name: session}               # required !
     {name: basic, realm: thehive}
     {name: local}
-    {name: key}    
+    {name: key}
     {
       name: oauth2
       clientId: "CLIENT_ID"
@@ -109,9 +109,9 @@ auth {
 }
 ```
 
-### Example with **Github**: 
+### Example with **Github**
 
-```
+```yaml
    {
       name: oauth2
       clientId: "CLIENT_ID"
@@ -124,7 +124,7 @@ auth {
       tokenUrl: "https://github.com/login/oauth/access_token"
       userUrl: "https://api.github.com/user"
       scope: ["user"]
-      userIdField: "email" 
+      userIdField: "email"
       #userOrganisation: ""
     }
 ```
@@ -135,7 +135,7 @@ CLIENT_ID and CLIENT_SECRET are created in the _OAuth Apps_ section at [https://
 
 ### Example with Microsoft 365
 
-```
+```yaml
     {
       name: oauth2
       clientId: "CLIENT_ID"
@@ -148,16 +148,34 @@ CLIENT_ID and CLIENT_SECRET are created in the _OAuth Apps_ section at [https://
       tokenUrl: "https://login.microsoftonline.com/TENANT/oauth2/v2.0/token"
       userUrl: "https://graph.microsoft.com/v1.0/me"
       scope: ["User.Read"]
-      userIdField: "mail" 
+      userIdField: "mail"
       #userOrganisation: "" ## if not existing in the response, use default organisation
     }
-
 ```
 
 To create CLIENT_ID, CLIENT_SECRET and TENANT, register a new app at [https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps](https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps).
 
- 
+### Example with Google
 
+```yaml
+    {
+      name: oauth2
+      clientId: "CLIENT_ID"
+      clientSecret: "CLIENT_SECRET"
+      redirectUri: "http://THEHIVE_URL/api/ssoLogin"
+      responseType: code
+      grantType: "authorization_code"
+      authorizationUrl: "https://accounts.google.com/o/oauth2/v2/auth"
+      authorizationHeader: "Bearer "
+      tokenUrl: "https://oauth2.googleapis.com/token"
+      userUrl: "https://openidconnect.googleapis.com/v1/userinfo"
+      scope: ["email", "profile", "openid"]
+      userIdField: "email"
+      # userOrganisation: "" ## if not existing in the response, use default organisation
+    }
+```
+
+CLIENT_ID and CLIENT_SECRET are created in the _APIs & Services_ > _Credentials_ section of the [GCP Console](https://console.cloud.google.com/apis/credentials). Instructions on how to create Oauth2 credentials at [https://support.google.com/cloud/answer/6158849](https://support.google.com/cloud/answer/6158849). For the latest reference for Google auth URLs please check Google's [.well-known/openid-configuration](https://accounts.google.com/.well-known/openid-configuration).
 
 ## pki
 
@@ -166,8 +184,6 @@ This module is deprecated.
 ## Multi-Factor Authentication
 
 Multi-Factor Authentication is enabled by default. This means users can configure their MFA through their User Settings page (top-Right corner button > Settings).
-
-Once enabled, users 
 
 User administrators can:
 
