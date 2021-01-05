@@ -82,6 +82,10 @@ Authenticate the user using an external OAuth2 authenticator server. The configu
 - defaultOrganisation (string, optional) the default organisation used to login if not present on user info
 - authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
 
+### User autocreation
+
+To allow users to login without previously creating them, you can enable autocreation by adding `user.autoCreateOnSso=true` to the top level of your configuration.
+
 ### Example with **Keycloak**:
 
 ```yaml
