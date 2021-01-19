@@ -1,8 +1,17 @@
+<div>
+  <p align="center">
+    <img src="Files/thehive-logo.png"width="600"/>  
+  </p>
+</div>
+<div>
+  <p align="center">
+    <a href="https://chat.thehive-project.org" target"_blank"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Discord"></a>
+    <a href><img src="https://drone.strangebee.com/api/badges/TheHive-Project/TheHive/status.svg?ref=refs/heads/master" alt="Build status"></a>
+    <a href="./LICENSE" target"_blank"><img src="https://img.shields.io/github/license/TheHive-Project/TheHive" alt="License"></a>        
+  </p>
+</div>
+
 # TheHive 4 : Installation, administration and user guides
-
-![](files/thehive-logo.png)
-
-[![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This documentation is dedicated to the all new TheHive 4. As of this writing, the latest release is TheHive 4.0.0-1. 
 
