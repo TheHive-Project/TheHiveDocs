@@ -6,7 +6,7 @@
 - This migration process is intended for single node of Elasticsearch database
 - The current version of this document is provided for testing purpose **ONLY!**  
 - This guide has been written and tested to migrate data from ES 6.8.2 to ES 7.8.1, and TheHive 3.4.2 to TheHive 3.5.0-RC1 **only!**
-- This guide starts with Elasticsearch version 6.8.2  up and running, indexes and data. To test this guide, we recommend using a backup of you production server. (see Backup and Restore page for more information)
+- This guide starts with Elasticsearch version 6.8.2  up and running, indexes and data. To test this guide, we recommend using a backup of you production server. (see [Backup and Restore page](./backup-restore.md) for more information)
 - This guide is illustrated with TheHive index. The process is identical for Cortex, you just have to adjust index names.
 ---
 
