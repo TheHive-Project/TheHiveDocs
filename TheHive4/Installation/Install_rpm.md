@@ -257,7 +257,7 @@ Configuration files are located in `etc/hadoop` (`/opt/hadoop/etc/hadoop`). They
     <value>/opt/thp_data/hdfs/namenode/data</value>
   </property>
   <property>
-    <name>dfs.datanode.name.dir</name>
+    <name>dfs.datanode.data.dir</name>
     <value>/opt/thp_data/hdfs/datanode/data</value>
   </property>
   <property>
