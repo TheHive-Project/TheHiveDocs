@@ -53,8 +53,8 @@ Once TheHive4 configuration file (`/etc/thehive/application.conf`) is correctly 
 The program comes with a large set of options: 
 
 ```
-$ /opt/thehive/bin/migrate --help
-TheHive migration tool 4.0.0-RC3-3
+# /opt/thehive/bin/migrate --help
+TheHive migration tool 4.0.4-1
 Usage: migrate [options]
 
   -v, --version
@@ -90,6 +90,14 @@ Usage: migrate [options]
                            migrate only alerts created from <date>
   --alert-until-date <date>
                            migrate only alerts created until <date>
+  --include-alert-types <type>,<type>...
+                           migrate only alerts with this types
+  --exclude-alert-types <type>,<type>...
+                           don't migrate alerts with this types
+  --include-alert-sources <source>,<source>...
+                           migrate only alerts with this sources
+  --exclude-alert-sources <source>,<source>...
+                           don't migrate alerts with this sources
   --max-audit-age <duration>
                            migrate only audits whose age is less than <duration>
   --min-audit-age <duration>
@@ -98,6 +106,14 @@ Usage: migrate [options]
                            migrate only audits created from <date>
   --audit-until-date <date>
                            migrate only audits created until <date>
+  --include-audit-actions <value>
+                           migration only audits with this action (Update, Creation, Delete)
+  --exclude-audit-actions <value>
+                           don't migration audits with this action (Update, Creation, Delete)
+  --include-audit-objectTypes <value>
+                           migration only audits with this objectType (case, case_artifact, case_task, ...)
+  --exclude-audit-objectTypes <value>
+                           don't migration audits with this objectType (case, case_artifact, case_task, ...)
 Accepted date formats are "yyyyMMdd[HH[mm[ss]]]" and "MMdd"
 The Format for duration is: <length> <unit>.
 Accepted units are:
@@ -179,5 +195,15 @@ It is important to notice that migrating Cases/Alerts containing MISP event that
 ```
 
 
+### Starting TheHive 4
+
+Once the migration process is sucessfully completed, TheHive4 can be started. 
+
+---
+⚠️ **Important Note**
+
+During the first start data are indexed and service is not available ; this can take some time. Do not stop or restart the service at this time. 
+ 
+---
 
 
