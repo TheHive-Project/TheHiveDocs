@@ -5,7 +5,7 @@ This document is related to upgrading TheHive and Elasticsearch on **Ubuntu 16.0
 #### Perform a backup of data
 
 ```bash
-curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
+curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -H 'Content-Type: application/json' -d '{
     "type": "fs",
     "settings": {
         "location": "/absolute/path/to/backup/directory",
@@ -17,7 +17,7 @@ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
 For example: 
 
 ```bash
-curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
+curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -H 'Content-Type: application/json' -d '{
     "type": "fs",
     "settings": {
         "location": "/opt/backup",
@@ -29,7 +29,7 @@ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup' -d '{
 Next:
 
 ```bash
-curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true&pretty' -d '{
+curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_completion=true&pretty' -H 'Content-Type: application/json' -d '{
   "indices": "<INDEX>"
 }'
 ```
@@ -37,7 +37,7 @@ curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1?wait_for_
 For example:
 
 ```bash
-curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/the_hive_152019060701_1?wait_for_completion=true&pretty' -d '{
+curl -XPUT 'http://localhost:9200/_snapshot/the_hive_backup/the_hive_152019060701_1?wait_for_completion=true&pretty' -H 'Content-Type: application/json' -d '{
   "indices": "the_hive_15"
 }'
 ```

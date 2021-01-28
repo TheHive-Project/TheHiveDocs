@@ -107,7 +107,7 @@ You can backup the last index of TheHive (you can list indices in your Elasticse
 Restore will do the reverse actions : it reads the backup in your snapshot directory and loads indices into the Elasticsearch
 cluster. This operation is done with the following command :
 ```
-$ curl -XPOST 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore' -d '
+$ curl -XPOST 'http://localhost:9200/_snapshot/the_hive_backup/snapshot_1/_restore' -H 'Content-Type: application/json' -d '
 {
   "indices": "<INDEX>"
 }'
