@@ -12,13 +12,12 @@ In this guide, we are considering the node 1 to be the master node. Start by con
 
 ```
 akka {
-  cluster.enable = on actor {
+  cluster.enable = on 
+  actor {
     provider = cluster
   }
 remote.artery {
   canonical {
-
-  }
     hostname = "<My IP address>"
     port = 2551
   }
