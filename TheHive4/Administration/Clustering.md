@@ -18,8 +18,6 @@ akka {
   }
 remote.artery {
   canonical {
-
-  }
     hostname = "<My IP address>"
     port = 2551
   }
