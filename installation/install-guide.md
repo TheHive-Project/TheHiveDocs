@@ -365,19 +365,6 @@ ln -s thehive-x.x.x thehive
 #### 5. First start
 It is recommended to use a dedicated, non-privileged user account to start TheHive. If so, make sure that the chosen account can create log files in `/opt/thehive/logs`.
 
-If you'd rather start the application as a service, use the following commands:
-
-```bash
-sudo addgroup thehive
-sudo adduser --system thehive
-sudo cp /opt/thehive/package/thehive.service /usr/lib/systemd/system
-sudo chown -R thehive:thehive /opt/thehive
-sudo chgrp thehive /etc/thehive/application.conf
-sudo chmod 640 /etc/thehive/application.conf
-sudo systemctl enable thehive
-sudo service thehive start
-```
-
 The only required parameter in order to start TheHive is the key of the server (`play.http.secret.key`). This key is used
 to authenticate cookies that contain data. If TheHive runs in cluster mode, all instances must share the same key.
 You can generate the minimal configuration with the following commands (they assume that you have created a
@@ -393,6 +380,19 @@ sudo mkdir /etc/thehive
 play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 ) | sudo tee -a /etc/thehive/application.conf
+```
+
+If you'd rather start the application as a service, use the following commands:
+
+```bash
+sudo addgroup thehive
+sudo adduser --system thehive
+sudo cp /opt/thehive/package/thehive.service /usr/lib/systemd/system
+sudo chown -R thehive:thehive /opt/thehive
+sudo chgrp thehive /etc/thehive/application.conf
+sudo chmod 640 /etc/thehive/application.conf
+sudo systemctl enable thehive
+sudo service thehive start
 ```
 
 Now you can start TheHive. To do so, change your current directory to the TheHive installation directory (`/opt/thehive` in this guide), then execute:
