@@ -370,7 +370,7 @@ If you'd rather start the application as a service, use the following commands:
 ```bash
 sudo addgroup thehive
 sudo adduser --system thehive
-sudo cp /opt/thehive/package/thehive.service /usr/lib/systemd/system
+sudo cp /opt/thehive/package/thehive.service /usr/lib/systemd/system/
 sudo chown -R thehive:thehive /opt/thehive
 sudo chgrp thehive /etc/thehive/application.conf
 sudo chmod 640 /etc/thehive/application.conf
