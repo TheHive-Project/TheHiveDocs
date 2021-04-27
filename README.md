@@ -12,7 +12,12 @@
 </div>
 
 
-TheHive documentation has moved and can be found at [https://docs.thehive-project.org/thehive/](https://docs.thehive-project.org/thehive/).
+---
+
+**TheHive documentation has moved** and can be found at [https://docs.thehive-project.org/thehive/](https://docs.thehive-project.org/thehive/).
+
+---
+
 
 If you are looking for the Demo Virtual Machine, visit [https://www.strangebee.com/tryit](https://www.strangebee.com/tryit).
 
