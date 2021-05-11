@@ -122,7 +122,7 @@ misp {
       #
       # Organization and tags 
       # exclusion {
-      #  organisation = ["bad organisation", "other orga"]
+      #  organisations = ["bad organisation", "other orga"]
       #  tags = ["tag1", "tag2"]
       #  }
       # whitelist {
