@@ -4,11 +4,11 @@ TheHive 4.0 is delivered with a tool to migrate your data from TheHive 3.x. stor
 
 ## Supported versions
 
-The tool only supports migration **from TheHive 3.4.0** and higher. 
+The tool only supports migration **from TheHive 3.5.0** and higher. 
 
 Technically, many reasons explain this limitation: 
 
-- A new database format has been introduced with TheHive 3.4.0,
+- A new database format has been introduced with TheHive 3.5.0,
 - Elasticsearch 6.x came with changes in data structure (mostly related to the definition of document relations)  
 
 So, if you want to migrate your data from TheHive 3 to TheHive 4.0, you are invited to update your current instance to TheHive 3.4.0+ before.
