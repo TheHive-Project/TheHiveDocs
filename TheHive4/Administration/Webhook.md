@@ -40,3 +40,22 @@ curl -XPUT -u$thehive_user:$thehive_password -H 'Content-type: application/json'
   ]
 }'
 ```
+
+If this account is part of multiple organisations, the header `X-Organisation` may have to be added in order to activate the webhook on the specified organisation. 
+```
+read -p 'Enter the URL of TheHive: ' thehive_url
+read -p 'Enter your login: ' thehive_user
+read -s -p 'Enter your password: ' thehive_password
+read -p 'Organization name: ' thehive_org
+
+curl -XPUT -u$thehive_user:$thehive_password -H 'Content-type: application/json' -H 'X-Organisation $thehive_org' $thehive_url/api/config/organisation/notification -d '
+{
+  "value": [
+    {
+      "delegate": false,
+      "trigger": { "name": "AnyEvent"},
+      "notifier": { "name": "webhook", "endpoint": "local" }
+    }
+  ]
+}'
+```
